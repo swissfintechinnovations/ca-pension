@@ -10,4 +10,6 @@
 
 This is the official SFTI repo for the payment API. Documentations may be found in the [Wiki](https://github.com/swissfintechinnovations/ca-bvg/wiki).
 
-An easy-to-read representation of the Payment/XS2A APIs is accessible via the following links:
+We refer to the [offical government website](https://www.kmu.admin.ch/kmu/de/home/praktisches-wissen/personal/personalmanagement/pflichten-der-arbeitgebenden/sozialversicherungen/pensionskasse-bvg.html) for more information.
+
+<!-- An easy-to-read representation of the Payment/XS2A APIs is accessible via the following links: -->
