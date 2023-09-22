@@ -1,5 +1,5 @@
 <!-- ![SFTI_Banner](https://user-images.githubusercontent.com/116151702/232762217-ac254483-0d25-4234-857b-376ff8dbb1e7.png) -->
-![ca-bvg](https://github.com/swissfintechinnovations/ca-bvg/assets/116151702/a7f08def-6d28-423d-85de-0087b61affa7)
+![ca-bvg](https://github.com/swissfintechinnovations/ca-bvg/assets/116151702/e8c6a9e8-89ab-4bed-b85e-1500865c87d6)
 
 
 ---
