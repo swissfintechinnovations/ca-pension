@@ -8,7 +8,7 @@
 ![Swagger Validator](https://img.shields.io/swagger/valid/3.0?specUrl=https%3A%2F%2Fraw.githubusercontent.com%2FOAI%2FOpenAPI-Specification%2Fmaster%2Fexamples%2Fv2.0%2Fjson%2Fpetstore-expanded.json)
 [![GitHub license](https://img.shields.io/github/license/swissfintechinnovations/ca-bvg)](https://github.com/swissfintechinnovations/ca-bvg/blob/main/LICENSE)
 
-This is the official SFTI repo for the payment API. Documentations may be found in the [Wiki](https://github.com/swissfintechinnovations/ca-bvg/wiki).
+This is the official SFTI repo for the pension API. Documentations may be found in the [Wiki](https://github.com/swissfintechinnovations/ca-pension/wiki).
 
 We refer to the [offical government website](https://www.kmu.admin.ch/kmu/de/home/praktisches-wissen/personal/personalmanagement/pflichten-der-arbeitgebenden/sozialversicherungen/pensionskasse-bvg.html) for more information.
 
