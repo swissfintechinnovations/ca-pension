@@ -125,7 +125,7 @@ components:
       type: array
       description: List of pension funds
       items:
-        $ref: "#/components/schemas/PensionFund"
+        $ref: #/components/schemas/PensionFund
 
     PensionFund:
       type: object
@@ -171,10 +171,10 @@ components:
           type: string
           description: |
             OpenPK API status:
-             * `active`: The APIs are active.
-             * `onboarding`: The APIs will soon be active.
-             * `paused`: The APIs have been paused.
-             * `notJoined`: The pension fund does not provide APIs.
+            * `active`: The APIs are active.
+            * `onboarding`: The APIs will soon be active.
+            * `paused`: The APIs have been paused.
+            * `notJoined`: The pension fund does not provide APIs.
           enum:
             - active
             - onboarding
