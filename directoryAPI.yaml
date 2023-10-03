@@ -125,7 +125,7 @@ components:
       type: array
       description: List of pension funds
       items:
-        $ref: #/components/schemas/PensionFund
+        $ref: '#/components/schemas/PensionFund'
 
     PensionFund:
       type: object
@@ -185,7 +185,7 @@ components:
           description: Pension fund address. Text excl. name.
         openpkServices:
           description: Technical description of API service
-          $ref: "#/components/schemas/ServicesDescription"
+          $ref: '#/components/schemas/ServicesDescription'
 
     ServicesDescription:
       type: object
