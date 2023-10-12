@@ -119,17 +119,17 @@ paths:
                       "personGrant":
                         {
                           "personId": '93816732',
-                          "personAccessRight": 'read-only',
+                          "personAccessRight": read-only,
                         },
                       "policyGrants":
                         [
                           {
                             "policyId": '132559379',
-                            "policyAccessRight": 'read-only',
+                            "policyAccessRight": read-only,
                           },
                           {
                             "policyId": '165978481',
-                            "policyAccessRight": 'read-only',
+                            "policyAccessRight": read-only,
                           },
                         ],
                     }
@@ -181,8 +181,8 @@ components:
       type: string
       description: |
         Access right for object:
-          * `read-only` - View object data
-          * `change` - View and change object data
+        * `read-only` - View object data
+        * `change` - View and change object data
       enum:
         - read-only
         - change
