@@ -82,14 +82,14 @@ info:
 
   x-logo:
     url: https://api-spec-dot-acrea-openpk.appspot.com/images/openpk_hori.svg
-    altText: "OpenPK"
+    altText: OpenPK
 
 tags:
   - name: consent
     description: Consent information
 
 servers:
-  - url: "https://openpk.ch/v1"
+  - url: https://openpk.ch/v1
 
 paths:
   /users/me:
@@ -110,7 +110,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Consents"
+                $ref: '#/components/schemas/Consents'
               examples:
                 twoPolicies:
                   summary: Insured person with two policies
@@ -118,18 +118,18 @@ paths:
                     {
                       "personGrant":
                         {
-                          "personId": "93816732",
-                          "personAccessRight": "read-only",
+                          "personId": '93816732',
+                          "personAccessRight": 'read-only',
                         },
                       "policyGrants":
                         [
                           {
-                            "policyId": "132559379",
-                            "policyAccessRight": "read-only",
+                            "policyId": '132559379',
+                            "policyAccessRight": 'read-only',
                           },
                           {
-                            "policyId": "165978481",
-                            "policyAccessRight": "read-only",
+                            "policyId": '165978481',
+                            "policyAccessRight": 'read-only',
                           },
                         ],
                     }
@@ -147,7 +147,7 @@ components:
       description: Consent details (accessible object, access rights)
       properties:
         personGrant:
-          $ref: "#/components/schemas/PersonGrant"
+          $ref: '#/components/schemas/PersonGrant'
 
         policyGrants:
           type: array
@@ -155,7 +155,7 @@ components:
             List of policies and associated access rights.
             Policies that have not been granted access are omitted from the list.
           items:
-            $ref: "#/components/schemas/PolicyGrant"
+            $ref: '#/components/schemas/PolicyGrant'
 
     PersonGrant:
       type: object
@@ -164,18 +164,18 @@ components:
         It is only provided, if access to person data has been granted.
       properties:
         personId:
-          $ref: "#/components/schemas/PersonId"
+          $ref: '#/components/schemas/PersonId'
         personAccessRight:
-          $ref: "#/components/schemas/ObjectAccessRight"
+          $ref: '#/components/schemas/ObjectAccessRight'
 
     PolicyGrant:
       type: object
       description: Granted consent details for policy data
       properties:
         policyId:
-          $ref: "#/components/schemas/PolicyId"
+          $ref: '#/components/schemas/PolicyId'
         policyAccessRight:
-          $ref: "#/components/schemas/ObjectAccessRight"
+          $ref: '#/components/schemas/ObjectAccessRight'
 
     ObjectAccessRight:
       type: string
