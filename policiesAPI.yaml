@@ -2,86 +2,87 @@ openapi: 3.0.1
 info:
   title: Policies
   version: 0.7.0-beta
+  # yamllint disable rule:indentiation
   description: |
     # Policendaten-API (Deutsch)
-    
+
     **** Deutsch (for English see below) ****
-    
+
     Mit dem Policendaten-API können Daten zur versicherten Person und zur Police abgefragt werden.
     Dies umfasst vereinfacht gesagt die Daten, die auf dem Versicherungsausweis zu finden sind.
     Auch die Erstellung bzw. das Beziehen von bereits erstellten Versicherungsausweisen als PDF-Datei
     ist möglich.
-    
+
     Als Einstieg fürs Policendaten-API wird eine technische Personen- oder Policen-ID benötigt.
     Dies wird vom Consent API geliefert.
-    
+
     Die beiden wesentlichen Objekte dieses APIs sind *Person* und *Police*. Person bezieht sich
     immer auf eine natürliche Person, die bei einer Pensionskasse versichert ist.
-    
+
     Die Police beschreibt den indirekten Versicherungsvertrag zwischen der versicherten Person
     (ArbeitnehmerIn) und der Pensionskasse. Ist eine Person über zwei Vorsorgepläne versichert,
     z.B. über einen Basis- und einen zusätzlichen Kaderplan, so hat sie zwei Policen.
-    
-    Wo es relevant ist, Angaben in den obligatorischen und den über-obligatorischen Teil 
-    aufzutrennen, wird jeweils das Total (obligatorisch plus über-obligatorisch) und der 
+
+    Wo es relevant ist, Angaben in den obligatorischen und den über-obligatorischen Teil
+    aufzutrennen, wird jeweils das Total (obligatorisch plus über-obligatorisch) und der
     obligatorische Wert separat ausgewiesen. Falls der über-obligatorische Wert benötigt wird, muss
     er vom API-Konsumenten selbst berechnet werden (Differenz zwischen den beiden Werten).
-    
+
     Ausgenommen davon sind Zinssätze und Umwandlungssätze. Hier werden entweder der obligatorische
     und der über-obligatorische Satz als zwei separate Werte geliefert, oder dann wird der
     umhüllende Satz geliefert.
-    
+
     Das API umfasst auch die Simulation einer Änderung des Beschäftigtengrads und/oder Lohns. Die
     Simulation berechnet die Effekte auf die monatlichen Beiträge sowie auf die voraussichtlichen
     Rentenleistungen bei unterschiedlichem Penionierungsalter.
-    
+
     Die in dieser Spezifikation angegebenen URLs sind nur Beispiel-URLs. Das API wird von einer
     Vielzahl von Pensionskassen implementiert und jede Pensionskasse hat eine andere Basis-URL
     für das API. Die Basis-URL der jeweiligen Pensionskasse wird vom Directory API geliefert.
-    
-    
+
+
     # Policies API (English)
-    
+
     **** English (für Deutsch siehe weiter oben) ****
-    
+
     The Policies API serves to query details about the insured person and insurance policies.
     In simplified terms, this includes the data found on the insurance certificate.
     Additionally, policy statements can be generated or already generated statements can be
     retrieved as PDF files.
-    
+
     Person and policy IDs serve as the entry point for this API. They are provided by the
     Consent API.
-    
+
     The two main objects are *person* and *policy*. A person refers to a natural person
     insured with a pension fund.
-    
+
     A policy describes the indirect contractural relationship between the insured person
     (employee) and the pension fund. If a person is insured by two separate insurance plans,
     e.g. a basic and a supplementary executive plan, the person has two separate plans.
-    
+
     If it is relevant to distinguish between the mandatory and the supplementary insurance
     coverage, a total value (mandatory and supplementary values combined) and a mandatory
-    coverage value are provided seperately. If the value for the supplementary coverage is 
+    coverage value are provided seperately. If the value for the supplementary coverage is
     required, the API consumer must calculate it (difference between the two values).
-    
+
     Interest and conversion rates are the exception to this rule. The pension fund either
     provides two separate values for the mandatory and the supplementary part, or  they
     provide a single enveloping value.
-    
+
     The API also includes the simulation of a change of employment level and/or salary. It
     calculates the effects on the monthly contributions as well as the effects of the
     perspective pension benefits for different retirement ages.
-    
+
     The URLs in the specification are examples only. The API is implemented by a many
     pension funds and each pension fund has an individual base URL for the API.
     The base URL of a specific pension fund is provided by the directory API.
-    
-    
+
+
     ### Glossar / Glossary
-    
+
     Folgende englischen Begriffe werden im API verwendet:
-    
-    - **Social Security Number (SSN)**: Sozialversicherungsnummer (SVN) – 13 stellige, Schweizer Sozialversicherungsnummer.
+
+    - **Social Security Number (SSN)**: Sozialversicherungsnummer (SVN) - 13 stellige, Schweizer Sozialversicherungsnummer.
     - **Mandatory / supplementary coverage**: Obligatorischer / überobligatorische Anteil / Deckung
     - **Retirement benefits**: Versicherungsleistungen bei Pensionierung (Altersrente und Altersguthaben)
     - **Risk benefits**: Versicherungsleistungen bei Invalidität und Tod
@@ -90,7 +91,7 @@ info:
     - **Savings contribution**: Sparbeitrag (Beitrag an Altersgutben)
     - **Risk contribution**: Risikobeitrag (Beitrag für Leistungen bei Invalidität und Tod)
     - **Vested benefits**: Freizügigkeitsleistungen
-
+  # yamllint enable rule:indentiation
   contact:
     name: OpenPK Project / Acrea AG
     url: https://www.openpkproject.ch
@@ -102,7 +103,7 @@ info:
 
   x-logo:
     url: https://api-spec-dot-acrea-openpk.appspot.com/images/openpk_hori.svg
-    altText: "OpenPK"
+    altText: OpenPK
 
 tags:
   - name: person
@@ -112,7 +113,7 @@ tags:
   - name: simulation
     description: Simulation of salary changes
 servers:
-  - url: "https://openpk.ch/v1"
+  - url: https://openpk.ch/v1
 
 paths:
   /insured-persons/{personId}:
@@ -130,18 +131,18 @@ paths:
           description: Technical person ID
           required: true
           schema:
-            $ref: "#/components/schemas/PersonId"
+            $ref: '#/components/schemas/PersonId'
       responses:
-        "200":
+        '200':
           description: Details of insured person
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/InsuredPerson"
-        "401":
+                $ref: '#/components/schemas/InsuredPerson'
+        '401':
           description: Access token is missing or invalid
           content: {}
-        "404":
+        '404':
           description: Invalid person ID / no authorization to access data
           content: {}
 
@@ -161,18 +162,18 @@ paths:
           description: Technical policy ID
           required: true
           schema:
-            $ref: "#/components/schemas/PolicyId"
+            $ref: '#/components/schemas/PolicyId'
       responses:
-        "200":
+        '200':
           description: Policy details
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Policy"
-        "401":
+                $ref: '#/components/schemas/Policy'
+        '401':
           description: Access token is missing or invalid
           content: {}
-        "404":
+        '404':
           description: Invalid policy ID / no authorization to access data
           content: {}
 
@@ -194,19 +195,19 @@ paths:
           description: Technical policy ID
           required: true
           schema:
-            $ref: "#/components/schemas/PolicyId"
+            $ref: '#/components/schemas/PolicyId'
       responses:
-        "200":
+        '200':
           description: Binary PDF data of the policy statement
           content:
             application/pdf:
               schema:
                 type: string
                 format: binary
-        "401":
+        '401':
           description: Access token is missing or invalid
           content: {}
-        "404":
+        '404':
           description: Invalid policy ID / no authorization to access data
           content: {}
 
@@ -228,29 +229,29 @@ paths:
           description: Technical policy ID
           required: true
           schema:
-            $ref: "#/components/schemas/PolicyId"
+            $ref: '#/components/schemas/PolicyId'
       requestBody:
         description: Reference date for information in generated document
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ReferenceDate"
+              $ref: '#/components/schemas/ReferenceDate'
       responses:
-        "200":
+        '200':
           description: Binary PDF data of the policy document
           content:
             application/pdf:
               schema:
                 type: string
                 format: binary
-        "400":
+        '400':
           description: Invalid reference date (invalid format or unable to provide statement for the requested date)
           content: {}
-        "401":
+        '401':
           description: Access token is missing or invalid
           content: {}
-        "404":
+        '404':
           description: Invalid policy ID / no authorization to access data
           content: {}
 
@@ -271,25 +272,25 @@ paths:
           description: Policy ID
           required: true
           schema:
-            $ref: "#/components/schemas/PolicyId"
+            $ref: '#/components/schemas/PolicyId'
       requestBody:
         description: Salary change simulation parameters
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SalaryChangeSimParameters"
+              $ref: '#/components/schemas/SalaryChangeSimParameters'
       responses:
-        "200":
+        '200':
           description: Simulation result
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SalaryChangeSimResult"
-        "401":
+                $ref: '#/components/schemas/SalaryChangeSimResult'
+        '401':
           description: Access token is missing or invalid
           content: {}
-        "404":
+        '404':
           description: Invalid policyId
           content: {}
 
@@ -308,7 +309,7 @@ components:
         - ssn
       properties:
         personId:
-          $ref: "#/components/schemas/PersonId"
+          $ref: '#/components/schemas/PersonId'
         lastName:
           type: string
           description: Last name / family name
@@ -316,7 +317,7 @@ components:
           type: string
           description: First name(s)
         address:
-          $ref: "#/components/schemas/Address"
+          $ref: '#/components/schemas/Address'
         birthDate:
           type: string
           format: date
@@ -324,8 +325,8 @@ components:
         sex:
           type: string
           enum:
-            - "male"
-            - "female"
+            - male
+            - female
           description: |
             Sex:
             * `male`: male
@@ -333,20 +334,20 @@ components:
         maritalStatus:
           type: string
           enum:
-            - "single"
-            - "married"
-            - "divorced"
-            - "widowed"
-            - "registeredPartnership"
-            - "dissolvedRegisteredPartnership"
+            - single
+            - married
+            - divorced
+            - widowed
+            - registeredPartnership
+            - dissolvedRegisteredPartnership
           description: |
             Maritial status:
-             * `single`: single
-             * `married`: marrie
-             * `divorced`: divorced
-             * `widowed`: widowed
-             * `registeredPartnership`: living in a registered partnership
-             * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
+            * `single`: single
+            * `married`: marrie
+            * `divorced`: divorced
+            * `widowed`: widowed
+            * `registeredPartnership`: living in a registered partnership
+            * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
         marriageDate:
           type: string
           format: date
@@ -358,7 +359,7 @@ components:
         policyIds:
           type: array
           items:
-            $ref: "#/components/schemas/PolicyId"
+            $ref: '#/components/schemas/PolicyId'
           description: List of IDs of policies that insured person has with this pension fund
         disabilityDegree:
           type: integer
@@ -371,7 +372,7 @@ components:
         healthReservations:
           type: array
           items:
-            $ref: "#/components/schemas/HealthReservation"
+            $ref: '#/components/schemas/HealthReservation'
           description: List of health reservations
 
     Address:
@@ -397,7 +398,7 @@ components:
           description: Postal code
         countryCode:
           type: string
-          pattern: "[A-Z]{2}"
+          pattern: '[A-Z]{2}'
           description: ISO country code
 
     Policy:
@@ -414,9 +415,9 @@ components:
         - financing
       properties:
         policyId:
-          $ref: "#/components/schemas/PolicyId"
+          $ref: '#/components/schemas/PolicyId'
         personId:
-          $ref: "#/components/schemas/PersonId"
+          $ref: '#/components/schemas/PersonId'
         policyNo:
           type: string
           description: Policy number (as printed on policy statements)
@@ -437,15 +438,15 @@ components:
             a regular pension fund with payments from an employer). If the field is not
             set, a regular pension fund is assumed.
         salaryData:
-          $ref: "#/components/schemas/SalaryData"
+          $ref: '#/components/schemas/SalaryData'
         retirementCapital:
-          $ref: "#/components/schemas/RetirementCapital"
+          $ref: '#/components/schemas/RetirementCapital'
         riskBenefits:
-          $ref: "#/components/schemas/RiskBenefits"
+          $ref: '#/components/schemas/RiskBenefits'
         financing:
-          $ref: "#/components/schemas/Financing"
+          $ref: '#/components/schemas/Financing'
         vestedBenefits:
-          $ref: "#/components/schemas/VestedBenefits"
+          $ref: '#/components/schemas/VestedBenefits'
 
     SalaryData:
       type: object
@@ -518,9 +519,9 @@ components:
             regular retirement age. For persons of 58 or older, the list is restricted
             to retirement ages higher than their current age.
           items:
-            $ref: "#/components/schemas/RetirementBenefits"
+            $ref: '#/components/schemas/RetirementBenefits'
         interestRates:
-          $ref: "#/components/schemas/InterestRates"
+          $ref: '#/components/schemas/InterestRates'
 
     RetirementBenefits:
       type: object
@@ -723,7 +724,7 @@ components:
         voluntaryPurchases:
           type: array
           items:
-            $ref: "#/components/schemas/CapitalTransaction"
+            $ref: '#/components/schemas/CapitalTransaction'
           description: |
             List of voluntary purchases of additional pension benefits made in the past.
             At least the purchases of the last 3 years must be included. They can be
@@ -731,19 +732,19 @@ components:
         homeOwnerhsipWithdrawals:
           type: array
           items:
-            $ref: "#/components/schemas/CapitalTransaction"
+            $ref: '#/components/schemas/CapitalTransaction'
           description: |
             List of withdrawls and refunds for home ownership promotion made in the past.
         divorceWithdrawals:
           type: array
           items:
-            $ref: "#/components/schemas/CapitalTransaction"
+            $ref: '#/components/schemas/CapitalTransaction'
           description: |
             List of withdrawls and refunds due to divorce made in the past.
         pledges:
           type: array
           items:
-            $ref: "#/components/schemas/Pledge"
+            $ref: '#/components/schemas/Pledge'
           description: |
             List of pledges of parts of the retirement capital.
 
@@ -811,7 +812,7 @@ components:
           type: string
           description: The name of the pledgee.
         pledgeeAddress:
-          $ref: "#/components/schemas/Address"
+          $ref: '#/components/schemas/Address'
 
     ReferenceDate:
       type: object
@@ -864,7 +865,7 @@ components:
         - financing
       properties:
         salaryData:
-          $ref: "#/components/schemas/SalaryData"
+          $ref: '#/components/schemas/SalaryData'
         projectedRetirementBenefits:
           type: array
           description: |
@@ -873,9 +874,9 @@ components:
             regular retirement age. For persons of 58 or older, the list is restricted
             to retirement ages higher than their current age.
           items:
-            $ref: "#/components/schemas/RetirementBenefits"
+            $ref: '#/components/schemas/RetirementBenefits'
         financing:
-          $ref: "#/components/schemas/Financing"
+          $ref: '#/components/schemas/Financing'
 
   securitySchemes:
     bearerAuthentication:

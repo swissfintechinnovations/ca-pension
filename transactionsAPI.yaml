@@ -2,27 +2,30 @@ openapi: 3.0.1
 info:
   title: Transactions
   version: 0.6.0-beta
+  # yamllint disable rule:indentiation
   description: |
     # Kontobewegungs-API (deutsch)
-    
+
     **** Deutsch (for English see below) ****
-    
+
     Das Kontobewegungs-API liefert die Kontobewegungen des Altersguthabens einer Police.
-    
+
     Die in dieser Spezifikation angegebenen URLs sind nur Beispiel-URLs. Das API wird von einer
     Vielzahl von Pensionskassen implementiert und jede Pensionskasse hat eine andere Basis-URL
     für das API. Die Basis-URL der jeweiligen Pensionskasse wird vom Directory API geliefert.
-    
-    
+
+
     # Transactions API (English)
-    
+
     **** English (für Deutsch siehe weiter oben) ****
-    
+
     The Transactions API provides the transactions affecting the retirement capital of a policy.
-    
+
     The URLs in the specification are examples only. The API is implemented by a many
     pension funds and each pension fund has an individual base URL for the API.
     The base URL of a specific pension fund is provided by the directory API.
+  # yamllint enable rule:indentiation
+
 
   contact:
     name: OpenPK Project / Acrea AG
@@ -35,17 +38,16 @@ info:
 
   x-logo:
     url: https://api-spec-dot-acrea-openpk.appspot.com/images/openpk_hori.svg
-    altText: "OpenPK"
+    altText: OpenPK
 
 tags:
   - name: transactions
     description: Retirement capital transactions
 
 servers:
-  - url: 'https://openpk.ch/v1'
-  
-paths:
+  - url: https://openpk.ch/v1
 
+paths:
   /policies/{policyId}/transactions:
     get:
       summary: Get the retirement capital transactions
@@ -84,7 +86,7 @@ paths:
           required: true
           schema:
             type: string
-            format: date                    
+            format: date
         - name: to
           in: query
           description: End of date range (inclusive)
@@ -109,10 +111,9 @@ paths:
         '404':
           description: Invalid policy ID or insufficient rights to view policy
           content: {}
-        
+
 components:
   schemas:
-
     Transactions:
       type: object
       description: Retirement capital transactions
@@ -152,27 +153,27 @@ components:
           type: string
           description: |
             Transaction category:
-             * `carryover`: Pseudo transaction to provide the carryover from the preceding period
-             * `transfer`: Transfer in and out of the fund (related to an start and end of employment)
-             * `employeeContribution`: Employee contribution as part of salary payment
-             * `employerContribution`: Employer contribution as part of salary payment
-             * `homeOwnershipEncouragement`: Transaction related to home ownerhsip encouragement scheme
-             * `voluntaryPurchase`: Transaction related to voluntary purchse of retirement benefits
-             * `securityInvestment`: Transaction related to a security investment or deinvestment
-             * `dividend`: Transaction related to payouts/distributions from security investments
-             * `fee`: Transaction related to fees
-             * `other`: Other reason for transaction not listed above
+            * `carryover`: Pseudo transaction to provide the carryover from the preceding period
+            * `transfer`: Transfer in and out of the fund (related to an start and end of employment)
+            * `employeeContribution`: Employee contribution as part of salary payment
+            * `employerContribution`: Employer contribution as part of salary payment
+            * `homeOwnershipEncouragement`: Transaction related to home ownerhsip encouragement scheme
+            * `voluntaryPurchase`: Transaction related to voluntary purchse of retirement benefits
+            * `securityInvestment`: Transaction related to a security investment or deinvestment
+            * `dividend`: Transaction related to payouts/distributions from security investments
+            * `fee`: Transaction related to fees
+            * `other`: Other reason for transaction not listed above
           enum:
-            - "carryover"
-            - "transfer"
-            - "employeeContribution"
-            - "employerContribution"
-            - "homeOwnershipEncouragement"
-            - "voluntaryPurchase"
-            - "securityInvestment"
-            - "dividend"
-            - "fee"
-            - "other"
+            - carryover
+            - transfer
+            - employeeContribution
+            - employerContribution
+            - homeOwnershipEncouragement
+            - voluntaryPurchase
+            - securityInvestment
+            - dividend
+            - fee
+            - other
         date:
           type: string
           format: date
@@ -183,13 +184,13 @@ components:
         reason:
           type: string
           description: |
-            A human-readable description of the transaction reason, in the insured person's 
+            A human-readable description of the transaction reason, in the insured person's
             preferred language.
         balance:
           type: number
           format: double
           description: Retirement capital balance after transaction
-          
+
     PolicyId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
