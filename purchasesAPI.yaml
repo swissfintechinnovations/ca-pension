@@ -4,7 +4,6 @@ info:
   version: 0.6.1-beta
   # yamllint disable rule:indentiation
   description: |
-
     # Einkaufs-API (deutsch)
 
     **** Deutsch (for English see below) ****
@@ -38,15 +37,15 @@ info:
     - In Prüfung: Die Pensionskasse ist dabei, den Antrag zu prüfen. Dies ist der erste Zustand eines neuen Antrags.
 
     - Unterlagen erforderlich: Die Prüfung hat ergeben, dass die versicherte Person weitere Unterlagen einreichen oder
-      direkt mit der Pensionskasse Kontakt aufnehmen muss.
+    direkt mit der Pensionskasse Kontakt aufnehmen muss.
 
     - Abgelehnt: Der Einkaufsantrag wurde abgelehnt. Dies ist ein Endzustand.
 
     - Bewilligt: Der Einkaufsantrag wurde bewilligt. Die versicherte Person kann nun die Zahlungen vornehmen
-      (einmalige oder wiederkehrende).
+    (einmalige oder wiederkehrende).
 
     - Abgeschlossen: Der Einkaufsantrag ist abgeschlossen. Eine oder mehrere Zahlungen sind erfolgt, und es sind keine
-      weiteren Zahlungen mehr möglich. Dies ist ein Endzustand.
+    weiteren Zahlungen mehr möglich. Dies ist ein Endzustand.
 
     Der Antrag kann über das API abgefragt werden und hat neben dem Antragszustand noch viele weitere Attribute,
     z.B. die bewilligte Einkaufssumme, die Summe der erfolgten Zahlungen etc.
@@ -107,10 +106,10 @@ info:
     Die Instruktionen bestehen aus einer Liste von Sätzen. Diese werden von der Applikation als unnummerierte Liste angezeigt, z.B:
 
     - *Der Einkaufsbetrag reduziert sich um die Höhe des Guthabens auf den Freizügigkeitskonti / -policen. Bitte senden Sie uns
-      Kopien von Konto-/Policienauszügen, die den Stand per Ende letzten Jahres zeigen.*
+    Kopien von Konto-/Policienauszügen, die den Stand per Ende letzten Jahres zeigen.*
     - *Senden Sie die Dokumente an: Personalfürsorge der Firma Heierli AG, Bahnhofstrasse 13, 9000 St. Gallen.*
     - *Alternativ können Sie die Dokumente an einkauf@heierli-pk.ch senden. Bitte beachten Sie, dass Emails einen Weg über Server
-      im Ausland nehmen können und die Vertraulichkeit auf dem Weg nicht gewährt ist.*
+    im Ausland nehmen können und die Vertraulichkeit auf dem Weg nicht gewährt ist.*
 
     Sind weitere Unterlagen nötig, so müssen diese direkt an die Pensionskasse (und nicht über die Applikation) eingereicht werden.
     Entsprechend gibt es kein API dafür.
@@ -132,16 +131,16 @@ info:
     Wurde der Einkauf über einen bestimmten Betrag bewilligt, so kann der Betrag wie folgt überwiesen werden:
 
     - **Einmalige Einzahlung mit Einzahlungsschein (QR-Rechnung)**: Die Pensionskasse stellt die Zahlungsdaten (Adresse, Kontonummer,
-      Referenznummer etc.) aus, die per API an die Applikation geliefert werden.
+    Referenznummer etc.) aus, die per API an die Applikation geliefert werden.
 
     - **Einmalige Einzahlung über eBill**: Die Pensionskasse sendet eine eBill ans eBill-Konto der versicherten Person.
 
     - **Regelmässige Einzahlungen per eBill**: Es wird ein Zahlungsrhythmus vereinbart, gemäss dem die Pensionskasse eBills ans
-      eBill-Konto der versicherten Person sendet.
+    eBill-Konto der versicherten Person sendet.
 
     - **Unregelmässige Einzahlungen per Einzahlungsschein (QR-Rechnung)**: Die Pensionskasse stellt die Zahlungsdaten (Adresse,
-      Kontonummer, Referenznummer etc.) aus, die die Applikation nutzt, um Zahlungen auszulösen, z.B. über eine E-Banking-Schnittstelle.
-      Es wird für alle Zahlungen die gleiche Referenznummer verwendet.
+    Kontonummer, Referenznummer etc.) aus, die die Applikation nutzt, um Zahlungen auszulösen, z.B. über eine E-Banking-Schnittstelle.
+    Es wird für alle Zahlungen die gleiche Referenznummer verwendet.
 
     Eine Pensionskasse muss nicht alle vier Zahlungsmethoden unterstützen. Die unterstützen Zahlungsmethoden können über das API
     abgefragt werden.
@@ -198,7 +197,7 @@ info:
     - Approved: The purchase application was approved. The insured person can now make payments (once or repeating).
 
     - Completed: The purchase application has been completed. One or more payments have been received, and no further payments
-      are possible. This is a final state.
+    are possible. This is a final state.
 
     The application can be queried using the API. It will return the application state and many additional attributes,
     such as the approved purchase amount, the amount of received payments.
@@ -258,10 +257,10 @@ info:
     Structurally, the instructions are a list of sentences. The application will display them as bullet list, e.g.:
 
     - *Your purchasing potential will be reduced by your further claims from pillar 2 (vested benefits account or policy). Please
-      send us a copy of the current account statement for your vested benefit accounts.*
+    send us a copy of the current account statement for your vested benefit accounts.*
     - *Please send the documents to: Personalfürsorge der Firma Heierli AG, Bahnhofstrasse 13, 9000 St. Gallen.*
     - *Alternatively, you can send the documents to einkauf@heierli-pk.ch. Please not that emails can take a route via servers abroad,
-      and confidentially on this path cannot be guaranteed.*
+    and confidentially on this path cannot be guaranteed.*
 
     If additional documents are required for the purchase, they must be sent directly to the pension fund (and not via the application).
     Thus, there is no API to upload documents.
@@ -283,19 +282,19 @@ info:
     Once the voluntary purchase has been approved, the amount can paid in one four ways:
 
     - **Single payment using a payment slip (QR bill)**: The pension fund provides the payment details (address,
-      account number, reference number etc.) via API to the application used by the insured person. He/she makes
-      a payment using the provided data.
+    account number, reference number etc.) via API to the application used by the insured person. He/she makes
+    a payment using the provided data.
 
     - **Single payment by eBill**: The pension fund sends an eBill to the insured person's eBill account.
-      The insured person provides the eBill email address via the API to the pension fund.
+    The insured person provides the eBill email address via the API to the pension fund.
 
     - **Periodic payments by eBill**: The insured person chooses a payment periodicity, which is sent
-      to the pension fund via the API. The pension fund will later send an eBill for each payment to
-      the insured person's eBill account.
+    to the pension fund via the API. The pension fund will later send an eBill for each payment to
+    the insured person's eBill account.
 
     - **Irregular payments using a payment slip (QR bill)**: The pension fund provides the payment details (address,
-      account number, reference number etc.)  via API to the application. The application then triggers payments
-      (e.g. via an E-Banking-API). All payments use the same reference number.
+    account number, reference number etc.)  via API to the application. The application then triggers payments
+    (e.g. via an E-Banking-API). All payments use the same reference number.
 
     A pension fund does not need to support a four payment methods. An application can query the supported methods
     with an API call.
