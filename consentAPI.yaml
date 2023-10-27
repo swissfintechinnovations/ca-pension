@@ -1,0 +1,199 @@
+openapi: 3.0.1
+info:
+  title: Consent
+  version: 0.6.1-beta
+  # yamllint disable rule:indentiation
+  description: |
+    # Zustimmungs-API (deutsch)
+
+    **** Deutsch (for English see below) ****
+
+    Mit dem Zustimmungs-API kann eine Applikation abfragen, für welche Daten der Benutzer
+    ihr Zugriffsrechte erteilt hat.
+
+    Möchte eine Applikation über das OpenPK-API auf Pensionskassendaten zugreifen, so muss
+    sie zuerst einen interaktiven UI-Flow auslösen, der direkt zwischen der versicherten Person
+    und der Pensionskasse abläuft. Dabei wird sich die versicherte Person gegenüber der
+    Pensionskasse authentisieren und der Applikation die Zustimmung erteilen, auf ihre Daten
+    zuzugreifen.
+
+    Die Pensionskasse kann den Zugriff entweder *pro Objekt*, also für die Personendaten und
+    die Policendaten separat, lösen, oder *global*, d.h. die versicherte Person erteilt einer
+    Applikation den Zugriff auf alle ihre Daten. Es ist möglich, dass nur der Zugriff auf die
+    Policendaten, nicht aber auf die Personendaten erteilt wird.
+
+    Zum Abschluss des UI-Flows werden Zugriffstoken an die Applikation übergeben, mit denen
+    sie im Namen der versicherten Person auf das OpenPK-API zugreifen kann. Mit den Tokens
+    kann der Zugriff auch offline erfolgen, d.h. unabhängig davon, ob der Benutzer die
+    Applikation gerade nutzt oder nicht.
+
+    Nachdem der UI-Flow abgeschlossen ist, frägt die Applikation über das Zustimmungs-API ab,
+    welche Rechte die versicherte Person der Applikation eingeräumt hat. Dabei erhält sie auch
+    die IDs der relevanten Objekte/Ressourcen. Diese IDs werden benötigt, um Anfragen für die
+    anderen APIs zu erstellen.
+
+    Die gelieferten IDs können beliebige technische IDs sein (für die maximale Länge und
+    erlaubten Zeichen siehe weiter unten), aber sie müssen stabil sein, d.h. sie dürfen sich
+    über die Zeit nicht ändern. Applikationen können und sollen sie speichern.
+
+    Eine Pensionskasse stellt ihren Versicherten auch einen Weg zur Verfügung, über den sie
+    einer Applikation die Rechte wieder entziehen kann.
+
+
+    # Consent API (English)
+
+    **** English (für Deutsch siehe weiter oben) ****
+
+    Using the Consent API applications can query what access rights the user has granted to
+    the application.
+
+    Before an application can use the OpenPK API for a particular user, it must initiate an
+    interactive UI flow conducted directly between the insured person and the pension fund.
+    As part of the flow the insured person will authenticate itself and grant consent to
+    the application to access his/her pension fund data.
+
+    The pension fund can implement grants *at object level*, i.e. separately for person data
+    and policy data, or *globally*, i.e. the insured person grants access to all data. It is
+    possible to only grant access to the policy data but not to the person data.
+
+    At the end of the UI flow, the application is given access tokens that are required
+    to use the OpenPK APIs on behalf of the insured person. Using the tokens, offline API
+    access is possible as well, i.e. API access is possible even if the user is not using
+    the application at the same time.
+
+    After the UI flow has concluded, the application uses the Consent API to query what
+    permission it has been granted by the user. As part of the reply the application will
+    also receive the IDs of relevant objects/resources. The IDs are required to construct
+    requests for the other OpenPK APIs.
+
+    The object IDs can be arbitrary technical IDs (for maximum length and allowed characters
+    see below), but they must be stable, i.e. they may not change over time. Applications
+    can and should store these IDs.
+
+    A pension fund will provide means to the insured persons to revoke the granted consents.
+  # yamllint enable rule:indentiation
+  contact:
+    name: OpenPK Project / Acrea AG
+    url: https://www.openpkproject.ch
+    email: openpkproject@acrea.com
+
+  license:
+    name: Creative Commons Attribution 4.0 International License
+    url: http://creativecommons.org/licenses/by/4.0/
+
+  x-logo:
+    url: https://api-spec-dot-acrea-openpk.appspot.com/images/openpk_hori.svg
+    altText: OpenPK
+
+tags:
+  - name: consent
+    description: Consent information
+
+servers:
+  - url: https://openpk.ch/v1
+
+paths:
+  /users/me:
+    get:
+      summary: Get granted consents
+      description: |
+        Gets the consents the user (insured person) has granted to the calling application.
+
+        The consent is managed separately for each person and each policy.
+        For each object, the user may have granted the right view the data
+        or view and change it.
+      operationId: getUsersMe
+      tags:
+        - consent
+      responses:
+        '200':
+          description: Granted consent details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Consents'
+              examples:
+                twoPolicies:
+                  summary: Insured person with two policies
+                  value:
+                    - personGrant:
+                        personId: 93816732
+                        personAccessRight: read-only
+                    - policyGrants:
+                        - policyId: 132559379
+                          policyAccessRight: read-only
+                        - policyId: 165978481
+                          policyAccessRight: read-only
+        '400':
+          description: Invalid request
+          content: {}
+        '401':
+          description: Access token is missing or invalid
+          content: {}
+
+components:
+  schemas:
+    Consents:
+      type: object
+      description: Consent details (accessible object, access rights)
+      properties:
+        personGrant:
+          $ref: '#/components/schemas/PersonGrant'
+
+        policyGrants:
+          type: array
+          description: |
+            List of policies and associated access rights.
+            Policies that have not been granted access are omitted from the list.
+          items:
+            $ref: '#/components/schemas/PolicyGrant'
+
+    PersonGrant:
+      type: object
+      description: |
+        Granted consent details for person data.
+        It is only provided, if access to person data has been granted.
+      properties:
+        personId:
+          $ref: '#/components/schemas/PersonId'
+        personAccessRight:
+          $ref: '#/components/schemas/ObjectAccessRight'
+
+    PolicyGrant:
+      type: object
+      description: Granted consent details for policy data
+      properties:
+        policyId:
+          $ref: '#/components/schemas/PolicyId'
+        policyAccessRight:
+          $ref: '#/components/schemas/ObjectAccessRight'
+
+    ObjectAccessRight:
+      type: string
+      description: |
+        Access right for object:
+        * `read-only` - View object data
+        * `change` - View and change object data
+      enum:
+        - read-only
+        - change
+
+    PersonId:
+      type: string
+      pattern: '[A-Za-z0-9_\-.~]{1,64}'
+      description: Technical ID of insured person used in API calls
+
+    PolicyId:
+      type: string
+      pattern: '[A-Za-z0-9_\-.~]{1,64}'
+      description: Technical ID of policy used in API calls
+
+  securitySchemes:
+    bearerAuthentication:
+      type: http
+      description: Bearer access token in HTTP header
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuthentication: []

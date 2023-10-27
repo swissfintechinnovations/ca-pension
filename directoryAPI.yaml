@@ -1,0 +1,218 @@
+openapi: 3.0.1
+info:
+  title: Central Directory
+  version: 0.5.2-beta
+  # yamllint disable rule:indentiation
+  description: |
+    # Zentrales Verzeichnis API (deutsch)
+
+    **** Deutsch (for English see below) ****
+
+    Das Zentrale Verzeichnis API liefert Informationen zu allen beteiligten Parteien. Dies umfasst einerseits Pensionskassen,
+    die das OpenPK-API implementieren, und andererseits Applikationen, die über das OpenPK-API auf Daten zugreifen.
+
+    Im Unterschied zu allen anderen APIs wird das Verzeichnis API nicht von jeder Pensionskasse, sondern nur einmal
+    von einem zentralen Dienst implementiert.
+
+    **Applikationen** nutzen das Verzeichnis-API, um dem Benutzer eine Liste von Pensionskassen anzuzeigen, damit der
+    Benutzer seine Pensionskasse auswählen kann. Ist die Auswahl getroffen, so liefert das Verzeichnis-API alle
+    technischen Angaben, um auf die OpenPK-Implementierung der gewählten Pensionskasse zuzugreifen. Insbesondere
+    werden die Basis-URLs der API-Endpunkte geliefert.
+
+    **Pensionskassen** nutzen das Verzeichnis-API, um Informationen über die Applikationen zu bekommen, die über das
+    OpenPK-API auf ihre Dienste zugreifen, zu bekommen.
+
+    Verzeichnis-Daten ändern nur langsam. Applikationen und Pensionskasse werden ermuntert, diese Daten gesamthaft
+    herunterzuladen, zwischenzuspeichern und nur alle 12 bis 24 Stunden erneut abzufragen.
+
+
+    # Central Directory API (English)
+
+    **** English (für Deutsch siehe weiter oben) ****
+
+    The Central Directory API provides information about the participating parties. It includes pension funds implementing
+    the OpenPK API as well as application using the OpenPK API to access data.
+
+    Unlike all other OpenPK APIs, this API is not implemented by several pension funds but only once by a central party.
+
+    **Applications** use the Central Directory API to show a list of pension funds and have the user select his/her pension
+    fund. Once the selection is made, the directory API provides the technical details to contact the pension fund's
+    OpenPK implementation. In particular the base URLs of the API endpoints are provided.
+
+    **Pension funds** use the directory API to get information about the applications accessing their OpenPK services.
+
+    Directory data does not change often. Applications and pension funds are encouraged to download the directory data
+    in its entirety, cache it and refresh it every 12 to 24 hours.
+  # yamllint enable rule:indentiation
+
+  contact:
+    name: OpenPK Project / Acrea AG
+    url: https://www.openpkproject.ch
+    email: openpkproject@acrea.com
+
+  license:
+    name: Creative Commons Attribution 4.0 International License
+    url: http://creativecommons.org/licenses/by/4.0/
+
+  x-logo:
+    url: https://api-spec-dot-acrea-openpk.appspot.com/images/openpk_hori.svg
+    altText: OpenPK
+
+tags:
+  - name: pension-funds
+    description: Pension fund directory
+
+servers:
+  - url: https://directory-dot-acrea-openpk.appspot.com/v1
+
+paths:
+  /pension-funds:
+    get:
+      operationId: getPensionFunds
+      tags:
+        - pension-funds
+      summary: Get list of pension funds
+      description: |
+        Provides the complete list of participating pension funds, incl. pension funds
+        that plan to participate soon and funds that have participated in the past.
+      responses:
+        '200':
+          description: |
+            List of pension funds with technical data for connecting to the OpenPK APIs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PensionFunds'
+              examples:
+                ex1:
+                  summary: Abbreviated pension fund list
+                  value:
+                    - - 'id': SG 0227,
+                      - 'name': BVG-Stiftung der Plaston AG,
+                      - 'nameDe': BVG-Stiftung der Plaston AG,
+                      - 'address': c/o Alvisa Services AG, Seestrasse 6, 8027 Zürich,
+                      - 'openpkStatus': active,
+                      - 'openpkServices':
+                          - 'authorizeUrl': https://iam.company.com/pensionfund/auth/authorize,
+                          - 'grantUrl': https://star-fund-dot-acrea-openpk.appspot.com/consent,
+                          - 'identityProvider': https://iam.company.com/pensionfund,
+                          - 'tokenEndpoint': https://iam.company.com/pensionfund/auth/token,
+                          - 'policyEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1,
+                          - 'consentEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1
+                    - - 'id': SR-200127,
+                      - 'name': Fonds de prévoyance en faveur du personnel du groupe SICPA en Suisse,
+                      - 'nameFr': Fonds de prévoyance en faveur du personnel du groupe SICPA en Suisse,
+                      - 'address': Avenue Florissant 41 Case postale, 1000 Lausanne 16,
+                      - 'openpkStatus': active,
+                      - 'openpkServices':
+                          - 'authorizeUrl': https://identity.pensionfund.ch/auth/authorize,
+                          - 'grantUrl': https://star-fund-dot-acrea-openpk.appspot.com/consent,
+                          - 'identityProvider': https://identity.pensionfund.ch,
+                          - 'tokenEndpoint': https://identity.pensionfund.ch/auth/token,
+                          - 'policyEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1,
+                          - 'consentEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1
+
+components:
+  schemas:
+    PensionFunds:
+      type: array
+      description: List of pension funds
+      items:
+        $ref: '#/components/schemas/PensionFund'
+
+    PensionFund:
+      type: object
+      description: Pension fund incl. technical service data
+      required:
+        - name
+        - id
+        - openpkStatus
+      properties:
+        id:
+          type: string
+          description: Pension fund ID
+        name:
+          type: string
+          description: Pension fund name in fund's preferred language
+        nameDe:
+          type: string
+          description: Pension fund name in German
+        nameEn:
+          type: string
+          description: Pension fund name in English
+        nameFr:
+          type: string
+          description: Pension fund name in French
+        nameIt:
+          type: string
+          description: Pension fund name in Itlian
+        nameRm:
+          type: string
+          description: Pension fund name in Rhaeto-Romanic
+        webUrl:
+          type: string
+          format: uri
+          description: URL of pension funds web site
+        logoUrl:
+          type: string
+          format: uri
+          description: |
+            Image URL of pension fund logo
+            (at least 200 by 200 pixels, suitable for display on white background,
+            JPEG or PNG format)
+        openpkStatus:
+          type: string
+          description: |
+            OpenPK API status:
+            * `active`: The APIs are active.
+            * `onboarding`: The APIs will soon be active.
+            * `paused`: The APIs have been paused.
+            * `notJoined`: The pension fund does not provide APIs.
+          enum:
+            - active
+            - onboarding
+            - paused
+            - notJoined
+        address:
+          type: string
+          description: Pension fund address. Text excl. name.
+        openpkServices:
+          description: Technical description of API service
+          $ref: '#/components/schemas/ServicesDescription'
+
+    ServicesDescription:
+      type: object
+      description: Technical description of API service
+      required:
+        - authorizeUrl
+        - tokenEndpoint
+        - grantUrl
+      properties:
+        authorizeUrl:
+          type: string
+          format: uri
+          description: URL to initiate the user authentication interaction
+        grantUrl:
+          type: string
+          format: uri
+          description: URL to initate the user interaction for granting access
+        identityProvider:
+          type: string
+          format: uri
+          description: |
+            URL of identity provider and issuer of credentials.
+            Open ID Connect discovery URLs derived relative to this URL,
+            e.g. `https://iam.company.com/iam/.well-known/openid-configuration`
+            for the issuer URL `https://iam.company.com/iam`.
+        tokenEndpoint:
+          type: string
+          format: uri
+          description: Endpoint URI to request access token
+        policyEndpoint:
+          type: string
+          format: uri
+          description: Endpoint URI to query insured person and policy data
+        consentEndpoint:
+          type: string
+          format: uri
+          description: Endpoint URI to query the granted consents
