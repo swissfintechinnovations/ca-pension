@@ -31,19 +31,13 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Check user permissions
-        uses: marcocarvalho/team-membership@v3
-        id: checkUserTeam
-        with:
-          username: ${{ github.actor }}
-          team: 'Stream Lead Pension'
-
-      - name: check user permission
+      - name: Check user permission
         id: permission_check
-        if: steps.checkUserTeam.outputs.isTeamMember == 'false'
         run: |
-          echo "You have no permissons to start the release action."
-          exit 1
+          if [[ "${{ github.actor }}" != "msacrea" && "${{ github.actor }}" != "micmuell" && "${{ github.actor }}" != "dkoeni" && "${{ github.actor }}" != "juergen-petry" ]]; then
+            echo "You have no permissons to start the release action."
+            exit 1
+          fi
 
       - name: Validate input parameters
         id: param_check
