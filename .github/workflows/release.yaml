@@ -40,7 +40,7 @@ jobs:
 
       - name: check user permission
         id: permission_check
-        if: steps.checkUserMember.outputs.isTeamMember == 'false'
+        if: steps.checkUserTeam.outputs.isTeamMember == 'false'
         run: |
           echo "You have no permissons to start the release action."
           exit 1
