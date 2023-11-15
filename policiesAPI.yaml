@@ -92,7 +92,7 @@ info:
     - **Risk contribution**: Risikobeitrag (Beitrag für Leistungen bei Invalidität und Tod)
     - **Vested benefits**: Freizügigkeitsleistungen
   # yamllint enable rule:indentiation
-  
+
   contact:
     email: info@common-api.ch
 

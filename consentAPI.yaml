@@ -72,7 +72,7 @@ info:
 
     A pension fund will provide means to the insured persons to revoke the granted consents.
   # yamllint enable rule:indentiation
-  
+
   contact:
     email: info@common-api.ch
 
@@ -83,7 +83,7 @@ info:
 externalDocs:
   description: Find out more about SFTI API specifications
   url: https://www.common-api.ch
- 
+
 tags:
   - name: consent
     description: Consent information
