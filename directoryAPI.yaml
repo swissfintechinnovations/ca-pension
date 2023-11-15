@@ -54,7 +54,7 @@ info:
 
 externalDocs:
   description: Find out more about SFTI API specifications
-  url: 'https://www.common-api.ch'
+  url: https://www.common-api.ch
 
 tags:
   - name: pension-funds
