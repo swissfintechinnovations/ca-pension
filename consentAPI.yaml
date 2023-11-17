@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Consent
-  version: 0.6.1-beta
+  version: 0.6.1
   # yamllint disable rule:indentiation
   description: |
     # Zustimmungs-API (deutsch)
@@ -72,18 +72,17 @@ info:
 
     A pension fund will provide means to the insured persons to revoke the granted consents.
   # yamllint enable rule:indentiation
+
   contact:
-    name: OpenPK Project / Acrea AG
-    url: https://www.openpkproject.ch
-    email: openpkproject@acrea.com
+    email: info@common-api.ch
 
   license:
-    name: Creative Commons Attribution 4.0 International License
-    url: http://creativecommons.org/licenses/by/4.0/
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
 
-  x-logo:
-    url: https://api-spec-dot-acrea-openpk.appspot.com/images/openpk_hori.svg
-    altText: OpenPK
+externalDocs:
+  description: Find out more about SFTI API specifications
+  url: https://www.common-api.ch
 
 tags:
   - name: consent
