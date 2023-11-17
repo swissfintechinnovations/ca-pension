@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Central Directory
-  version: 0.5.2
+  version: 0.8.0
   # yamllint disable rule:indentiation
   description: |
     # Zentrales Verzeichnis API (deutsch)

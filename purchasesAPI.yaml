@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Voluntary Purchase
-  version: 0.6.1
+  version: 0.8.0
   # yamllint disable rule:indentiation
   description: |
     # Einkaufs-API (deutsch)
