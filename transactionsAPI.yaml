@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Transactions
-  version: 0.6.0-beta
+  version: 0.6.0
   # yamllint disable rule:indentiation
   description: |
     # Kontobewegungs-API (deutsch)
