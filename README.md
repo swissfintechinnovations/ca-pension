@@ -4,8 +4,8 @@
 
 ---
 [![GitHub release](https://img.shields.io/github/release/swissfintechinnovations/ca-pension)](https://github.com/swissfintechinnovations/ca-pension/releases/)
-[![GitHub checks](https://img.shields.io/github/checks-status/swissfintechinnovations/ca-pension/main)](https://github.com/swissfintechinnovations/ca-pension/actions)
-[![Swagger Validator](https://img.shields.io/swagger/valid/3.0?specUrl=https%3A%2F%2Fraw.githubusercontent.com%2FOAI%2FOpenAPI-Specification%2Fmaster%2Fexamples%2Fv2.0%2Fjson%2Fpetstore-expanded.json)](https://github.com/swissfintechinnovations/ca-pension/wiki/Swagger-Editor)
+[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/swissfintechinnovations/ca-pension/lint.yaml?label=Lint%20checks)](https://github.com/swissfintechinnovations/ca-pension/actions)
+[![Swagger Validator](https://img.shields.io/swagger/valid/3.0?specUrl=https://raw.githubusercontent.com/swissfintechinnovations/ca-pension/main/consentAPI.yaml)](https://github.com/swissfintechinnovations/ca-pension/wiki/Swagger-Editor)
 [![GitHub license](https://img.shields.io/github/license/swissfintechinnovations/ca-pension)](https://github.com/swissfintechinnovations/ca-pension/blob/main/LICENSE)
 
 This is the official SFTI repo for the pension API. Documentations may be found in the [Wiki](https://github.com/swissfintechinnovations/ca-pension/wiki).
