@@ -738,6 +738,11 @@ components:
             $ref: '#/components/schemas/capitalTransaction'
           description: |
             List of withdrawls and refunds for home ownership promotion made in the past.
+        homeOwnershipAvailableForWithdrawal:
+          type: number
+          format: double
+          description: |
+            The total amount available for the insured person to withdraw or borrow against from their retirement capital for the purpose of financing home ownership.
         divorceWithdrawals:
           type: array
           items:
