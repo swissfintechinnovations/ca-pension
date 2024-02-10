@@ -362,6 +362,24 @@ components:
           type: integer
           format: int64
           description: Social security number
+        employer:
+          type: object
+          description: Details of the insured person's employer
+          required:
+            - name
+          properties:
+            employerId:
+              type: string
+              description: Swiss Enterprise Identification Number UID
+            name:
+              type: string
+              description: The name of the employer
+            address:
+              $ref: '#/components/schemas/address'
+              description: The address of the employer
+            industry:
+              type: string
+              description: The industry or sector the employer operates in
         policyIds:
           type: array
           items:
