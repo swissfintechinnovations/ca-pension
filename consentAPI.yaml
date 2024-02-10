@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Consent
-  version: 0.6.1-beta
+  version: 0.8.0
   # yamllint disable rule:indentiation
   description: |
     # Zustimmungs-API (deutsch)
@@ -91,6 +91,9 @@ tags:
 servers:
   - url: https://openpk.ch/v1
 
+security:
+  - bearerAuthentication: []
+
 paths:
   /users/me:
     get:
@@ -110,7 +113,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Consents'
+                $ref: '#/components/schemas/consents'
               examples:
                 twoPolicies:
                   summary: Insured person with two policies
@@ -131,43 +134,49 @@ paths:
           content: {}
 
 components:
+  securitySchemes:
+    bearerAuthentication:
+      type: http
+      description: Bearer access token in HTTP header
+      scheme: bearer
+      bearerFormat: JWT
+
   schemas:
-    Consents:
+    consents:
       type: object
       description: Consent details (accessible object, access rights)
       properties:
         personGrant:
-          $ref: '#/components/schemas/PersonGrant'
-
+          $ref: '#/components/schemas/personGrant'
         policyGrants:
           type: array
           description: |
             List of policies and associated access rights.
             Policies that have not been granted access are omitted from the list.
           items:
-            $ref: '#/components/schemas/PolicyGrant'
+            $ref: '#/components/schemas/policyGrant'
 
-    PersonGrant:
+    personGrant:
       type: object
       description: |
         Granted consent details for person data.
         It is only provided, if access to person data has been granted.
       properties:
         personId:
-          $ref: '#/components/schemas/PersonId'
+          $ref: '#/components/schemas/personId'
         personAccessRight:
-          $ref: '#/components/schemas/ObjectAccessRight'
+          $ref: '#/components/schemas/objectAccessRight'
 
-    PolicyGrant:
+    policyGrant:
       type: object
       description: Granted consent details for policy data
       properties:
         policyId:
-          $ref: '#/components/schemas/PolicyId'
+          $ref: '#/components/schemas/policyId'
         policyAccessRight:
-          $ref: '#/components/schemas/ObjectAccessRight'
+          $ref: '#/components/schemas/objectAccessRight'
 
-    ObjectAccessRight:
+    objectAccessRight:
       type: string
       description: |
         Access right for object:
@@ -177,22 +186,12 @@ components:
         - read-only
         - change
 
-    PersonId:
+    personId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of insured person used in API calls
 
-    PolicyId:
+    policyId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of policy used in API calls
-
-  securitySchemes:
-    bearerAuthentication:
-      type: http
-      description: Bearer access token in HTTP header
-      scheme: bearer
-      bearerFormat: JWT
-
-security:
-  - bearerAuthentication: []

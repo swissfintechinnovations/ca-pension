@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Central Directory
-  version: 0.5.2-beta
+  version: 0.8.0
   # yamllint disable rule:indentiation
   description: |
     # Zentrales Verzeichnis API (deutsch)
@@ -80,7 +80,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PensionFunds'
+                $ref: '#/components/schemas/pensionFunds'
               examples:
                 ex1:
                   summary: Abbreviated pension fund list
@@ -112,13 +112,13 @@ paths:
 
 components:
   schemas:
-    PensionFunds:
+    pensionFunds:
       type: array
       description: List of pension funds
       items:
-        $ref: '#/components/schemas/PensionFund'
+        $ref: '#/components/schemas/pensionFund'
 
-    PensionFund:
+    pensionFund:
       type: object
       description: Pension fund incl. technical service data
       required:
@@ -176,9 +176,9 @@ components:
           description: Pension fund address. Text excl. name.
         openpkServices:
           description: Technical description of API service
-          $ref: '#/components/schemas/ServicesDescription'
+          $ref: '#/components/schemas/servicesDescription'
 
-    ServicesDescription:
+    servicesDescription:
       type: object
       description: Technical description of API service
       required:

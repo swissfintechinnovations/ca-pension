@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Policies
-  version: 0.7.0-beta
+  version: 0.8.0
   # yamllint disable rule:indentiation
   description: |
     # Policendaten-API (Deutsch)
@@ -114,6 +114,9 @@ tags:
 servers:
   - url: https://openpk.ch/v1
 
+security:
+  - bearerAuthentication: []
+
 paths:
   /insured-persons/{personId}:
     get:
@@ -130,14 +133,14 @@ paths:
           description: Technical person ID
           required: true
           schema:
-            $ref: '#/components/schemas/PersonId'
+            $ref: '#/components/schemas/personId'
       responses:
         '200':
           description: Details of insured person
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InsuredPerson'
+                $ref: '#/components/schemas/insuredPerson'
         '401':
           description: Access token is missing or invalid
           content: {}
@@ -161,14 +164,14 @@ paths:
           description: Technical policy ID
           required: true
           schema:
-            $ref: '#/components/schemas/PolicyId'
+            $ref: '#/components/schemas/policyId'
       responses:
         '200':
           description: Policy details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: '#/components/schemas/policy'
         '401':
           description: Access token is missing or invalid
           content: {}
@@ -194,7 +197,7 @@ paths:
           description: Technical policy ID
           required: true
           schema:
-            $ref: '#/components/schemas/PolicyId'
+            $ref: '#/components/schemas/policyId'
       responses:
         '200':
           description: Binary PDF data of the policy statement
@@ -228,14 +231,14 @@ paths:
           description: Technical policy ID
           required: true
           schema:
-            $ref: '#/components/schemas/PolicyId'
+            $ref: '#/components/schemas/policyId'
       requestBody:
         description: Reference date for information in generated document
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReferenceDate'
+              $ref: '#/components/schemas/referenceDate'
       responses:
         '200':
           description: Binary PDF data of the policy document
@@ -262,7 +265,6 @@ paths:
         Simulates the effects of a salaray and/or employment level change on contributions
         and prospective retirement benefits. Prospective retirements benefits are calculated
         for retirement at the regular age as well as for multiple early retirement ages.
-
       tags:
         - simulation
       parameters:
@@ -271,21 +273,21 @@ paths:
           description: Policy ID
           required: true
           schema:
-            $ref: '#/components/schemas/PolicyId'
+            $ref: '#/components/schemas/policyId'
       requestBody:
         description: Salary change simulation parameters
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SalaryChangeSimParameters'
+              $ref: '#/components/schemas/salaryChangeSimParameters'
       responses:
         '200':
           description: Simulation result
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SalaryChangeSimResult'
+                $ref: '#/components/schemas/salaryChangeSimResult'
         '401':
           description: Access token is missing or invalid
           content: {}
@@ -294,8 +296,15 @@ paths:
           content: {}
 
 components:
+  securitySchemes:
+    bearerAuthentication:
+      type: http
+      description: Bearer access token in HTTP header
+      scheme: bearer
+      bearerFormat: JWT
+
   schemas:
-    InsuredPerson:
+    insuredPerson:
       type: object
       description: Details of insured person
       required:
@@ -308,7 +317,7 @@ components:
         - ssn
       properties:
         personId:
-          $ref: '#/components/schemas/PersonId'
+          $ref: '#/components/schemas/personId'
         lastName:
           type: string
           description: Last name / family name
@@ -316,10 +325,9 @@ components:
           type: string
           description: First name(s)
         address:
-          $ref: '#/components/schemas/Address'
+          $ref: '#/components/schemas/address'
         birthDate:
-          type: string
-          format: date
+          $ref: '#/components/schemas/date'
           description: Birth date
         sex:
           type: string
@@ -348,8 +356,7 @@ components:
             * `registeredPartnership`: living in a registered partnership
             * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
         marriageDate:
-          type: string
-          format: date
+          $ref: '#/components/schemas/date'
           description: Date of marriage (or registration of partnership)
         ssn:
           type: integer
@@ -358,7 +365,7 @@ components:
         policyIds:
           type: array
           items:
-            $ref: '#/components/schemas/PolicyId'
+            $ref: '#/components/schemas/policyId'
           description: List of IDs of policies that insured person has with this pension fund
         disabilityDegree:
           type: integer
@@ -371,10 +378,10 @@ components:
         healthReservations:
           type: array
           items:
-            $ref: '#/components/schemas/HealthReservation'
+            $ref: '#/components/schemas/healthReservation'
           description: List of health reservations
 
-    Address:
+    address:
       type: object
       description: Postal/residence address
       required:
@@ -400,7 +407,7 @@ components:
           pattern: '[A-Z]{2}'
           description: ISO country code
 
-    Policy:
+    policy:
       type: object
       description: Details of policy
       required:
@@ -414,15 +421,14 @@ components:
         - financing
       properties:
         policyId:
-          $ref: '#/components/schemas/PolicyId'
+          $ref: '#/components/schemas/policyId'
         personId:
-          $ref: '#/components/schemas/PersonId'
+          $ref: '#/components/schemas/personId'
         policyNo:
           type: string
           description: Policy number (as printed on policy statements)
         entryDate:
-          type: string
-          format: date
+          $ref: '#/components/schemas/date'
           description: Entry date into policy
         contractNo:
           type: string
@@ -437,17 +443,17 @@ components:
             a regular pension fund with payments from an employer). If the field is not
             set, a regular pension fund is assumed.
         salaryData:
-          $ref: '#/components/schemas/SalaryData'
+          $ref: '#/components/schemas/salaryData'
         retirementCapital:
-          $ref: '#/components/schemas/RetirementCapital'
+          $ref: '#/components/schemas/retirementCapital'
         riskBenefits:
-          $ref: '#/components/schemas/RiskBenefits'
+          $ref: '#/components/schemas/riskBenefits'
         financing:
-          $ref: '#/components/schemas/Financing'
+          $ref: '#/components/schemas/financing'
         vestedBenefits:
-          $ref: '#/components/schemas/VestedBenefits'
+          $ref: '#/components/schemas/vestedBenefits'
 
-    SalaryData:
+    salaryData:
       type: object
       description: Details of salary relevant for insurance
       required:
@@ -478,7 +484,7 @@ components:
           format: double
           description: Level of full-time/part-time employment (in percent, 100 for full-time employment)
 
-    RetirementCapital:
+    retirementCapital:
       type: object
       description: Retirement capital balances for the past and projections for the future
       required:
@@ -518,11 +524,11 @@ components:
             regular retirement age. For persons of 58 or older, the list is restricted
             to retirement ages higher than their current age.
           items:
-            $ref: '#/components/schemas/RetirementBenefits'
+            $ref: '#/components/schemas/retirementBenefits'
         interestRates:
-          $ref: '#/components/schemas/InterestRates'
+          $ref: '#/components/schemas/interestRates'
 
-    RetirementBenefits:
+    retirementBenefits:
       type: object
       description: |
         Retirement benefits for retirement at the specified age.
@@ -571,7 +577,7 @@ components:
           format: double
           description: Enveloping conversion rate (capital to pension) for combined mandatory and supplementary coverage
 
-    InterestRates:
+    interestRates:
       type: object
       description: |
         A set of applicable/applied interest rates.
@@ -590,7 +596,7 @@ components:
           format: double
           description: Enveloping interest rate for combined mandatory and supplementary coverage (in percent)
 
-    RiskBenefits:
+    riskBenefits:
       type: object
       description: Benefits in case of death or disability to work
       required:
@@ -636,7 +642,7 @@ components:
           format: double
           description: One-off payment in case of death
 
-    Financing:
+    financing:
       type: object
       description: Contributions for financing the policy
       required:
@@ -670,13 +676,12 @@ components:
           format: double
           description: Annual contribution towards fund administration financed by the employer
 
-    VestedBenefits:
+    vestedBenefits:
       type: object
       description: Detail information about vested benefits
       properties:
         referenceDate:
-          type: string
-          format: date
+          $ref: '#/components/schemas/date'
           description: Reference date of the vested benefit information.
         capitalAt50:
           type: number
@@ -715,15 +720,14 @@ components:
             Vested benefit capital that has been initially communicated or had become due
             after January 1, 1995 (for insured persons having married before January 1, 1995).
         capitalFirstCommunicatedDate:
-          type: string
-          format: date
+          $ref: '#/components/schemas/date'
           description: |
             Date when vested benefit capital has been initially communicated or had become due
             after January 1, 1995 (for insured persons having married before January 1, 1995).
         voluntaryPurchases:
           type: array
           items:
-            $ref: '#/components/schemas/CapitalTransaction'
+            $ref: '#/components/schemas/capitalTransaction'
           description: |
             List of voluntary purchases of additional pension benefits made in the past.
             At least the purchases of the last 3 years must be included. They can be
@@ -731,23 +735,23 @@ components:
         homeOwnerhsipWithdrawals:
           type: array
           items:
-            $ref: '#/components/schemas/CapitalTransaction'
+            $ref: '#/components/schemas/capitalTransaction'
           description: |
             List of withdrawls and refunds for home ownership promotion made in the past.
         divorceWithdrawals:
           type: array
           items:
-            $ref: '#/components/schemas/CapitalTransaction'
+            $ref: '#/components/schemas/capitalTransaction'
           description: |
             List of withdrawls and refunds due to divorce made in the past.
         pledges:
           type: array
           items:
-            $ref: '#/components/schemas/Pledge'
+            $ref: '#/components/schemas/pledge'
           description: |
             List of pledges of parts of the retirement capital.
 
-    CapitalTransaction:
+    capitalTransaction:
       type: object
       description: |
         Capital transaction made by the insured persons. It includes volunatry purchases,
@@ -758,8 +762,7 @@ components:
         - amountMandatory
       properties:
         date:
-          type: string
-          format: date
+          $ref: '#/components/schemas/date'
           description: Date of transaction
         amount:
           type: number
@@ -774,7 +777,7 @@ components:
             Transaction amount for mandatory part only.
             The amout is positive for payments towards the capital, and negative for withdrawals.
 
-    HealthReservation:
+    healthReservation:
       type: object
       description: |
         Period of health reservation.
@@ -782,17 +785,15 @@ components:
         - startDate
       properties:
         startDate:
-          type: string
-          format: date
+          $ref: '#/components/schemas/date'
           description: Start date of health reservation
         endDate:
-          type: string
-          format: date
+          $ref: '#/components/schemas/date'
           description: |
             End date of health reservation.
             If no end date is specified, the health reservation is currently still in force.
 
-    Pledge:
+    pledge:
       type: object
       description: |
         Details about pledged capital.
@@ -811,29 +812,28 @@ components:
           type: string
           description: The name of the pledgee.
         pledgeeAddress:
-          $ref: '#/components/schemas/Address'
+          $ref: '#/components/schemas/address'
 
-    ReferenceDate:
+    referenceDate:
       type: object
       description: Reference date for information in generated document
       required:
         - referenceDate
       properties:
         referenceDate:
-          type: string
-          format: date
+          $ref: '#/components/schemas/date'
 
-    PersonId:
+    personId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of insured person used in API calls
 
-    PolicyId:
+    policyId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of policy used in API calls
 
-    SalaryChangeSimParameters:
+    salaryChangeSimParameters:
       type: object
       description: Salary change simulation parameters
       required:
@@ -849,13 +849,12 @@ components:
           format: double
           description: Changed level of full-time/part-time employment (in percent, 100 for full-time employment)
         effectiveDate:
-          type: string
-          format: date
+          $ref: '#/components/schemas/date'
           description: |
             Date when the salary change takes effect.
             If omitted: tomorrow.
 
-    SalaryChangeSimResult:
+    salaryChangeSimResult:
       type: object
       description: Financial effect of voluntary purchase
       required:
@@ -864,7 +863,7 @@ components:
         - financing
       properties:
         salaryData:
-          $ref: '#/components/schemas/SalaryData'
+          $ref: '#/components/schemas/salaryData'
         projectedRetirementBenefits:
           type: array
           description: |
@@ -873,16 +872,17 @@ components:
             regular retirement age. For persons of 58 or older, the list is restricted
             to retirement ages higher than their current age.
           items:
-            $ref: '#/components/schemas/RetirementBenefits'
+            $ref: '#/components/schemas/retirementBenefits'
         financing:
-          $ref: '#/components/schemas/Financing'
+          $ref: '#/components/schemas/financing'
 
-  securitySchemes:
-    bearerAuthentication:
-      type: http
-      description: Bearer access token in HTTP header
-      scheme: bearer
-      bearerFormat: JWT
+    # ---- Common Data Model ----
+    date:
+      type: string
+      format: date
+      example: 2018-04-13
 
-security:
-  - bearerAuthentication: []
+    dateTime:
+      type: string
+      format: date-time
+      example: 2018-04-13T11:11:11Z

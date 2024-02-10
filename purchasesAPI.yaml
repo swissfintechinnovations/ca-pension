@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Voluntary Purchase
-  version: 0.6.1-beta
+  version: 0.8.0
   # yamllint disable rule:indentiation
   description: |
     # Einkaufs-API (deutsch)
@@ -333,6 +333,9 @@ tags:
 servers:
   - url: https://openpk.ch/v1
 
+security:
+  - bearerAuthentication: []
+
 paths:
   /policies/{policyId}/purchase-simulation:
     post:
@@ -363,21 +366,21 @@ paths:
           description: Policy ID
           required: true
           schema:
-            $ref: '#/components/schemas/PolicyId'
+            $ref: '#/components/schemas/policyId'
       requestBody:
         description: Voluntary purchase simulation parameters
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SimulationParameters'
+              $ref: '#/components/schemas/simulationParameters'
       responses:
         '200':
           description: Simulation result
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SimulationResult'
+                $ref: '#/components/schemas/simulationResult'
         '401':
           description: Access token is missing or invalid
           content: {}
@@ -400,14 +403,14 @@ paths:
           description: Policy ID
           required: true
           schema:
-            $ref: '#/components/schemas/PolicyId'
+            $ref: '#/components/schemas/policyId'
       responses:
         '200':
           description: Purchase request with configuration and initial values
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PurchaseRequest'
+                $ref: '#/components/schemas/purchaseRequest'
         '401':
           description: Access token is missing or invalid
           content: {}
@@ -429,7 +432,7 @@ paths:
           description: Policy ID
           required: true
           schema:
-            $ref: '#/components/schemas/PolicyId'
+            $ref: '#/components/schemas/policyId'
       responses:
         '200':
           description: List of purchase requests
@@ -438,7 +441,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PurchaseRequest'
+                  $ref: '#/components/schemas/purchaseRequest'
                 description: List of purchase requests
         '401':
           description: Access token is missing or invalid
@@ -466,21 +469,21 @@ paths:
           description: Policy ID
           required: true
           schema:
-            $ref: '#/components/schemas/PolicyId'
+            $ref: '#/components/schemas/policyId'
       requestBody:
         description: Voluntary purchase request details
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PurchaseRequest'
+              $ref: '#/components/schemas/purchaseRequest'
       responses:
         '200':
           description: Updated voluntary purchase request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PurchaseRequest'
+                $ref: '#/components/schemas/purchaseRequest'
         '400':
           description: Some of the input is incomplete or invalid for starting a request
           content: {}
@@ -505,20 +508,20 @@ paths:
           description: Policy ID
           required: true
           schema:
-            $ref: '#/components/schemas/PolicyId'
+            $ref: '#/components/schemas/policyId'
         - name: purchaseRequestId
           in: path
           description: Purchase Request ID
           required: true
           schema:
-            $ref: '#/components/schemas/PurchaseRequestId'
+            $ref: '#/components/schemas/purchaseRequestId'
       responses:
         '200':
           description: Vvoluntary purchase request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PurchaseRequest'
+                $ref: '#/components/schemas/purchaseRequest'
         '401':
           description: Access token is missing or invalid
           content: {}
@@ -542,27 +545,27 @@ paths:
           description: Policy ID
           required: true
           schema:
-            $ref: '#/components/schemas/PolicyId'
+            $ref: '#/components/schemas/policyId'
         - name: purchaseRequestId
           in: path
           description: Purchase Request ID
           required: true
           schema:
-            $ref: '#/components/schemas/PurchaseRequestId'
+            $ref: '#/components/schemas/purchaseRequestId'
       requestBody:
         description: Voluntary purchase request details
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PurchaseRequest'
+              $ref: '#/components/schemas/purchaseRequest'
       responses:
         '200':
           description: Updated voluntary purchase request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PurchaseRequest'
+                $ref: '#/components/schemas/purchaseRequest'
         '400':
           description: Some of the input is incomplete or invalid for starting a request
           content: {}
@@ -588,7 +591,7 @@ paths:
           description: Policy ID
           required: true
           schema:
-            $ref: '#/components/schemas/PolicyId'
+            $ref: '#/components/schemas/policyId'
       responses:
         '200':
           description: List of payment methods
@@ -597,7 +600,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PaymentMethod'
+                  $ref: '#/components/schemas/paymentMethod'
         '401':
           description: Access token is missing or invalid
           content: {}
@@ -606,8 +609,15 @@ paths:
           content: {}
 
 components:
+  securitySchemes:
+    bearerAuthentication:
+      type: http
+      description: Bearer access token in HTTP header
+      scheme: bearer
+      bearerFormat: JWT
+
   schemas:
-    SimulationParameters:
+    simulationParameters:
       type: object
       description: Voluntary purchase simulation parameters
       required:
@@ -624,8 +634,7 @@ components:
             Planned retirement age.
             If omitted, the regular payment age is assumed.
         date:
-          type: string
-          format: date
+          $ref: '#/components/schemas/date'
           description: |
             Date of the (first) payments.
             If omitted: tomorrow.
@@ -635,9 +644,9 @@ components:
             The size of individual periodic payments.
             If omitted, 0 or equal to 'amount', a one-time payment is assumed.
         paymentFrequency:
-          $ref: '#/components/schemas/PaymentFrequency'
+          $ref: '#/components/schemas/paymentFrequency'
 
-    SimulationResult:
+    simulationResult:
       type: object
       description: Financial effect of voluntary purchase
       required:
@@ -671,7 +680,7 @@ components:
           type: number
           description: Prospective pension after retirement with purchase (in CHF per year)
 
-    PurchaseRequest:
+    purchaseRequest:
       type: object
       description: |
         The *Purchase Request* object is the main data structure exchanged between application and pension fund
@@ -698,10 +707,9 @@ components:
         The pension fund will not update `purchaseDetails` except for minor cleanup (e.g. removing trailing whitespace)
         that does not alter the insured person's input materially. The only exception is the purchase amount, which may
         be lowered to maximum allowed amount.
-
       properties:
         id:
-          $ref: '#/components/schemas/PurchaseRequestId'
+          $ref: '#/components/schemas/purchaseRequestId'
         status:
           type: string
           description: |
@@ -718,22 +726,22 @@ components:
             - approved
             - completed
         purchaseDetails:
-          $ref: '#/components/schemas/PurchaseDetails'
+          $ref: '#/components/schemas/purchaseDetails'
         requiredPurchaseDetails:
-          $ref: '#/components/schemas/RequiredPurchaseDetails'
+          $ref: '#/components/schemas/requiredPurchaseDetails'
         instructions:
-          $ref: '#/components/schemas/Instructions'
+          $ref: '#/components/schemas/instructions'
         paymentSchedule:
-          $ref: '#/components/schemas/PaymentSchedule'
+          $ref: '#/components/schemas/paymentSchedule'
         paymentInstructions:
-          $ref: '#/components/schemas/PaymentInstructions'
+          $ref: '#/components/schemas/paymentInstructions'
         paymentsReceived:
           type: number
           format: double
           minimum: 0
           description: Total amount of payments received (in CHF)
 
-    PurchaseDetails:
+    purchaseDetails:
       type: object
       description: |
         Input from the insured person regarding the purchase request. These are the answers to the questions
@@ -747,7 +755,6 @@ components:
 
         The pension fund may set some of the properties when the empty purchase request is queried. These values
         should be used as the initial values.
-
       properties:
         amount:
           type: number
@@ -778,8 +785,7 @@ components:
           description: |
             Answer to question 5a: Indicates if the insured person has moved to Switzerland from abroad during the last 5 years (`true`) or not (`false`)
         moveFromAbroadDate:
-          type: string
-          format: date
+          $ref: '#/components/schemas/date'
           description: |
             Answert to question 5b: Date of move from another country to Switzerland
         hasBeenInsuredBefore:
@@ -787,8 +793,7 @@ components:
           description: |
             Answer to question 5c: Indicates if the person has been insured in the Swiss pension system before (`true`) or not (`false`)
         firstInsuranceDate:
-          type: string
-          format: date
+          $ref: '#/components/schemas/date'
           description: |
             Answert to question 5d: First entry date into the Swiss pension system
         isDrawingPensionBenefits:
@@ -824,11 +829,10 @@ components:
           description: |
             Answer to question 8c: Email address to contact the insured person regarding the purchase request
 
-    RequiredPurchaseDetails:
+    requiredPurchaseDetails:
       type: object
       description: |
         Provides the configuration regarding which questions should be displayed/asked and additional data required for the questions.
-
       properties:
         askForSelfEmployedContributionCredit:
           type: boolean
@@ -877,7 +881,7 @@ components:
           type: boolean
           description: Indicates if question 8c is to be asked
 
-    PaymentSchedule:
+    paymentSchedule:
       type: object
       description: |
         Desired payment method and payment schedule.
@@ -894,9 +898,9 @@ components:
         - paymentMethod
       properties:
         paymentMethod:
-          $ref: '#/components/schemas/PaymentMethod'
+          $ref: '#/components/schemas/paymentMethod'
         paymentFrequency:
-          $ref: '#/components/schemas/PaymentFrequency'
+          $ref: '#/components/schemas/paymentFrequency'
         paymentSize:
           type: number
           format: double
@@ -906,7 +910,7 @@ components:
           type: string
           description: Email address of insured person's eBill account.
 
-    PaymentInstructions:
+    paymentInstructions:
       type: object
       description: |
         Payment instructions for to insured person to make the payment. This information will only be provided
@@ -923,20 +927,19 @@ components:
             [SIX - Swiss Implementation Guidelines QR-bill (PDF, English)](https://www.paymentstandards.ch/dam/downloads/ig-qr-bill-de.pdf) or
             [SIX - Schweizer Implementation Guidelines QR-Rechnung (PDF, German)](https://www.paymentstandards.ch/dam/downloads/ig-qr-bill-de.pdf).
 
-    Instructions:
+    instructions:
+      type: array
       description: |
         The instructions are a list of sentences that inform the insured person either about the next steps in the process
         that are likely to happen, or - in particular in case of status `inputRequired` - about the steps the insured
         person should take.
 
         Instructions should be displayed in a bullet list, each array item becoming a list item.
-
-      type: array
       items:
         description: A single instruction, display as an item in a bullet list.
         type: string
 
-    PaymentMethod:
+    paymentMethod:
       type: string
       description: |
         Request status (set and updated by pension fund):
@@ -950,7 +953,7 @@ components:
         - regularPaymentEBill
         - irreularPaymentQrBill
 
-    PaymentFrequency:
+    paymentFrequency:
       type: integer
       description: |
         Number of payments per year.
@@ -961,22 +964,23 @@ components:
         * 4: Quarterly payment
         * 12: Monthly payment
 
-    PolicyId:
+    policyId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of policy used in API calls
 
-    PurchaseRequestId:
+    purchaseRequestId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of purchase request used in API calls
 
-  securitySchemes:
-    bearerAuthentication:
-      type: http
-      description: Bearer access token in HTTP header
-      scheme: bearer
-      bearerFormat: JWT
+    # ---- Common Data Model ----
+    date:
+      type: string
+      format: date
+      example: 2018-04-13
 
-security:
-  - bearerAuthentication: []
+    dateTime:
+      type: string
+      format: date-time
+      example: 2018-04-13T11:11:11Z
