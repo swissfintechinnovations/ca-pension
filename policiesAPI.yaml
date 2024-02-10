@@ -452,6 +452,11 @@ components:
           $ref: '#/components/schemas/financing'
         vestedBenefits:
           $ref: '#/components/schemas/vestedBenefits'
+        maxPurchaseAmount:
+          type: number
+          format: double
+          description: |
+            The maximum amount the insured person is permitted to voluntarily contribute to their pension plan.
 
     salaryData:
       type: object
