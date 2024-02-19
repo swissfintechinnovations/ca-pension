@@ -643,6 +643,8 @@ components:
         - childPensionDisabilityFromIllness
         - partnerPensionDeathFromIllness
         - orphanPensionDeathFromIllness
+        - lumpSumWithoutPensionBenefits
+        - lumpSumWithPensionBenefits
       properties:
         pensionDisabilityFromIllness:
           type: number
@@ -676,10 +678,14 @@ components:
           type: number
           format: double
           description: Annual orphan pension in case of death resulting from accident
-        lumpSumDeathBenefit:
+        lumpSumWithoutPensionBenefits:
           type: number
           format: double
-          description: One-off payment in case of death
+          description: One-off payment in case of death where no other benefits are paid out
+        lumpSumWithPensionBenefits:
+          type: number
+          format: double
+          description: One-off payment in case of death where other benefits are paid out
 
     financing:
       type: object
