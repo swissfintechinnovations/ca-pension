@@ -619,7 +619,7 @@ components:
     interestRates:
       type: object
       description: |
-        A set of applicable/applied interest rates.
+        A set of interest rates applicable/applied to the retirement capital, including actual rates for mandatory and supplementary coverage and a projection rate for future value calculations.
         Either the pair for combined mandatory and supplementary coverage or the enveloping rate must be specified.
       properties:
         interestRateMandatory:
@@ -630,10 +630,10 @@ components:
           type: number
           format: double
           description: Interest rate for supplementary coverage (in percent)
-        interestRateEnveloping:
+        interestRateProjectionEnveloping:
           type: number
           format: double
-          description: Enveloping interest rate for combined mandatory and supplementary coverage (in percent)
+          description: Projection enveloping interest rate for combined mandatory and supplementary coverage (in percent), used specifically for calculating projected future values.
 
     riskBenefits:
       type: object
