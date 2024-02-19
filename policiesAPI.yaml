@@ -431,6 +431,7 @@ components:
       required:
         - policyId
         - personId
+        - pensionProvider
         - policyNo
         - entryDate
         - salaryData
@@ -442,6 +443,21 @@ components:
           $ref: '#/components/schemas/policyId'
         personId:
           $ref: '#/components/schemas/personId'
+        pensionProvider:
+          type: object
+          description: Pension provider (foundation) administering the policy
+          required:
+            - providerName
+          properties:
+            providerId:
+              type: string
+              description: Swiss Enterprise Identification Number UID
+            providerName:
+              type: string
+              description: The name of the pension provider
+            providerAddress:
+              $ref: '#/components/schemas/Address'
+              description: Postal address of the pension provider
         policyNo:
           type: string
           description: Policy number (as printed on policy statements)
