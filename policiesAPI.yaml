@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Policies
-  version: 0.8.5
+  version: 0.8.0
   # yamllint disable rule:indentiation
   description: |
     # Policendaten-API (Deutsch)
@@ -410,45 +410,45 @@ components:
           description: ISO country code
 
     pensionProvider:
-          type: object
-          description: Pension provider (foundation) administering the policy
-          required:
-            - providerName
-          properties:
-            providerId:
-              type: string
-              description: Swiss Enterprise Identification Number UID
-            providerName:
-              type: string
-              description: The name of the pension provider
-            providerAddress:
-              $ref: '#/components/schemas/Address'
-              description: Postal address of the pension provider
-            portalUrl:
-              type: string
-              description: URL of the insurance portal of the pension fund
-            portalName:
-              type: string
-              description: offical name of the insurance portal
+      type: object
+      description: Pension provider (foundation) administering the policy
+      required:
+        - providerName
+      properties:
+        providerId:
+          type: string
+          description: Swiss Enterprise Identification Number UID
+        providerName:
+          type: string
+          description: The name of the pension provider
+        providerAddress:
+          $ref: '#/components/schemas/Address'
+          description: Postal address of the pension provider
+        portalUrl:
+          type: string
+          description: URL of the insurance portal of the pension fund
+        portalName:
+          type: string
+          description: offical name of the insurance portal
 
     employer:
-          type: object
-          description: Details of the insured person's employer
-          required:
-            - name
-          properties:
-            employerId:
-              type: string
-              description: Swiss Enterprise Identification Number UID
-            name:
-              type: string
-              description: The name of the employer
-            address:
-              $ref: '#/components/schemas/address'
-              description: The address of the employer
-            industry:
-              type: string
-              description: The industry or sector the employer operates in
+      type: object
+      description: Details of the insured person's employer
+      required:
+        - name
+      properties:
+        employerId:
+          type: string
+          description: Swiss Enterprise Identification Number UID
+        name:
+          type: string
+          description: The name of the employer
+        address:
+          $ref: '#/components/schemas/address'
+          description: The address of the employer
+        industry:
+          type: string
+          description: The industry or sector the employer operates in
 
     pensionStatementSimple:
       type: object
@@ -510,9 +510,7 @@ components:
           $ref: '#/components/schemas/regularPurchaseMaxAmount'
         homeOwnershipAvailableForWithdrawal:
           $ref: '#/components/schemas/homeOwnershipAvailableForWithdrawal'
-        
-   
- 
+
     policy:
       type: object
       description: Details of policy
@@ -935,19 +933,17 @@ components:
             Transaction amount for mandatory part only.
             The amout is positive for payments towards the capital, and negative for withdrawals.
 
-       
     regularPurchaseMaxAmount:
-        type: number
-        format: double
-        description: |
-          The maximum amount the insured person is permitted to contribute to their pension plan as an ordinary purchase.
-
+      type: number
+      format: double
+      description: |
+        The maximum amount the insured person is permitted to contribute to their pension plan as an ordinary purchase.
 
     homeOwnershipAvailableForWithdrawal:
-        type: number
-        format: double
-        description: |
-          The total amount available for the insured person to withdraw or borrow against from their retirement capital for the purpose of financing home ownership.
+      type: number
+      format: double
+      description: |
+        The total amount available for the insured person to withdraw or borrow against from their retirement capital for the purpose of financing home ownership.
 
     healthReservation:
       type: object
