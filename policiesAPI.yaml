@@ -349,7 +349,7 @@ components:
             - dissolvedRegisteredPartnership
             - unknown
           description: |
-            Maritial status:
+            Marital status:
             * `single`: single
             * `married`: marrie
             * `divorced`: divorced
@@ -983,7 +983,7 @@ components:
           type: string
           description: The name of the pledgee.
         pledgeeAddress:
-          $ref: '#/components/schemas/'
+          $ref: '#/components/schemas/address'
 
     referenceDate:
       type: object
