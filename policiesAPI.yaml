@@ -454,7 +454,9 @@ components:
       type: object
       description: Simple, reduced pension statement consisting of only the most important information
       required:
+        - personID
         - employer
+        - pensionProvider
         - referenceDate
         - pensionStatementType
         - pensionPlans
@@ -473,6 +475,8 @@ components:
           $ref: '#/components/schemas/personId'
         employer:
           $ref: '#/components/schemas/employer'
+        pensionProvider:
+          $ref: '#/components/schemas/pensionProvider'
         pensionStatementNo:
           type: string
           description: Pension statement number (as printed on statement)
@@ -529,6 +533,8 @@ components:
           $ref: '#/components/schemas/policyId'
         personId:
           $ref: '#/components/schemas/personId'
+        pensionProvider:
+          $ref: '#/components/schemas/pensionProvider'
         policyNo:
           type: string
           description: Policy number (as printed on policy statements)
