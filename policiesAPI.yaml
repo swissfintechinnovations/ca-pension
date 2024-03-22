@@ -443,9 +443,6 @@ components:
         name:
           type: string
           description: The name of the employer
-        :
-          $ref: '#/components/schemas/'
-          description: The  of the employer
         industry:
           type: string
           description: The industry or sector the employer operates in
