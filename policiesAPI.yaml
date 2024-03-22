@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Policies
-  version: 0.8.0
+  version: 0.8.5
   # yamllint disable rule:indentiation
   description: |
     # Policendaten-API (Deutsch)
@@ -347,6 +347,7 @@ components:
             - widowed
             - registeredPartnership
             - dissolvedRegisteredPartnership
+            - unknown
           description: |
             Maritial status:
             * `single`: single
@@ -355,6 +356,7 @@ components:
             * `widowed`: widowed
             * `registeredPartnership`: living in a registered partnership
             * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
+            * `unknown`: martial status is not known
         marriageDate:
           $ref: '#/components/schemas/date'
           description: Date of marriage (or registration of partnership)
@@ -362,24 +364,6 @@ components:
           type: integer
           format: int64
           description: Social security number
-        employer:
-          type: object
-          description: Details of the insured person's employer
-          required:
-            - name
-          properties:
-            employerId:
-              type: string
-              description: Swiss Enterprise Identification Number UID
-            name:
-              type: string
-              description: The name of the employer
-            address:
-              $ref: '#/components/schemas/address'
-              description: The address of the employer
-            industry:
-              type: string
-              description: The industry or sector the employer operates in
         policyIds:
           type: array
           items:
@@ -425,6 +409,110 @@ components:
           pattern: '[A-Z]{2}'
           description: ISO country code
 
+    pensionProvider:
+          type: object
+          description: Pension provider (foundation) administering the policy
+          required:
+            - providerName
+          properties:
+            providerId:
+              type: string
+              description: Swiss Enterprise Identification Number UID
+            providerName:
+              type: string
+              description: The name of the pension provider
+            providerAddress:
+              $ref: '#/components/schemas/Address'
+              description: Postal address of the pension provider
+            portalUrl:
+              type: string
+              description: URL of the insurance portal of the pension fund
+            portalName:
+              type: string
+              description: offical name of the insurance portal
+
+    employer:
+          type: object
+          description: Details of the insured person's employer
+          required:
+            - name
+          properties:
+            employerId:
+              type: string
+              description: Swiss Enterprise Identification Number UID
+            name:
+              type: string
+              description: The name of the employer
+            address:
+              $ref: '#/components/schemas/address'
+              description: The address of the employer
+            industry:
+              type: string
+              description: The industry or sector the employer operates in
+
+    pensionStatementSimple:
+      type: object
+      description: Simple, reduced pension statement consisting of only the most important information
+      required:
+        - employer
+        - referenceDate
+        - pensionStatementType
+        - pensionPlans
+        - ordinaryRetirementAge
+        - earliestRetirementAge
+        - salaryData
+        - retirementCapital
+        - riskBenefits
+        - financing
+        - regularPurchaseMaxAmount
+        - homeOwnershipAvailableForWithdrawal
+      properties:
+        pensionStatementSimpleID:
+          $ref: '#/components/schemas/pensionStatementID'
+        personId:
+          $ref: '#/components/schemas/personId'
+        employer:
+          $ref: '#/components/schemas/employer'
+        pensionStatementNo:
+          type: string
+          description: Pension statement number (as printed on statement)
+        referenceDate:
+          $ref: '#/components/schemas/date'
+          description: Reference date of pension statement.
+        pensionStatementType:
+          $ref: '#/components/schemas/pensionStatementType'
+        entryDate:
+          $ref: '#/components/schemas/date'
+          description: Entry date into the pension fund
+        pensionPlans:
+          type: array
+          description: |
+            List of related pension plans.
+          items:
+            $ref: '#/components/schemas/pensionPlan'
+        ordinaryRetirementAge:
+          type: integer
+          format: int32
+          description: Age for ordinary retirement
+        earliestRetirementAge:
+          type: integer
+          format: int32
+          description: Age for earliest possible retirement
+        salaryData:
+          $ref: '#/components/schemas/salaryData'
+        retirementCapital:
+          $ref: '#/components/schemas/retirementCapital'
+        riskBenefits:
+          $ref: '#/components/schemas/riskBenefits'
+        financing:
+          $ref: '#/components/schemas/financing'
+        regularPurchaseMaxAmount:
+          $ref: '#/components/schemas/regularPurchaseMaxAmount'
+        homeOwnershipAvailableForWithdrawal:
+          $ref: '#/components/schemas/homeOwnershipAvailableForWithdrawal'
+        
+   
+ 
     policy:
       type: object
       description: Details of policy
@@ -443,21 +531,6 @@ components:
           $ref: '#/components/schemas/policyId'
         personId:
           $ref: '#/components/schemas/personId'
-        pensionProvider:
-          type: object
-          description: Pension provider (foundation) administering the policy
-          required:
-            - providerName
-          properties:
-            providerId:
-              type: string
-              description: Swiss Enterprise Identification Number UID
-            providerName:
-              type: string
-              description: The name of the pension provider
-            providerAddress:
-              $ref: '#/components/schemas/Address'
-              description: Postal address of the pension provider
         policyNo:
           type: string
           description: Policy number (as printed on policy statements)
@@ -467,9 +540,8 @@ components:
         contractNo:
           type: string
           description: Contract number of contract between employer and pension fund
-        planName:
-          type: string
-          description: Insurance plan name
+        pensionPlan:
+          $ref: '#/components/schemas/pensionPlan'
         isInVestedBenefitFoundation:
           type: boolean
           description: |
@@ -486,11 +558,23 @@ components:
           $ref: '#/components/schemas/financing'
         vestedBenefits:
           $ref: '#/components/schemas/vestedBenefits'
-        maxPurchaseAmount:
-          type: number
-          format: double
-          description: |
-            The maximum amount the insured person is permitted to voluntarily contribute to their pension plan.
+        regularPurchaseMaxAmount:
+          $ref: '#/components/schemas/regularPurchaseMaxAmount'
+        homeOwnershipAvailableForWithdrawal:
+          $ref: '#/components/schemas/homeOwnershipAvailableForWithdrawal'
+
+    pensionPlan:
+      type: object
+      description: The pension plan defines various conditions for the occupational pension provision of the insured employees, incl. the contributions and insured benefits.
+      required:
+        - planName
+      properties:
+        planName:
+          type: string
+          description: Insurance plan name
+        optionalSavingsPlanName:
+          type: string
+          description: Name of the optional savings plan
 
     salaryData:
       type: object
@@ -506,6 +590,18 @@ components:
           type: number
           format: double
           description: Gross annual salary
+        bonus:
+          type: number
+          format: double
+          description: Bonus component of the salary
+        additionalSalary:
+          type: number
+          format: double
+          description: Additional salary component
+        otherSalaryComponent:
+          type: number
+          format: double
+          description: Other salary component
         insuredSalaryMandatory:
           type: number
           format: double
@@ -527,9 +623,10 @@ components:
       type: object
       description: Retirement capital balances for the past and projections for the future
       required:
-        - balanceEndLastYear
-        - balanceMandatoryEndLastYear
+        - balanceReferenceDate
+        - balanceMandatoryReferenceDate
         - projectedRetirementBenefits
+        - interestRates
       properties:
         transferredCapital:
           type: number
@@ -539,14 +636,14 @@ components:
           type: number
           format: double
           description: Retirement capital under mandatory coverage brought from other funds into this fund
-        balanceEndLastYear:
+        balanceReferenceDate:
           type: number
           format: double
-          description: Retirement capital as per end of last year (mandatory and supplementary coverage)
-        balanceMandatoryEndLastYear:
+          description: Retirement capital as per a specified reference date (mandatory and supplementary coverage)
+        balanceMandatoryReferenceDate:
           type: number
           format: double
-          description: Retirement capital under mandatory coverage as per end of last year
+          description: Retirement capital under mandatory coverage as per a specified reference date
         balanceEndCurrentYear:
           type: number
           format: double
@@ -582,7 +679,7 @@ components:
         age:
           type: integer
           format: int32
-          description: Retirement age
+          description: Specified age used for the retirement benefits calculation
         capitalBalance:
           type: number
           format: double
@@ -620,7 +717,10 @@ components:
       type: object
       description: |
         A set of interest rates applicable/applied to the retirement capital, including actual rates for mandatory and supplementary coverage and a projection rate for future value calculations.
-        Either the pair for combined mandatory and supplementary coverage or the enveloping rate must be specified.
+      required:
+        - interestRateMandatory
+        - interestRateSupplementary
+        - interestRateProjectionEnveloping
       properties:
         interestRateMandatory:
           type: number
@@ -639,13 +739,16 @@ components:
       type: object
       description: Benefits in case of death or disability to work
       required:
-        - pensionDisabilityFromIllness
-        - childPensionDisabilityFromIllness
-        - partnerPensionDeathFromIllness
-        - orphanPensionDeathFromIllness
-        - lumpSumWithoutPensionBenefits
-        - lumpSumWithPensionBenefits
+        - pensionDisability
+        - childPensionDisability
+        - partnerPensionDeath
+        - orphanPensionDeath
+        - minimalLumpSumWithPensionBenefits
       properties:
+        pensionDisability: 
+          type: number
+          format: double
+          description: Annual pension in case of disability
         pensionDisabilityFromIllness:
           type: number
           format: double
@@ -654,6 +757,10 @@ components:
           type: number
           format: double
           description: Annual pension in case of disability resulting from accident
+        childPensionDisability:
+          type: number
+          format: double
+          description: Annual child pension in case of disability
         childPensionDisabilityFromIllness:
           type: number
           format: double
@@ -662,6 +769,10 @@ components:
           type: number
           format: double
           description: Annual child pension in case of disability resulting from accident
+        partnerPensionDeath:
+          type: number
+          format: double
+          description: Annual partner pension in case of death
         partnerPensionDeathFromIllness:
           type: number
           format: double
@@ -670,6 +781,10 @@ components:
           type: number
           format: double
           description: Annual partner pension in case of death resulting from accident
+        orphanPensionDeath:
+          type: number
+          format: double
+          description: Annual orphan pension in case of death
         orphanPensionDeathFromIllness:
           type: number
           format: double
@@ -682,10 +797,10 @@ components:
           type: number
           format: double
           description: One-off payment in case of death where no other benefits are paid out
-        lumpSumWithPensionBenefits:
+        minimalLumpSumWithPensionBenefits:
           type: number
           format: double
-          description: One-off payment in case of death where other benefits are paid out
+          description: Guaranteed, minimal one-off payment in case of death where other benefits are paid out
 
     financing:
       type: object
@@ -693,8 +808,6 @@ components:
       required:
         - contributionSavingsInsuredPerson
         - contributionSavingsEmployer
-        - contributionRiskInsuredPerson
-        - contributionRiskEmployer
       properties:
         contributionSavingsInsuredPerson:
           type: number
@@ -783,11 +896,6 @@ components:
             $ref: '#/components/schemas/capitalTransaction'
           description: |
             List of withdrawls and refunds for home ownership promotion made in the past.
-        homeOwnershipAvailableForWithdrawal:
-          type: number
-          format: double
-          description: |
-            The total amount available for the insured person to withdraw or borrow against from their retirement capital for the purpose of financing home ownership.
         divorceWithdrawals:
           type: array
           items:
@@ -826,6 +934,20 @@ components:
           description: |
             Transaction amount for mandatory part only.
             The amout is positive for payments towards the capital, and negative for withdrawals.
+
+       
+    regularPurchaseMaxAmount:
+        type: number
+        format: double
+        description: |
+          The maximum amount the insured person is permitted to contribute to their pension plan as an ordinary purchase.
+
+
+    homeOwnershipAvailableForWithdrawal:
+        type: number
+        format: double
+        description: |
+          The total amount available for the insured person to withdraw or borrow against from their retirement capital for the purpose of financing home ownership.
 
     healthReservation:
       type: object
@@ -882,6 +1004,21 @@ components:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of policy used in API calls
+
+    pensionStatementID: 
+      type: string
+      pattern: '[A-Za-z0-9_\-.~]{1,64}'
+      description: Technical ID of pension statement used in API calls
+
+    pensionStatementType:
+      type: string
+      enum:
+        - regular
+        - simulated
+      description: |
+            pension statement type:
+            * `regular`: the pension statement is an offical, regular statement on the basis of real values (not changed for simulation purposes)
+            * `simulated`: the pension statement is a non-offical, simulated statement, i.e. some values might have been changed for simulation purposes
 
     salaryChangeSimParameters:
       type: object
