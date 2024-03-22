@@ -422,7 +422,7 @@ components:
           type: string
           description: The name of the pension provider
         providerAddress:
-          $ref: '#/components/schemas/Address'
+          $ref: '#/components/schemas/address'
           description: Postal address of the pension provider
         portalUrl:
           type: string
@@ -443,9 +443,9 @@ components:
         name:
           type: string
           description: The name of the employer
-        address:
-          $ref: '#/components/schemas/address'
-          description: The address of the employer
+        :
+          $ref: '#/components/schemas/'
+          description: The  of the employer
         industry:
           type: string
           description: The industry or sector the employer operates in
@@ -454,7 +454,7 @@ components:
       type: object
       description: Simple, reduced pension statement consisting of only the most important information
       required:
-        - personID
+        - personId
         - employer
         - pensionProvider
         - referenceDate
@@ -986,7 +986,7 @@ components:
           type: string
           description: The name of the pledgee.
         pledgeeAddress:
-          $ref: '#/components/schemas/address'
+          $ref: '#/components/schemas/'
 
     referenceDate:
       type: object
