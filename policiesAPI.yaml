@@ -351,12 +351,12 @@ components:
           description: |
             Marital status:
             * `single`: single
-            * `married`: marrie
+            * `married`: married
             * `divorced`: divorced
             * `widowed`: widowed
             * `registeredPartnership`: living in a registered partnership
             * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
-            * `unknown`: martial status is not known
+            * `unknown`: marital status is not known
         marriageDate:
           $ref: '#/components/schemas/date'
           description: Date of marriage (or registration of partnership)
@@ -429,7 +429,7 @@ components:
           description: URL of the insurance portal of the pension fund
         portalName:
           type: string
-          description: offical name of the insurance portal
+          description: Offical name of the insurance portal
 
     employer:
       type: object
@@ -466,8 +466,8 @@ components:
         - regularPurchaseMaxAmount
         - homeOwnershipAvailableForWithdrawal
       properties:
-        pensionStatementSimpleID:
-          $ref: '#/components/schemas/pensionStatementID'
+        pensionStatementSimpleId:
+          $ref: '#/components/schemas/pensionStatementId'
         personId:
           $ref: '#/components/schemas/personId'
         employer:
@@ -487,8 +487,7 @@ components:
           description: Entry date into the pension fund
         pensionPlans:
           type: array
-          description: |
-            List of related pension plans.
+          description: List of related pension plans.
           items:
             $ref: '#/components/schemas/pensionPlan'
         ordinaryRetirementAge:
@@ -566,7 +565,9 @@ components:
 
     pensionPlan:
       type: object
-      description: The pension plan defines various conditions for the occupational pension provision of the insured employees, incl. the contributions and insured benefits.
+      description: |
+        The pension plan defines various conditions for the occupational pension provision
+        of the insured employees, incl. the contributions and insured benefits.
       required:
         - planName
       properties:
@@ -692,11 +693,14 @@ components:
         capitalBalanceNoInterest:
           type: number
           format: double
-          description: Retirement capital balance assuming no interest on assets (mandatory and supplementary coverage)
+          description: |
+            Retirement capital balance assuming no interest on assets (mandatory
+            and supplementary coverage)
         capitalBalanceNoInterestMandatory:
           type: number
           format: double
-          description: Retirement capital balance assuming no interest on assets (mandatory coverage only)
+          description: |
+            Retirement capital balance assuming no interest on assets (mandatory coverage only)
         pension:
           type: number
           format: double
@@ -712,12 +716,16 @@ components:
         conversionRateEnveloping:
           type: number
           format: double
-          description: Enveloping conversion rate (capital to pension) for combined mandatory and supplementary coverage
+          description: |
+            Enveloping conversion rate (capital to pension) for combined mandatory and
+            supplementary coverage
 
     interestRates:
       type: object
       description: |
-        A set of interest rates applicable/applied to the retirement capital, including actual rates for mandatory and supplementary coverage and a projection rate for future value calculations.
+        A set of interest rates applicable/applied to the retirement capital, including
+        actual rates for mandatory and supplementary coverage and a projection rate for
+        future value calculations.
       required:
         - interestRateMandatory
         - interestRateSupplementary
@@ -734,7 +742,9 @@ components:
         interestRateProjectionEnveloping:
           type: number
           format: double
-          description: Projection enveloping interest rate for combined mandatory and supplementary coverage (in percent), used specifically for calculating projected future values.
+          description: |
+            Projection enveloping interest rate for combined mandatory and supplementary coverage
+            (in percent), used specifically for calculating projected future values.
 
     riskBenefits:
       type: object
@@ -801,7 +811,8 @@ components:
         minimalLumpSumWithPensionBenefits:
           type: number
           format: double
-          description: Guaranteed, minimal one-off payment in case of death where other benefits are paid out
+          description: |
+            Guaranteed, minimal one-off payment in case of death where other benefits are paid out
 
     financing:
       type: object
@@ -940,7 +951,8 @@ components:
       type: number
       format: double
       description: |
-        The maximum amount the insured person is permitted to contribute to their pension plan as an ordinary purchase.
+        The maximum amount the insured person is permitted to contribute to their pension plan
+        as an ordinary purchase.
 
     homeOwnershipAvailableForWithdrawal:
       type: number
@@ -1004,7 +1016,7 @@ components:
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of policy used in API calls
 
-    pensionStatementID: 
+    pensionStatementId: 
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of pension statement used in API calls
