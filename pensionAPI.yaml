@@ -8,12 +8,12 @@ info:
 
     **** Deutsch (for English see below) ****
 
-    Mit dem Policendaten-API können Daten zur versicherten Person und zur Police abgefragt werden.
+    Mit dem Pension-API können Daten zur versicherten Person und zur Police abgefragt werden.
     Dies umfasst vereinfacht gesagt die Daten, die auf dem Versicherungsausweis zu finden sind.
     Auch die Erstellung bzw. das Beziehen von bereits erstellten Versicherungsausweisen als PDF-Datei
-    ist möglich.
+    ist möglich. Des Weiteren gibt es Endpunkte zum Einkaufsprozess, für Simulationen und für Transaktionen.
 
-    Als Einstieg fürs Policendaten-API wird eine technische Personen- oder Policen-ID benötigt.
+    Als Einstieg fürs Pension-API wird eine technische Personen- oder Policen-ID benötigt.
     Dies wird vom Consent API geliefert.
 
     Die beiden wesentlichen Objekte dieses APIs sind *Person* und *Police*. Person bezieht sich
@@ -36,78 +36,7 @@ info:
     Simulation berechnet die Effekte auf die monatlichen Beiträge sowie auf die voraussichtlichen
     Rentenleistungen bei unterschiedlichem Penionierungsalter.
 
-    Die in dieser Spezifikation angegebenen URLs sind nur Beispiel-URLs. Das API wird von einer
-    Vielzahl von Pensionskassen implementiert und jede Pensionskasse hat eine andere Basis-URL
-    für das API. Die Basis-URL der jeweiligen Pensionskasse wird vom Directory API geliefert.
-
-    # Pension API (English)
-
-    **** English (für Deutsch siehe weiter oben) ****
-
-    The Policies API serves to query details about the insured person and insurance policies.
-    In simplified terms, this includes the data found on the insurance certificate.
-    Additionally, policy statements can be generated or already generated statements can be
-    retrieved as PDF files.
-
-    Person and policy IDs serve as the entry point for this API. They are provided by the
-    Consent API.
-
-    The two main objects are *person* and *policy*. A person refers to a natural person
-    insured with a pension fund.
-
-    A policy describes the indirect contractural relationship between the insured person
-    (employee) and the pension fund. If a person is insured by two separate insurance plans,
-    e.g. a basic and a supplementary executive plan, the person has two separate plans.
-
-    If it is relevant to distinguish between the mandatory and the supplementary insurance
-    coverage, a total value (mandatory and supplementary values combined) and a mandatory
-    coverage value are provided seperately. If the value for the supplementary coverage is
-    required, the API consumer must calculate it (difference between the two values).
-
-    Interest and conversion rates are the exception to this rule. The pension fund either
-    provides two separate values for the mandatory and the supplementary part, or  they
-    provide a single enveloping value.
-
-    The API also includes the simulation of a change of employment level and/or salary. It
-    calculates the effects on the monthly contributions as well as the effects of the
-    perspective pension benefits for different retirement ages.
-
-    The URLs in the specification are examples only. The API is implemented by a many
-    pension funds and each pension fund has an individual base URL for the API.
-    The base URL of a specific pension fund is provided by the directory API.
-
-
-    ### Glossar / Glossary
-
-    Folgende englischen Begriffe werden im API verwendet:
-
-    - **Social Security Number (SSN)**: Sozialversicherungsnummer (SVN) - 13 stellige, Schweizer Sozialversicherungsnummer.
-    - **Mandatory / supplementary coverage**: Obligatorischer / überobligatorische Anteil / Deckung
-    - **Retirement benefits**: Versicherungsleistungen bei Pensionierung (Altersrente und Altersguthaben)
-    - **Risk benefits**: Versicherungsleistungen bei Invalidität und Tod
-    - **Enveloping interest/conversion rate**: Umhüllender Zinssatz / Umwandlungssatz
-    - **Retirement capital**: Altersguthaben / Alterskapital
-    - **Savings contribution**: Sparbeitrag (Beitrag an Altersgutben)
-    - **Risk contribution**: Risikobeitrag (Beitrag für Leistungen bei Invalidität und Tod)
-    - **Vested benefits**: Freizügigkeitsleistungen
-
-
-
-
-
-
-
-
-
-
-
-
-    # Einkaufs-API (deutsch)
-
-    **** Deutsch (for English see below) ****
-
-
-    Das Einkaufs-API erlaubt es, die Auswirkungen eines freiwilligen Einkaufs in die Pensionskasse
+    Das Einkaufsendpunkte erlauben es, die Auswirkungen eines freiwilligen Einkaufs in die Pensionskasse
     zu simulieren und einen Einkauf zu starten.
 
     Die in dieser Spezifikation angegebenen URLs sind nur Beispiel-URLs. Das API wird von einer
@@ -257,11 +186,45 @@ info:
     Die Simulation geht davon aus, dass die gesetzlichen Voraussetzungen für den Einkauf gegeben sind. Sie prüft, dass der maximale Einkaufsbetrag nicht überschritten wird, und passt in bei Bedarf an.
 
 
-    # Purchases API (English)
+    ## Kontobewegung
+
+    Das Kontobewegungsendpunkte liefert die Kontobewegungen des Altersguthabens einer Police.
+
+
+    # Pension API (English)
 
     **** English (für Deutsch siehe weiter oben) ****
 
-    The Purchases API can simulate the prospective effects of voluntary purchases of retirement
+    The Pension API serves to query details about the insured person and insurance policies.
+    In simplified terms, this includes the data found on the insurance certificate.
+    Additionally, policy statements can be generated or already generated statements can be
+    retrieved as PDF files. There are also endpoints for the purchasing process, for simulations
+    and for transactions.
+
+    Person and policy IDs serve as the entry point for this API. They are provided by the
+    Consent API.
+
+    The two main objects are *person* and *policy*. A person refers to a natural person
+    insured with a pension fund.
+
+    A policy describes the indirect contractural relationship between the insured person
+    (employee) and the pension fund. If a person is insured by two separate insurance plans,
+    e.g. a basic and a supplementary executive plan, the person has two separate plans.
+
+    If it is relevant to distinguish between the mandatory and the supplementary insurance
+    coverage, a total value (mandatory and supplementary values combined) and a mandatory
+    coverage value are provided seperately. If the value for the supplementary coverage is
+    required, the API consumer must calculate it (difference between the two values).
+
+    Interest and conversion rates are the exception to this rule. The pension fund either
+    provides two separate values for the mandatory and the supplementary part, or  they
+    provide a single enveloping value.
+
+    The API also includes the simulation of a change of employment level and/or salary. It
+    calculates the effects on the monthly contributions as well as the effects of the
+    perspective pension benefits for different retirement ages.
+
+    The Purchases endpoints can simulate the prospective effects of voluntary purchases of retirement
     benefits and initiate a purchase.
 
     The URLs in the specification are examples only. The API is implemented by a many
@@ -413,36 +376,24 @@ info:
     exceeded and modifies it if needed.
 
 
+    ## Transactions
+
+    The Transactions endpoints provide the transactions affecting the retirement capital of a policy.
 
 
+    ### Glossar / Glossary
 
+    Folgende englischen Begriffe werden im API verwendet / The following English terms are used in the API :
 
-
-
-
-
-
-
-    # Kontobewegungs-API (deutsch)
-
-    **** Deutsch (for English see below) ****
-
-    Das Kontobewegungs-API liefert die Kontobewegungen des Altersguthabens einer Police.
-
-    Die in dieser Spezifikation angegebenen URLs sind nur Beispiel-URLs. Das API wird von einer
-    Vielzahl von Pensionskassen implementiert und jede Pensionskasse hat eine andere Basis-URL
-    für das API. Die Basis-URL der jeweiligen Pensionskasse wird vom Directory API geliefert.
-
-
-    # Transactions API (English)
-
-    **** English (für Deutsch siehe weiter oben) ****
-
-    The Transactions API provides the transactions affecting the retirement capital of a policy.
-
-    The URLs in the specification are examples only. The API is implemented by a many
-    pension funds and each pension fund has an individual base URL for the API.
-    The base URL of a specific pension fund is provided by the directory API.
+    - **Social Security Number (SSN)**: Sozialversicherungsnummer (SVN) - 13 stellige, Schweizer Sozialversicherungsnummer.
+    - **Mandatory / supplementary coverage**: Obligatorischer / überobligatorische Anteil / Deckung
+    - **Retirement benefits**: Versicherungsleistungen bei Pensionierung (Altersrente und Altersguthaben)
+    - **Risk benefits**: Versicherungsleistungen bei Invalidität und Tod
+    - **Enveloping interest/conversion rate**: Umhüllender Zinssatz / Umwandlungssatz
+    - **Retirement capital**: Altersguthaben / Alterskapital
+    - **Savings contribution**: Sparbeitrag (Beitrag an Altersgutben)
+    - **Risk contribution**: Risikobeitrag (Beitrag für Leistungen bei Invalidität und Tod)
+    - **Vested benefits**: Freizügigkeitsleistungen
   # yamllint enable rule:indentiation
 
   contact:
