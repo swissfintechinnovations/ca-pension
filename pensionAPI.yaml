@@ -429,10 +429,10 @@ paths:
   /insured-persons/{personId}:
     get:
       summary: Get details of an insured person
-      operationId: getInsuredPerson
       description: |
         Provides the details of the insured person, including name, address and
         additional data relevant in the Swiss social security system (birth date, sex etc.)
+      operationId: getInsuredPerson
       tags:
         - person
       parameters:
@@ -459,11 +459,11 @@ paths:
   /policies/{policyId}:
     get:
       summary: Get details of a pension fund policy
-      operationId: getPolicy
       description: |
         Provides extensive details about the insurance policy including current retirement capital,
         prospective pension benefits for different retirement ages, contributions to financing the
         insurance etc.
+      operationId: getPolicy
       tags:
         - policy
       parameters:
@@ -490,13 +490,13 @@ paths:
   /policies/{policyId}/statement/recent:
     get:
       summary: Get the most recent policy statement
-      operationId: getRecentPolicyStatement
       description: |
         Provides the most recent policy statement as a PDF document
         in the insured person's preferred language.
 
         If possible, pension funds should provide a statement as of end of the
         last business day. At the minimum, they must provide the latest annual statement.
+      operationId: getRecentPolicyStatement
       tags:
         - policy
       parameters:
@@ -524,13 +524,13 @@ paths:
   /policies/{policyId}/statement:
     post:
       summary: Get the policy statement for the specified date
-      operationId: getPolicyStatementByDate
       description: |
         Provides the policy statement representing the policy state for the specified date
         as a PDF document in the insured person's preferred language.
 
         If the pension fund is unable to provide a statement for the request date, the error
         code 400 should be returned.
+      operationId: getPolicyStatementByDate
       tags:
         - policy
       parameters:
@@ -568,11 +568,11 @@ paths:
   /policies/{policyId}/salary-change-simulation:
     post:
       summary: Simulate effects of salary and employment level change
-      operationId: simulateSalaryChange
       description: |
         Simulates the effects of a salaray and/or employment level change on contributions
         and prospective retirement benefits. Prospective retirements benefits are calculated
         for retirement at the regular age as well as for multiple early retirement ages.
+      operationId: simulateSalaryChange
       tags:
         - simulation
       parameters:
@@ -606,7 +606,6 @@ paths:
   /policies/{policyId}/purchase-simulation:
     post:
       summary: Simulate effects of voluntary purchase
-      operationId: simulatePurchase
       description: |
         Simulates the financial effect of voluntary purchase of additional pension benefits
         for the provided parameters (retirement age, purchase amount etc.)
@@ -623,7 +622,7 @@ paths:
 
         Using a very high amount (e.g. CHF 10 million), it is possible to query the maximum purchase
         amount and the maximum additional pension at once.
-
+      operationId: simulatePurchase
       tags:
         - purchase
       parameters:
@@ -725,7 +724,6 @@ paths:
         in particular which questions require an answer.
 
         The response will contain an ID that can be used to query the submitted request in the future.
-
       operationId: submitPurchaseRequest
       tags:
         - purchase
@@ -801,7 +799,6 @@ paths:
         Updates the insured person's input in the specified purchase request.
 
         Updates are usually on possible if the request is in the state `inputRequired`.
-
       operationId: updatePurchaseRequest
       tags:
         - purchase
@@ -877,9 +874,6 @@ paths:
   /policies/{policyId}/transactions:
     get:
       summary: Get the retirement capital transactions
-      operationId: getRetirementCapitalTransactions
-      tags:
-        - transactions
       description: |
         Retrieves all transactions affecting the policy's retirement capital in the specified
         date range.
@@ -898,6 +892,9 @@ paths:
         However, if the requested `from` date is before the start of the policy or if the
         request `to` date is in the future, the date range may be adjusted to reflect the
         effective date range.
+      operationId: getRetirementCapitalTransactions
+      tags:
+        - transactions
       parameters:
         - name: policyId
           in: path
