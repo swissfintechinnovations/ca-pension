@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: Pension
   version: 0.8.0
+  title: Pension
   # yamllint disable rule:indentiation
   description: |
     # Pension-API (Deutsch)
@@ -403,6 +403,9 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
+servers:
+  - url: https://openpk.ch/v1
+  
 externalDocs:
   description: Find out more about SFTI API specifications
   url: https://www.common-api.ch
@@ -418,9 +421,6 @@ tags:
     description: Voluntary purchase simulation and operations
   - name: transactions
     description: Retirement capital transactions
-
-servers:
-  - url: https://openpk.ch/v1
 
 security:
   - bearerAuthentication: []
