@@ -1083,9 +1083,9 @@ components:
           type: string
           description: The industry or sector the employer operates in
 
-    pensionStatementSimple:
+    pensionStatementBasic:
       type: object
-      description: Simple, reduced pension statement consisting of only the most important information
+      description: Basic, reduced pension statement consisting of only the most important information
       required:
         - personId
         - employer
@@ -1102,7 +1102,7 @@ components:
         - regularPurchaseMaxAmount
         - homeOwnershipAvailableForWithdrawal
       properties:
-        pensionStatementSimpleId:
+        pensionStatementBasicId:
           $ref: '#/components/schemas/pensionStatementId'
         personId:
           $ref: '#/components/schemas/personId'
