@@ -1190,12 +1190,14 @@ components:
         policyNo:
           type: string
           description: Policy number (as printed on policy statements)
+          example: "392'485'482"
         entryDate:
           $ref: '#/components/schemas/date'
           description: Entry date into policy
         contractNo:
           type: string
           description: Contract number of contract between employer and pension fund
+          example: "C27-842.183"
         pensionPlan:
           $ref: '#/components/schemas/pensionPlan'
         isInVestedBenefitFoundation:
@@ -1204,6 +1206,7 @@ components:
             Indicates if policy is part of a vested benefit foundation (as opposed to
             a regular pension fund with payments from an employer). If the field is not
             set, a regular pension fund is assumed.
+          example: false
         salaryData:
           $ref: '#/components/schemas/salaryData'
         retirementCapital:
@@ -1230,9 +1233,11 @@ components:
         planName:
           type: string
           description: Insurance plan name
+          example: "Basisplan"
         optionalSavingsPlanName:
           type: string
           description: Name of the optional savings plan
+          example: "Sparplan 2"
 
     salaryData:
       type: object
@@ -1248,34 +1253,42 @@ components:
           type: number
           format: double
           description: Gross annual salary
+          example: 78000.00
         bonus:
           type: number
           format: double
           description: Bonus component of the salary
+          example: 0.00
         additionalSalary:
           type: number
           format: double
           description: Additional salary component
+          example: 0.00
         otherSalaryComponent:
           type: number
           format: double
           description: Other salary component
+          example: 0.00
         insuredSalaryMandatory:
           type: number
           format: double
           description: Annual salary insured under mandatory coverage
+          example: 59215.00
         insuredSalaryRetirement:
           type: number
           format: double
           description: Annual salary insured for retirement benefits (mandatory and supplementary coverage)
+          example: 59215.00
         insuredSalaryRisk:
           type: number
           format: double
           description: Annual salary insured for risk benefits (mandatory and supplementary coverage)
+          example: 59215.00
         employmentLevel:
           type: number
           format: double
           description: Level of full-time/part-time employment (in percent, 100 for full-time employment)
+          example: 100
 
     retirementCapital:
       type: object
@@ -1290,26 +1303,32 @@ components:
           type: number
           format: double
           description: Total retirement capital (mandatory and supplementary coverage) brought from other funds into this fund
+          example: 45210.25
         transferredCapitalMandatory:
           type: number
           format: double
           description: Retirement capital under mandatory coverage brought from other funds into this fund
+          example: 32840.55
         balanceReferenceDate:
           type: number
           format: double
           description: Retirement capital as per a specified reference date (mandatory and supplementary coverage)
+          example: 53842.50
         balanceMandatoryReferenceDate:
           type: number
           format: double
           description: Retirement capital under mandatory coverage as per a specified reference date
+          example: 38942.15
         balanceEndCurrentYear:
           type: number
           format: double
           description: Projected retirement capital as per end of the current year (mandatory and supplementary coverage)
+          example: 56325.25
         balanceMandatoryEndCurrentYear:
           format: double
           type: number
           description: Projected retirement capital under mandatory coverage as per end of the current year
+          example: 40846.60
         projectedRetirementBenefits:
           type: array
           description: |
@@ -1338,25 +1357,30 @@ components:
           type: integer
           format: int32
           description: Specified age used for the retirement benefits calculation
+          example: 63
         capitalBalance:
           type: number
           format: double
           description: Retirement capital balance with interest (mandatory and supplementary coverage)
+          example: 378832.05
         capitalBalanceMandatory:
           type: number
           format: double
           description: Retirement capital balance with interest (mandatory coverage only)
+          example: 284832.15
         capitalBalanceNoInterest:
           type: number
           format: double
           description: |
             Retirement capital balance assuming no interest on assets (mandatory
             and supplementary coverage)
+          example: 331285.25
         capitalBalanceNoInterestMandatory:
           type: number
           format: double
           description: |
             Retirement capital balance assuming no interest on assets (mandatory coverage only)
+          example: 248862.65
         pension:
           type: number
           format: double
@@ -1365,16 +1389,19 @@ components:
           type: number
           format: double
           description: Conversion rate (capital to pension) for mandatory coverage
+          example: 6.800
         conversionRateSupplementary:
           type: number
           format: double
           description: Conversion rate (capital to pension) for supplementary coverage
+          example: 5.500
         conversionRateEnveloping:
           type: number
           format: double
           description: |
             Enveloping conversion rate (capital to pension) for combined mandatory and
             supplementary coverage
+          example: 6.300
 
     interestRates:
       type: object
@@ -1391,16 +1418,19 @@ components:
           type: number
           format: double
           description: Interest rate for mandatory coverage (in percent)
+          example: 6.800
         interestRateSupplementary:
           type: number
           format: double
           description: Interest rate for supplementary coverage (in percent)
+          example: 5.500
         interestRateProjectionEnveloping:
           type: number
           format: double
           description: |
             Projection enveloping interest rate for combined mandatory and supplementary coverage
             (in percent), used specifically for calculating projected future values.
+          example: 6.300
 
     riskBenefits:
       type: object
@@ -1609,12 +1639,14 @@ components:
       description: |
         The maximum amount the insured person is permitted to contribute to their pension plan
         as an ordinary purchase.
+      example: 48392.45
 
     homeOwnershipAvailableForWithdrawal:
       type: number
       format: double
       description: |
         The total amount available for the insured person to withdraw or borrow against from their retirement capital for the purpose of financing home ownership.
+      example: 51000.00
 
     healthReservation:
       type: object
