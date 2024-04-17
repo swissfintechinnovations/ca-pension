@@ -415,10 +415,10 @@ tags:
     description: Insured person
   - name: policy
     description: Pension fund policy
-  - name: simulation
-    description: Simulation of salary changes
   - name: purchase
     description: Voluntary purchase simulation and operations
+  - name: simulation
+    description: Simulation of salary changes
   - name: transactions
     description: Retirement capital transactions
 
@@ -957,9 +957,11 @@ components:
         lastName:
           type: string
           description: Last name / family name
+          example: "Doe"
         firstName:
           type: string
           description: First name(s)
+          example: "John"
         address:
           $ref: '#/components/schemas/address'
         birthDate:
@@ -974,6 +976,7 @@ components:
             Sex:
             * `male`: male
             * `female`: female
+          example: "male"
         maritalStatus:
           type: string
           enum:
@@ -993,6 +996,7 @@ components:
             * `registeredPartnership`: living in a registered partnership
             * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
             * `unknown`: marital status is not known
+          example: "married"
         marriageDate:
           $ref: '#/components/schemas/date'
           description: Date of marriage (or registration of partnership)
@@ -1000,6 +1004,7 @@ components:
           type: integer
           format: int64
           description: Social security number
+          example: 7561234567890
         policyIds:
           type: array
           items:
@@ -1013,6 +1018,7 @@ components:
           description: |
             Degree (percent) of disability according to OASI (AHV/IV).
             If not specified, 0 is assumed.
+          example: 0
         healthReservations:
           type: array
           items:
@@ -1031,19 +1037,24 @@ components:
         street:
           type: string
           description: Street and house number
+          example: "Brandstrasse 2"
         poBox:
           type: string
           description: PO box
+          example: "PO Box 42"
         town:
           type: string
           description: Town
+          example: "Unterbäch"
         postalCode:
           type: string
           description: Postal code
+          example: "3944"
         countryCode:
           type: string
           pattern: '[A-Z]{2}'
           description: ISO country code
+          example: "CH"
 
     pensionProvider:
       type: object
@@ -1054,18 +1065,22 @@ components:
         providerId:
           type: string
           description: Swiss Enterprise Identification Number UID
+          example: "CHE123456789"
         providerName:
           type: string
           description: The name of the pension provider
+          example: "Omnifund"
         providerAddress:
           $ref: '#/components/schemas/address'
           description: Postal address of the pension provider
         portalUrl:
           type: string
           description: URL of the insurance portal of the pension fund
+          example: "www.omnifund.ch"
         portalName:
           type: string
           description: Offical name of the insurance portal
+          example: "Omni Portal"
 
     employer:
       type: object
@@ -1076,12 +1091,15 @@ components:
         employerId:
           type: string
           description: Swiss Enterprise Identification Number UID
+          example: "CHE115873291"
         name:
           type: string
           description: The name of the employer
+          example: "Acrea AG"
         industry:
           type: string
           description: The industry or sector the employer operates in
+          example: "information technology and management consulting"
 
     pensionStatementBasic:
       type: object
@@ -1130,10 +1148,12 @@ components:
           type: integer
           format: int32
           description: Age for ordinary retirement
+          example: 65
         earliestRetirementAge:
           type: integer
           format: int32
           description: Age for earliest possible retirement
+          example: 58
         salaryData:
           $ref: '#/components/schemas/salaryData'
         retirementCapital:
@@ -1646,16 +1666,19 @@ components:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of insured person used in API calls
+      example: "JohnDoe_1234"
 
     policyId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of policy used in API calls
+      example: "Pol_56789-2024"
 
     pensionStatementId: 
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of pension statement used in API calls
+      example: "PS_ID_6789-ABC"
 
     pensionStatementType:
       type: string
@@ -1666,6 +1689,7 @@ components:
             pension statement type:
             * `regular`: the pension statement is an offical, regular statement on the basis of real values (not changed for simulation purposes)
             * `simulated`: the pension statement is a non-offical, simulated statement, i.e. some values might have been changed for simulation purposes
+      example: "regular"
 
     salaryChangeSimParameters:
       type: object
@@ -1678,10 +1702,12 @@ components:
           type: number
           format: double
           description: Changed gross annual salary in CHF (for employment level 100%)
+          example: 80000
         employmentLevel:
           type: number
           format: double
           description: Changed level of full-time/part-time employment (in percent, 100 for full-time employment)
+          example: 80
         effectiveDate:
           $ref: '#/components/schemas/date'
           description: |
