@@ -1385,6 +1385,7 @@ components:
           type: number
           format: double
           description: Annual pension credit
+          example: 22835.00
         conversionRateMandatory:
           type: number
           format: double
@@ -1446,59 +1447,73 @@ components:
           type: number
           format: double
           description: Annual pension in case of disability
+          example: 40213.00
         pensionDisabilityFromIllness:
           type: number
           format: double
           description: Annual pension in case of disability resulting from illness
+          example: 40213.00
         pensionDisabilityFromAccident:
           type: number
           format: double
           description: Annual pension in case of disability resulting from accident
+          example: 40213.00
         childPensionDisability:
           type: number
           format: double
           description: Annual child pension in case of disability
+          example: 5382.00
         childPensionDisabilityFromIllness:
           type: number
           format: double
           description: Annual child pension in case of disability resulting from illness
+          example: 5382.00
         childPensionDisabilityFromAccident:
           type: number
           format: double
           description: Annual child pension in case of disability resulting from accident
+          example: 5382.00
         partnerPensionDeath:
           type: number
           format: double
           description: Annual partner pension in case of death
+          example: 24817.00
         partnerPensionDeathFromIllness:
           type: number
           format: double
           description: Annual partner pension in case of death resulting from illness
+          example: 24817.00
         partnerPensionDeathFromAccident:
           type: number
           format: double
           description: Annual partner pension in case of death resulting from accident
+          example: 24817.00
         orphanPensionDeath:
           type: number
           format: double
           description: Annual orphan pension in case of death
+          example: 5382.00
         orphanPensionDeathFromIllness:
           type: number
           format: double
           description: Annual orphan pension in case of death resulting from illness
+          example: 5382.00
         orphanPensionDeathFromAccident:
           type: number
           format: double
           description: Annual orphan pension in case of death resulting from accident
+          example: 5382.00
         lumpSumWithoutPensionBenefits:
           type: number
           format: double
           description: One-off payment in case of death where no other benefits are paid out
+          example: 92834.00
         minimalLumpSumWithPensionBenefits:
           type: number
           format: double
           description: |
             Guaranteed, minimal one-off payment in case of death where other benefits are paid out
+          example: 74383.00
 
     financing:
       type: object
@@ -1511,26 +1526,32 @@ components:
           type: number
           format: double
           description: Annual contribution towards the retirement captial financed by the insured person
+          example: 4025.00
         contributionSavingsEmployer:
           type: number
           format: double
           description: Annual contribution towards the retirement captial financed by the employer
+          example: 4025.00
         contributionRiskInsuredPerson:
           type: number
           format: double
           description: Annual contribution towards risk benefits financed by the insured person
+          example: 0.00
         contributionRiskEmployer:
           type: number
           format: double
           description: Annual contribution towards risk benefits financed by the employer
+          example: 0.00
         contributionAdministrationInsuredPerson:
           type: number
           format: double
           description: Annual contribution towards fund administration financed by the insured person
+          example: 0.00
         contributionAdministrationEmployer:
           type: number
           format: double
           description: Annual contribution towards fund administration financed by the employer
+          example: 0.00
 
     vestedBenefits:
       type: object
@@ -1545,12 +1566,14 @@ components:
           description: |
             The insured person's retirement capital when he/she was 50 (mandatory and supplementary).
             Empty for persons younger than 50.
+          example: 0.00
         capitalAt50Mandatory:
           type: number
           format: double
           description: |
             The insured person's retirement capital when he/she was 50 (mandatory part only).
             Empty for persons younger than 50.
+          example: 0.00
         capitalAtMarriage:
           type: number
           format: double
@@ -1560,6 +1583,7 @@ components:
             marriage or registered partnership (the marriage/partnership date is part of
             the insured person object.)
             Empty for persons who are not married or in a registered partnership.
+          example: 28483.35
         capitalAtMarriageMandatory:
           type: number
           format: double
@@ -1569,12 +1593,14 @@ components:
             marriage or registered partnership (the marriage/partnership date is part of
             the insured person object.)
             Empty for persons who are not married or in a registered partnership.
+          example: 23863.15
         capitalFirstCommunicated:
           type: number
           format: double
           description: |
             Vested benefit capital that has been initially communicated or had become due
             after January 1, 1995 (for insured persons having married before January 1, 1995).
+          example: 0.00
         capitalFirstCommunicatedDate:
           $ref: '#/components/schemas/date'
           description: |
@@ -1626,12 +1652,14 @@ components:
           description: |
             Total transaction amount for mandatory and supplementary part.
             The amount is positive for payments towards the capital, and negative for withdrawals.
+          example: 0.00
         amountMandatory:
           type: number
           format: double
           description: |
             Transaction amount for mandatory part only.
             The amount is positive for payments towards the capital, and negative for withdrawals.
+          example: 0.00
 
     regularPurchaseMaxAmount:
       type: number
@@ -1646,7 +1674,7 @@ components:
       format: double
       description: |
         The total amount available for the insured person to withdraw or borrow against from their retirement capital for the purpose of financing home ownership.
-      example: 51000.00
+      example: 31000.00
 
     healthReservation:
       type: object
@@ -1674,14 +1702,17 @@ components:
           format: double
           description: |
             Amount of retirement capital used for pledging (mandatory and supplementary).
+          example: 20000.00
         amountMandatory:
           type: number
           format: double
           description: |
             Amount of retirement capital used for pledging (mandatory part only).
+          example: 20000.00
         pledgee:
           type: string
           description: The name of the pledgee.
+          example: "UBS AG"
         pledgeeAddress:
           $ref: '#/components/schemas/address'
 
