@@ -119,19 +119,17 @@ paths:
                   summary: Insured person with two policies
                   value:
                     - personGrant:
-                        personId: 93816732
-                        personAccessRight: read-only
+                        - personId: 93816732
+                          personAccessRight: read-only
                     - policyGrants:
                         - policyId: 132559379
                           policyAccessRight: read-only
                         - policyId: 165978481
                           policyAccessRight: read-only
         '400':
-          description: Invalid request
-          content: {}
+          $ref: '#/components/responses/standard400'
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
 
 components:
   securitySchemes:
@@ -185,13 +183,71 @@ components:
       enum:
         - read-only
         - change
+      example: read-only
 
     personId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of insured person used in API calls
+      example: "JohnDoe_1234"
 
     policyId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of policy used in API calls
+      example: "Pol_56789-2024"
+
+    # ---- Common Error Response ----
+    commonErrorResponse:
+      title: Common Error Response
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/commonErrorType'
+        title:
+          type: string
+          example: This is the general problem description
+        detail:
+          type: string
+          example: Detailed problem description with respect to the current request, e.g., invalid account number format
+        instance:
+          type: string
+          example: path/to/corresponding/resource
+
+    commonErrorType:
+      title: Common Error Type
+      type: string
+      description: Error Types for commonErrorResponse.
+      enum:
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+      example: /problems/TECHNICAL_ERROR
+
+  # ---- Responses - Standard Errors Common Data Model ----
+  responses:
+
+    standard400:
+      description: Some of the input is incomplete or invalid for starting a request
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
+
+    standard401:
+      description: Access token is missing or invalid
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
