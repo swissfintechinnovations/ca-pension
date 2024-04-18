@@ -109,6 +109,8 @@ paths:
                           - 'tokenEndpoint': https://identity.pensionfund.ch/auth/token,
                           - 'policyEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1,
                           - 'consentEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1
+        '404':
+          $ref: '#/components/responses/standard404'
 
 components:
   schemas:
@@ -129,28 +131,36 @@ components:
         id:
           type: string
           description: Pension fund ID
+          example: 
         name:
           type: string
           description: Pension fund name in fund's preferred language
+          example: "Omnifund"
         nameDe:
           type: string
           description: Pension fund name in German
+          example: "Omni Fonds"
         nameEn:
           type: string
           description: Pension fund name in English
+          example: "Omnifund"
         nameFr:
           type: string
           description: Pension fund name in French
+          example: "Omni fonds"
         nameIt:
           type: string
           description: Pension fund name in Itlian
+          example: "Omni fondo"
         nameRm:
           type: string
           description: Pension fund name in Rhaeto-Romanic
+          example: "Omni fondo"
         webUrl:
           type: string
           format: uri
           description: URL of pension funds web site
+          example: "www.omnifund.ch"
         logoUrl:
           type: string
           format: uri
@@ -158,6 +168,7 @@ components:
             Image URL of pension fund logo
             (at least 200 by 200 pixels, suitable for display on white background,
             JPEG or PNG format)
+          example: "www.omnifund.ch/logo.png"
         openpkStatus:
           type: string
           description: |
@@ -171,9 +182,11 @@ components:
             - onboarding
             - paused
             - notJoined
+          example: active
         address:
           type: string
           description: Pension fund address. Text excl. name.
+          example: "Gupfengasse 1, 9230 Flawil"
         openpkServices:
           description: Technical description of API service
           $ref: '#/components/schemas/servicesDescription'
@@ -190,10 +203,12 @@ components:
           type: string
           format: uri
           description: URL to initiate the user authentication interaction
+          example: "https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/auth"
         grantUrl:
           type: string
           format: uri
           description: URL to initate the user interaction for granting access
+          example: "https://fund.omnifund.ch/consents/grant?fund_name=Omnifund"
         identityProvider:
           type: string
           format: uri
@@ -202,15 +217,67 @@ components:
             Open ID Connect discovery URLs derived relative to this URL,
             e.g. `https://iam.company.com/iam/.well-known/openid-configuration`
             for the issuer URL `https://iam.company.com/iam`.
+          example: "https://iam.omnifund.ch/auth/realms/pensionfund"
         tokenEndpoint:
           type: string
           format: uri
           description: Endpoint URI to request access token
+          example: "https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/token"
         policyEndpoint:
           type: string
           format: uri
           description: Endpoint URI to query insured person and policy data
+          example: "https://fund.omnifund.ch/v1"
         consentEndpoint:
           type: string
           format: uri
           description: Endpoint URI to query the granted consents
+          example: "https://fund.omnifund.ch/v1"
+
+    # ---- Common Error Response ----
+    commonErrorResponse:
+      title: Common Error Response
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/commonErrorType'
+        title:
+          type: string
+          example: This is the general problem description
+        detail:
+          type: string
+          example: Detailed problem description with respect to the current request, e.g., invalid account number format
+        instance:
+          type: string
+          example: path/to/corresponding/resource
+
+    commonErrorType:
+      title: Common Error Type
+      type: string
+      description: Error Types for commonErrorResponse.
+      enum:
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+      example: /problems/TECHNICAL_ERROR
+
+  # ---- Responses - Standard Errors Common Data Model ----
+  responses:
+
+    standard404:
+      description: No authorization to access data
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
