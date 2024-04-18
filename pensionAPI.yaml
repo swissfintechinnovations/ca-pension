@@ -1810,11 +1810,13 @@ components:
           description: |
             Purchase amount in CHF.
             For periodic purchases, the sum of all payments.
+          example: 10000.00
         retirementAge:
           type: integer
           description: |
             Planned retirement age.
             If omitted, the regular payment age is assumed.
+          example: 65
         date:
           $ref: '#/components/schemas/date'
           description: |
@@ -1825,6 +1827,7 @@ components:
           description: |
             The size of individual periodic payments.
             If omitted, 0 or equal to 'amount', a one-time payment is assumed.
+          example: 10000.00
         paymentFrequency:
           $ref: '#/components/schemas/paymentFrequency'
 
@@ -1843,24 +1846,31 @@ components:
         maxAmount:
           type: number
           description: Maximum allowed amount of voluntary purchase of additional pension benefits (in CHF)
+          example: 48392.45
         amount:
           type: number
           description: Effective amount of voluntary purchase (in CHF)
+          example: 10000.00
         retirementAge:
           type: integer
           description: Retirement age assumed for simulation
+          example: 65
         capitalWithoutPurchase:
           type: number
           description: Prospective savings capital at retirement without purchase (in CHF)
+          example: 378832.05
         capitalWithPurchase:
           type: number
           description: Prospective savings capital at retirement with purchase (in CHF)
+          example: 390216.55
         pensionWithoutPurchase:
           type: number
           description: Prospective pension after retirement without purchase (in CHF per year)
+          example: 22835.00
         pensionWithPurchase:
           type: number
           description: Prospective pension after retirement with purchase (in CHF per year)
+          example: 23517.00
 
     purchaseRequest:
       type: object
@@ -1907,6 +1917,7 @@ components:
             - rejected
             - approved
             - completed
+          example: inReview
         purchaseDetails:
           $ref: '#/components/schemas/purchaseDetails'
         requiredPurchaseDetails:
@@ -1922,6 +1933,7 @@ components:
           format: double
           minimum: 0
           description: Total amount of payments received (in CHF)
+          example: 10000.00
 
     purchaseDetails:
       type: object
@@ -1944,28 +1956,34 @@ components:
           minimum: 1
           description: |
             Answer to question 1a: Requested purchase amount in CHF
+          example: 10000.00
         hasVestedBenefits:
           type: boolean
           description: |
             Answer to question 2a: Indicates if the insured person has pillar 2 vested benefits outside the pension fund (`true`) or not (`false`)
+          example: false
         hasMadeSelfEmployedContributions:
           type: boolean
           description: |
             Answer to question 3a: Indicates if the insured person has made pillar 3a contributions while being self-employed (`true`) or not (`false`)
+          example: false
         selfEmployedContributionCredit:
           type: number
           format: double
           minimum: 1
           description: |
             Answer to question 3b: Balance of pillar 3a credit as of the end of last year
+          example: 35000.00
         hasNotRepaidEarlyWithdrawal:
           type: boolean
           description: |
             Answer to question 4a: Indicates if the insured person has made an early withdrawal of savings to fund the purchase of residential property and has not repaid it fully (`true`) or not (`false`)
+          example: false
         hasMovedFromAbroad:
           type: boolean
           description: |
             Answer to question 5a: Indicates if the insured person has moved to Switzerland from abroad during the last 5 years (`true`) or not (`false`)
+          example: false
         moveFromAbroadDate:
           $ref: '#/components/schemas/date'
           description: |
@@ -1974,6 +1992,7 @@ components:
           type: boolean
           description: |
             Answer to question 5c: Indicates if the person has been insured in the Swiss pension system before (`true`) or not (`false`)
+          example: false
         firstInsuranceDate:
           $ref: '#/components/schemas/date'
           description: |
@@ -1982,34 +2001,42 @@ components:
           type: boolean
           description: |
             Answer to question 6a: Indicates if the insured person is already drawing or has ever drawn retirement benefits under another pension plan (`true`) or not (`false`)
+          example: false
         isInAnotherPensionPlan:
           type: boolean
           description: |
             Answer to question 7a: Indicates if the person is insured in another pension plan (`true`) or not (`false`)
+          example: false
         isFullyAbleToWork:
           type: boolean
           description: |
             Answer to question 7b: Indicates if the person is fully able to work (`true`) or not (`false`)
+          example: true
         isPurchaseAfterDivorce:
           type: boolean
           description: |
             Answer to question 7c: Indicates if the purchase is to make up for the pension savings surrender due to a divorce (`true`) or not (`false`)
+          example: false
         isPurchaseWithPillar3aSavings:
           type: boolean
           description: |
             Answer to question 7d: Indicates if the purchase is made with funds from a pillar 3a pension plan (`true`) or not (`false`)
+          example: false
         isAddressUpToDate:
           type: boolean
           description: |
             Answer to question 8a: Indicates if the postal address is up-to-date (`true`) or not (`false`)
+          example: true
         phoneContact:
           type: string
           description: |
             Answer to question 8b: Phone number to contact the insured person regarding the purchase request
+          example: "0041 79 123 45 67"
         emailContact:
           type: string
           description: |
             Answer to question 8c: Email address to contact the insured person regarding the purchase request
+          example: "johndoe@gmail.com"
 
     requiredPurchaseDetails:
       type: object
@@ -2019,36 +2046,47 @@ components:
         askForSelfEmployedContributionCredit:
           type: boolean
           description: Indicates if question 3b is to be asked
+          example: true
         askForHasMovedFromAbroad:
           type: boolean
           description: Indicates if question 5a is to be asked
+          example: true
         askForMoveFromAbroadDate:
           type: boolean
           description: Indicates if question 5b is to be asked
+          example: true
         askForHasBeenInsuredBefore:
           type: boolean
           description: Indicates if question 5c is to be asked
+          example: true
         askForFirstInsuranceDate:
           type: boolean
           description: Indicates if question 5d is to be asked
+          example: true
         askForIsDrawingPensionBenefits:
           type: boolean
           description: Indicates if question 6a is to be asked
+          example: true
         askFoIsInAnotherPensionPlan:
           type: boolean
           description: Indicates if question 7a is to be asked
+          example: true
         askForIsFullyAbleToWork:
           type: boolean
           description: Indicates if question 7b is to be asked
+          example: true
         askForIsPurchaseAfterDivorce:
           type: boolean
           description: Indicates if question 7c is to be asked
+          example: true
         askForIsPurchaseWithPillar3aSavings:
           type: boolean
           description: Indicates if question 7d is to be asked
+          example: true
         askForIsAddressUpToDate:
           type: boolean
           description: Indicates if question 8a (postal address is up-to-date) is to be asked
+          example: true
         postalAddress:
           type: string
           description: |
@@ -2056,12 +2094,15 @@ components:
 
             The address should be formatted in a human-readable form, ready to be displayed in the question sentence.
             Street, postal code and city, country etc. should be separated with comma and space; no newlines must be used.
+          example: "Brandstrasse 2, 3944 Unterbäch"
         askForPhoneContact:
           type: boolean
           description: Indicates if question 8b is to be asked
+          example: true
         askForEmailContact:
           type: boolean
           description: Indicates if question 8c is to be asked
+          example: true
 
     paymentSchedule:
       type: object
@@ -2088,9 +2129,11 @@ components:
           format: double
           description: |
             Size (in CHF) of individual regular payments.
+          example: 500.00
         eBillAcount:
           type: string
           description: Email address of insured person's eBill account.
+          example: "johndoe@gmail.com"
 
     paymentInstructions:
       type: object
@@ -2230,8 +2273,3 @@ components:
       type: string
       format: date
       example: 2018-04-13
-
-    dateTime:
-      type: string
-      format: date-time
-      example: 2018-04-13T11:11:11Z
