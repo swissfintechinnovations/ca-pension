@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: Central Directory
   version: 0.8.0
+  title: Central Directory
   # yamllint disable rule:indentiation
   description: |
     # Zentrales Verzeichnis API (deutsch)
@@ -52,6 +52,9 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
+servers:
+  - url: https://directory-dot-acrea-openpk.appspot.com/v1
+
 externalDocs:
   description: Find out more about SFTI API specifications
   url: https://www.common-api.ch
@@ -59,9 +62,6 @@ externalDocs:
 tags:
   - name: pension-funds
     description: Pension fund directory
-
-servers:
-  - url: https://directory-dot-acrea-openpk.appspot.com/v1
 
 paths:
   /pension-funds:
