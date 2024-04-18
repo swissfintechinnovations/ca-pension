@@ -2151,6 +2151,32 @@ components:
             See chapter 4 'Swiss QR Code database' in
             [SIX - Swiss Implementation Guidelines QR-bill (PDF, English)](https://www.paymentstandards.ch/dam/downloads/ig-qr-bill-de.pdf) or
             [SIX - Schweizer Implementation Guidelines QR-Rechnung (PDF, German)](https://www.paymentstandards.ch/dam/downloads/ig-qr-bill-de.pdf).
+          example: >
+            SPC
+            0200
+            1
+            CH4431999123000889012
+            S
+            Max Muster & Söhne
+            Musterstrasse
+            123
+            8000
+            Seldwyla
+            CH
+            
+            0.00
+            CHF
+            S
+            Simon Muster
+            Musterstrasse
+            1
+            8000
+            Seldwyla
+            CH
+            QRR
+            210000000003139471430009017
+            DO NOT USE FOR PAYMENT
+            EPD
 
     instructions:
       type: array
@@ -2177,6 +2203,7 @@ components:
         - singlePaymentEBill
         - regularPaymentEBill
         - irreularPaymentQrBill
+      example: singlePaymentQrBill
 
     paymentFrequency:
       type: integer
@@ -2188,11 +2215,13 @@ components:
         * 2: Semi-annual payment
         * 4: Quarterly payment
         * 12: Monthly payment
+      example: 0
 
     purchaseRequestId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of purchase request used in API calls
+      example: "PR-4838525"
 
     transactions:
       type: object
@@ -2252,21 +2281,25 @@ components:
             - dividend
             - fee
             - other
+          example: voluntaryPurchase
         date:
           $ref: '#/components/schemas/date'
           description: Transaction date (date the transaction becomes effective financially)
         amount:
           type: number
           description: Transaction amount (in CHF, positive numbers for credits, negative numbers for debits)
+          example: 10000.00
         reason:
           type: string
           description: |
             A human-readable description of the transaction reason, in the insured person's
             preferred language.
+          example: "Freiwilliger Einkauf"
         balance:
           type: number
           format: double
           description: Retirement capital balance after transaction
+          example: 63842.50
 
     # ---- Common Data Model ----
     date:
