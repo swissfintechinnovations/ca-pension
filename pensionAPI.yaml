@@ -450,11 +450,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/insuredPerson'
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
         '404':
-          description: Invalid person ID / no authorization to access data
-          content: {}
+          $ref: '#/components/responses/standard404'
 
   /policies/{policyId}:
     get:
@@ -481,11 +479,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/policy'
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
         '404':
-          description: Invalid policy ID / no authorization to access data
-          content: {}
+          $ref: '#/components/responses/standard404'
 
   /policies/{policyId}/statement/recent:
     get:
@@ -515,11 +511,9 @@ paths:
                 type: string
                 format: binary
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
         '404':
-          description: Invalid policy ID / no authorization to access data
-          content: {}
+          $ref: '#/components/responses/standard404'
 
   /policies/{policyId}/statement:
     post:
@@ -556,14 +550,11 @@ paths:
                 type: string
                 format: binary
         '400':
-          description: Invalid reference date (invalid format or unable to provide statement for the requested date)
-          content: {}
+          $ref: '#/components/responses/standard400'
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
         '404':
-          description: Invalid policy ID / no authorization to access data
-          content: {}
+          $ref: '#/components/responses/standard404'
 
   /policies/{policyId}/salary-change-simulation:
     post:
@@ -597,11 +588,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/salaryChangeSimResult'
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
         '404':
-          description: Invalid policyId
-          content: {}
+          $ref: '#/components/responses/standard404'
 
   /policies/{policyId}/purchase-simulation:
     post:
@@ -647,11 +636,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/simulationResult'
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
         '404':
-          description: Invalid policyId
-          content: {}
+          $ref: '#/components/responses/standard404'
 
   /policies/{policyId}/purchases/template:
     get:
@@ -677,11 +664,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/purchaseRequest'
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
         '404':
-          description: Invalid `policyId`
-          content: {}
+          $ref: '#/components/responses/standard404'
 
   /policies/{policyId}/purchases:
     get:
@@ -709,11 +694,9 @@ paths:
                   $ref: '#/components/schemas/purchaseRequest'
                 description: List of purchase requests
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
         '404':
-          description: Invalid `policyId`
-          content: {}
+          $ref: '#/components/responses/standard404'
 
     post:
       summary: Submit a new purchase request
@@ -749,14 +732,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/purchaseRequest'
         '400':
-          description: Some of the input is incomplete or invalid for starting a request
-          content: {}
+          $ref: '#/components/responses/standard400'
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
         '404':
-          description: Invalid `policyId`
-          content: {}
+          $ref: '#/components/responses/standard404'
 
   /policies/{policyId}/purchases/{purchaseRequestId}:
     get:
@@ -787,11 +767,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/purchaseRequest'
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
         '404':
-          description: Invalid `policyId` or `purchaseRequestId`
-          content: {}
+          $ref: '#/components/responses/standard404'
 
     put:
       summary: Update purchase request.
@@ -830,14 +808,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/purchaseRequest'
         '400':
-          description: Some of the input is incomplete or invalid for starting a request
-          content: {}
+          $ref: '#/components/responses/standard400'
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
         '404':
-          description: Invalid `policyId` or `purchaseRequestId`
-          content: {}
+          $ref: '#/components/responses/standard404'
 
   /policies/{policyId}/payment-methods:
     get:
@@ -865,11 +840,9 @@ paths:
                 items:
                   $ref: '#/components/schemas/paymentMethod'
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
         '404':
-          description: Invalid `policyId`
-          content: {}
+          $ref: '#/components/responses/standard404'
 
   /policies/{policyId}/transactions:
     get:
@@ -922,14 +895,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/transactions'
         '400':
-          description: Invalid dates or date range
-          content: {}
+          $ref: '#/components/responses/standard400'
         '401':
-          description: Access token is missing or invalid
-          content: {}
+          $ref: '#/components/responses/standard401'
         '404':
-          description: Invalid policy ID or insufficient rights to view policy
-          content: {}
+          $ref: '#/components/responses/standard404'
 
 components:
   securitySchemes:
@@ -1131,6 +1101,7 @@ components:
         pensionStatementNo:
           type: string
           description: Pension statement number (as printed on statement)
+          example: "PS_ID_6789-ABC"
         referenceDate:
           $ref: '#/components/schemas/date'
           description: Reference date of pension statement.
@@ -1741,7 +1712,7 @@ components:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of pension statement used in API calls
-      example: "PS_ID_6789-ABC"
+      example: "550e8450-e59b-21d4-a346-442215440560"
 
     pensionStatementType:
       type: string
@@ -2256,6 +2227,7 @@ components:
         id:
           type: string
           description: Transaction ID
+          example: "TR-683463823"
         category:
           type: string
           description: |
@@ -2301,8 +2273,70 @@ components:
           description: Retirement capital balance after transaction
           example: 63842.50
 
+    # ---- Common Error Response ----
+    commonErrorResponse:
+      title: Common Error Response
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/commonErrorType'
+        title:
+          type: string
+          example: This is the general problem description
+        detail:
+          type: string
+          example: Detailed problem description with respect to the current request, e.g., invalid account number format
+        instance:
+          type: string
+          example: path/to/corresponding/resource
+
+    commonErrorType:
+      title: Common Error Type
+      type: string
+      description: Error Types for commonErrorResponse.
+      enum:
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+      example: /problems/TECHNICAL_ERROR
+
     # ---- Common Data Model ----
     date:
       type: string
       format: date
       example: 2018-04-13
+
+  # ---- Responses - Standard Errors Common Data Model ----
+  responses:
+
+    standard400:
+      description: Some of the input is incomplete or invalid for starting a request
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
+
+    standard401:
+      description: Access token is missing or invalid
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
+
+    standard404:
+      description: Invalid ID / no authorization to access data
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/commonErrorResponse'
