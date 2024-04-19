@@ -1019,7 +1019,7 @@ components:
         postalCode:
           type: string
           description: Postal code
-          example: 3944
+          example: '3944'
         countryCode:
           type: string
           pattern: '[A-Z]{2}'
