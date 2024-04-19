@@ -133,36 +133,36 @@ components:
         id:
           type: string
           description: Pension fund ID
-          example: 
+          example: 'VS-731'
         name:
           type: string
           description: Pension fund name in fund's preferred language
-          example: "Omnifund"
+          example: 'Omnifund'
         nameDe:
           type: string
           description: Pension fund name in German
-          example: "Omni Fonds"
+          example: 'Omni Fonds'
         nameEn:
           type: string
           description: Pension fund name in English
-          example: "Omnifund"
+          example: 'Omnifund'
         nameFr:
           type: string
           description: Pension fund name in French
-          example: "Omni fonds"
+          example: 'Omni fonds'
         nameIt:
           type: string
           description: Pension fund name in Itlian
-          example: "Omni fondo"
+          example: 'Omni fondo'
         nameRm:
           type: string
           description: Pension fund name in Rhaeto-Romanic
-          example: "Omni fondo"
+          example: 'Omni fondo'
         webUrl:
           type: string
           format: uri
           description: URL of pension funds web site
-          example: "www.omnifund.ch"
+          example: 'www.omnifund.ch'
         logoUrl:
           type: string
           format: uri
@@ -170,7 +170,7 @@ components:
             Image URL of pension fund logo
             (at least 200 by 200 pixels, suitable for display on white background,
             JPEG or PNG format)
-          example: "www.omnifund.ch/logo.png"
+          example: 'www.omnifund.ch/logo.png'
         openpkStatus:
           type: string
           description: |

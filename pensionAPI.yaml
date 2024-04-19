@@ -405,7 +405,7 @@ info:
 
 servers:
   - url: https://openpk.ch/v1
-  
+
 externalDocs:
   description: Find out more about SFTI API specifications
   url: https://www.common-api.ch
@@ -1414,7 +1414,7 @@ components:
         - orphanPensionDeath
         - minimalLumpSumWithPensionBenefits
       properties:
-        pensionDisability: 
+        pensionDisability:
           type: number
           format: double
           description: Annual pension in case of disability
@@ -1708,7 +1708,7 @@ components:
       description: Technical ID of policy used in API calls
       example: "Pol_56789-2024"
 
-    pensionStatementId: 
+    pensionStatementId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of pension statement used in API calls
@@ -2134,7 +2134,7 @@ components:
             8000
             Seldwyla
             CH
-            
+
             0.00
             CHF
             S

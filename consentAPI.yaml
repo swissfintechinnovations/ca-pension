@@ -189,13 +189,13 @@ components:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of insured person used in API calls
-      example: "JohnDoe_1234"
+      example: 'JohnDoe_1234'
 
     policyId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of policy used in API calls
-      example: "Pol_56789-2024"
+      example: 'Pol_56789-2024'
 
     # ---- Common Error Response ----
     commonErrorResponse:
