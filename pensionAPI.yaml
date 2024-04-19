@@ -483,7 +483,7 @@ paths:
         '404':
           $ref: '#/components/responses/standard404'
 
-  /policies/{policyId}/statement/recent:
+  /policies/{policyId}/statements/recent:
     get:
       summary: Get the most recent policy statement
       description: |
@@ -515,7 +515,7 @@ paths:
         '404':
           $ref: '#/components/responses/standard404'
 
-  /policies/{policyId}/statement:
+  /policies/{policyId}/statements:
     post:
       summary: Get the policy statement for the specified date
       description: |
