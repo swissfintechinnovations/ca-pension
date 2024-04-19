@@ -927,11 +927,11 @@ components:
         lastName:
           type: string
           description: Last name / family name
-          example: "Doe"
+          example: Doe
         firstName:
           type: string
           description: First name(s)
-          example: "John"
+          example: John
         address:
           $ref: '#/components/schemas/address'
         birthDate:
@@ -946,7 +946,7 @@ components:
             Sex:
             * `male`: male
             * `female`: female
-          example: "male"
+          example: male
         maritalStatus:
           type: string
           enum:
@@ -966,7 +966,7 @@ components:
             * `registeredPartnership`: living in a registered partnership
             * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
             * `unknown`: marital status is not known
-          example: "married"
+          example: married
         marriageDate:
           $ref: '#/components/schemas/date'
           description: Date of marriage (or registration of partnership)
@@ -1007,24 +1007,24 @@ components:
         street:
           type: string
           description: Street and house number
-          example: "Brandstrasse 2"
+          example: Brandstrasse 2
         poBox:
           type: string
           description: PO box
-          example: "PO Box 42"
+          example: PO Box 42
         town:
           type: string
           description: Town
-          example: "Unterbäch"
+          example: Unterbäch
         postalCode:
           type: string
           description: Postal code
-          example: "3944"
+          example: 3944
         countryCode:
           type: string
           pattern: '[A-Z]{2}'
           description: ISO country code
-          example: "CH"
+          example: CH
 
     pensionProvider:
       type: object
@@ -1035,22 +1035,22 @@ components:
         providerId:
           type: string
           description: Swiss Enterprise Identification Number UID
-          example: "CHE123456789"
+          example: CHE123456789
         providerName:
           type: string
           description: The name of the pension provider
-          example: "Omnifund"
+          example: Omnifund
         providerAddress:
           $ref: '#/components/schemas/address'
           description: Postal address of the pension provider
         portalUrl:
           type: string
           description: URL of the insurance portal of the pension fund
-          example: "www.omnifund.ch"
+          example: www.omnifund.ch
         portalName:
           type: string
           description: Offical name of the insurance portal
-          example: "Omni Portal"
+          example: Omni Portal
 
     employer:
       type: object
@@ -1061,15 +1061,15 @@ components:
         employerId:
           type: string
           description: Swiss Enterprise Identification Number UID
-          example: "CHE115873291"
+          example: CHE115873291
         name:
           type: string
           description: The name of the employer
-          example: "Acrea AG"
+          example: Acrea AG
         industry:
           type: string
           description: The industry or sector the employer operates in
-          example: "information technology and management consulting"
+          example: information technology and management consulting
 
     pensionStatementBasic:
       type: object
@@ -1101,7 +1101,7 @@ components:
         pensionStatementNo:
           type: string
           description: Pension statement number (as printed on statement)
-          example: "PS_ID_6789-ABC"
+          example: PS_ID_6789-ABC
         referenceDate:
           $ref: '#/components/schemas/date'
           description: Reference date of pension statement.
@@ -1161,14 +1161,14 @@ components:
         policyNo:
           type: string
           description: Policy number (as printed on policy statements)
-          example: "392'485'482"
+          example: 392'485'482
         entryDate:
           $ref: '#/components/schemas/date'
           description: Entry date into policy
         contractNo:
           type: string
           description: Contract number of contract between employer and pension fund
-          example: "C27-842.183"
+          example: C27-842.183
         pensionPlan:
           $ref: '#/components/schemas/pensionPlan'
         isInVestedBenefitFoundation:
@@ -1204,11 +1204,11 @@ components:
         planName:
           type: string
           description: Insurance plan name
-          example: "Basisplan"
+          example: Basisplan
         optionalSavingsPlanName:
           type: string
           description: Name of the optional savings plan
-          example: "Sparplan 2"
+          example: Sparplan 2
 
     salaryData:
       type: object
@@ -1683,7 +1683,7 @@ components:
         pledgee:
           type: string
           description: The name of the pledgee.
-          example: "UBS AG"
+          example: UBS AG
         pledgeeAddress:
           $ref: '#/components/schemas/address'
 
@@ -1700,19 +1700,19 @@ components:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of insured person used in API calls
-      example: "JohnDoe_1234"
+      example: JohnDoe_1234
 
     policyId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of policy used in API calls
-      example: "Pol_56789-2024"
+      example: Pol_56789-2024
 
     pensionStatementId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of pension statement used in API calls
-      example: "550e8450-e59b-21d4-a346-442215440560"
+      example: 550e8450-e59b-21d4-a346-442215440560
 
     pensionStatementType:
       type: string
@@ -1723,7 +1723,7 @@ components:
             pension statement type:
             * `regular`: the pension statement is an offical, regular statement on the basis of real values (not changed for simulation purposes)
             * `simulated`: the pension statement is a non-offical, simulated statement, i.e. some values might have been changed for simulation purposes
-      example: "regular"
+      example: regular
 
     salaryChangeSimParameters:
       type: object
@@ -2002,12 +2002,12 @@ components:
           type: string
           description: |
             Answer to question 8b: Phone number to contact the insured person regarding the purchase request
-          example: "0041 79 123 45 67"
+          example: 0041 79 123 45 67
         emailContact:
           type: string
           description: |
             Answer to question 8c: Email address to contact the insured person regarding the purchase request
-          example: "johndoe@gmail.com"
+          example: johndoe@gmail.com
 
     requiredPurchaseDetails:
       type: object
@@ -2065,7 +2065,7 @@ components:
 
             The address should be formatted in a human-readable form, ready to be displayed in the question sentence.
             Street, postal code and city, country etc. should be separated with comma and space; no newlines must be used.
-          example: "Brandstrasse 2, 3944 Unterbäch"
+          example: Brandstrasse 2, 3944 Unterbäch
         askForPhoneContact:
           type: boolean
           description: Indicates if question 8b is to be asked
@@ -2104,7 +2104,7 @@ components:
         eBillAcount:
           type: string
           description: Email address of insured person's eBill account.
-          example: "johndoe@gmail.com"
+          example: johndoe@gmail.com
 
     paymentInstructions:
       type: object
@@ -2192,7 +2192,7 @@ components:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of purchase request used in API calls
-      example: "PR-4838525"
+      example: PR-4838525
 
     transactions:
       type: object
@@ -2227,7 +2227,7 @@ components:
         id:
           type: string
           description: Transaction ID
-          example: "TR-683463823"
+          example: TR-683463823
         category:
           type: string
           description: |
@@ -2266,7 +2266,7 @@ components:
           description: |
             A human-readable description of the transaction reason, in the insured person's
             preferred language.
-          example: "Freiwilliger Einkauf"
+          example: Freiwilliger Einkauf
         balance:
           type: number
           format: double

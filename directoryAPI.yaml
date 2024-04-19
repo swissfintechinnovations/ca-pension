@@ -188,7 +188,7 @@ components:
         address:
           type: string
           description: Pension fund address. Text excl. name.
-          example: "Gupfengasse 1, 9230 Flawil"
+          example: Gupfengasse 1, 9230 Flawil
         openpkServices:
           description: Technical description of API service
           $ref: '#/components/schemas/servicesDescription'
@@ -205,12 +205,12 @@ components:
           type: string
           format: uri
           description: URL to initiate the user authentication interaction
-          example: "https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/auth"
+          example: https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/auth
         grantUrl:
           type: string
           format: uri
           description: URL to initate the user interaction for granting access
-          example: "https://fund.omnifund.ch/consents/grant?fund_name=Omnifund"
+          example: https://fund.omnifund.ch/consents/grant?fund_name=Omnifund
         identityProvider:
           type: string
           format: uri
@@ -219,22 +219,22 @@ components:
             Open ID Connect discovery URLs derived relative to this URL,
             e.g. `https://iam.company.com/iam/.well-known/openid-configuration`
             for the issuer URL `https://iam.company.com/iam`.
-          example: "https://iam.omnifund.ch/auth/realms/pensionfund"
+          example: https://iam.omnifund.ch/auth/realms/pensionfund
         tokenEndpoint:
           type: string
           format: uri
           description: Endpoint URI to request access token
-          example: "https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/token"
+          example: https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/token
         policyEndpoint:
           type: string
           format: uri
           description: Endpoint URI to query insured person and policy data
-          example: "https://fund.omnifund.ch/v1"
+          example: https://fund.omnifund.ch/v1
         consentEndpoint:
           type: string
           format: uri
           description: Endpoint URI to query the granted consents
-          example: "https://fund.omnifund.ch/v1"
+          example: https://fund.omnifund.ch/v1
 
     # ---- Common Error Response ----
     commonErrorResponse:
