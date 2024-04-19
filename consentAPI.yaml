@@ -119,12 +119,12 @@ paths:
                   summary: Insured person with two policies
                   value:
                     personGrant:
-                      personId: 93816732
+                      personId: '93816732'
                       personAccessRight: read-only
                     policyGrants:
-                      - policyId: 132559379
+                      - policyId: '132559379'
                         policyAccessRight: read-only
-                      - policyId: 165978481
+                      - policyId: '165978481'
                         policyAccessRight: read-only
         '400':
           $ref: '#/components/responses/standard400'

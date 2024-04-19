@@ -87,29 +87,29 @@ paths:
                 ex1:
                   summary: Abbreviated pension fund list
                   value:
-                    - 'id': SG 0227,
-                      'name': BVG-Stiftung der Plaston AG,
-                      'nameDe': BVG-Stiftung der Plaston AG,
-                      'address': c/o Alvisa Services AG, Seestrasse 6, 8027 Zürich,
-                      'openpkStatus': active,
+                    - 'id': SG 0227
+                      'name': BVG-Stiftung der Plaston AG
+                      'nameDe': BVG-Stiftung der Plaston AG
+                      'address': c/o Alvisa Services AG, Seestrasse 6, 8027 Zürich
+                      'openpkStatus': active
                       'openpkServices':
-                        'authorizeUrl': https://iam.company.com/pensionfund/auth/authorize,
-                        'grantUrl': https://star-fund-dot-acrea-openpk.appspot.com/consent,
-                        'identityProvider': https://iam.company.com/pensionfund,
-                        'tokenEndpoint': https://iam.company.com/pensionfund/auth/token,
-                        'policyEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1,
+                        'authorizeUrl': https://iam.company.com/pensionfund/auth/authorize
+                        'grantUrl': https://star-fund-dot-acrea-openpk.appspot.com/consent
+                        'identityProvider': https://iam.company.com/pensionfund
+                        'tokenEndpoint': https://iam.company.com/pensionfund/auth/token
+                        'policyEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1
                         'consentEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1
-                    - 'id': SR-200127,
-                      'name': Fonds de prévoyance en faveur du personnel du groupe SICPA en Suisse,
-                      'nameFr': Fonds de prévoyance en faveur du personnel du groupe SICPA en Suisse,
-                      'address': Avenue Florissant 41 Case postale, 1000 Lausanne 16,
-                      'openpkStatus': active,
+                    - 'id': SR-200127
+                      'name': Fonds de prévoyance en faveur du personnel du groupe SICPA en Suisse
+                      'nameFr': Fonds de prévoyance en faveur du personnel du groupe SICPA en Suisse
+                      'address': Avenue Florissant 41 Case postale, 1000 Lausanne 16
+                      'openpkStatus': active
                       'openpkServices':
-                        'authorizeUrl': https://identity.pensionfund.ch/auth/authorize,
-                        'grantUrl': https://star-fund-dot-acrea-openpk.appspot.com/consent,
-                        'identityProvider': https://identity.pensionfund.ch,
-                        'tokenEndpoint': https://identity.pensionfund.ch/auth/token,
-                        'policyEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1,
+                        'authorizeUrl': https://identity.pensionfund.ch/auth/authorize
+                        'grantUrl': https://star-fund-dot-acrea-openpk.appspot.com/consent
+                        'identityProvider': https://identity.pensionfund.ch
+                        'tokenEndpoint': https://identity.pensionfund.ch/auth/token
+                        'policyEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1
                         'consentEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1
         '404':
           $ref: '#/components/responses/standard404'
