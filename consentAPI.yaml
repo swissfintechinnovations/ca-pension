@@ -89,7 +89,7 @@ externalDocs:
 
 tags:
   - name: consent
-    description: Consent information
+    description: Consent information.
 
 security:
   - bearerAuthentication: []
@@ -113,7 +113,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/consents'
+                $ref: '#/components/schemas/Consents'
               examples:
                 twoPolicies:
                   summary: Insured person with two policies
@@ -140,41 +140,41 @@ components:
       bearerFormat: JWT
 
   schemas:
-    consents:
+    Consents:
       type: object
       description: Consent details (accessible object, access rights)
       properties:
         personGrant:
-          $ref: '#/components/schemas/personGrant'
+          $ref: '#/components/schemas/PersonGrant'
         policyGrants:
           type: array
           description: |
             List of policies and associated access rights.
             Policies that have not been granted access are omitted from the list.
           items:
-            $ref: '#/components/schemas/policyGrant'
+            $ref: '#/components/schemas/PolicyGrant'
 
-    personGrant:
+    PersonGrant:
       type: object
       description: |
         Granted consent details for person data.
         It is only provided, if access to person data has been granted.
       properties:
         personId:
-          $ref: '#/components/schemas/personId'
+          $ref: '#/components/schemas/PersonId'
         personAccessRight:
-          $ref: '#/components/schemas/objectAccessRight'
+          $ref: '#/components/schemas/ObjectAccessRight'
 
-    policyGrant:
+    PolicyGrant:
       type: object
       description: Granted consent details for policy data
       properties:
         policyId:
-          $ref: '#/components/schemas/policyId'
+          $ref: '#/components/schemas/PolicyId'
         policyAccessRight:
-          $ref: '#/components/schemas/objectAccessRight'
+          $ref: '#/components/schemas/ObjectAccessRight'
 
-    objectAccessRight:
+    ObjectAccessRight:
       type: string
       description: |
         Access right for object:
@@ -185,25 +185,25 @@ components:
         - change
       example: read-only
 
-    personId:
+    PersonId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of insured person used in API calls
       example: JohnDoe_1234
 
-    policyId:
+    PolicyId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of policy used in API calls
       example: Pol_56789-2024
 
     # ---- Common Error Response ----
-    commonErrorResponse:
+    CommonErrorResponse:
       title: Common Error Response
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/commonErrorType'
+          $ref: '#/components/schemas/CommonErrorType'
         title:
           type: string
           example: This is the general problem description
@@ -214,7 +214,7 @@ components:
           type: string
           example: path/to/corresponding/resource
 
-    commonErrorType:
+    CommonErrorType:
       title: Common Error Type
       type: string
       description: Error Types for commonErrorResponse.
@@ -243,11 +243,11 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
 
     standard401:
       description: Access token is missing or invalid
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
