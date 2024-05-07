@@ -412,15 +412,15 @@ externalDocs:
 
 tags:
   - name: person
-    description: Insured person
+    description: Insured person.
   - name: policy
-    description: Pension fund policy
+    description: Pension fund policy.
   - name: purchase
-    description: Voluntary purchase simulation and operations
+    description: Voluntary purchase simulation and operations.
   - name: simulation
-    description: Simulation of salary changes
+    description: Simulation of salary changes.
   - name: transactions
-    description: Retirement capital transactions
+    description: Retirement capital transactions.
 
 security:
   - bearerAuthentication: []
@@ -436,12 +436,12 @@ paths:
       tags:
         - person
       parameters:
-        - name: personId
-          in: path
-          description: Technical person ID
+        - in: path
+          name: personId
           required: true
           schema:
             $ref: '#/components/schemas/personId'
+          description: Technical person ID.
       responses:
         '200':
           description: Details of insured person
@@ -465,12 +465,12 @@ paths:
       tags:
         - policy
       parameters:
-        - name: policyId
-          in: path
-          description: Technical policy ID
+        - in: path
+          name: policyId
           required: true
           schema:
             $ref: '#/components/schemas/policyId'
+          description: Technical policy ID.
       responses:
         '200':
           description: Policy details
@@ -496,12 +496,12 @@ paths:
       tags:
         - policy
       parameters:
-        - name: policyId
-          in: path
-          description: Technical policy ID
+        - in: path
+          name: policyId
           required: true
           schema:
             $ref: '#/components/schemas/policyId'
+          description: Technical policy ID.
       responses:
         '200':
           description: Binary PDF data of the policy statement
@@ -528,12 +528,12 @@ paths:
       tags:
         - policy
       parameters:
-        - name: policyId
-          in: path
-          description: Technical policy ID
+        - in: path
+          name: policyId
           required: true
           schema:
             $ref: '#/components/schemas/policyId'
+          description: Technical policy ID.
       requestBody:
         description: Reference date for information in generated document
         required: true
@@ -567,12 +567,12 @@ paths:
       tags:
         - simulation
       parameters:
-        - name: policyId
-          in: path
-          description: Policy ID
+        - in: path
+          name: policyId
           required: true
           schema:
             $ref: '#/components/schemas/policyId'
+          description: Policy ID.
       requestBody:
         description: Salary change simulation parameters
         required: true
@@ -615,12 +615,12 @@ paths:
       tags:
         - purchase
       parameters:
-        - name: policyId
-          in: path
-          description: Policy ID
+        - in: path
+          name: policyId
           required: true
           schema:
             $ref: '#/components/schemas/policyId'
+          description: Policy ID.
       requestBody:
         description: Voluntary purchase simulation parameters
         required: true
@@ -650,12 +650,12 @@ paths:
       tags:
         - purchase
       parameters:
-        - name: policyId
-          in: path
-          description: Policy ID
+        - in: path
+          name: policyId
           required: true
           schema:
             $ref: '#/components/schemas/policyId'
+          description: Policy ID.
       responses:
         '200':
           description: Purchase request with configuration and initial values
@@ -677,12 +677,12 @@ paths:
       tags:
         - purchase
       parameters:
-        - name: policyId
-          in: path
-          description: Policy ID
+        - in: path
+          name: policyId
           required: true
           schema:
             $ref: '#/components/schemas/policyId'
+          description: Policy ID.
       responses:
         '200':
           description: List of purchase requests
@@ -711,12 +711,12 @@ paths:
       tags:
         - purchase
       parameters:
-        - name: policyId
-          in: path
-          description: Policy ID
+        - in: path
+          name: policyId
           required: true
           schema:
             $ref: '#/components/schemas/policyId'
+          description: Policy ID.
       requestBody:
         description: Voluntary purchase request details
         required: true
@@ -747,18 +747,18 @@ paths:
       tags:
         - purchase
       parameters:
-        - name: policyId
-          in: path
-          description: Policy ID
+        - in: path
+          name: policyId
           required: true
           schema:
             $ref: '#/components/schemas/policyId'
-        - name: purchaseRequestId
-          in: path
-          description: Purchase Request ID
+          description: Policy ID.
+        - in: path
+          name: purchaseRequestId
           required: true
           schema:
             $ref: '#/components/schemas/purchaseRequestId'
+          description: Purchase Request ID.
       responses:
         '200':
           description: Vvoluntary purchase request
@@ -781,18 +781,18 @@ paths:
       tags:
         - purchase
       parameters:
-        - name: policyId
-          in: path
-          description: Policy ID
+        - in: path
+          name: policyId
           required: true
           schema:
             $ref: '#/components/schemas/policyId'
-        - name: purchaseRequestId
-          in: path
-          description: Purchase Request ID
+          description: Policy ID.
+        - in: path
+          name: purchaseRequestId
           required: true
           schema:
             $ref: '#/components/schemas/purchaseRequestId'
+          description: Purchase Request ID.
       requestBody:
         description: Voluntary purchase request details
         required: true
@@ -824,12 +824,12 @@ paths:
       tags:
         - purchase
       parameters:
-        - name: policyId
-          in: path
-          description: Policy ID
+        - in: path
+          name: policyId
           required: true
           schema:
             $ref: '#/components/schemas/policyId'
+          description: Policy ID.
       responses:
         '200':
           description: List of payment methods
@@ -869,24 +869,24 @@ paths:
       tags:
         - transactions
       parameters:
-        - name: policyId
-          in: path
-          description: Technical policy ID
+        - in: path
+          name: policyId
           required: true
           schema:
             $ref: '#/components/schemas/policyId'
-        - name: from
-          in: query
-          description: Start of date range (inclusive)
+          description: Technical policy ID.
+        - in: path
+          name: from
           required: true
           schema:
             $ref: '#/components/schemas/date'
-        - name: to
-          in: query
-          description: End of date range (inclusive)
+          description: Start of date range (inclusive).
+        - in: query
+          name: to
           required: true
           schema:
             $ref: '#/components/schemas/date'
+          description: End of date range (inclusive).
       responses:
         '200':
           description: Retirement capital transactions
@@ -902,13 +902,6 @@ paths:
           $ref: '#/components/responses/standard404'
 
 components:
-  securitySchemes:
-    bearerAuthentication:
-      type: http
-      description: Bearer access token in HTTP header
-      scheme: bearer
-      bearerFormat: JWT
-
   schemas:
     insuredPerson:
       type: object
@@ -2316,6 +2309,13 @@ components:
       type: string
       format: date
       example: 2018-04-13
+
+  securitySchemes:
+    bearerAuthentication:
+      type: http
+      description: Bearer access token in HTTP header
+      scheme: bearer
+      bearerFormat: JWT
 
   # ---- Responses - Standard Errors Common Data Model ----
   responses:
