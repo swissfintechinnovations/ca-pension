@@ -132,13 +132,6 @@ paths:
           $ref: '#/components/responses/standard401'
 
 components:
-  securitySchemes:
-    bearerAuthentication:
-      type: http
-      description: Bearer access token in HTTP header
-      scheme: bearer
-      bearerFormat: JWT
-
   schemas:
     Consents:
       type: object
@@ -234,6 +227,13 @@ components:
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
       example: /problems/TECHNICAL_ERROR
+
+  securitySchemes:
+    bearerAuthentication:
+      type: http
+      description: Bearer access token in HTTP header
+      scheme: bearer
+      bearerFormat: JWT
 
   # ---- Responses - Standard Errors Common Data Model ----
   responses:
