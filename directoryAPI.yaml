@@ -61,7 +61,7 @@ externalDocs:
 
 tags:
   - name: pension-funds
-    description: Pension fund directory
+    description: Pension fund directory.
 
 security: []
 
@@ -82,7 +82,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/pensionFunds'
+                $ref: '#/components/schemas/PensionFunds'
               examples:
                 ex1:
                   summary: Abbreviated pension fund list
@@ -116,13 +116,13 @@ paths:
 
 components:
   schemas:
-    pensionFunds:
+    PensionFunds:
       type: array
       description: List of pension funds
       items:
-        $ref: '#/components/schemas/pensionFund'
+        $ref: '#/components/schemas/PensionFund'
 
-    pensionFund:
+    PensionFund:
       type: object
       description: Pension fund incl. technical service data
       required:
@@ -191,9 +191,9 @@ components:
           example: Gupfengasse 1, 9230 Flawil
         openpkServices:
           description: Technical description of API service
-          $ref: '#/components/schemas/servicesDescription'
+          $ref: '#/components/schemas/ServicesDescription'
 
-    servicesDescription:
+    ServicesDescription:
       type: object
       description: Technical description of API service
       required:
@@ -237,12 +237,12 @@ components:
           example: https://fund.omnifund.ch/v1
 
     # ---- Common Error Response ----
-    commonErrorResponse:
+    CommonErrorResponse:
       title: Common Error Response
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/commonErrorType'
+          $ref: '#/components/schemas/CommonErrorType'
         title:
           type: string
           example: This is the general problem description
@@ -253,7 +253,7 @@ components:
           type: string
           example: path/to/corresponding/resource
 
-    commonErrorType:
+    CommonErrorType:
       title: Common Error Type
       type: string
       description: Error Types for commonErrorResponse.
@@ -282,4 +282,4 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
