@@ -440,7 +440,7 @@ paths:
           name: personId
           required: true
           schema:
-            $ref: '#/components/schemas/personId'
+            $ref: '#/components/schemas/PersonId'
           description: Technical person ID.
       responses:
         '200':
@@ -448,7 +448,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/insuredPerson'
+                $ref: '#/components/schemas/InsuredPerson'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -469,7 +469,7 @@ paths:
           name: policyId
           required: true
           schema:
-            $ref: '#/components/schemas/policyId'
+            $ref: '#/components/schemas/PolicyId'
           description: Technical policy ID.
       responses:
         '200':
@@ -477,7 +477,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/policy'
+                $ref: '#/components/schemas/Policy'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -500,7 +500,7 @@ paths:
           name: policyId
           required: true
           schema:
-            $ref: '#/components/schemas/policyId'
+            $ref: '#/components/schemas/PolicyId'
           description: Technical policy ID.
       responses:
         '200':
@@ -532,7 +532,7 @@ paths:
           name: policyId
           required: true
           schema:
-            $ref: '#/components/schemas/policyId'
+            $ref: '#/components/schemas/PolicyId'
           description: Technical policy ID.
       requestBody:
         description: Reference date for information in generated document
@@ -540,7 +540,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/referenceDate'
+              $ref: '#/components/schemas/ReferenceDate'
       responses:
         '200':
           description: Binary PDF data of the policy document
@@ -571,7 +571,7 @@ paths:
           name: policyId
           required: true
           schema:
-            $ref: '#/components/schemas/policyId'
+            $ref: '#/components/schemas/PolicyId'
           description: Policy ID.
       requestBody:
         description: Salary change simulation parameters
@@ -579,14 +579,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/salaryChangeSimParameters'
+              $ref: '#/components/schemas/SalaryChangeSimParameters'
       responses:
         '200':
           description: Simulation result
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/salaryChangeSimResult'
+                $ref: '#/components/schemas/SalaryChangeSimResult'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -619,7 +619,7 @@ paths:
           name: policyId
           required: true
           schema:
-            $ref: '#/components/schemas/policyId'
+            $ref: '#/components/schemas/PolicyId'
           description: Policy ID.
       requestBody:
         description: Voluntary purchase simulation parameters
@@ -627,14 +627,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/simulationParameters'
+              $ref: '#/components/schemas/SimulationParameters'
       responses:
         '200':
           description: Simulation result
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/simulationResult'
+                $ref: '#/components/schemas/SimulationResult'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -654,7 +654,7 @@ paths:
           name: policyId
           required: true
           schema:
-            $ref: '#/components/schemas/policyId'
+            $ref: '#/components/schemas/PolicyId'
           description: Policy ID.
       responses:
         '200':
@@ -662,7 +662,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/purchaseRequest'
+                $ref: '#/components/schemas/PurchaseRequest'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -681,7 +681,7 @@ paths:
           name: policyId
           required: true
           schema:
-            $ref: '#/components/schemas/policyId'
+            $ref: '#/components/schemas/PolicyId'
           description: Policy ID.
       responses:
         '200':
@@ -691,7 +691,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/purchaseRequest'
+                  $ref: '#/components/schemas/PurchaseRequest'
                 description: List of purchase requests
         '401':
           $ref: '#/components/responses/standard401'
@@ -715,7 +715,7 @@ paths:
           name: policyId
           required: true
           schema:
-            $ref: '#/components/schemas/policyId'
+            $ref: '#/components/schemas/PolicyId'
           description: Policy ID.
       requestBody:
         description: Voluntary purchase request details
@@ -723,14 +723,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/purchaseRequest'
+              $ref: '#/components/schemas/PurchaseRequest'
       responses:
         '200':
           description: Updated voluntary purchase request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/purchaseRequest'
+                $ref: '#/components/schemas/PurchaseRequest'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -751,13 +751,13 @@ paths:
           name: policyId
           required: true
           schema:
-            $ref: '#/components/schemas/policyId'
+            $ref: '#/components/schemas/PolicyId'
           description: Policy ID.
         - in: path
           name: purchaseRequestId
           required: true
           schema:
-            $ref: '#/components/schemas/purchaseRequestId'
+            $ref: '#/components/schemas/PurchaseRequestId'
           description: Purchase Request ID.
       responses:
         '200':
@@ -765,7 +765,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/purchaseRequest'
+                $ref: '#/components/schemas/PurchaseRequest'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -785,13 +785,13 @@ paths:
           name: policyId
           required: true
           schema:
-            $ref: '#/components/schemas/policyId'
+            $ref: '#/components/schemas/PolicyId'
           description: Policy ID.
         - in: path
           name: purchaseRequestId
           required: true
           schema:
-            $ref: '#/components/schemas/purchaseRequestId'
+            $ref: '#/components/schemas/PurchaseRequestId'
           description: Purchase Request ID.
       requestBody:
         description: Voluntary purchase request details
@@ -799,14 +799,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/purchaseRequest'
+              $ref: '#/components/schemas/PurchaseRequest'
       responses:
         '200':
           description: Updated voluntary purchase request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/purchaseRequest'
+                $ref: '#/components/schemas/PurchaseRequest'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -828,7 +828,7 @@ paths:
           name: policyId
           required: true
           schema:
-            $ref: '#/components/schemas/policyId'
+            $ref: '#/components/schemas/PolicyId'
           description: Policy ID.
       responses:
         '200':
@@ -838,7 +838,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/paymentMethod'
+                  $ref: '#/components/schemas/PaymentMethod'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -873,19 +873,19 @@ paths:
           name: policyId
           required: true
           schema:
-            $ref: '#/components/schemas/policyId'
+            $ref: '#/components/schemas/PolicyId'
           description: Technical policy ID.
-        - in: path
+        - in: query
           name: from
           required: true
           schema:
-            $ref: '#/components/schemas/date'
+            $ref: '#/components/schemas/Date'
           description: Start of date range (inclusive).
         - in: query
           name: to
           required: true
           schema:
-            $ref: '#/components/schemas/date'
+            $ref: '#/components/schemas/Date'
           description: End of date range (inclusive).
       responses:
         '200':
@@ -893,7 +893,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/transactions'
+                $ref: '#/components/schemas/Transactions'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -903,7 +903,7 @@ paths:
 
 components:
   schemas:
-    insuredPerson:
+    InsuredPerson:
       type: object
       description: Details of insured person
       required:
@@ -916,7 +916,7 @@ components:
         - ssn
       properties:
         personId:
-          $ref: '#/components/schemas/personId'
+          $ref: '#/components/schemas/PersonId'
         lastName:
           type: string
           description: Last name / family name
@@ -926,9 +926,9 @@ components:
           description: First name(s)
           example: John
         address:
-          $ref: '#/components/schemas/address'
+          $ref: '#/components/schemas/Address'
         birthDate:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: Birth date
         sex:
           type: string
@@ -961,7 +961,7 @@ components:
             * `unknown`: marital status is not known
           example: married
         marriageDate:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: Date of marriage (or registration of partnership)
         ssn:
           type: integer
@@ -971,7 +971,7 @@ components:
         policyIds:
           type: array
           items:
-            $ref: '#/components/schemas/policyId'
+            $ref: '#/components/schemas/PolicyId'
           description: List of IDs of policies that insured person has with this pension fund
         disabilityDegree:
           type: integer
@@ -985,10 +985,10 @@ components:
         healthReservations:
           type: array
           items:
-            $ref: '#/components/schemas/healthReservation'
+            $ref: '#/components/schemas/HealthReservation'
           description: List of health reservations
 
-    address:
+    Address:
       type: object
       description: Postal/residence address
       required:
@@ -1019,7 +1019,7 @@ components:
           description: ISO country code
           example: CH
 
-    pensionProvider:
+    PensionProvider:
       type: object
       description: Pension provider (foundation) administering the policy
       required:
@@ -1034,7 +1034,7 @@ components:
           description: The name of the pension provider
           example: Omnifund
         providerAddress:
-          $ref: '#/components/schemas/address'
+          $ref: '#/components/schemas/Address'
           description: Postal address of the pension provider
         portalUrl:
           type: string
@@ -1045,7 +1045,7 @@ components:
           description: Offical name of the insurance portal
           example: Omni Portal
 
-    employer:
+    Employer:
       type: object
       description: Details of the insured person's employer
       required:
@@ -1064,7 +1064,7 @@ components:
           description: The industry or sector the employer operates in
           example: information technology and management consulting
 
-    pensionStatementBasic:
+    PensionStatementBasic:
       type: object
       description: Basic, reduced pension statement consisting of only the most important information
       required:
@@ -1084,30 +1084,30 @@ components:
         - homeOwnershipAvailableForWithdrawal
       properties:
         pensionStatementBasicId:
-          $ref: '#/components/schemas/pensionStatementId'
+          $ref: '#/components/schemas/PensionStatementId'
         personId:
-          $ref: '#/components/schemas/personId'
+          $ref: '#/components/schemas/PersonId'
         employer:
-          $ref: '#/components/schemas/employer'
+          $ref: '#/components/schemas/Employer'
         pensionProvider:
-          $ref: '#/components/schemas/pensionProvider'
+          $ref: '#/components/schemas/PensionProvider'
         pensionStatementNo:
           type: string
           description: Pension statement number (as printed on statement)
           example: PS_ID_6789-ABC
         referenceDate:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: Reference date of pension statement.
         pensionStatementType:
-          $ref: '#/components/schemas/pensionStatementType'
+          $ref: '#/components/schemas/PensionStatementType'
         entryDate:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: Entry date into the pension fund
         pensionPlans:
           type: array
           description: List of related pension plans.
           items:
-            $ref: '#/components/schemas/pensionPlan'
+            $ref: '#/components/schemas/PensionPlan'
         ordinaryRetirementAge:
           type: integer
           format: int32
@@ -1119,19 +1119,19 @@ components:
           description: Age for earliest possible retirement
           example: 58
         salaryData:
-          $ref: '#/components/schemas/salaryData'
+          $ref: '#/components/schemas/SalaryData'
         retirementCapital:
-          $ref: '#/components/schemas/retirementCapital'
+          $ref: '#/components/schemas/RetirementCapital'
         riskBenefits:
-          $ref: '#/components/schemas/riskBenefits'
+          $ref: '#/components/schemas/RiskBenefits'
         financing:
-          $ref: '#/components/schemas/financing'
+          $ref: '#/components/schemas/Financing'
         regularPurchaseMaxAmount:
-          $ref: '#/components/schemas/regularPurchaseMaxAmount'
+          $ref: '#/components/schemas/RegularPurchaseMaxAmount'
         homeOwnershipAvailableForWithdrawal:
-          $ref: '#/components/schemas/homeOwnershipAvailableForWithdrawal'
+          $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
 
-    policy:
+    Policy:
       type: object
       description: Details of policy
       required:
@@ -1146,24 +1146,24 @@ components:
         - financing
       properties:
         policyId:
-          $ref: '#/components/schemas/policyId'
+          $ref: '#/components/schemas/PolicyId'
         personId:
-          $ref: '#/components/schemas/personId'
+          $ref: '#/components/schemas/PersonId'
         pensionProvider:
-          $ref: '#/components/schemas/pensionProvider'
+          $ref: '#/components/schemas/PensionProvider'
         policyNo:
           type: string
           description: Policy number (as printed on policy statements)
           example: 392'485'482
         entryDate:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: Entry date into policy
         contractNo:
           type: string
           description: Contract number of contract between employer and pension fund
           example: C27-842.183
         pensionPlan:
-          $ref: '#/components/schemas/pensionPlan'
+          $ref: '#/components/schemas/PensionPlan'
         isInVestedBenefitFoundation:
           type: boolean
           description: |
@@ -1172,21 +1172,21 @@ components:
             set, a regular pension fund is assumed.
           example: false
         salaryData:
-          $ref: '#/components/schemas/salaryData'
+          $ref: '#/components/schemas/SalaryData'
         retirementCapital:
-          $ref: '#/components/schemas/retirementCapital'
+          $ref: '#/components/schemas/RetirementCapital'
         riskBenefits:
-          $ref: '#/components/schemas/riskBenefits'
+          $ref: '#/components/schemas/RiskBenefits'
         financing:
-          $ref: '#/components/schemas/financing'
+          $ref: '#/components/schemas/Financing'
         vestedBenefits:
-          $ref: '#/components/schemas/vestedBenefits'
+          $ref: '#/components/schemas/VestedBenefits'
         regularPurchaseMaxAmount:
-          $ref: '#/components/schemas/regularPurchaseMaxAmount'
+          $ref: '#/components/schemas/RegularPurchaseMaxAmount'
         homeOwnershipAvailableForWithdrawal:
-          $ref: '#/components/schemas/homeOwnershipAvailableForWithdrawal'
+          $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
 
-    pensionPlan:
+    PensionPlan:
       type: object
       description: |
         The pension plan defines various conditions for the occupational pension provision
@@ -1203,7 +1203,7 @@ components:
           description: Name of the optional savings plan
           example: Sparplan 2
 
-    salaryData:
+    SalaryData:
       type: object
       description: Details of salary relevant for insurance
       required:
@@ -1254,7 +1254,7 @@ components:
           description: Level of full-time/part-time employment (in percent, 100 for full-time employment)
           example: 100
 
-    retirementCapital:
+    RetirementCapital:
       type: object
       description: Retirement capital balances for the past and projections for the future
       required:
@@ -1301,11 +1301,11 @@ components:
             regular retirement age. For persons of 58 or older, the list is restricted
             to retirement ages higher than their current age.
           items:
-            $ref: '#/components/schemas/retirementBenefits'
+            $ref: '#/components/schemas/RetirementBenefits'
         interestRates:
-          $ref: '#/components/schemas/interestRates'
+          $ref: '#/components/schemas/InterestRates'
 
-    retirementBenefits:
+    RetirementBenefits:
       type: object
       description: |
         Retirement benefits for retirement at the specified age.
@@ -1368,7 +1368,7 @@ components:
             supplementary coverage
           example: 6.300
 
-    interestRates:
+    InterestRates:
       type: object
       description: |
         A set of interest rates applicable/applied to the retirement capital, including
@@ -1397,7 +1397,7 @@ components:
             (in percent), used specifically for calculating projected future values.
           example: 6.300
 
-    riskBenefits:
+    RiskBenefits:
       type: object
       description: Benefits in case of death or disability to work
       required:
@@ -1479,7 +1479,7 @@ components:
             Guaranteed, minimal one-off payment in case of death where other benefits are paid out
           example: 74383.00
 
-    financing:
+    Financing:
       type: object
       description: Contributions for financing the policy
       required:
@@ -1517,12 +1517,12 @@ components:
           description: Annual contribution towards fund administration financed by the employer
           example: 0.00
 
-    vestedBenefits:
+    VestedBenefits:
       type: object
       description: Detail information about vested benefits
       properties:
         referenceDate:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: Reference date of the vested benefit information.
         capitalAt50:
           type: number
@@ -1566,14 +1566,14 @@ components:
             after January 1, 1995 (for insured persons having married before January 1, 1995).
           example: 0.00
         capitalFirstCommunicatedDate:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: |
             Date when vested benefit capital has been initially communicated or had become due
             after January 1, 1995 (for insured persons having married before January 1, 1995).
         voluntaryPurchases:
           type: array
           items:
-            $ref: '#/components/schemas/capitalTransaction'
+            $ref: '#/components/schemas/CapitalTransaction'
           description: |
             List of voluntary purchases of additional pension benefits made in the past.
             At least the purchases of the last 3 years must be included. They can be
@@ -1581,23 +1581,23 @@ components:
         homeOwnerhsipWithdrawals:
           type: array
           items:
-            $ref: '#/components/schemas/capitalTransaction'
+            $ref: '#/components/schemas/CapitalTransaction'
           description: |
             List of withdrawls and refunds for home ownership promotion made in the past.
         divorceWithdrawals:
           type: array
           items:
-            $ref: '#/components/schemas/capitalTransaction'
+            $ref: '#/components/schemas/CapitalTransaction'
           description: |
             List of withdrawls and refunds due to divorce made in the past.
         pledges:
           type: array
           items:
-            $ref: '#/components/schemas/pledge'
+            $ref: '#/components/schemas/Pledge'
           description: |
             List of pledges of parts of the retirement capital.
 
-    capitalTransaction:
+    CapitalTransaction:
       type: object
       description: |
         Capital transaction made by the insured persons. It includes volunatry purchases,
@@ -1608,7 +1608,7 @@ components:
         - amountMandatory
       properties:
         date:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: Date of transaction
         amount:
           type: number
@@ -1625,7 +1625,7 @@ components:
             The amount is positive for payments towards the capital, and negative for withdrawals.
           example: 0.00
 
-    regularPurchaseMaxAmount:
+    RegularPurchaseMaxAmount:
       type: number
       format: double
       description: |
@@ -1633,14 +1633,14 @@ components:
         as an ordinary purchase.
       example: 48392.45
 
-    homeOwnershipAvailableForWithdrawal:
+    HomeOwnershipAvailableForWithdrawal:
       type: number
       format: double
       description: |
         The total amount available for the insured person to withdraw or borrow against from their retirement capital for the purpose of financing home ownership.
       example: 31000.00
 
-    healthReservation:
+    HealthReservation:
       type: object
       description: |
         Period of health reservation.
@@ -1648,15 +1648,15 @@ components:
         - startDate
       properties:
         startDate:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: Start date of health reservation
         endDate:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: |
             End date of health reservation.
             If no end date is specified, the health reservation is currently still in force.
 
-    pledge:
+    Pledge:
       type: object
       description: |
         Details about pledged capital.
@@ -1678,36 +1678,36 @@ components:
           description: The name of the pledgee.
           example: UBS AG
         pledgeeAddress:
-          $ref: '#/components/schemas/address'
+          $ref: '#/components/schemas/Address'
 
-    referenceDate:
+    ReferenceDate:
       type: object
       description: Reference date for information in generated document
       required:
         - referenceDate
       properties:
         referenceDate:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
 
-    personId:
+    PersonId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of insured person used in API calls
       example: JohnDoe_1234
 
-    policyId:
+    PolicyId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of policy used in API calls
       example: Pol_56789-2024
 
-    pensionStatementId:
+    PensionStatementId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of pension statement used in API calls
       example: 550e8450-e59b-21d4-a346-442215440560
 
-    pensionStatementType:
+    PensionStatementType:
       type: string
       enum:
         - regular
@@ -1718,7 +1718,7 @@ components:
         * `simulated`: the pension statement is a non-offical, simulated statement, i.e. some values might have been changed for simulation purposes
       example: regular
 
-    salaryChangeSimParameters:
+    SalaryChangeSimParameters:
       type: object
       description: Salary change simulation parameters
       required:
@@ -1736,12 +1736,12 @@ components:
           description: Changed level of full-time/part-time employment (in percent, 100 for full-time employment)
           example: 80
         effectiveDate:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: |
             Date when the salary change takes effect.
             If omitted: tomorrow.
 
-    salaryChangeSimResult:
+    SalaryChangeSimResult:
       type: object
       description: Financial effect of voluntary purchase
       required:
@@ -1750,7 +1750,7 @@ components:
         - financing
       properties:
         salaryData:
-          $ref: '#/components/schemas/salaryData'
+          $ref: '#/components/schemas/SalaryData'
         projectedRetirementBenefits:
           type: array
           description: |
@@ -1759,11 +1759,11 @@ components:
             regular retirement age. For persons of 58 or older, the list is restricted
             to retirement ages higher than their current age.
           items:
-            $ref: '#/components/schemas/retirementBenefits'
+            $ref: '#/components/schemas/RetirementBenefits'
         financing:
-          $ref: '#/components/schemas/financing'
+          $ref: '#/components/schemas/Financing'
 
-    simulationParameters:
+    SimulationParameters:
       type: object
       description: Voluntary purchase simulation parameters
       required:
@@ -1782,7 +1782,7 @@ components:
             If omitted, the regular payment age is assumed.
           example: 65
         date:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: |
             Date of the (first) payments.
             If omitted: tomorrow.
@@ -1793,9 +1793,9 @@ components:
             If omitted, 0 or equal to 'amount', a one-time payment is assumed.
           example: 10000.00
         paymentFrequency:
-          $ref: '#/components/schemas/paymentFrequency'
+          $ref: '#/components/schemas/PaymentFrequency'
 
-    simulationResult:
+    SimulationResult:
       type: object
       description: Financial effect of voluntary purchase
       required:
@@ -1836,7 +1836,7 @@ components:
           description: Prospective pension after retirement with purchase (in CHF per year)
           example: 23517.00
 
-    purchaseRequest:
+    PurchaseRequest:
       type: object
       description: |
         The *Purchase Request* object is the main data structure exchanged between application and pension fund
@@ -1865,7 +1865,7 @@ components:
         be lowered to maximum allowed amount.
       properties:
         id:
-          $ref: '#/components/schemas/purchaseRequestId'
+          $ref: '#/components/schemas/PurchaseRequestId'
         status:
           type: string
           description: |
@@ -1883,15 +1883,15 @@ components:
             - completed
           example: inReview
         purchaseDetails:
-          $ref: '#/components/schemas/purchaseDetails'
+          $ref: '#/components/schemas/PurchaseDetails'
         requiredPurchaseDetails:
-          $ref: '#/components/schemas/requiredPurchaseDetails'
+          $ref: '#/components/schemas/RequiredPurchaseDetails'
         instructions:
-          $ref: '#/components/schemas/instructions'
+          $ref: '#/components/schemas/Instructions'
         paymentSchedule:
-          $ref: '#/components/schemas/paymentSchedule'
+          $ref: '#/components/schemas/PaymentSchedule'
         paymentInstructions:
-          $ref: '#/components/schemas/paymentInstructions'
+          $ref: '#/components/schemas/PaymentInstructions'
         paymentsReceived:
           type: number
           format: double
@@ -1899,7 +1899,7 @@ components:
           description: Total amount of payments received (in CHF)
           example: 10000.00
 
-    purchaseDetails:
+    PurchaseDetails:
       type: object
       description: |
         Input from the insured person regarding the purchase request. These are the answers to the questions
@@ -1949,7 +1949,7 @@ components:
             Answer to question 5a: Indicates if the insured person has moved to Switzerland from abroad during the last 5 years (`true`) or not (`false`)
           example: false
         moveFromAbroadDate:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: |
             Answert to question 5b: Date of move from another country to Switzerland
         hasBeenInsuredBefore:
@@ -1958,7 +1958,7 @@ components:
             Answer to question 5c: Indicates if the person has been insured in the Swiss pension system before (`true`) or not (`false`)
           example: false
         firstInsuranceDate:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: |
             Answert to question 5d: First entry date into the Swiss pension system
         isDrawingPensionBenefits:
@@ -2002,7 +2002,7 @@ components:
             Answer to question 8c: Email address to contact the insured person regarding the purchase request
           example: johndoe@gmail.com
 
-    requiredPurchaseDetails:
+    RequiredPurchaseDetails:
       type: object
       description: |
         Provides the configuration regarding which questions should be displayed/asked and additional data required for the questions.
@@ -2068,7 +2068,7 @@ components:
           description: Indicates if question 8c is to be asked
           example: true
 
-    paymentSchedule:
+    PaymentSchedule:
       type: object
       description: |
         Desired payment method and payment schedule.
@@ -2085,9 +2085,9 @@ components:
         - paymentMethod
       properties:
         paymentMethod:
-          $ref: '#/components/schemas/paymentMethod'
+          $ref: '#/components/schemas/PaymentMethod'
         paymentFrequency:
-          $ref: '#/components/schemas/paymentFrequency'
+          $ref: '#/components/schemas/PaymentFrequency'
         paymentSize:
           type: number
           format: double
@@ -2099,7 +2099,7 @@ components:
           description: Email address of insured person's eBill account.
           example: johndoe@gmail.com
 
-    paymentInstructions:
+    PaymentInstructions:
       type: object
       description: |
         Payment instructions for to insured person to make the payment. This information will only be provided
@@ -2142,7 +2142,7 @@ components:
             DO NOT USE FOR PAYMENT
             EPD
 
-    instructions:
+    Instructions:
       type: array
       description: |
         The instructions are a list of sentences that inform the insured person either about the next steps in the process
@@ -2154,7 +2154,7 @@ components:
         description: A single instruction, display as an item in a bullet list.
         type: string
 
-    paymentMethod:
+    PaymentMethod:
       type: string
       description: |
         Request status (set and updated by pension fund):
@@ -2169,7 +2169,7 @@ components:
         - irreularPaymentQrBill
       example: singlePaymentQrBill
 
-    paymentFrequency:
+    PaymentFrequency:
       type: integer
       description: |
         Number of payments per year.
@@ -2181,13 +2181,13 @@ components:
         * 12: Monthly payment
       example: 0
 
-    purchaseRequestId:
+    PurchaseRequestId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of purchase request used in API calls
       example: PR-4838525
 
-    transactions:
+    Transactions:
       type: object
       description: Retirement capital transactions
       required:
@@ -2198,16 +2198,16 @@ components:
         transactions:
           type: array
           items:
-            $ref: '#/components/schemas/transaction'
+            $ref: '#/components/schemas/Transaction'
           description: Chronologically sorted list of transactions
         from:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: Start of date range (inclusive)
         to:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: End of date range (inclusive)
 
-    transaction:
+    Transaction:
       type: object
       description: Transaction affecting the retirement capital.
       required:
@@ -2248,7 +2248,7 @@ components:
             - other
           example: voluntaryPurchase
         date:
-          $ref: '#/components/schemas/date'
+          $ref: '#/components/schemas/Date'
           description: Transaction date (date the transaction becomes effective financially)
         amount:
           type: number
@@ -2267,12 +2267,12 @@ components:
           example: 63842.50
 
     # ---- Common Error Response ----
-    commonErrorResponse:
+    CommonErrorResponse:
       title: Common Error Response
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/commonErrorType'
+          $ref: '#/components/schemas/CommonErrorType'
         title:
           type: string
           example: This is the general problem description
@@ -2283,7 +2283,7 @@ components:
           type: string
           example: path/to/corresponding/resource
 
-    commonErrorType:
+    CommonErrorType:
       title: Common Error Type
       type: string
       description: Error Types for commonErrorResponse.
@@ -2305,7 +2305,7 @@ components:
       example: /problems/TECHNICAL_ERROR
 
     # ---- Common Data Model ----
-    date:
+    Date:
       type: string
       format: date
       example: 2018-04-13
@@ -2325,18 +2325,18 @@ components:
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
 
     standard401:
       description: Access token is missing or invalid
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
 
     standard404:
       description: Invalid ID / no authorization to access data
       content:
         application/problem+json:
           schema:
-            $ref: '#/components/schemas/commonErrorResponse'
+            $ref: '#/components/schemas/CommonErrorResponse'
