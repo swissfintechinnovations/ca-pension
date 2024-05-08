@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.1.0
 info:
   version: 0.8.0
   title: Pension
@@ -509,7 +509,7 @@ paths:
             application/pdf:
               schema:
                 type: string
-                format: binary
+                contentEncoding: binary
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -548,7 +548,7 @@ paths:
             application/pdf:
               schema:
                 type: string
-                format: binary
+                contentEncoding: binary
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -920,11 +920,13 @@ components:
         lastName:
           type: string
           description: Last name / family name
-          example: Doe
+          examples:
+            - Doe
         firstName:
           type: string
           description: First name(s)
-          example: John
+          examples:
+            - John
         address:
           $ref: '#/components/schemas/Address'
         birthDate:
@@ -939,7 +941,8 @@ components:
             Sex:
             * `male`: male
             * `female`: female
-          example: male
+          examples:
+            - male
         maritalStatus:
           type: string
           enum:
@@ -959,7 +962,8 @@ components:
             * `registeredPartnership`: living in a registered partnership
             * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
             * `unknown`: marital status is not known
-          example: married
+          examples:
+            - married
         marriageDate:
           $ref: '#/components/schemas/Date'
           description: Date of marriage (or registration of partnership)
@@ -967,7 +971,8 @@ components:
           type: integer
           format: int64
           description: Social security number
-          example: 7561234567890
+          examples:
+            - 7561234567890
         policyIds:
           type: array
           items:
@@ -981,7 +986,8 @@ components:
           description: |
             Degree (percent) of disability according to OASI (AHV/IV).
             If not specified, 0 is assumed.
-          example: 0
+          examples:
+            - 0
         healthReservations:
           type: array
           items:
@@ -1000,24 +1006,29 @@ components:
         street:
           type: string
           description: Street and house number
-          example: Brandstrasse 2
+          examples:
+            - Brandstrasse 2
         poBox:
           type: string
           description: PO box
-          example: PO Box 42
+          examples:
+            - PO Box 42
         town:
           type: string
           description: Town
-          example: Unterbäch
+          examples:
+            - Unterbäch
         postalCode:
           type: string
           description: Postal code
-          example: '3944'
+          examples:
+            - '3944'
         countryCode:
           type: string
           pattern: '[A-Z]{2}'
           description: ISO country code
-          example: CH
+          examples:
+            - CH
 
     PensionProvider:
       type: object
@@ -1028,22 +1039,26 @@ components:
         providerId:
           type: string
           description: Swiss Enterprise Identification Number UID
-          example: CHE123456789
+          examples:
+            - CHE123456789
         providerName:
           type: string
           description: The name of the pension provider
-          example: Omnifund
+          examples:
+            - Omnifund
         providerAddress:
           $ref: '#/components/schemas/Address'
           description: Postal address of the pension provider
         portalUrl:
           type: string
           description: URL of the insurance portal of the pension fund
-          example: www.omnifund.ch
+          examples:
+            - www.omnifund.ch
         portalName:
           type: string
           description: Offical name of the insurance portal
-          example: Omni Portal
+          examples:
+            - Omni Portal
 
     Employer:
       type: object
@@ -1054,15 +1069,18 @@ components:
         employerId:
           type: string
           description: Swiss Enterprise Identification Number UID
-          example: CHE115873291
+          examples:
+            - CHE115873291
         name:
           type: string
           description: The name of the employer
-          example: Acrea AG
+          examples:
+            - Acrea AG
         industry:
           type: string
           description: The industry or sector the employer operates in
-          example: information technology and management consulting
+          examples:
+            - information technology and management consulting
 
     PensionStatementBasic:
       type: object
@@ -1094,7 +1112,8 @@ components:
         pensionStatementNo:
           type: string
           description: Pension statement number (as printed on statement)
-          example: PS_ID_6789-ABC
+          examples:
+            - PS_ID_6789-ABC
         referenceDate:
           $ref: '#/components/schemas/Date'
           description: Reference date of pension statement.
@@ -1112,12 +1131,14 @@ components:
           type: integer
           format: int32
           description: Age for ordinary retirement
-          example: 65
+          examples:
+            - 65
         earliestRetirementAge:
           type: integer
           format: int32
           description: Age for earliest possible retirement
-          example: 58
+          examples:
+            - 58
         salaryData:
           $ref: '#/components/schemas/SalaryData'
         retirementCapital:
@@ -1154,14 +1175,16 @@ components:
         policyNo:
           type: string
           description: Policy number (as printed on policy statements)
-          example: 392'485'482
+          examples:
+            - 392'485'482
         entryDate:
           $ref: '#/components/schemas/Date'
           description: Entry date into policy
         contractNo:
           type: string
           description: Contract number of contract between employer and pension fund
-          example: C27-842.183
+          examples:
+            - C27-842.183
         pensionPlan:
           $ref: '#/components/schemas/PensionPlan'
         isInVestedBenefitFoundation:
@@ -1170,7 +1193,8 @@ components:
             Indicates if policy is part of a vested benefit foundation (as opposed to
             a regular pension fund with payments from an employer). If the field is not
             set, a regular pension fund is assumed.
-          example: false
+          examples:
+            - false
         salaryData:
           $ref: '#/components/schemas/SalaryData'
         retirementCapital:
@@ -1197,11 +1221,13 @@ components:
         planName:
           type: string
           description: Insurance plan name
-          example: Basisplan
+          examples:
+            - Basisplan
         optionalSavingsPlanName:
           type: string
           description: Name of the optional savings plan
-          example: Sparplan 2
+          examples:
+            - Sparplan 2
 
     SalaryData:
       type: object
@@ -1217,42 +1243,50 @@ components:
           type: number
           format: double
           description: Gross annual salary
-          example: 78000.00
+          examples:
+            - 78000.00
         bonus:
           type: number
           format: double
           description: Bonus component of the salary
-          example: 0.00
+          examples:
+            - 0.00
         additionalSalary:
           type: number
           format: double
           description: Additional salary component
-          example: 0.00
+          examples:
+            - 0.00
         otherSalaryComponent:
           type: number
           format: double
           description: Other salary component
-          example: 0.00
+          examples:
+            - 0.00
         insuredSalaryMandatory:
           type: number
           format: double
           description: Annual salary insured under mandatory coverage
-          example: 59215.00
+          examples:
+            - 59215.00
         insuredSalaryRetirement:
           type: number
           format: double
           description: Annual salary insured for retirement benefits (mandatory and supplementary coverage)
-          example: 59215.00
+          examples:
+            - 59215.00
         insuredSalaryRisk:
           type: number
           format: double
           description: Annual salary insured for risk benefits (mandatory and supplementary coverage)
-          example: 59215.00
+          examples:
+            - 59215.00
         employmentLevel:
           type: number
           format: double
           description: Level of full-time/part-time employment (in percent, 100 for full-time employment)
-          example: 100
+          examples:
+            - 100
 
     RetirementCapital:
       type: object
@@ -1267,32 +1301,38 @@ components:
           type: number
           format: double
           description: Total retirement capital (mandatory and supplementary coverage) brought from other funds into this fund
-          example: 45210.25
+          examples:
+            - 45210.25
         transferredCapitalMandatory:
           type: number
           format: double
           description: Retirement capital under mandatory coverage brought from other funds into this fund
-          example: 32840.55
+          examples:
+            - 32840.55
         balanceReferenceDate:
           type: number
           format: double
           description: Retirement capital as per a specified reference date (mandatory and supplementary coverage)
-          example: 53842.50
+          examples:
+            - 53842.50
         balanceMandatoryReferenceDate:
           type: number
           format: double
           description: Retirement capital under mandatory coverage as per a specified reference date
-          example: 38942.15
+          examples:
+            - 38942.15
         balanceEndCurrentYear:
           type: number
           format: double
           description: Projected retirement capital as per end of the current year (mandatory and supplementary coverage)
-          example: 56325.25
+          examples:
+            - 56325.25
         balanceMandatoryEndCurrentYear:
           format: double
           type: number
           description: Projected retirement capital under mandatory coverage as per end of the current year
-          example: 40846.60
+          examples:
+            - 40846.60
         projectedRetirementBenefits:
           type: array
           description: |
@@ -1321,52 +1361,61 @@ components:
           type: integer
           format: int32
           description: Specified age used for the retirement benefits calculation
-          example: 63
+          examples:
+            - 63
         capitalBalance:
           type: number
           format: double
           description: Retirement capital balance with interest (mandatory and supplementary coverage)
-          example: 378832.05
+          examples:
+            - 378832.05
         capitalBalanceMandatory:
           type: number
           format: double
           description: Retirement capital balance with interest (mandatory coverage only)
-          example: 284832.15
+          examples:
+            - 284832.15
         capitalBalanceNoInterest:
           type: number
           format: double
           description: |
             Retirement capital balance assuming no interest on assets (mandatory
             and supplementary coverage)
-          example: 331285.25
+          examples:
+            - 331285.25
         capitalBalanceNoInterestMandatory:
           type: number
           format: double
           description: |
             Retirement capital balance assuming no interest on assets (mandatory coverage only)
-          example: 248862.65
+          examples:
+            - 248862.65
         pension:
           type: number
           format: double
           description: Annual pension credit
-          example: 22835.00
+          examples:
+            - 22835.00
         conversionRateMandatory:
           type: number
           format: double
           description: Conversion rate (capital to pension) for mandatory coverage
-          example: 6.800
+          examples:
+            - 6.800
         conversionRateSupplementary:
           type: number
           format: double
           description: Conversion rate (capital to pension) for supplementary coverage
-          example: 5.500
+          examples:
+            - 5.500
         conversionRateEnveloping:
           type: number
           format: double
           description: |
             Enveloping conversion rate (capital to pension) for combined mandatory and
             supplementary coverage
-          example: 6.300
+          examples:
+            - 6.300
 
     InterestRates:
       type: object
@@ -1383,19 +1432,22 @@ components:
           type: number
           format: double
           description: Interest rate for mandatory coverage (in percent)
-          example: 6.800
+          examples:
+            - 6.800
         interestRateSupplementary:
           type: number
           format: double
           description: Interest rate for supplementary coverage (in percent)
-          example: 5.500
+          examples:
+            - 5.500
         interestRateProjectionEnveloping:
           type: number
           format: double
           description: |
             Projection enveloping interest rate for combined mandatory and supplementary coverage
             (in percent), used specifically for calculating projected future values.
-          example: 6.300
+          examples:
+            - 6.300
 
     RiskBenefits:
       type: object
@@ -1411,73 +1463,87 @@ components:
           type: number
           format: double
           description: Annual pension in case of disability
-          example: 40213.00
+          examples:
+            - 40213.00
         pensionDisabilityFromIllness:
           type: number
           format: double
           description: Annual pension in case of disability resulting from illness
-          example: 40213.00
+          examples:
+            - 40213.00
         pensionDisabilityFromAccident:
           type: number
           format: double
           description: Annual pension in case of disability resulting from accident
-          example: 40213.00
+          examples:
+            - 40213.00
         childPensionDisability:
           type: number
           format: double
           description: Annual child pension in case of disability
-          example: 5382.00
+          examples:
+            - 5382.00
         childPensionDisabilityFromIllness:
           type: number
           format: double
           description: Annual child pension in case of disability resulting from illness
-          example: 5382.00
+          examples:
+            - 5382.00
         childPensionDisabilityFromAccident:
           type: number
           format: double
           description: Annual child pension in case of disability resulting from accident
-          example: 5382.00
+          examples:
+            - 5382.00
         partnerPensionDeath:
           type: number
           format: double
           description: Annual partner pension in case of death
-          example: 24817.00
+          examples:
+            - 24817.00
         partnerPensionDeathFromIllness:
           type: number
           format: double
           description: Annual partner pension in case of death resulting from illness
-          example: 24817.00
+          examples:
+            - 24817.00
         partnerPensionDeathFromAccident:
           type: number
           format: double
           description: Annual partner pension in case of death resulting from accident
-          example: 24817.00
+          examples:
+            - 24817.00
         orphanPensionDeath:
           type: number
           format: double
           description: Annual orphan pension in case of death
-          example: 5382.00
+          examples:
+            - 5382.00
         orphanPensionDeathFromIllness:
           type: number
           format: double
           description: Annual orphan pension in case of death resulting from illness
-          example: 5382.00
+          examples:
+            - 5382.00
         orphanPensionDeathFromAccident:
           type: number
           format: double
           description: Annual orphan pension in case of death resulting from accident
-          example: 5382.00
+          examples:
+            - 5382.00
         lumpSumWithoutPensionBenefits:
           type: number
           format: double
           description: One-off payment in case of death where no other benefits are paid out
-          example: 92834.00
+          examples:
+            - 92834.00
         minimalLumpSumWithPensionBenefits:
           type: number
           format: double
           description: |
             Guaranteed, minimal one-off payment in case of death where other benefits are paid out
-          example: 74383.00
+          examples:
+            - 74383.00
 
     Financing:
       type: object
@@ -1490,32 +1556,38 @@ components:
           type: number
           format: double
           description: Annual contribution towards the retirement captial financed by the insured person
-          example: 4025.00
+          examples:
+            - 4025.00
         contributionSavingsEmployer:
           type: number
           format: double
           description: Annual contribution towards the retirement captial financed by the employer
-          example: 4025.00
+          examples:
+            - 4025.00
         contributionRiskInsuredPerson:
           type: number
           format: double
           description: Annual contribution towards risk benefits financed by the insured person
-          example: 0.00
+          examples:
+            - 0.00
         contributionRiskEmployer:
           type: number
           format: double
           description: Annual contribution towards risk benefits financed by the employer
-          example: 0.00
+          examples:
+            - 0.00
         contributionAdministrationInsuredPerson:
           type: number
           format: double
           description: Annual contribution towards fund administration financed by the insured person
-          example: 0.00
+          examples:
+            - 0.00
         contributionAdministrationEmployer:
           type: number
           format: double
           description: Annual contribution towards fund administration financed by the employer
-          example: 0.00
+          examples:
+            - 0.00
 
     VestedBenefits:
       type: object
@@ -1530,14 +1602,16 @@ components:
           description: |
             The insured person's retirement capital when he/she was 50 (mandatory and supplementary).
             Empty for persons younger than 50.
-          example: 0.00
+          examples:
+            - 0.00
         capitalAt50Mandatory:
           type: number
           format: double
           description: |
             The insured person's retirement capital when he/she was 50 (mandatory part only).
             Empty for persons younger than 50.
-          example: 0.00
+          examples:
+            - 0.00
         capitalAtMarriage:
           type: number
           format: double
@@ -1547,7 +1621,8 @@ components:
             marriage or registered partnership (the marriage/partnership date is part of
             the insured person object.)
             Empty for persons who are not married or in a registered partnership.
-          example: 28483.35
+          examples:
+            - 28483.35
         capitalAtMarriageMandatory:
           type: number
           format: double
@@ -1557,14 +1632,16 @@ components:
             marriage or registered partnership (the marriage/partnership date is part of
             the insured person object.)
             Empty for persons who are not married or in a registered partnership.
-          example: 23863.15
+          examples:
+            - 23863.15
         capitalFirstCommunicated:
           type: number
           format: double
           description: |
             Vested benefit capital that has been initially communicated or had become due
             after January 1, 1995 (for insured persons having married before January 1, 1995).
-          example: 0.00
+          examples:
+            - 0.00
         capitalFirstCommunicatedDate:
           $ref: '#/components/schemas/Date'
           description: |
@@ -1616,14 +1693,16 @@ components:
           description: |
             Total transaction amount for mandatory and supplementary part.
             The amount is positive for payments towards the capital, and negative for withdrawals.
-          example: 0.00
+          examples:
+            - 0.00
         amountMandatory:
           type: number
           format: double
           description: |
             Transaction amount for mandatory part only.
             The amount is positive for payments towards the capital, and negative for withdrawals.
-          example: 0.00
+          examples:
+            - 0.00
 
     RegularPurchaseMaxAmount:
       type: number
@@ -1631,14 +1710,16 @@ components:
       description: |
         The maximum amount the insured person is permitted to contribute to their pension plan
         as an ordinary purchase.
-      example: 48392.45
+      examples:
+        - 48392.45
 
     HomeOwnershipAvailableForWithdrawal:
       type: number
       format: double
       description: |
         The total amount available for the insured person to withdraw or borrow against from their retirement capital for the purpose of financing home ownership.
-      example: 31000.00
+      examples:
+        - 31000.00
 
     HealthReservation:
       type: object
@@ -1666,17 +1747,20 @@ components:
           format: double
           description: |
             Amount of retirement capital used for pledging (mandatory and supplementary).
-          example: 20000.00
+          examples:
+            - 20000.00
         amountMandatory:
           type: number
           format: double
           description: |
             Amount of retirement capital used for pledging (mandatory part only).
-          example: 20000.00
+          examples:
+            - 20000.00
         pledgee:
           type: string
           description: The name of the pledgee.
-          example: UBS AG
+          examples:
+            - UBS AG
         pledgeeAddress:
           $ref: '#/components/schemas/Address'
 
@@ -1693,19 +1777,22 @@ components:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of insured person used in API calls
-      example: JohnDoe_1234
+      examples:
+        - JohnDoe_1234
 
     PolicyId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of policy used in API calls
-      example: Pol_56789-2024
+      examples:
+        - Pol_56789-2024
 
     PensionStatementId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of pension statement used in API calls
-      example: 550e8450-e59b-21d4-a346-442215440560
+      examples:
+        - 550e8450-e59b-21d4-a346-442215440560
 
     PensionStatementType:
       type: string
@@ -1716,7 +1803,8 @@ components:
         pension statement type:
         * `regular`: the pension statement is an offical, regular statement on the basis of real values (not changed for simulation purposes)
         * `simulated`: the pension statement is a non-offical, simulated statement, i.e. some values might have been changed for simulation purposes
-      example: regular
+      examples:
+        - regular
 
     SalaryChangeSimParameters:
       type: object
@@ -1729,12 +1817,14 @@ components:
           type: number
           format: double
           description: Changed gross annual salary in CHF (for employment level 100%)
-          example: 80000
+          examples:
+            - 80000
         employmentLevel:
           type: number
           format: double
           description: Changed level of full-time/part-time employment (in percent, 100 for full-time employment)
-          example: 80
+          examples:
+            - 80
         effectiveDate:
           $ref: '#/components/schemas/Date'
           description: |
@@ -1774,13 +1864,15 @@ components:
           description: |
             Purchase amount in CHF.
             For periodic purchases, the sum of all payments.
-          example: 10000.00
+          examples:
+            - 10000.00
         retirementAge:
           type: integer
           description: |
             Planned retirement age.
             If omitted, the regular payment age is assumed.
-          example: 65
+          examples:
+            - 65
         date:
           $ref: '#/components/schemas/Date'
           description: |
@@ -1791,7 +1883,8 @@ components:
           description: |
             The size of individual periodic payments.
             If omitted, 0 or equal to 'amount', a one-time payment is assumed.
-          example: 10000.00
+          examples:
+            - 10000.00
         paymentFrequency:
           $ref: '#/components/schemas/PaymentFrequency'
 
@@ -1810,31 +1903,38 @@ components:
         maxAmount:
           type: number
           description: Maximum allowed amount of voluntary purchase of additional pension benefits (in CHF)
-          example: 48392.45
+          examples:
+            - 48392.45
         amount:
           type: number
           description: Effective amount of voluntary purchase (in CHF)
-          example: 10000.00
+          examples:
+            - 10000.00
         retirementAge:
           type: integer
           description: Retirement age assumed for simulation
-          example: 65
+          examples:
+            - 65
         capitalWithoutPurchase:
           type: number
           description: Prospective savings capital at retirement without purchase (in CHF)
-          example: 378832.05
+          examples:
+            - 378832.05
         capitalWithPurchase:
           type: number
           description: Prospective savings capital at retirement with purchase (in CHF)
-          example: 390216.55
+          examples:
+            - 390216.55
         pensionWithoutPurchase:
           type: number
           description: Prospective pension after retirement without purchase (in CHF per year)
-          example: 22835.00
+          examples:
+            - 22835.00
         pensionWithPurchase:
           type: number
           description: Prospective pension after retirement with purchase (in CHF per year)
-          example: 23517.00
+          examples:
+            - 23517.00
 
     PurchaseRequest:
       type: object
@@ -1881,7 +1981,8 @@ components:
             - rejected
             - approved
             - completed
-          example: inReview
+          examples:
+            - inReview
         purchaseDetails:
           $ref: '#/components/schemas/PurchaseDetails'
         requiredPurchaseDetails:
@@ -1897,7 +1998,8 @@ components:
           format: double
           minimum: 0
           description: Total amount of payments received (in CHF)
-          example: 10000.00
+          examples:
+            - 10000.00
 
     PurchaseDetails:
       type: object
@@ -1920,34 +2022,40 @@ components:
           minimum: 1
           description: |
             Answer to question 1a: Requested purchase amount in CHF
-          example: 10000.00
+          examples:
+            - 10000.00
         hasVestedBenefits:
           type: boolean
           description: |
             Answer to question 2a: Indicates if the insured person has pillar 2 vested benefits outside the pension fund (`true`) or not (`false`)
-          example: false
+          examples:
+            - false
         hasMadeSelfEmployedContributions:
           type: boolean
           description: |
             Answer to question 3a: Indicates if the insured person has made pillar 3a contributions while being self-employed (`true`) or not (`false`)
-          example: false
+          examples:
+            - false
         selfEmployedContributionCredit:
           type: number
           format: double
           minimum: 1
           description: |
             Answer to question 3b: Balance of pillar 3a credit as of the end of last year
-          example: 35000.00
+          examples:
+            - 35000.00
         hasNotRepaidEarlyWithdrawal:
           type: boolean
           description: |
             Answer to question 4a: Indicates if the insured person has made an early withdrawal of savings to fund the purchase of residential property and has not repaid it fully (`true`) or not (`false`)
-          example: false
+          examples:
+            - false
         hasMovedFromAbroad:
           type: boolean
           description: |
             Answer to question 5a: Indicates if the insured person has moved to Switzerland from abroad during the last 5 years (`true`) or not (`false`)
-          example: false
+          examples:
+            - false
         moveFromAbroadDate:
           $ref: '#/components/schemas/Date'
           description: |
@@ -1956,7 +2064,8 @@ components:
           type: boolean
           description: |
             Answer to question 5c: Indicates if the person has been insured in the Swiss pension system before (`true`) or not (`false`)
-          example: false
+          examples:
+            - false
         firstInsuranceDate:
           $ref: '#/components/schemas/Date'
           description: |
@@ -1965,42 +2074,50 @@ components:
           type: boolean
           description: |
             Answer to question 6a: Indicates if the insured person is already drawing or has ever drawn retirement benefits under another pension plan (`true`) or not (`false`)
-          example: false
+          examples:
+            - false
         isInAnotherPensionPlan:
           type: boolean
           description: |
             Answer to question 7a: Indicates if the person is insured in another pension plan (`true`) or not (`false`)
-          example: false
+          examples:
+            - false
         isFullyAbleToWork:
           type: boolean
           description: |
             Answer to question 7b: Indicates if the person is fully able to work (`true`) or not (`false`)
-          example: true
+          examples:
+            - true
         isPurchaseAfterDivorce:
           type: boolean
           description: |
             Answer to question 7c: Indicates if the purchase is to make up for the pension savings surrender due to a divorce (`true`) or not (`false`)
-          example: false
+          examples:
+            - false
         isPurchaseWithPillar3aSavings:
           type: boolean
           description: |
             Answer to question 7d: Indicates if the purchase is made with funds from a pillar 3a pension plan (`true`) or not (`false`)
-          example: false
+          examples:
+            - false
         isAddressUpToDate:
           type: boolean
           description: |
             Answer to question 8a: Indicates if the postal address is up-to-date (`true`) or not (`false`)
-          example: true
+          examples:
+            - true
         phoneContact:
           type: string
           description: |
             Answer to question 8b: Phone number to contact the insured person regarding the purchase request
-          example: 0041 79 123 45 67
+          examples:
+            - 0041 79 123 45 67
         emailContact:
           type: string
           description: |
             Answer to question 8c: Email address to contact the insured person regarding the purchase request
-          example: johndoe@gmail.com
+          examples:
+            - johndoe@gmail.com
 
     RequiredPurchaseDetails:
       type: object
@@ -2010,47 +2127,58 @@ components:
         askForSelfEmployedContributionCredit:
           type: boolean
           description: Indicates if question 3b is to be asked
-          example: true
+          examples:
+            - true
         askForHasMovedFromAbroad:
           type: boolean
           description: Indicates if question 5a is to be asked
-          example: true
+          examples:
+            - true
         askForMoveFromAbroadDate:
           type: boolean
           description: Indicates if question 5b is to be asked
-          example: true
+          examples:
+            - true
         askForHasBeenInsuredBefore:
           type: boolean
           description: Indicates if question 5c is to be asked
-          example: true
+          examples:
+            - true
         askForFirstInsuranceDate:
           type: boolean
           description: Indicates if question 5d is to be asked
-          example: true
+          examples:
+            - true
         askForIsDrawingPensionBenefits:
           type: boolean
           description: Indicates if question 6a is to be asked
-          example: true
+          examples:
+            - true
         askFoIsInAnotherPensionPlan:
           type: boolean
           description: Indicates if question 7a is to be asked
-          example: true
+          examples:
+            - true
         askForIsFullyAbleToWork:
           type: boolean
           description: Indicates if question 7b is to be asked
-          example: true
+          examples:
+            - true
         askForIsPurchaseAfterDivorce:
           type: boolean
           description: Indicates if question 7c is to be asked
-          example: true
+          examples:
+            - true
         askForIsPurchaseWithPillar3aSavings:
           type: boolean
           description: Indicates if question 7d is to be asked
-          example: true
+          examples:
+            - true
         askForIsAddressUpToDate:
           type: boolean
           description: Indicates if question 8a (postal address is up-to-date) is to be asked
-          example: true
+          examples:
+            - true
         postalAddress:
           type: string
           description: |
@@ -2058,15 +2186,18 @@ components:
 
             The address should be formatted in a human-readable form, ready to be displayed in the question sentence.
             Street, postal code and city, country etc. should be separated with comma and space; no newlines must be used.
-          example: Brandstrasse 2, 3944 Unterbäch
+          examples:
+            - Brandstrasse 2, 3944 Unterbäch
         askForPhoneContact:
           type: boolean
           description: Indicates if question 8b is to be asked
-          example: true
+          examples:
+            - true
         askForEmailContact:
           type: boolean
           description: Indicates if question 8c is to be asked
-          example: true
+          examples:
+            - true
 
     PaymentSchedule:
       type: object
@@ -2093,11 +2224,13 @@ components:
           format: double
           description: |
             Size (in CHF) of individual regular payments.
-          example: 500.00
+          examples:
+            - 500.00
         eBillAcount:
           type: string
           description: Email address of insured person's eBill account.
-          example: johndoe@gmail.com
+          examples:
+            - johndoe@gmail.com
 
     PaymentInstructions:
       type: object
@@ -2115,32 +2248,33 @@ components:
             See chapter 4 'Swiss QR Code database' in
             [SIX - Swiss Implementation Guidelines QR-bill (PDF, English)](https://www.paymentstandards.ch/dam/downloads/ig-qr-bill-de.pdf) or
             [SIX - Schweizer Implementation Guidelines QR-Rechnung (PDF, German)](https://www.paymentstandards.ch/dam/downloads/ig-qr-bill-de.pdf).
-          example: >
-            SPC
-            0200
-            1
-            CH4431999123000889012
-            S
-            Max Muster & Söhne
-            Musterstrasse
-            123
-            8000
-            Seldwyla
-            CH
+          examples:
+            - >
+              SPC
+              0200
+              1
+              CH4431999123000889012
+              S
+              Max Muster & Söhne
+              Musterstrasse
+              123
+              8000
+              Seldwyla
+              CH
 
-            0.00
-            CHF
-            S
-            Simon Muster
-            Musterstrasse
-            1
-            8000
-            Seldwyla
-            CH
-            QRR
-            210000000003139471430009017
-            DO NOT USE FOR PAYMENT
-            EPD
+              0.00
+              CHF
+              S
+              Simon Muster
+              Musterstrasse
+              1
+              8000
+              Seldwyla
+              CH
+              QRR
+              210000000003139471430009017
+              DO NOT USE FOR PAYMENT
+              EPD
 
     Instructions:
       type: array
@@ -2167,7 +2301,8 @@ components:
         - singlePaymentEBill
         - regularPaymentEBill
         - irreularPaymentQrBill
-      example: singlePaymentQrBill
+      examples:
+        - singlePaymentQrBill
 
     PaymentFrequency:
       type: integer
@@ -2179,13 +2314,15 @@ components:
         * 2: Semi-annual payment
         * 4: Quarterly payment
         * 12: Monthly payment
-      example: 0
+      examples:
+        - 0
 
     PurchaseRequestId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
       description: Technical ID of purchase request used in API calls
-      example: PR-4838525
+      examples:
+        - PR-4838525
 
     Transactions:
       type: object
@@ -2220,7 +2357,8 @@ components:
         id:
           type: string
           description: Transaction ID
-          example: TR-683463823
+          examples:
+            - TR-683463823
         category:
           type: string
           description: |
@@ -2246,25 +2384,29 @@ components:
             - dividend
             - fee
             - other
-          example: voluntaryPurchase
+          examples:
+            - voluntaryPurchase
         date:
           $ref: '#/components/schemas/Date'
           description: Transaction date (date the transaction becomes effective financially)
         amount:
           type: number
           description: Transaction amount (in CHF, positive numbers for credits, negative numbers for debits)
-          example: 10000.00
+          examples:
+            - 10000.00
         reason:
           type: string
           description: |
             A human-readable description of the transaction reason, in the insured person's
             preferred language.
-          example: Freiwilliger Einkauf
+          examples:
+            - Freiwilliger Einkauf
         balance:
           type: number
           format: double
           description: Retirement capital balance after transaction
-          example: 63842.50
+          examples:
+            - 63842.50
 
     # ---- Common Error Response ----
     CommonErrorResponse:
@@ -2275,13 +2417,16 @@ components:
           $ref: '#/components/schemas/CommonErrorType'
         title:
           type: string
-          example: This is the general problem description
+          examples:
+            - This is the general problem description
         detail:
           type: string
-          example: Detailed problem description with respect to the current request, e.g., invalid account number format
+          examples:
+            - Detailed problem description with respect to the current request, e.g., invalid account number format
         instance:
           type: string
-          example: path/to/corresponding/resource
+          examples:
+            - path/to/corresponding/resource
 
     CommonErrorType:
       title: Common Error Type
@@ -2302,13 +2447,15 @@ components:
         - /problems/TECHNICAL_ERROR
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
-      example: /problems/TECHNICAL_ERROR
+      examples:
+        - /problems/TECHNICAL_ERROR
 
     # ---- Common Data Model ----
     Date:
       type: string
       format: date
-      example: 2018-04-13
+      examples:
+        - 2018-04-13
 
   securitySchemes:
     bearerAuthentication:

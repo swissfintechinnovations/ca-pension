@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.1.0
 info:
   version: 0.8.0
   title: Central Directory
@@ -133,36 +133,44 @@ components:
         id:
           type: string
           description: Pension fund ID
-          example: VS-731
+          examples: 
+            - VS-731
         name:
           type: string
           description: Pension fund name in fund's preferred language
-          example: Omnifund
+          examples:
+            - Omnifund
         nameDe:
           type: string
           description: Pension fund name in German
-          example: Omni Fonds
+          examples:
+            - Omni Fonds
         nameEn:
           type: string
           description: Pension fund name in English
-          example: Omnifund
+          examples:
+            - Omnifund
         nameFr:
           type: string
           description: Pension fund name in French
-          example: Omni fonds
+          examples:
+            - Omni fonds
         nameIt:
           type: string
           description: Pension fund name in Itlian
-          example: Omni fondo
+          examples:
+            - Omni fondo
         nameRm:
           type: string
           description: Pension fund name in Rhaeto-Romanic
-          example: Omni fondo
+          examples:
+            - Omni fondo
         webUrl:
           type: string
           format: uri
           description: URL of pension funds web site
-          example: www.omnifund.ch
+          examples:
+            - www.omnifund.ch
         logoUrl:
           type: string
           format: uri
@@ -170,7 +178,8 @@ components:
             Image URL of pension fund logo
             (at least 200 by 200 pixels, suitable for display on white background,
             JPEG or PNG format)
-          example: www.omnifund.ch/logo.png
+          examples:
+            - www.omnifund.ch/logo.png
         openpkStatus:
           type: string
           description: |
@@ -184,11 +193,13 @@ components:
             - onboarding
             - paused
             - notJoined
-          example: active
+          examples:
+            - active
         address:
           type: string
           description: Pension fund address. Text excl. name.
-          example: Gupfengasse 1, 9230 Flawil
+          examples:
+            - Gupfengasse 1, 9230 Flawil
         openpkServices:
           description: Technical description of API service
           $ref: '#/components/schemas/ServicesDescription'
@@ -205,12 +216,14 @@ components:
           type: string
           format: uri
           description: URL to initiate the user authentication interaction
-          example: https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/auth
+          examples:
+            - https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/auth
         grantUrl:
           type: string
           format: uri
           description: URL to initate the user interaction for granting access
-          example: https://fund.omnifund.ch/consents/grant?fund_name=Omnifund
+          examples:
+            - https://fund.omnifund.ch/consents/grant?fund_name=Omnifund
         identityProvider:
           type: string
           format: uri
@@ -219,22 +232,26 @@ components:
             Open ID Connect discovery URLs derived relative to this URL,
             e.g. `https://iam.company.com/iam/.well-known/openid-configuration`
             for the issuer URL `https://iam.company.com/iam`.
-          example: https://iam.omnifund.ch/auth/realms/pensionfund
+          examples:
+            - https://iam.omnifund.ch/auth/realms/pensionfund
         tokenEndpoint:
           type: string
           format: uri
           description: Endpoint URI to request access token
-          example: https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/token
+          examples:
+            - https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/token
         policyEndpoint:
           type: string
           format: uri
           description: Endpoint URI to query insured person and policy data
-          example: https://fund.omnifund.ch/v1
+          examples:
+            - https://fund.omnifund.ch/v1
         consentEndpoint:
           type: string
           format: uri
           description: Endpoint URI to query the granted consents
-          example: https://fund.omnifund.ch/v1
+          examples:
+            - https://fund.omnifund.ch/v1
 
     # ---- Common Error Response ----
     CommonErrorResponse:
@@ -245,13 +262,16 @@ components:
           $ref: '#/components/schemas/CommonErrorType'
         title:
           type: string
-          example: This is the general problem description
+          examples:
+            - This is the general problem description
         detail:
           type: string
-          example: Detailed problem description with respect to the current request, e.g., invalid account number format
+          examples:
+            - Detailed problem description with respect to the current request, e.g., invalid account number format
         instance:
           type: string
-          example: path/to/corresponding/resource
+          examples:
+            - path/to/corresponding/resource
 
     CommonErrorType:
       title: Common Error Type
@@ -272,7 +292,8 @@ components:
         - /problems/TECHNICAL_ERROR
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
-      example: /problems/TECHNICAL_ERROR
+      examples:
+        - /problems/TECHNICAL_ERROR
 
   # ---- Responses - Standard Errors Common Data Model ----
   responses:
