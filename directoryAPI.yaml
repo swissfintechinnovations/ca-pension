@@ -133,7 +133,7 @@ components:
         id:
           type: string
           description: Pension fund ID
-          examples: 
+          examples:
             - VS-731
         name:
           type: string

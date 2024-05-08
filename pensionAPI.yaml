@@ -2250,31 +2250,31 @@ components:
             [SIX - Schweizer Implementation Guidelines QR-Rechnung (PDF, German)](https://www.paymentstandards.ch/dam/downloads/ig-qr-bill-de.pdf).
           examples:
             - >
-              SPC
-              0200
-              1
-              CH4431999123000889012
-              S
-              Max Muster & Söhne
-              Musterstrasse
-              123
-              8000
-              Seldwyla
-              CH
+                SPC
+                0200
+                1
+                CH4431999123000889012
+                S
+                Max Muster & Söhne
+                Musterstrasse
+                123
+                8000
+                Seldwyla
+                CH
 
-              0.00
-              CHF
-              S
-              Simon Muster
-              Musterstrasse
-              1
-              8000
-              Seldwyla
-              CH
-              QRR
-              210000000003139471430009017
-              DO NOT USE FOR PAYMENT
-              EPD
+                0.00
+                CHF
+                S
+                Simon Muster
+                Musterstrasse
+                1
+                8000
+                Seldwyla
+                CH
+                QRR
+                210000000003139471430009017
+                DO NOT USE FOR PAYMENT
+                EPD
 
     Instructions:
       type: array
