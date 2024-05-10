@@ -50,7 +50,7 @@ info:
 
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
   - url: https://directory-dot-acrea-openpk.appspot.com/v1
@@ -118,13 +118,13 @@ components:
   schemas:
     PensionFunds:
       type: array
-      description: List of pension funds
+      description: List of pension funds.
       items:
         $ref: '#/components/schemas/PensionFund'
 
     PensionFund:
       type: object
-      description: Pension fund incl. technical service data
+      description: Pension fund incl. technical service data.
       required:
         - name
         - id
@@ -132,43 +132,43 @@ components:
       properties:
         id:
           type: string
-          description: Pension fund ID
+          description: Pension fund ID.
           examples:
             - VS-731
         name:
           type: string
-          description: Pension fund name in fund's preferred language
+          description: Pension fund name in fund's preferred language.
           examples:
             - Omnifund
         nameDe:
           type: string
-          description: Pension fund name in German
+          description: Pension fund name in German.
           examples:
             - Omni Fonds
         nameEn:
           type: string
-          description: Pension fund name in English
+          description: Pension fund name in English.
           examples:
             - Omnifund
         nameFr:
           type: string
-          description: Pension fund name in French
+          description: Pension fund name in French.
           examples:
             - Omni fonds
         nameIt:
           type: string
-          description: Pension fund name in Itlian
+          description: Pension fund name in Itlian.
           examples:
             - Omni fondo
         nameRm:
           type: string
-          description: Pension fund name in Rhaeto-Romanic
+          description: Pension fund name in Rhaeto-Romanic.
           examples:
             - Omni fondo
         webUrl:
           type: string
           format: uri
-          description: URL of pension funds web site
+          description: URL of pension funds web site.
           examples:
             - www.omnifund.ch
         logoUrl:
@@ -201,12 +201,12 @@ components:
           examples:
             - Gupfengasse 1, 9230 Flawil
         openpkServices:
-          description: Technical description of API service
+          description: Technical description of API service.
           $ref: '#/components/schemas/ServicesDescription'
 
     ServicesDescription:
       type: object
-      description: Technical description of API service
+      description: Technical description of API service.
       required:
         - authorizeUrl
         - tokenEndpoint
@@ -215,13 +215,13 @@ components:
         authorizeUrl:
           type: string
           format: uri
-          description: URL to initiate the user authentication interaction
+          description: URL to initiate the user authentication interaction.
           examples:
             - https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/auth
         grantUrl:
           type: string
           format: uri
-          description: URL to initate the user interaction for granting access
+          description: URL to initate the user interaction for granting access.
           examples:
             - https://fund.omnifund.ch/consents/grant?fund_name=Omnifund
         identityProvider:
@@ -237,19 +237,19 @@ components:
         tokenEndpoint:
           type: string
           format: uri
-          description: Endpoint URI to request access token
+          description: Endpoint URI to request access token.
           examples:
             - https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/token
         policyEndpoint:
           type: string
           format: uri
-          description: Endpoint URI to query insured person and policy data
+          description: Endpoint URI to query insured person and policy data.
           examples:
             - https://fund.omnifund.ch/v1
         consentEndpoint:
           type: string
           format: uri
-          description: Endpoint URI to query the granted consents
+          description: Endpoint URI to query the granted consents.
           examples:
             - https://fund.omnifund.ch/v1
 
@@ -257,19 +257,23 @@ components:
     CommonErrorResponse:
       title: Common Error Response
       type: object
+      description: Common Error Response.
       properties:
         type:
           $ref: '#/components/schemas/CommonErrorType'
         title:
           type: string
+          description: The error title.
           examples:
             - This is the general problem description
         detail:
           type: string
+          description: Details about the error.
           examples:
             - Detailed problem description with respect to the current request, e.g., invalid account number format
         instance:
           type: string
+          description: Instance of the error.
           examples:
             - path/to/corresponding/resource
 
