@@ -78,7 +78,7 @@ info:
 
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
   - url: https://openpk.ch/v1
@@ -135,7 +135,7 @@ components:
   schemas:
     Consents:
       type: object
-      description: Consent details (accessible object, access rights)
+      description: Consent details (accessible object, access rights).
       properties:
         personGrant:
           $ref: '#/components/schemas/PersonGrant'
@@ -160,7 +160,7 @@ components:
 
     PolicyGrant:
       type: object
-      description: Granted consent details for policy data
+      description: Granted consent details for policy data.
       properties:
         policyId:
           $ref: '#/components/schemas/PolicyId'
@@ -182,14 +182,14 @@ components:
     PersonId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
-      description: Technical ID of insured person used in API calls
+      description: Technical ID of insured person used in API calls.
       examples:
         - JohnDoe_1234
 
     PolicyId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
-      description: Technical ID of policy used in API calls
+      description: Technical ID of policy used in API calls.
       examples:
         - Pol_56789-2024
 
@@ -197,19 +197,23 @@ components:
     CommonErrorResponse:
       title: Common Error Response
       type: object
+      description: Common Error Response.
       properties:
         type:
           $ref: '#/components/schemas/CommonErrorType'
         title:
           type: string
+          description: The error title.
           examples:
             - This is the general problem description
         detail:
           type: string
+          description: Details about the error.
           examples:
             - Detailed problem description with respect to the current request, e.g., invalid account number format
         instance:
           type: string
+          description: Instance of the error.
           examples:
             - path/to/corresponding/resource
 
@@ -238,7 +242,7 @@ components:
   securitySchemes:
     bearerAuthentication:
       type: http
-      description: Bearer access token in HTTP header
+      description: Bearer access token in HTTP header.
       scheme: bearer
       bearerFormat: JWT
 
@@ -246,14 +250,14 @@ components:
   responses:
 
     standard400:
-      description: Some of the input is incomplete or invalid for starting a request
+      description: Some of the input is incomplete or invalid for starting a request.
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
 
     standard401:
-      description: Access token is missing or invalid
+      description: Access token is missing or invalid.
       content:
         application/problem+json:
           schema:
