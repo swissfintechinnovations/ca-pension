@@ -1154,7 +1154,7 @@ components:
 
     Policy:
       type: object
-      description: Details of policy
+      description: Details of policy.
       required:
         - policyId
         - personId
@@ -1242,49 +1242,49 @@ components:
         declaredSalary:
           type: number
           format: double
-          description: Gross annual salary
+          description: Gross annual salary.
           examples:
             - 78000.00
         bonus:
           type: number
           format: double
-          description: Bonus component of the salary
+          description: Bonus component of the salary.
           examples:
             - 0.00
         additionalSalary:
           type: number
           format: double
-          description: Additional salary component
+          description: Additional salary component.
           examples:
             - 0.00
         otherSalaryComponent:
           type: number
           format: double
-          description: Other salary component
+          description: Other salary component.
           examples:
             - 0.00
         insuredSalaryMandatory:
           type: number
           format: double
-          description: Annual salary insured under mandatory coverage
+          description: Annual salary insured under mandatory coverage.
           examples:
             - 59215.00
         insuredSalaryRetirement:
           type: number
           format: double
-          description: Annual salary insured for retirement benefits (mandatory and supplementary coverage)
+          description: Annual salary insured for retirement benefits (mandatory and supplementary coverage).
           examples:
             - 59215.00
         insuredSalaryRisk:
           type: number
           format: double
-          description: Annual salary insured for risk benefits (mandatory and supplementary coverage)
+          description: Annual salary insured for risk benefits (mandatory and supplementary coverage).
           examples:
             - 59215.00
         employmentLevel:
           type: number
           format: double
-          description: Level of full-time/part-time employment (in percent, 100 for full-time employment)
+          description: Level of full-time/part-time employment (in percent, 100 for full-time employment).
           examples:
             - 100
 
@@ -1547,7 +1547,7 @@ components:
 
     Financing:
       type: object
-      description: Contributions for financing the policy
+      description: Contributions for financing the policy.
       required:
         - contributionSavingsInsuredPerson
         - contributionSavingsEmployer
@@ -2457,6 +2457,7 @@ components:
     # ---- Common Data Model ----
     Date:
       type: string
+      description: Common date format.
       format: date
       examples:
         - 2018-04-13
