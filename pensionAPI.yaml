@@ -401,7 +401,7 @@ info:
 
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
   - url: https://openpk.ch/v1
@@ -794,7 +794,7 @@ paths:
             $ref: '#/components/schemas/PurchaseRequestId'
           description: Purchase Request ID.
       requestBody:
-        description: Voluntary purchase request details
+        description: Voluntary purchase request details.
         required: true
         content:
           application/json:
@@ -802,7 +802,7 @@ paths:
               $ref: '#/components/schemas/PurchaseRequest'
       responses:
         '200':
-          description: Updated voluntary purchase request
+          description: Updated voluntary purchase request.
           content:
             application/json:
               schema:
@@ -832,7 +832,7 @@ paths:
           description: Policy ID.
       responses:
         '200':
-          description: List of payment methods
+          description: List of payment methods.
           content:
             application/json:
               schema:
@@ -889,7 +889,7 @@ paths:
           description: End of date range (inclusive).
       responses:
         '200':
-          description: Retirement capital transactions
+          description: Retirement capital transactions.
           content:
             application/json:
               schema:
@@ -905,7 +905,7 @@ components:
   schemas:
     InsuredPerson:
       type: object
-      description: Details of insured person
+      description: Details of insured person.
       required:
         - personId
         - lastName
@@ -919,19 +919,19 @@ components:
           $ref: '#/components/schemas/PersonId'
         lastName:
           type: string
-          description: Last name / family name
+          description: Last name / family name.
           examples:
             - Doe
         firstName:
           type: string
-          description: First name(s)
+          description: First name(s).
           examples:
             - John
         address:
           $ref: '#/components/schemas/Address'
         birthDate:
           $ref: '#/components/schemas/Date'
-          description: Birth date
+          description: Birth date.
         sex:
           type: string
           enum:
@@ -966,18 +966,18 @@ components:
             - married
         marriageDate:
           $ref: '#/components/schemas/Date'
-          description: Date of marriage (or registration of partnership)
+          description: Date of marriage (or registration of partnership).
         ssn:
           type: integer
           format: int64
-          description: Social security number
+          description: Social security number.
           examples:
             - 7561234567890
         policyIds:
           type: array
           items:
             $ref: '#/components/schemas/PolicyId'
-          description: List of IDs of policies that insured person has with this pension fund
+          description: List of IDs of policies that insured person has with this pension fund.
         disabilityDegree:
           type: integer
           format: int32
@@ -992,11 +992,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/HealthReservation'
-          description: List of health reservations
+          description: List of health reservations.
 
     Address:
       type: object
-      description: Postal/residence address
+      description: Postal/residence address.
       required:
         - street
         - town
@@ -1005,86 +1005,86 @@ components:
       properties:
         street:
           type: string
-          description: Street and house number
+          description: Street and house number.
           examples:
             - Brandstrasse 2
         poBox:
           type: string
-          description: PO box
+          description: PO box.
           examples:
             - PO Box 42
         town:
           type: string
-          description: Town
+          description: Town.
           examples:
             - Unterbäch
         postalCode:
           type: string
-          description: Postal code
+          description: Postal code.
           examples:
             - '3944'
         countryCode:
           type: string
           pattern: '[A-Z]{2}'
-          description: ISO country code
+          description: ISO country code.
           examples:
             - CH
 
     PensionProvider:
       type: object
-      description: Pension provider (foundation) administering the policy
+      description: Pension provider (foundation) administering the policy.
       required:
         - providerName
       properties:
         providerId:
           type: string
-          description: Swiss Enterprise Identification Number UID
+          description: Swiss Enterprise Identification Number UID.
           examples:
             - CHE123456789
         providerName:
           type: string
-          description: The name of the pension provider
+          description: The name of the pension provider.
           examples:
             - Omnifund
         providerAddress:
           $ref: '#/components/schemas/Address'
-          description: Postal address of the pension provider
+          description: Postal address of the pension provider.
         portalUrl:
           type: string
-          description: URL of the insurance portal of the pension fund
+          description: URL of the insurance portal of the pension fund.
           examples:
             - www.omnifund.ch
         portalName:
           type: string
-          description: Offical name of the insurance portal
+          description: Offical name of the insurance portal.
           examples:
             - Omni Portal
 
     Employer:
       type: object
-      description: Details of the insured person's employer
+      description: Details of the insured person's employer.
       required:
         - name
       properties:
         employerId:
           type: string
-          description: Swiss Enterprise Identification Number UID
+          description: Swiss Enterprise Identification Number UID.
           examples:
             - CHE115873291
         name:
           type: string
-          description: The name of the employer
+          description: The name of the employer.
           examples:
             - Acrea AG
         industry:
           type: string
-          description: The industry or sector the employer operates in
+          description: The industry or sector the employer operates in.
           examples:
             - information technology and management consulting
 
     PensionStatementBasic:
       type: object
-      description: Basic, reduced pension statement consisting of only the most important information
+      description: Basic, reduced pension statement consisting of only the most important information.
       required:
         - personId
         - employer
@@ -1111,7 +1111,7 @@ components:
           $ref: '#/components/schemas/PensionProvider'
         pensionStatementNo:
           type: string
-          description: Pension statement number (as printed on statement)
+          description: Pension statement number (as printed on statement).
           examples:
             - PS_ID_6789-ABC
         referenceDate:
@@ -1121,7 +1121,7 @@ components:
           $ref: '#/components/schemas/PensionStatementType'
         entryDate:
           $ref: '#/components/schemas/Date'
-          description: Entry date into the pension fund
+          description: Entry date into the pension fund.
         pensionPlans:
           type: array
           description: List of related pension plans.
@@ -1130,13 +1130,13 @@ components:
         ordinaryRetirementAge:
           type: integer
           format: int32
-          description: Age for ordinary retirement
+          description: Age for ordinary retirement.
           examples:
             - 65
         earliestRetirementAge:
           type: integer
           format: int32
-          description: Age for earliest possible retirement
+          description: Age for earliest possible retirement.
           examples:
             - 58
         salaryData:
@@ -1174,7 +1174,7 @@ components:
           $ref: '#/components/schemas/PensionProvider'
         policyNo:
           type: string
-          description: Policy number (as printed on policy statements)
+          description: Policy number (as printed on policy statements).
           examples:
             - 392'485'482
         entryDate:
@@ -1182,7 +1182,7 @@ components:
           description: Entry date into policy
         contractNo:
           type: string
-          description: Contract number of contract between employer and pension fund
+          description: Contract number of contract between employer and pension fund.
           examples:
             - C27-842.183
         pensionPlan:
@@ -1220,18 +1220,18 @@ components:
       properties:
         planName:
           type: string
-          description: Insurance plan name
+          description: Insurance plan name.
           examples:
             - Basisplan
         optionalSavingsPlanName:
           type: string
-          description: Name of the optional savings plan
+          description: Name of the optional savings plan.
           examples:
             - Sparplan 2
 
     SalaryData:
       type: object
-      description: Details of salary relevant for insurance
+      description: Details of salary relevant for insurance.
       required:
         - declaredSalary
         - insuredSalaryMandatory
@@ -1290,7 +1290,7 @@ components:
 
     RetirementCapital:
       type: object
-      description: Retirement capital balances for the past and projections for the future
+      description: Retirement capital balances for the past and projections for the future.
       required:
         - balanceReferenceDate
         - balanceMandatoryReferenceDate
@@ -1300,37 +1300,37 @@ components:
         transferredCapital:
           type: number
           format: double
-          description: Total retirement capital (mandatory and supplementary coverage) brought from other funds into this fund
+          description: Total retirement capital (mandatory and supplementary coverage) brought from other funds into this fund.
           examples:
             - 45210.25
         transferredCapitalMandatory:
           type: number
           format: double
-          description: Retirement capital under mandatory coverage brought from other funds into this fund
+          description: Retirement capital under mandatory coverage brought from other funds into this fund.
           examples:
             - 32840.55
         balanceReferenceDate:
           type: number
           format: double
-          description: Retirement capital as per a specified reference date (mandatory and supplementary coverage)
+          description: Retirement capital as per a specified reference date (mandatory and supplementary coverage).
           examples:
             - 53842.50
         balanceMandatoryReferenceDate:
           type: number
           format: double
-          description: Retirement capital under mandatory coverage as per a specified reference date
+          description: Retirement capital under mandatory coverage as per a specified reference date.
           examples:
             - 38942.15
         balanceEndCurrentYear:
           type: number
           format: double
-          description: Projected retirement capital as per end of the current year (mandatory and supplementary coverage)
+          description: Projected retirement capital as per end of the current year (mandatory and supplementary coverage).
           examples:
             - 56325.25
         balanceMandatoryEndCurrentYear:
           format: double
           type: number
-          description: Projected retirement capital under mandatory coverage as per end of the current year
+          description: Projected retirement capital under mandatory coverage as per end of the current year.
           examples:
             - 40846.60
         projectedRetirementBenefits:
@@ -1360,19 +1360,19 @@ components:
         age:
           type: integer
           format: int32
-          description: Specified age used for the retirement benefits calculation
+          description: Specified age used for the retirement benefits calculation.
           examples:
             - 63
         capitalBalance:
           type: number
           format: double
-          description: Retirement capital balance with interest (mandatory and supplementary coverage)
+          description: Retirement capital balance with interest (mandatory and supplementary coverage).
           examples:
             - 378832.05
         capitalBalanceMandatory:
           type: number
           format: double
-          description: Retirement capital balance with interest (mandatory coverage only)
+          description: Retirement capital balance with interest (mandatory coverage only).
           examples:
             - 284832.15
         capitalBalanceNoInterest:
@@ -1393,19 +1393,19 @@ components:
         pension:
           type: number
           format: double
-          description: Annual pension credit
+          description: Annual pension credit.
           examples:
             - 22835.00
         conversionRateMandatory:
           type: number
           format: double
-          description: Conversion rate (capital to pension) for mandatory coverage
+          description: Conversion rate (capital to pension) for mandatory coverage.
           examples:
             - 6.800
         conversionRateSupplementary:
           type: number
           format: double
-          description: Conversion rate (capital to pension) for supplementary coverage
+          description: Conversion rate (capital to pension) for supplementary coverage.
           examples:
             - 5.500
         conversionRateEnveloping:
@@ -1431,13 +1431,13 @@ components:
         interestRateMandatory:
           type: number
           format: double
-          description: Interest rate for mandatory coverage (in percent)
+          description: Interest rate for mandatory coverage (in percent).
           examples:
             - 6.800
         interestRateSupplementary:
           type: number
           format: double
-          description: Interest rate for supplementary coverage (in percent)
+          description: Interest rate for supplementary coverage (in percent).
           examples:
             - 5.500
         interestRateProjectionEnveloping:
@@ -1451,7 +1451,7 @@ components:
 
     RiskBenefits:
       type: object
-      description: Benefits in case of death or disability to work
+      description: Benefits in case of death or disability to work.
       required:
         - pensionDisability
         - childPensionDisability
@@ -1462,86 +1462,86 @@ components:
         pensionDisability:
           type: number
           format: double
-          description: Annual pension in case of disability
+          description: Annual pension in case of disability.
           examples:
             - 40213.00
         pensionDisabilityFromIllness:
           type: number
           format: double
-          description: Annual pension in case of disability resulting from illness
+          description: Annual pension in case of disability resulting from illness.
           examples:
             - 40213.00
         pensionDisabilityFromAccident:
           type: number
           format: double
-          description: Annual pension in case of disability resulting from accident
+          description: Annual pension in case of disability resulting from accident.
           examples:
             - 40213.00
         childPensionDisability:
           type: number
           format: double
-          description: Annual child pension in case of disability
+          description: Annual child pension in case of disability.
           examples:
             - 5382.00
         childPensionDisabilityFromIllness:
           type: number
           format: double
-          description: Annual child pension in case of disability resulting from illness
+          description: Annual child pension in case of disability resulting from illness.
           examples:
             - 5382.00
         childPensionDisabilityFromAccident:
           type: number
           format: double
-          description: Annual child pension in case of disability resulting from accident
+          description: Annual child pension in case of disability resulting from accident.
           examples:
             - 5382.00
         partnerPensionDeath:
           type: number
           format: double
-          description: Annual partner pension in case of death
+          description: Annual partner pension in case of death.
           examples:
             - 24817.00
         partnerPensionDeathFromIllness:
           type: number
           format: double
-          description: Annual partner pension in case of death resulting from illness
+          description: Annual partner pension in case of death resulting from illness.
           examples:
             - 24817.00
         partnerPensionDeathFromAccident:
           type: number
           format: double
-          description: Annual partner pension in case of death resulting from accident
+          description: Annual partner pension in case of death resulting from accident.
           examples:
             - 24817.00
         orphanPensionDeath:
           type: number
           format: double
-          description: Annual orphan pension in case of death
+          description: Annual orphan pension in case of death.
           examples:
             - 5382.00
         orphanPensionDeathFromIllness:
           type: number
           format: double
-          description: Annual orphan pension in case of death resulting from illness
+          description: Annual orphan pension in case of death resulting from illness.
           examples:
             - 5382.00
         orphanPensionDeathFromAccident:
           type: number
           format: double
-          description: Annual orphan pension in case of death resulting from accident
+          description: Annual orphan pension in case of death resulting from accident.
           examples:
             - 5382.00
         lumpSumWithoutPensionBenefits:
           type: number
           format: double
-          description: One-off payment in case of death where no other benefits are paid out
+          description: One-off payment in case of death where no other benefits are paid out.
           examples:
             - 92834.00
         minimalLumpSumWithPensionBenefits:
           type: number
           format: double
           description: |
-            Guaranteed, minimal one-off payment in case of death where other benefits are paid out
+            Guaranteed, minimal one-off payment in case of death where other benefits are paid out.
           examples:
             - 74383.00
 
@@ -1555,43 +1555,43 @@ components:
         contributionSavingsInsuredPerson:
           type: number
           format: double
-          description: Annual contribution towards the retirement captial financed by the insured person
+          description: Annual contribution towards the retirement captial financed by the insured person.
           examples:
             - 4025.00
         contributionSavingsEmployer:
           type: number
           format: double
-          description: Annual contribution towards the retirement captial financed by the employer
+          description: Annual contribution towards the retirement captial financed by the employer.
           examples:
             - 4025.00
         contributionRiskInsuredPerson:
           type: number
           format: double
-          description: Annual contribution towards risk benefits financed by the insured person
+          description: Annual contribution towards risk benefits financed by the insured person.
           examples:
             - 0.00
         contributionRiskEmployer:
           type: number
           format: double
-          description: Annual contribution towards risk benefits financed by the employer
+          description: Annual contribution towards risk benefits financed by the employer.
           examples:
             - 0.00
         contributionAdministrationInsuredPerson:
           type: number
           format: double
-          description: Annual contribution towards fund administration financed by the insured person
+          description: Annual contribution towards fund administration financed by the insured person.
           examples:
             - 0.00
         contributionAdministrationEmployer:
           type: number
           format: double
-          description: Annual contribution towards fund administration financed by the employer
+          description: Annual contribution towards fund administration financed by the employer.
           examples:
             - 0.00
 
     VestedBenefits:
       type: object
-      description: Detail information about vested benefits
+      description: Detail information about vested benefits.
       properties:
         referenceDate:
           $ref: '#/components/schemas/Date'
@@ -1730,7 +1730,7 @@ components:
       properties:
         startDate:
           $ref: '#/components/schemas/Date'
-          description: Start date of health reservation
+          description: Start date of health reservation.
         endDate:
           $ref: '#/components/schemas/Date'
           description: |
@@ -1766,7 +1766,7 @@ components:
 
     ReferenceDate:
       type: object
-      description: Reference date for information in generated document
+      description: Reference date for information in generated document.
       required:
         - referenceDate
       properties:
@@ -1776,21 +1776,21 @@ components:
     PersonId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
-      description: Technical ID of insured person used in API calls
+      description: Technical ID of insured person used in API calls.
       examples:
         - JohnDoe_1234
 
     PolicyId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
-      description: Technical ID of policy used in API calls
+      description: Technical ID of policy used in API calls.
       examples:
         - Pol_56789-2024
 
     PensionStatementId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
-      description: Technical ID of pension statement used in API calls
+      description: Technical ID of pension statement used in API calls.
       examples:
         - 550e8450-e59b-21d4-a346-442215440560
 
@@ -1808,7 +1808,7 @@ components:
 
     SalaryChangeSimParameters:
       type: object
-      description: Salary change simulation parameters
+      description: Salary change simulation parameters.
       required:
         - declaredSalary
         - employmentLevel
@@ -1816,13 +1816,13 @@ components:
         declaredSalary:
           type: number
           format: double
-          description: Changed gross annual salary in CHF (for employment level 100%)
+          description: Changed gross annual salary in CHF (for employment level 100%).
           examples:
             - 80000
         employmentLevel:
           type: number
           format: double
-          description: Changed level of full-time/part-time employment (in percent, 100 for full-time employment)
+          description: Changed level of full-time/part-time employment (in percent, 100 for full-time employment).
           examples:
             - 80
         effectiveDate:
@@ -1833,7 +1833,7 @@ components:
 
     SalaryChangeSimResult:
       type: object
-      description: Financial effect of voluntary purchase
+      description: Financial effect of voluntary purchase.
       required:
         - salaryData
         - projectedRetirementBenefits
@@ -1855,7 +1855,7 @@ components:
 
     SimulationParameters:
       type: object
-      description: Voluntary purchase simulation parameters
+      description: Voluntary purchase simulation parameters.
       required:
         - totalAmount
       properties:
@@ -1890,7 +1890,7 @@ components:
 
     SimulationResult:
       type: object
-      description: Financial effect of voluntary purchase
+      description: Financial effect of voluntary purchase.
       required:
         - maxAmount
         - amount
@@ -1902,37 +1902,37 @@ components:
       properties:
         maxAmount:
           type: number
-          description: Maximum allowed amount of voluntary purchase of additional pension benefits (in CHF)
+          description: Maximum allowed amount of voluntary purchase of additional pension benefits (in CHF).
           examples:
             - 48392.45
         amount:
           type: number
-          description: Effective amount of voluntary purchase (in CHF)
+          description: Effective amount of voluntary purchase (in CHF).
           examples:
             - 10000.00
         retirementAge:
           type: integer
-          description: Retirement age assumed for simulation
+          description: Retirement age assumed for simulation.
           examples:
             - 65
         capitalWithoutPurchase:
           type: number
-          description: Prospective savings capital at retirement without purchase (in CHF)
+          description: Prospective savings capital at retirement without purchase (in CHF).
           examples:
             - 378832.05
         capitalWithPurchase:
           type: number
-          description: Prospective savings capital at retirement with purchase (in CHF)
+          description: Prospective savings capital at retirement with purchase (in CHF).
           examples:
             - 390216.55
         pensionWithoutPurchase:
           type: number
-          description: Prospective pension after retirement without purchase (in CHF per year)
+          description: Prospective pension after retirement without purchase (in CHF per year).
           examples:
             - 22835.00
         pensionWithPurchase:
           type: number
-          description: Prospective pension after retirement with purchase (in CHF per year)
+          description: Prospective pension after retirement with purchase (in CHF per year).
           examples:
             - 23517.00
 
@@ -1997,7 +1997,7 @@ components:
           type: number
           format: double
           minimum: 0
-          description: Total amount of payments received (in CHF)
+          description: Total amount of payments received (in CHF).
           examples:
             - 10000.00
 
@@ -2021,7 +2021,7 @@ components:
           format: double
           minimum: 1
           description: |
-            Answer to question 1a: Requested purchase amount in CHF
+            Answer to question 1a: Requested purchase amount in CHF.
           examples:
             - 10000.00
         hasVestedBenefits:
@@ -2041,81 +2041,81 @@ components:
           format: double
           minimum: 1
           description: |
-            Answer to question 3b: Balance of pillar 3a credit as of the end of last year
+            Answer to question 3b: Balance of pillar 3a credit as of the end of last year.
           examples:
             - 35000.00
         hasNotRepaidEarlyWithdrawal:
           type: boolean
           description: |
-            Answer to question 4a: Indicates if the insured person has made an early withdrawal of savings to fund the purchase of residential property and has not repaid it fully (`true`) or not (`false`)
+            Answer to question 4a: Indicates if the insured person has made an early withdrawal of savings to fund the purchase of residential property and has not repaid it fully (`true`) or not (`false`).
           examples:
             - false
         hasMovedFromAbroad:
           type: boolean
           description: |
-            Answer to question 5a: Indicates if the insured person has moved to Switzerland from abroad during the last 5 years (`true`) or not (`false`)
+            Answer to question 5a: Indicates if the insured person has moved to Switzerland from abroad during the last 5 years (`true`) or not (`false`).
           examples:
             - false
         moveFromAbroadDate:
           $ref: '#/components/schemas/Date'
           description: |
-            Answert to question 5b: Date of move from another country to Switzerland
+            Answert to question 5b: Date of move from another country to Switzerland.
         hasBeenInsuredBefore:
           type: boolean
           description: |
-            Answer to question 5c: Indicates if the person has been insured in the Swiss pension system before (`true`) or not (`false`)
+            Answer to question 5c: Indicates if the person has been insured in the Swiss pension system before (`true`) or not (`false`).
           examples:
             - false
         firstInsuranceDate:
           $ref: '#/components/schemas/Date'
           description: |
-            Answert to question 5d: First entry date into the Swiss pension system
+            Answert to question 5d: First entry date into the Swiss pension system.
         isDrawingPensionBenefits:
           type: boolean
           description: |
-            Answer to question 6a: Indicates if the insured person is already drawing or has ever drawn retirement benefits under another pension plan (`true`) or not (`false`)
+            Answer to question 6a: Indicates if the insured person is already drawing or has ever drawn retirement benefits under another pension plan (`true`) or not (`false`).
           examples:
             - false
         isInAnotherPensionPlan:
           type: boolean
           description: |
-            Answer to question 7a: Indicates if the person is insured in another pension plan (`true`) or not (`false`)
+            Answer to question 7a: Indicates if the person is insured in another pension plan (`true`) or not (`false`).
           examples:
             - false
         isFullyAbleToWork:
           type: boolean
           description: |
-            Answer to question 7b: Indicates if the person is fully able to work (`true`) or not (`false`)
+            Answer to question 7b: Indicates if the person is fully able to work (`true`) or not (`false`).
           examples:
             - true
         isPurchaseAfterDivorce:
           type: boolean
           description: |
-            Answer to question 7c: Indicates if the purchase is to make up for the pension savings surrender due to a divorce (`true`) or not (`false`)
+            Answer to question 7c: Indicates if the purchase is to make up for the pension savings surrender due to a divorce (`true`) or not (`false`).
           examples:
             - false
         isPurchaseWithPillar3aSavings:
           type: boolean
           description: |
-            Answer to question 7d: Indicates if the purchase is made with funds from a pillar 3a pension plan (`true`) or not (`false`)
+            Answer to question 7d: Indicates if the purchase is made with funds from a pillar 3a pension plan (`true`) or not (`false`).
           examples:
             - false
         isAddressUpToDate:
           type: boolean
           description: |
-            Answer to question 8a: Indicates if the postal address is up-to-date (`true`) or not (`false`)
+            Answer to question 8a: Indicates if the postal address is up-to-date (`true`) or not (`false`).
           examples:
             - true
         phoneContact:
           type: string
           description: |
-            Answer to question 8b: Phone number to contact the insured person regarding the purchase request
+            Answer to question 8b: Phone number to contact the insured person regarding the purchase request.
           examples:
             - 0041 79 123 45 67
         emailContact:
           type: string
           description: |
-            Answer to question 8c: Email address to contact the insured person regarding the purchase request
+            Answer to question 8c: Email address to contact the insured person regarding the purchase request.
           examples:
             - johndoe@gmail.com
 
@@ -2126,57 +2126,57 @@ components:
       properties:
         askForSelfEmployedContributionCredit:
           type: boolean
-          description: Indicates if question 3b is to be asked
+          description: Indicates if question 3b is to be asked.
           examples:
             - true
         askForHasMovedFromAbroad:
           type: boolean
-          description: Indicates if question 5a is to be asked
+          description: Indicates if question 5a is to be asked.
           examples:
             - true
         askForMoveFromAbroadDate:
           type: boolean
-          description: Indicates if question 5b is to be asked
+          description: Indicates if question 5b is to be asked.
           examples:
             - true
         askForHasBeenInsuredBefore:
           type: boolean
-          description: Indicates if question 5c is to be asked
+          description: Indicates if question 5c is to be asked.
           examples:
             - true
         askForFirstInsuranceDate:
           type: boolean
-          description: Indicates if question 5d is to be asked
+          description: Indicates if question 5d is to be asked.
           examples:
             - true
         askForIsDrawingPensionBenefits:
           type: boolean
-          description: Indicates if question 6a is to be asked
+          description: Indicates if question 6a is to be asked.
           examples:
             - true
         askFoIsInAnotherPensionPlan:
           type: boolean
-          description: Indicates if question 7a is to be asked
+          description: Indicates if question 7a is to be asked.
           examples:
             - true
         askForIsFullyAbleToWork:
           type: boolean
-          description: Indicates if question 7b is to be asked
+          description: Indicates if question 7b is to be asked.
           examples:
             - true
         askForIsPurchaseAfterDivorce:
           type: boolean
-          description: Indicates if question 7c is to be asked
+          description: Indicates if question 7c is to be asked.
           examples:
             - true
         askForIsPurchaseWithPillar3aSavings:
           type: boolean
-          description: Indicates if question 7d is to be asked
+          description: Indicates if question 7d is to be asked.
           examples:
             - true
         askForIsAddressUpToDate:
           type: boolean
-          description: Indicates if question 8a (postal address is up-to-date) is to be asked
+          description: Indicates if question 8a (postal address is up-to-date) is to be asked.
           examples:
             - true
         postalAddress:
@@ -2190,12 +2190,12 @@ components:
             - Brandstrasse 2, 3944 Unterbäch
         askForPhoneContact:
           type: boolean
-          description: Indicates if question 8b is to be asked
+          description: Indicates if question 8b is to be asked.
           examples:
             - true
         askForEmailContact:
           type: boolean
-          description: Indicates if question 8c is to be asked
+          description: Indicates if question 8c is to be asked.
           examples:
             - true
 
@@ -2320,13 +2320,13 @@ components:
     PurchaseRequestId:
       type: string
       pattern: '[A-Za-z0-9_\-.~]{1,64}'
-      description: Technical ID of purchase request used in API calls
+      description: Technical ID of purchase request used in API calls.
       examples:
         - PR-4838525
 
     Transactions:
       type: object
-      description: Retirement capital transactions
+      description: Retirement capital transactions.
       required:
         - transaction
         - from
@@ -2336,13 +2336,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Transaction'
-          description: Chronologically sorted list of transactions
+          description: Chronologically sorted list of transactions.
         from:
           $ref: '#/components/schemas/Date'
-          description: Start of date range (inclusive)
+          description: Start of date range (inclusive).
         to:
           $ref: '#/components/schemas/Date'
-          description: End of date range (inclusive)
+          description: End of date range (inclusive).
 
     Transaction:
       type: object
@@ -2356,7 +2356,7 @@ components:
       properties:
         id:
           type: string
-          description: Transaction ID
+          description: Transaction ID.
           examples:
             - TR-683463823
         category:
@@ -2388,10 +2388,10 @@ components:
             - voluntaryPurchase
         date:
           $ref: '#/components/schemas/Date'
-          description: Transaction date (date the transaction becomes effective financially)
+          description: Transaction date (date the transaction becomes effective financially).
         amount:
           type: number
-          description: Transaction amount (in CHF, positive numbers for credits, negative numbers for debits)
+          description: Transaction amount (in CHF, positive numbers for credits, negative numbers for debits).
           examples:
             - 10000.00
         reason:
@@ -2404,7 +2404,7 @@ components:
         balance:
           type: number
           format: double
-          description: Retirement capital balance after transaction
+          description: Retirement capital balance after transaction.
           examples:
             - 63842.50
 
@@ -2412,19 +2412,23 @@ components:
     CommonErrorResponse:
       title: Common Error Response
       type: object
+      description: Common Error Response.
       properties:
         type:
           $ref: '#/components/schemas/CommonErrorType'
         title:
           type: string
+          description: The error title.
           examples:
             - This is the general problem description
         detail:
           type: string
+          description: Details about the error.
           examples:
             - Detailed problem description with respect to the current request, e.g., invalid account number format
         instance:
           type: string
+          description: Instance of the error.
           examples:
             - path/to/corresponding/resource
 
@@ -2460,7 +2464,7 @@ components:
   securitySchemes:
     bearerAuthentication:
       type: http
-      description: Bearer access token in HTTP header
+      description: Bearer access token in HTTP header.
       scheme: bearer
       bearerFormat: JWT
 
@@ -2468,21 +2472,21 @@ components:
   responses:
 
     standard400:
-      description: Some of the input is incomplete or invalid for starting a request
+      description: Some of the input is incomplete or invalid for starting a request.
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
 
     standard401:
-      description: Access token is missing or invalid
+      description: Access token is missing or invalid.
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
 
     standard404:
-      description: Invalid ID / no authorization to access data
+      description: Invalid ID / no authorization to access data.
       content:
         application/problem+json:
           schema:
