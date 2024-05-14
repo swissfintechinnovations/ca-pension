@@ -413,10 +413,12 @@ externalDocs:
 tags:
   - name: person
     description: Insured person.
+  - name: statement
+    description: Pension statement.
   - name: policy
     description: Pension fund policy.
   - name: simulation
-    description: Simulations of voluntary purchases and salary changes.
+    description: Simulations of salary changes and voluntary purchases.
   - name: purchase
     description: Voluntary purchase operations.
   - name: transactions
@@ -1101,7 +1103,7 @@ components:
         - regularPurchaseMaxAmount
         - homeOwnershipAvailableForWithdrawal
       properties:
-        pensionStatementBasicId:
+        pensionStatementId:
           $ref: '#/components/schemas/PensionStatementId'
         personId:
           $ref: '#/components/schemas/PersonId'
@@ -1218,6 +1220,12 @@ components:
       required:
         - planName
       properties:
+        planId:
+          type: string
+          pattern: '[A-Za-z0-9_\-.~]{1,64}'
+          description: Technical ID of pension plan used in API calls.
+          examples:
+            - Plan_XY4284_425          
         planName:
           type: string
           description: Insurance plan name.
