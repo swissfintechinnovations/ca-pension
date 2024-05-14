@@ -456,6 +456,49 @@ paths:
         '404':
           $ref: '#/components/responses/standard404'
 
+  /insured-persons/{personId}/statements:
+    post:
+      summary: Get pension statement(s) data
+      description: |
+        Provides the pension statement(s) representing the state of the policy/policies for
+        the specified date (or most recent regular/official statement(s) when date not given)
+        as structured data.
+
+        If the pension fund is unable to provide a statement for the request date, the error
+        code 400 should be returned.
+      operationId: getPolicyStatementByDate
+      tags:
+        - statement
+      parameters:
+        - in: path
+          name: personId
+          required: true
+          schema:
+            $ref: '#/components/schemas/PersonId'
+          description: Technical person ID.
+      requestBody:
+        description: Reference date for information in output
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferenceDate'
+      responses:
+        '200':
+          description: Statement details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PensionStatementBasic'
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '404':
+          $ref: '#/components/responses/standard404'
+
   /policies/{policyId}:
     get:
       summary: Get details of a pension fund policy
