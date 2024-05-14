@@ -415,10 +415,10 @@ tags:
     description: Insured person.
   - name: policy
     description: Pension fund policy.
-  - name: purchase
-    description: Voluntary purchase simulation and operations.
   - name: simulation
-    description: Simulation of salary changes.
+    description: Simulations of voluntary purchases and salary changes.
+  - name: purchase
+    description: Voluntary purchase operations.
   - name: transactions
     description: Retirement capital transactions.
 
@@ -613,7 +613,7 @@ paths:
         amount and the maximum additional pension at once.
       operationId: simulatePurchase
       tags:
-        - purchase
+        - simulation
       parameters:
         - in: path
           name: policyId
