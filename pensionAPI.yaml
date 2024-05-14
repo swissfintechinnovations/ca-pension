@@ -466,7 +466,7 @@ paths:
 
         If the pension fund is unable to provide a statement for the request date, the error
         code 400 should be returned.
-      operationId: getPolicyStatementByDate
+      operationId: getPensionStatementsByDate
       tags:
         - statement
       parameters:
@@ -499,6 +499,38 @@ paths:
         '404':
           $ref: '#/components/responses/standard404'
 
+  /statements/{pensionStatementId}/documents:
+    get:
+      summary: Get the pension statement for the specified id
+      description: |
+        Provides the pension statement for the specified id as a PDF document
+        in the insured person's preferred language.
+
+        If the pension fund is unable to provide a document for the request id, the error
+        code 400 should be returned.
+      operationId: getPensionStatementDocument
+      tags:
+        - statement
+      parameters:
+        - in: path
+          name: pensionStatementId
+          required: true
+          schema:
+            $ref: '#/components/schemas/PensionStatementId'
+          description: Technical pension statement ID.
+      responses:
+        '200':
+          description: Binary PDF data of the pension statement
+          content:
+            application/pdf:
+              schema:
+                type: string
+                contentEncoding: binary
+        '401':
+          $ref: '#/components/responses/standard401'
+        '404':
+          $ref: '#/components/responses/standard404'
+
   /policies/{policyId}:
     get:
       summary: Get details of a pension fund policy
@@ -523,79 +555,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Policy'
-        '401':
-          $ref: '#/components/responses/standard401'
-        '404':
-          $ref: '#/components/responses/standard404'
-
-  /policies/{policyId}/statements/recent:
-    get:
-      summary: Get the most recent policy statement
-      description: |
-        Provides the most recent policy statement as a PDF document
-        in the insured person's preferred language.
-
-        If possible, pension funds should provide a statement as of end of the
-        last business day. At the minimum, they must provide the latest annual statement.
-      operationId: getRecentPolicyStatement
-      tags:
-        - policy
-      parameters:
-        - in: path
-          name: policyId
-          required: true
-          schema:
-            $ref: '#/components/schemas/PolicyId'
-          description: Technical policy ID.
-      responses:
-        '200':
-          description: Binary PDF data of the policy statement
-          content:
-            application/pdf:
-              schema:
-                type: string
-                contentEncoding: binary
-        '401':
-          $ref: '#/components/responses/standard401'
-        '404':
-          $ref: '#/components/responses/standard404'
-
-  /policies/{policyId}/statements:
-    post:
-      summary: Get the policy statement for the specified date
-      description: |
-        Provides the policy statement representing the policy state for the specified date
-        as a PDF document in the insured person's preferred language.
-
-        If the pension fund is unable to provide a statement for the request date, the error
-        code 400 should be returned.
-      operationId: getPolicyStatementByDate
-      tags:
-        - policy
-      parameters:
-        - in: path
-          name: policyId
-          required: true
-          schema:
-            $ref: '#/components/schemas/PolicyId'
-          description: Technical policy ID.
-      requestBody:
-        description: Reference date for information in generated document
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ReferenceDate'
-      responses:
-        '200':
-          description: Binary PDF data of the policy document
-          content:
-            application/pdf:
-              schema:
-                type: string
-                contentEncoding: binary
-        '400':
-          $ref: '#/components/responses/standard400'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
