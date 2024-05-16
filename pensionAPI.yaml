@@ -1134,15 +1134,15 @@ components:
         ordinaryRetirementAge:
           type: integer
           format: int32
-          description: Age for ordinary retirement.
+          description: Age (in month since birth) for ordinary retirement.
           examples:
-            - 65
+            - 780
         earliestRetirementAge:
           type: integer
           format: int32
-          description: Age for earliest possible retirement.
+          description: Age (in month since birth) for earliest possible retirement.
           examples:
-            - 58
+            - 696
         salaryData:
           $ref: '#/components/schemas/SalaryData'
         retirementCapital:
@@ -1370,9 +1370,9 @@ components:
         age:
           type: integer
           format: int32
-          description: Specified age used for the retirement benefits calculation.
+          description: Specified age (in month since birth) used for the retirement benefits calculation.
           examples:
-            - 63
+            - 756
         capitalBalance:
           type: number
           format: double
@@ -1879,10 +1879,10 @@ components:
         retirementAge:
           type: integer
           description: |
-            Planned retirement age.
+            Planned retirement age (in month since birth).
             If omitted, the regular payment age is assumed.
           examples:
-            - 65
+            - 780
         date:
           $ref: '#/components/schemas/Date'
           description: |
@@ -1922,9 +1922,9 @@ components:
             - 10000.00
         retirementAge:
           type: integer
-          description: Retirement age assumed for simulation.
+          description: Retirement age (in month since birth) assumed for simulation.
           examples:
-            - 65
+            - 780
         capitalWithoutPurchase:
           type: number
           description: Prospective savings capital at retirement without purchase (in CHF).
