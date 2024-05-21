@@ -1036,7 +1036,7 @@ components:
             - '3944'
         countryCode:
           type: string
-          pattern: '[A-Z]{2}'
+          pattern: '^[A-Z]{2}$'
           description: ISO country code.
           examples:
             - CH
@@ -1231,7 +1231,7 @@ components:
       properties:
         planId:
           type: string
-          pattern: '[A-Za-z0-9_\-.~]{1,64}'
+          pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
           description: Technical ID of pension plan used in API calls.
           examples:
             - Plan_XY4284_425          
@@ -1792,21 +1792,21 @@ components:
 
     PersonId:
       type: string
-      pattern: '[A-Za-z0-9_\-.~]{1,64}'
+      pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
       description: Technical ID of insured person used in API calls.
       examples:
         - JohnDoe_1234
 
     PolicyId:
       type: string
-      pattern: '[A-Za-z0-9_\-.~]{1,64}'
+      pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
       description: Technical ID of policy used in API calls.
       examples:
         - Pol_56789-2024
 
     PensionStatementId:
       type: string
-      pattern: '[A-Za-z0-9_\-.~]{1,64}'
+      pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
       description: Technical ID of pension statement used in API calls.
       examples:
         - 550e8450-e59b-21d4-a346-442215440560
@@ -2336,7 +2336,7 @@ components:
 
     PurchaseRequestId:
       type: string
-      pattern: '[A-Za-z0-9_\-.~]{1,64}'
+      pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
       description: Technical ID of purchase request used in API calls.
       examples:
         - PR-4838525

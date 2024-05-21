@@ -181,14 +181,14 @@ components:
 
     PersonId:
       type: string
-      pattern: '[A-Za-z0-9_\-.~]{1,64}'
+      pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
       description: Technical ID of insured person used in API calls.
       examples:
         - JohnDoe_1234
 
     PolicyId:
       type: string
-      pattern: '[A-Za-z0-9_\-.~]{1,64}'
+      pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
       description: Technical ID of policy used in API calls.
       examples:
         - Pol_56789-2024
