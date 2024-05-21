@@ -8,7 +8,7 @@ info:
 
     **** Deutsch (for English see below) ****
 
-    Mit dem Pension-API können Daten zur versicherten Person und zur Police abgefragt werden.
+    Mit dem Pension-API können Daten zur versicherten Person und deren Vorsorgesituation abgefragt werden.
     Dies umfasst vereinfacht gesagt die Daten, die auf dem Versicherungsausweis zu finden sind.
     Auch die Erstellung bzw. das Beziehen von bereits erstellten Versicherungsausweisen als PDF-Datei
     ist möglich. Des Weiteren gibt es Endpunkte zum Einkaufsprozess, für Simulationen und für Transaktionen.
@@ -16,12 +16,15 @@ info:
     Als Einstieg fürs Pension-API wird eine technische Personen- oder Policen-ID benötigt.
     Dies wird vom Consent API geliefert.
 
-    Die beiden wesentlichen Objekte dieses APIs sind *Person* und *Police*. Person bezieht sich
+    Die wesentlichen Objekte dieses APIs sind *Person*, *Police* und *Vorsorgeausweis*. Person bezieht sich
     immer auf eine natürliche Person, die bei einer Pensionskasse versichert ist.
 
     Die Police beschreibt den indirekten Versicherungsvertrag zwischen der versicherten Person
     (ArbeitnehmerIn) und der Pensionskasse. Ist eine Person über zwei Vorsorgepläne versichert,
     z.B. über einen Basis- und einen zusätzlichen Kaderplan, so hat sie zwei Policen.
+
+    Der Vorsorgeausweis entspricht dem Dokument, welches traditionell anfangs Jahr durch die Pensionskasse
+    für die Versicherten ausgestellt wird.
 
     Wo es relevant ist, Angaben in den obligatorischen und den über-obligatorischen Teil
     aufzutrennen, wird jeweils das Total (obligatorisch plus über-obligatorisch) und der
@@ -183,7 +186,8 @@ info:
     - Zahlungsperiodizität (bei mehreren Zahlungen)
     - Datum der (ersten) Zahlung
 
-    Die Simulation geht davon aus, dass die gesetzlichen Voraussetzungen für den Einkauf gegeben sind. Sie prüft, dass der maximale Einkaufsbetrag nicht überschritten wird, und passt in bei Bedarf an.
+    Die Simulation geht davon aus, dass die gesetzlichen Voraussetzungen für den Einkauf gegeben sind. Sie prüft,
+    dass der maximale Einkaufsbetrag nicht überschritten wird, und passt in bei Bedarf an.
 
 
     ## Kontobewegung
@@ -195,7 +199,7 @@ info:
 
     **** English (für Deutsch siehe weiter oben) ****
 
-    The Pension API serves to query details about the insured person and insurance policies.
+    The Pension API serves to query details about the insured person and their pension situation.
     In simplified terms, this includes the data found on the insurance certificate.
     Additionally, policy statements can be generated or already generated statements can be
     retrieved as PDF files. There are also endpoints for the purchasing process, for simulations
@@ -204,12 +208,15 @@ info:
     Person and policy IDs serve as the entry point for this API. They are provided by the
     Consent API.
 
-    The two main objects are *person* and *policy*. A person refers to a natural person
+    The main objects are *person*, *policy* and *statement*. A person refers to a natural person
     insured with a pension fund.
 
     A policy describes the indirect contractural relationship between the insured person
     (employee) and the pension fund. If a person is insured by two separate insurance plans,
     e.g. a basic and a supplementary executive plan, the person has two separate plans.
+
+    The pension certificate corresponds to the document that is traditionally issued to the
+    insured persons by the pension fund at the beginning of the year.
 
     If it is relevant to distinguish between the mandatory and the supplementary insurance
     coverage, a total value (mandatory and supplementary values combined) and a mandatory

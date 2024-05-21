@@ -18,9 +18,9 @@ info:
     zuzugreifen.
 
     Die Pensionskasse kann den Zugriff entweder *pro Objekt*, also für die Personendaten und
-    die Policendaten separat, lösen, oder *global*, d.h. die versicherte Person erteilt einer
+    die Vorsorgedaten separat, lösen, oder *global*, d.h. die versicherte Person erteilt einer
     Applikation den Zugriff auf alle ihre Daten. Es ist möglich, dass nur der Zugriff auf die
-    Policendaten, nicht aber auf die Personendaten erteilt wird.
+    Vorsorgedaten, nicht aber auf die Personendaten erteilt wird.
 
     Zum Abschluss des UI-Flows werden Zugriffstoken an die Applikation übergeben, mit denen
     sie im Namen der versicherten Person auf das OpenPK-API zugreifen kann. Mit den Tokens
@@ -53,8 +53,8 @@ info:
     the application to access his/her pension fund data.
 
     The pension fund can implement grants *at object level*, i.e. separately for person data
-    and policy data, or *globally*, i.e. the insured person grants access to all data. It is
-    possible to only grant access to the policy data but not to the person data.
+    and provision data, or *globally*, i.e. the insured person grants access to all data. It is
+    possible to only grant access to the provision data but not to the person data.
 
     At the end of the UI flow, the application is given access tokens that are required
     to use the OpenPK APIs on behalf of the insured person. Using the tokens, offline API
