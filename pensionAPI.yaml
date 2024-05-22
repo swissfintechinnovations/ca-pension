@@ -1482,34 +1482,10 @@ components:
           description: Annual pension in case of disability.
           examples:
             - 40213.00
-        pensionDisabilityFromIllness:
-          type: number
-          format: double
-          description: Annual pension in case of disability resulting from illness.
-          examples:
-            - 40213.00
-        pensionDisabilityFromAccident:
-          type: number
-          format: double
-          description: Annual pension in case of disability resulting from accident.
-          examples:
-            - 40213.00
         childPensionDisability:
           type: number
           format: double
           description: Annual child pension in case of disability.
-          examples:
-            - 5382.00
-        childPensionDisabilityFromIllness:
-          type: number
-          format: double
-          description: Annual child pension in case of disability resulting from illness.
-          examples:
-            - 5382.00
-        childPensionDisabilityFromAccident:
-          type: number
-          format: double
-          description: Annual child pension in case of disability resulting from accident.
           examples:
             - 5382.00
         partnerPensionDeath:
@@ -1518,34 +1494,10 @@ components:
           description: Annual partner pension in case of death.
           examples:
             - 24817.00
-        partnerPensionDeathFromIllness:
-          type: number
-          format: double
-          description: Annual partner pension in case of death resulting from illness.
-          examples:
-            - 24817.00
-        partnerPensionDeathFromAccident:
-          type: number
-          format: double
-          description: Annual partner pension in case of death resulting from accident.
-          examples:
-            - 24817.00
         orphanPensionDeath:
           type: number
           format: double
           description: Annual orphan pension in case of death.
-          examples:
-            - 5382.00
-        orphanPensionDeathFromIllness:
-          type: number
-          format: double
-          description: Annual orphan pension in case of death resulting from illness.
-          examples:
-            - 5382.00
-        orphanPensionDeathFromAccident:
-          type: number
-          format: double
-          description: Annual orphan pension in case of death resulting from accident.
           examples:
             - 5382.00
         lumpSumWithoutPensionBenefits:
