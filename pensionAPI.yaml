@@ -1438,31 +1438,60 @@ components:
       type: object
       description: |
         A set of interest rates applicable/applied to the retirement capital, including
-        actual rates for mandatory and supplementary coverage and a projection rate for
-        future value calculations.
-      required:
-        - interestRateMandatory
-        - interestRateSupplementary
-        - interestRateProjectionEnveloping
+        actual rates for mandatory and supplementary coverage. Rates for saving/purchase
+        and projection rates for future value calculations.
       properties:
-        interestRateMandatory:
-          type: number
-          format: double
-          description: Interest rate for mandatory coverage (in percent).
+        interestRateMandatorySaving:
+          $ref: '#/components/schemas/InterestRate'
+          description: Saving interest rate for mandatory coverage (in percent).
           examples:
             - 6.800
-        interestRateSupplementary:
-          type: number
-          format: double
-          description: Interest rate for supplementary coverage (in percent).
+        interestRateSupplementarySaving:
+          $ref: '#/components/schemas/InterestRate'
+          description: Saving interest rate for supplementary coverage (in percent).
           examples:
             - 5.500
-        interestRateProjectionEnveloping:
-          type: number
-          format: double
+        interestRateEnvelopingSaving:
+          $ref: '#/components/schemas/InterestRate'
+          description: Saving enveloping interest rate for combined mandatory and supplementary coverage (in percent).
+          examples:
+            - 6.300
+        interestRateMandatoryPurchase:
+          $ref: '#/components/schemas/InterestRate'
+          description: Interest rate for mandatory coverage (in percent), used specifically in purchase calculations.
+          examples:
+            - 6.800
+        interestRateSupplementaryPurchase:
+          $ref: '#/components/schemas/InterestRate'
+          description: Interest rate for supplementary coverage (in percent), used specifically in purchase calculations.
+          examples:
+            - 5.500
+        interestRateEnvelopingPurchase:
+          $ref: '#/components/schemas/InterestRate'
           description: |
-            Projection enveloping interest rate for combined mandatory and supplementary coverage
-            (in percent), used specifically for calculating projected future values.
+            Enveloping interest rate for combined mandatory and supplementary coverage (in percent),
+            used specifically in purchase calculations.
+          examples:
+            - 6.300        
+        interestRateMandatoryProjection:
+          $ref: '#/components/schemas/InterestRate'
+          description: |
+            Projection rate for mandatory coverage (in percent),
+            used specifically for calculating projected future values.
+          examples:
+            - 6.800
+        interestRateSupplementaryProjection:
+          $ref: '#/components/schemas/InterestRate'
+          description: |
+            Projection rate for supplementary coverage (in percent),
+            used specifically for calculating projected future values.
+          examples:
+            - 5.500
+        interestRateEnvelopingProjection:
+          $ref: '#/components/schemas/InterestRate'
+          description: |
+            Projection enveloping interest rate for combined mandatory and supplementary coverage (in percent),
+            used specifically for calculating projected future values.
           examples:
             - 6.300
 
@@ -2376,6 +2405,13 @@ components:
           description: Retirement capital balance after transaction.
           examples:
             - 63842.50
+
+    InterestRate:
+      type: number
+      format: double
+      description: Common interest rate object.
+      examples:
+        - 3.175
 
     # ---- Common Error Response ----
     CommonErrorResponse:
