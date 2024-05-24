@@ -508,7 +508,7 @@ paths:
 
   /statements/{pensionStatementId}/documents:
     get:
-      summary: Get the pension statement for the specified id
+      summary: Get the pension statement document for the specified id
       description: |
         Provides the pension statement for the specified id as a PDF document
         in the insured person's preferred language.
@@ -533,6 +533,272 @@ paths:
               schema:
                 type: string
                 contentEncoding: binary
+        '401':
+          $ref: '#/components/responses/standard401'
+        '404':
+          $ref: '#/components/responses/standard404'
+
+  /statements/{pensionStatementId}/statementForQrCode:
+    get:
+      summary: Get the pension statement QR code json for the specified id
+      description: |
+        Provides the pension statement for the specified id as a compact json
+        in the insured person's preferred language. This json has the same content as
+        defined in the PensionStatementBasic schema. Its sole purpose is to provide a
+        compact json so it can be fit into a QR code. This endpoint should not be used
+        otherwise and will be deprecated once the QR code is no longer needed.
+
+        If the pension fund is unable to provide a json for the request id, the error
+        code 400 should be returned.
+      operationId: getPensionStatementQrCodeJson
+      tags:
+        - statement
+      parameters:
+        - in: path
+          name: pensionStatementId
+          required: true
+          schema:
+            $ref: '#/components/schemas/PensionStatementId'
+          description: Technical pension statement ID.
+      responses:
+        '200':
+          description: Compact statement details
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Basic, reduced pension statement consisting of only the most important information in compact form for QR code.
+                required:
+                  - pi
+                  - en
+                  - ppn
+                  - rd
+                  - pst
+                  - pln
+                  - ora
+                  - era
+                  - ds
+                  - ism
+                  - isre
+                  - isri
+                  - el
+                  - brd
+                  - bmr
+                  - prb
+                  - pd
+                  - cpd
+                  - ppd
+                  - opd
+                  - mlswpb
+                  - fcsip
+                  - fcse
+                  - rpm
+                  - hoaw
+                properties:
+                  psi:
+                    $ref: '#/components/schemas/PensionStatementId'
+                  pi:
+                    $ref: '#/components/schemas/PersonId'
+                  ei:
+                    $ref: '#/components/schemas/EmployerId'
+                  en:
+                    $ref: '#/components/schemas/EmployerName'
+                  in:
+                    $ref: '#/components/schemas/Industry'
+                  ppi:
+                    $ref: '#/components/schemas/ProviderId'
+                  ppn:
+                    $ref: '#/components/schemas/ProviderName'
+                  ppa:
+                    type: object
+                    description: Postal address of the pension provider.
+                    properties:
+                      st:
+                        $ref: '#/components/schemas/Street'
+                      pbo:
+                        $ref: '#/components/schemas/PoBox'
+                      to:
+                        $ref: '#/components/schemas/Town'
+                      pc:
+                        $ref: '#/components/schemas/PostalCode'
+                      cc:
+                        $ref: '#/components/schemas/CountryCode'
+                  pu:
+                    $ref: '#/components/schemas/PortalUrl'
+                  pn:
+                    $ref: '#/components/schemas/PortalName'
+                  psn:
+                    $ref: '#/components/schemas/PensionStatementNo'
+                  rd:
+                    $ref: '#/components/schemas/Date'
+                    description: Reference date of pension statement.
+                  pst:
+                    $ref: '#/components/schemas/PensionStatementType'
+                  ed:
+                    $ref: '#/components/schemas/Date'
+                    description: Entry date into the pension fund.
+                  ppl:
+                    type: array
+                    description: List of related pension plans.
+                    items:
+                      pli:
+                        $ref: '#/components/schemas/PlanId'        
+                      pln:
+                        $ref: '#/components/schemas/PlanName'
+                      ospn:
+                        $ref: '#/components/schemas/OptionalSavingsPlanName'
+                  ora:
+                    type: integer
+                    format: int32
+                    description: Age (in month since birth) for ordinary retirement.
+                    examples:
+                      - 780
+                  era:
+                    type: integer
+                    format: int32
+                    description: Age (in month since birth) for earliest possible retirement.
+                    examples:
+                      - 696
+                  ds:
+                    $ref: '#/components/schemas/DeclaredSalary' 
+                  bo:
+                    $ref: '#/components/schemas/Bonus' 
+                  as:
+                    $ref: '#/components/schemas/AdditionalSalary' 
+                  osc:
+                    $ref: '#/components/schemas/OtherSalaryComponent' 
+                  ism:
+                    $ref: '#/components/schemas/InsuredSalaryMandatory' 
+                  isre:
+                    $ref: '#/components/schemas/InsuredSalaryRetirement' 
+                  isri:
+                    $ref: '#/components/schemas/InsuredSalaryRisk' 
+                  el:
+                    $ref: '#/components/schemas/EmploymentLevel'
+                  tc:
+                    $ref: '#/components/schemas/TransferredCapital'
+                  tcm:
+                    $ref: '#/components/schemas/TransferredCapitalMandatory'
+                  brd:
+                    $ref: '#/components/schemas/BalanceReferenceDate'
+                  bmr:
+                    $ref: '#/components/schemas/BalanceMandatoryReferenceDate'
+                  bec:
+                    $ref: '#/components/schemas/BalanceEndCurrentYear'
+                  bmc:
+                    $ref: '#/components/schemas/BalanceMandatoryEndCurrentYear'
+                  prb:
+                    type: array
+                    description: |
+                      Projected retirement benefits for a series of retirement ages.
+                      The list contains projections for each integer retirement age from 58 to the
+                      regular retirement age. For persons of 58 or older, the list is restricted
+                      to retirement ages higher than their current age.
+                    required:
+                      - ra
+                      - cb
+                      - cbm
+                      - p
+                    items:
+                      ra:
+                        $ref: '#/components/schemas/RetirementAge'
+                      cb:
+                        $ref: '#/components/schemas/CapitalBalance'
+                      cbm:
+                        $ref: '#/components/schemas/CapitalBalanceMandatory'
+                      cbni:
+                        $ref: '#/components/schemas/CapitalBalanceNoInterest'
+                      cbnim:
+                        $ref: '#/components/schemas/CapitalBalanceNoInterestMandatory'
+                      p:
+                        $ref: '#/components/schemas/Pension'
+                      crm:
+                        $ref: '#/components/schemas/ConversionRateMandatory'
+                      crs:
+                        $ref: '#/components/schemas/ConversionRateSupplementary'
+                      cre:
+                        $ref: '#/components/schemas/ConversionRateEnveloping'
+                  irms:
+                    $ref: '#/components/schemas/InterestRate'
+                    description: Saving interest rate for mandatory coverage (in percent).
+                    examples:
+                      - 6.800
+                  irss:
+                    $ref: '#/components/schemas/InterestRate'
+                    description: Saving interest rate for supplementary coverage (in percent).
+                    examples:
+                      - 5.500
+                  ires:
+                    $ref: '#/components/schemas/InterestRate'
+                    description: Saving enveloping interest rate for combined mandatory and supplementary coverage (in percent).
+                    examples:
+                      - 6.300
+                  irme:
+                    $ref: '#/components/schemas/InterestRate'
+                    description: Interest rate for mandatory coverage (in percent), used specifically in purchase calculations.
+                    examples:
+                      - 6.800
+                  irse:
+                    $ref: '#/components/schemas/InterestRate'
+                    description: Interest rate for supplementary coverage (in percent), used specifically in purchase calculations.
+                    examples:
+                      - 5.500
+                  iree:
+                    $ref: '#/components/schemas/InterestRate'
+                    description: |
+                      Enveloping interest rate for combined mandatory and supplementary coverage (in percent),
+                      used specifically in purchase calculations.
+                    examples:
+                      - 6.300        
+                  irmp:
+                    $ref: '#/components/schemas/InterestRate'
+                    description: |
+                      Projection rate for mandatory coverage (in percent),
+                      used specifically for calculating projected future values.
+                    examples:
+                      - 6.800
+                  irsp:
+                    $ref: '#/components/schemas/InterestRate'
+                    description: |
+                      Projection rate for supplementary coverage (in percent),
+                      used specifically for calculating projected future values.
+                    examples:
+                      - 5.500
+                  irep:
+                    $ref: '#/components/schemas/InterestRate'
+                    description: |
+                      Projection enveloping interest rate for combined mandatory and supplementary coverage (in percent),
+                      used specifically for calculating projected future values.
+                    examples:
+                      - 6.300
+                  pd:
+                    $ref: '#/components/schemas/PensionDisability'
+                  cpd:
+                    $ref: '#/components/schemas/ChildPensionDisability'
+                  ppd:
+                    $ref: '#/components/schemas/PartnerPensionDeath'
+                  opd:
+                    $ref: '#/components/schemas/OrphanPensionDeath'
+                  lswpb:
+                    $ref: '#/components/schemas/LumpSumWithoutPensionBenefits'
+                  mlswpb:
+                    $ref: '#/components/schemas/MinimalLumpSumWithPensionBenefits'
+                  fcsip:
+                    $ref: '#/components/schemas/ContributionSavingsInsuredPerson'
+                  fcse:
+                    $ref: '#/components/schemas/ContributionSavingsEmployer'
+                  fcrip:
+                    $ref: '#/components/schemas/ContributionRiskInsuredPerson'
+                  fcre:
+                    $ref: '#/components/schemas/ContributionRiskEmployer'
+                  fcaip:
+                    $ref: '#/components/schemas/ContributionAdministrationInsuredPerson'
+                  fcae:
+                    $ref: '#/components/schemas/ContributionAdministrationEmployer'
+                  rpm:
+                    $ref: '#/components/schemas/RegularPurchaseMaxAmount'
+                  hoaw:
+                    $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -1015,31 +1281,46 @@ components:
         - countryCode
       properties:
         street:
-          type: string
-          description: Street and house number.
-          examples:
-            - Brandstrasse 2
+          $ref: '#/components/schemas/Street'
         poBox:
-          type: string
-          description: PO box.
-          examples:
-            - PO Box 42
+          $ref: '#/components/schemas/PoBox'
         town:
-          type: string
-          description: Town.
-          examples:
-            - Unterbäch
+          $ref: '#/components/schemas/Town'
         postalCode:
-          type: string
-          description: Postal code.
-          examples:
-            - '3944'
+          $ref: '#/components/schemas/PostalCode'
         countryCode:
-          type: string
-          pattern: '^[A-Z]{2}$'
-          description: ISO country code.
-          examples:
-            - CH
+          $ref: '#/components/schemas/CountryCode'
+
+    Street:
+      type: string
+      description: Street and house number.
+      examples:
+        - Brandstrasse 2
+
+    PoBox:
+      type: string
+      description: PO box.
+      examples:
+        - PO Box 42
+
+    Town:
+      type: string
+      description: Town.
+      examples:
+        - Unterbäch
+
+    PostalCode:
+      type: string
+      description: Postal code.
+      examples:
+        - '3944'
+
+    CountryCode:
+      type: string
+      pattern: '^[A-Z]{2}$'
+      description: ISO country code.
+      examples:
+        - CH
 
     PensionProvider:
       type: object
@@ -1048,28 +1329,16 @@ components:
         - providerName
       properties:
         providerId:
-          type: string
-          description: Swiss Enterprise Identification Number UID.
-          examples:
-            - CHE123456789
+          $ref: '#/components/schemas/ProviderId'
         providerName:
-          type: string
-          description: The name of the pension provider.
-          examples:
-            - Omnifund
+          $ref: '#/components/schemas/ProviderName'
         providerAddress:
           $ref: '#/components/schemas/Address'
           description: Postal address of the pension provider.
         portalUrl:
-          type: string
-          description: URL of the insurance portal of the pension fund.
-          examples:
-            - www.omnifund.ch
+          $ref: '#/components/schemas/PortalUrl'
         portalName:
-          type: string
-          description: Offical name of the insurance portal.
-          examples:
-            - Omni Portal
+          $ref: '#/components/schemas/PortalName'
 
     Employer:
       type: object
@@ -1078,20 +1347,11 @@ components:
         - name
       properties:
         employerId:
-          type: string
-          description: Swiss Enterprise Identification Number UID.
-          examples:
-            - CHE115873291
-        name:
-          type: string
-          description: The name of the employer.
-          examples:
-            - Acrea AG
+          $ref: '#/components/schemas/EmployerId'
+        employerName:
+          $ref: '#/components/schemas/EmployerName'
         industry:
-          type: string
-          description: The industry or sector the employer operates in.
-          examples:
-            - information technology and management consulting
+          $ref: '#/components/schemas/Industry'
 
     PensionStatementBasic:
       type: object
@@ -1121,10 +1381,7 @@ components:
         pensionProvider:
           $ref: '#/components/schemas/PensionProvider'
         pensionStatementNo:
-          type: string
-          description: Pension statement number (as printed on statement).
-          examples:
-            - PS_ID_6789-ABC
+          $ref: '#/components/schemas/PensionStatementNo'
         referenceDate:
           $ref: '#/components/schemas/Date'
           description: Reference date of pension statement.
@@ -1230,21 +1487,30 @@ components:
         - planName
       properties:
         planId:
-          type: string
-          pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
-          description: Technical ID of pension plan used in API calls.
-          examples:
-            - Plan_XY4284_425          
+          $ref: '#/components/schemas/PlanId'        
         planName:
-          type: string
-          description: Insurance plan name.
-          examples:
-            - Basisplan
+          $ref: '#/components/schemas/PlanName'
         optionalSavingsPlanName:
-          type: string
-          description: Name of the optional savings plan.
-          examples:
-            - Sparplan 2
+          $ref: '#/components/schemas/OptionalSavingsPlanName'
+
+    PlanId:
+      type: string
+      pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
+      description: Technical ID of pension plan used in API calls.
+      examples:
+        - Plan_XY4284_425   
+       
+    PlanName:
+      type: string
+      description: Insurance plan name.
+      examples:
+        - Basisplan
+
+    OptionalSavingsPlanName:
+      type: string
+      description: Name of the optional savings plan.
+      examples:
+        - Sparplan 2
 
     SalaryData:
       type: object
@@ -1257,53 +1523,77 @@ components:
         - employmentLevel
       properties:
         declaredSalary:
-          type: number
-          format: double
-          description: Gross annual salary.
-          examples:
-            - 78000.00
+          $ref: '#/components/schemas/DeclaredSalary' 
         bonus:
-          type: number
-          format: double
-          description: Bonus component of the salary.
-          examples:
-            - 0.00
+          $ref: '#/components/schemas/Bonus' 
         additionalSalary:
-          type: number
-          format: double
-          description: Additional salary component.
-          examples:
-            - 0.00
+          $ref: '#/components/schemas/AdditionalSalary' 
         otherSalaryComponent:
-          type: number
-          format: double
-          description: Other salary component.
-          examples:
-            - 0.00
+          $ref: '#/components/schemas/OtherSalaryComponent' 
         insuredSalaryMandatory:
-          type: number
-          format: double
-          description: Annual salary insured under mandatory coverage.
-          examples:
-            - 59215.00
+          $ref: '#/components/schemas/InsuredSalaryMandatory' 
         insuredSalaryRetirement:
-          type: number
-          format: double
-          description: Annual salary insured for retirement benefits (mandatory and supplementary coverage).
-          examples:
-            - 59215.00
+          $ref: '#/components/schemas/InsuredSalaryRetirement' 
         insuredSalaryRisk:
-          type: number
-          format: double
-          description: Annual salary insured for risk benefits (mandatory and supplementary coverage).
-          examples:
-            - 59215.00
+          $ref: '#/components/schemas/InsuredSalaryRisk' 
         employmentLevel:
-          type: number
-          format: double
-          description: Level of full-time/part-time employment (in percent, 100 for full-time employment).
-          examples:
-            - 100
+          $ref: '#/components/schemas/EmploymentLevel' 
+
+    DeclaredSalary:
+      type: number
+      format: double
+      description: Gross annual salary.
+      examples:
+        - 78000.00
+
+    Bonus:
+      type: number
+      format: double
+      description: Bonus component of the salary.
+      examples:
+        - 0.00
+
+    AdditionalSalary:
+      type: number
+      format: double
+      description: Additional salary component.
+      examples:
+        - 0.00
+
+    OtherSalaryComponent:
+      type: number
+      format: double
+      description: Other salary component.
+      examples:
+        - 0.00
+
+    InsuredSalaryMandatory:
+      type: number
+      format: double
+      description: Annual salary insured under mandatory coverage.
+      examples:
+        - 59215.00
+
+    InsuredSalaryRetirement:
+      type: number
+      format: double
+      description: Annual salary insured for retirement benefits (mandatory and supplementary coverage).
+      examples:
+        - 59215.00
+
+    InsuredSalaryRisk:
+      type: number
+      format: double
+      description: Annual salary insured for risk benefits (mandatory and supplementary coverage).
+      examples:
+        - 59215.00
+
+    EmploymentLevel:
+      type: number
+      format: double
+      description: Level of full-time/part-time employment (in percent, 100 for full-time employment).
+      examples:
+        - 100
 
     RetirementCapital:
       type: object
@@ -1315,41 +1605,17 @@ components:
         - interestRates
       properties:
         transferredCapital:
-          type: number
-          format: double
-          description: Total retirement capital (mandatory and supplementary coverage) brought from other funds into this fund.
-          examples:
-            - 45210.25
+          $ref: '#/components/schemas/TransferredCapital'
         transferredCapitalMandatory:
-          type: number
-          format: double
-          description: Retirement capital under mandatory coverage brought from other funds into this fund.
-          examples:
-            - 32840.55
+          $ref: '#/components/schemas/TransferredCapitalMandatory'
         balanceReferenceDate:
-          type: number
-          format: double
-          description: Retirement capital as per a specified reference date (mandatory and supplementary coverage).
-          examples:
-            - 53842.50
+          $ref: '#/components/schemas/BalanceReferenceDate'
         balanceMandatoryReferenceDate:
-          type: number
-          format: double
-          description: Retirement capital under mandatory coverage as per a specified reference date.
-          examples:
-            - 38942.15
+          $ref: '#/components/schemas/BalanceMandatoryReferenceDate'
         balanceEndCurrentYear:
-          type: number
-          format: double
-          description: Projected retirement capital as per end of the current year (mandatory and supplementary coverage).
-          examples:
-            - 56325.25
+          $ref: '#/components/schemas/BalanceEndCurrentYear'
         balanceMandatoryEndCurrentYear:
-          format: double
-          type: number
-          description: Projected retirement capital under mandatory coverage as per end of the current year.
-          examples:
-            - 40846.60
+          $ref: '#/components/schemas/BalanceMandatoryEndCurrentYear'
         projectedRetirementBenefits:
           type: array
           description: |
@@ -1362,6 +1628,48 @@ components:
         interestRates:
           $ref: '#/components/schemas/InterestRates'
 
+    TransferredCapital:
+      type: number
+      format: double
+      description: Total retirement capital (mandatory and supplementary coverage) brought from other funds into this fund.
+      examples:
+        - 45210.25
+
+    TransferredCapitalMandatory:
+      type: number
+      format: double
+      description: Retirement capital under mandatory coverage brought from other funds into this fund.
+      examples:
+        - 32840.55
+
+    BalanceReferenceDate:
+      type: number
+      format: double
+      description: Retirement capital as per a specified reference date (mandatory and supplementary coverage).
+      examples:
+        - 53842.50
+
+    BalanceMandatoryReferenceDate:
+      type: number
+      format: double
+      description: Retirement capital under mandatory coverage as per a specified reference date.
+      examples:
+        - 38942.15
+
+    BalanceEndCurrentYear:
+      type: number
+      format: double
+      description: Projected retirement capital as per end of the current year (mandatory and supplementary coverage).
+      examples:
+        - 56325.25
+
+    BalanceMandatoryEndCurrentYear:
+      format: double
+      type: number
+      description: Projected retirement capital under mandatory coverage as per end of the current year.
+      examples:
+        - 40846.60
+
     RetirementBenefits:
       type: object
       description: |
@@ -1369,70 +1677,97 @@ components:
         The conversion rate is mandatory: either the pair for mandatory and supplementary
         coverage is provided, or the enveloping conversion rate.
       required:
-        - age
+        - retirementAge
         - capitalBalance
         - capitalBalanceMandatory
         - pension
       properties:
-        age:
-          type: integer
-          format: int32
-          description: Specified age (in month since birth) used for the retirement benefits calculation.
-          examples:
-            - 756
+        retirementAge:
+          $ref: '#/components/schemas/RetirementAge'
         capitalBalance:
-          type: number
-          format: double
-          description: Retirement capital balance with interest (mandatory and supplementary coverage).
-          examples:
-            - 378832.05
+          $ref: '#/components/schemas/CapitalBalance'
         capitalBalanceMandatory:
-          type: number
-          format: double
-          description: Retirement capital balance with interest (mandatory coverage only).
-          examples:
-            - 284832.15
+          $ref: '#/components/schemas/CapitalBalanceMandatory'
         capitalBalanceNoInterest:
-          type: number
-          format: double
-          description: |
-            Retirement capital balance assuming no interest on assets (mandatory
-            and supplementary coverage)
-          examples:
-            - 331285.25
+          $ref: '#/components/schemas/CapitalBalanceNoInterest'
         capitalBalanceNoInterestMandatory:
-          type: number
-          format: double
-          description: |
-            Retirement capital balance assuming no interest on assets (mandatory coverage only)
-          examples:
-            - 248862.65
+          $ref: '#/components/schemas/CapitalBalanceNoInterestMandatory'
         pension:
-          type: number
-          format: double
-          description: Annual pension credit.
-          examples:
-            - 22835.00
+          $ref: '#/components/schemas/Pension'
         conversionRateMandatory:
-          type: number
-          format: double
-          description: Conversion rate (capital to pension) for mandatory coverage.
-          examples:
-            - 6.800
+          $ref: '#/components/schemas/ConversionRateMandatory'
         conversionRateSupplementary:
-          type: number
-          format: double
-          description: Conversion rate (capital to pension) for supplementary coverage.
-          examples:
-            - 5.500
+          $ref: '#/components/schemas/ConversionRateSupplementary'
         conversionRateEnveloping:
-          type: number
-          format: double
-          description: |
-            Enveloping conversion rate (capital to pension) for combined mandatory and
-            supplementary coverage
-          examples:
-            - 6.300
+          $ref: '#/components/schemas/ConversionRateEnveloping'
+
+    RetirementAge:
+      type: integer
+      format: int32
+      description: Specified age (in month since birth) used for the retirement benefits calculation.
+      examples:
+        - 756
+
+    CapitalBalance:
+      type: number
+      format: double
+      description: Retirement capital balance with interest (mandatory and supplementary coverage).
+      examples:
+        - 378832.05
+
+    CapitalBalanceMandatory:
+      type: number
+      format: double
+      description: Retirement capital balance with interest (mandatory coverage only).
+      examples:
+        - 284832.15
+
+    CapitalBalanceNoInterest:
+      type: number
+      format: double
+      description: |
+        Retirement capital balance assuming no interest on assets (mandatory
+        and supplementary coverage)
+      examples:
+        - 331285.25
+
+    CapitalBalanceNoInterestMandatory:
+      type: number
+      format: double
+      description: |
+        Retirement capital balance assuming no interest on assets (mandatory coverage only)
+      examples:
+        - 248862.65
+
+    Pension:
+      type: number
+      format: double
+      description: Annual pension credit.
+      examples:
+        - 22835.00
+
+    ConversionRateMandatory:
+      type: number
+      format: double
+      description: Conversion rate (capital to pension) for mandatory coverage.
+      examples:
+        - 6.800
+
+    ConversionRateSupplementary:
+      type: number
+      format: double
+      description: Conversion rate (capital to pension) for supplementary coverage.
+      examples:
+        - 5.500
+
+    ConversionRateEnveloping:
+      type: number
+      format: double
+      description: |
+        Enveloping conversion rate (capital to pension) for combined mandatory and
+        supplementary coverage
+      examples:
+        - 6.300
 
     InterestRates:
       type: object
@@ -1506,42 +1841,60 @@ components:
         - minimalLumpSumWithPensionBenefits
       properties:
         pensionDisability:
-          type: number
-          format: double
-          description: Annual pension in case of disability.
-          examples:
-            - 40213.00
+          $ref: '#/components/schemas/PensionDisability'
         childPensionDisability:
-          type: number
-          format: double
-          description: Annual child pension in case of disability.
-          examples:
-            - 5382.00
+          $ref: '#/components/schemas/ChildPensionDisability'
         partnerPensionDeath:
-          type: number
-          format: double
-          description: Annual partner pension in case of death.
-          examples:
-            - 24817.00
+          $ref: '#/components/schemas/PartnerPensionDeath'
         orphanPensionDeath:
-          type: number
-          format: double
-          description: Annual orphan pension in case of death.
-          examples:
-            - 5382.00
+          $ref: '#/components/schemas/OrphanPensionDeath'
         lumpSumWithoutPensionBenefits:
-          type: number
-          format: double
-          description: One-off payment in case of death where no other benefits are paid out.
-          examples:
-            - 92834.00
+          $ref: '#/components/schemas/LumpSumWithoutPensionBenefits'
         minimalLumpSumWithPensionBenefits:
-          type: number
-          format: double
-          description: |
-            Guaranteed, minimal one-off payment in case of death where other benefits are paid out.
-          examples:
-            - 74383.00
+          $ref: '#/components/schemas/MinimalLumpSumWithPensionBenefits'
+
+    PensionDisability:
+      type: number
+      format: double
+      description: Annual pension in case of disability.
+      examples:
+        - 40213.00
+
+    ChildPensionDisability:
+      type: number
+      format: double
+      description: Annual child pension in case of disability.
+      examples:
+        - 5382.00
+
+    PartnerPensionDeath:
+      type: number
+      format: double
+      description: Annual partner pension in case of death.
+      examples:
+        - 24817.00
+
+    OrphanPensionDeath:
+      type: number
+      format: double
+      description: Annual orphan pension in case of death.
+      examples:
+        - 5382.00
+
+    LumpSumWithoutPensionBenefits:
+      type: number
+      format: double
+      description: One-off payment in case of death where no other benefits are paid out.
+      examples:
+        - 92834.00
+
+    MinimalLumpSumWithPensionBenefits:
+      type: number
+      format: double
+      description: |
+        Guaranteed, minimal one-off payment in case of death where other benefits are paid out.
+      examples:
+        - 74383.00
 
     Financing:
       type: object
@@ -1551,41 +1904,59 @@ components:
         - contributionSavingsEmployer
       properties:
         contributionSavingsInsuredPerson:
-          type: number
-          format: double
-          description: Annual contribution towards the retirement captial financed by the insured person.
-          examples:
-            - 4025.00
+          $ref: '#/components/schemas/ContributionSavingsInsuredPerson'
         contributionSavingsEmployer:
-          type: number
-          format: double
-          description: Annual contribution towards the retirement captial financed by the employer.
-          examples:
-            - 4025.00
+          $ref: '#/components/schemas/ContributionSavingsEmployer'
         contributionRiskInsuredPerson:
-          type: number
-          format: double
-          description: Annual contribution towards risk benefits financed by the insured person.
-          examples:
-            - 0.00
+          $ref: '#/components/schemas/ContributionRiskInsuredPerson'
         contributionRiskEmployer:
-          type: number
-          format: double
-          description: Annual contribution towards risk benefits financed by the employer.
-          examples:
-            - 0.00
+          $ref: '#/components/schemas/ContributionRiskEmployer'
         contributionAdministrationInsuredPerson:
-          type: number
-          format: double
-          description: Annual contribution towards fund administration financed by the insured person.
-          examples:
-            - 0.00
+          $ref: '#/components/schemas/ContributionAdministrationInsuredPerson'
         contributionAdministrationEmployer:
-          type: number
-          format: double
-          description: Annual contribution towards fund administration financed by the employer.
-          examples:
-            - 0.00
+          $ref: '#/components/schemas/ContributionAdministrationEmployer'
+
+    ContributionSavingsInsuredPerson:
+      type: number
+      format: double
+      description: Annual contribution towards the retirement captial financed by the insured person.
+      examples:
+        - 4025.00
+
+    ContributionSavingsEmployer:
+      type: number
+      format: double
+      description: Annual contribution towards the retirement captial financed by the employer.
+      examples:
+        - 4025.00
+
+    ContributionRiskInsuredPerson:
+      type: number
+      format: double
+      description: Annual contribution towards risk benefits financed by the insured person.
+      examples:
+        - 0.00
+
+    ContributionRiskEmployer:
+      type: number
+      format: double
+      description: Annual contribution towards risk benefits financed by the employer.
+      examples:
+        - 0.00
+
+    ContributionAdministrationInsuredPerson:
+      type: number
+      format: double
+      description: Annual contribution towards fund administration financed by the insured person.
+      examples:
+        - 0.00
+
+    ContributionAdministrationEmployer:
+      type: number
+      format: double
+      description: Annual contribution towards fund administration financed by the employer.
+      examples:
+        - 0.00
 
     VestedBenefits:
       type: object
@@ -1778,6 +2149,48 @@ components:
       examples:
         - JohnDoe_1234
 
+    ProviderId:
+      type: string
+      description: Swiss Enterprise Identification Number UID.
+      examples:
+        - CHE123456789
+
+    ProviderName:
+      type: string
+      description: The name of the pension provider.
+      examples:
+        - Omnifund
+
+    PortalUrl:
+      type: string
+      description: URL of the insurance portal of the pension fund.
+      examples:
+        - www.omnifund.ch
+
+    PortalName:
+      type: string
+      description: Offical name of the insurance portal.
+      examples:
+        - Omni Portal
+
+    EmployerId:
+      type: string
+      description: Swiss Enterprise Identification Number UID.
+      examples:
+        - CHE115873291
+
+    EmployerName:
+      type: string
+      description: The name of the employer.
+      examples:
+        - Acrea AG
+
+    Industry:
+      type: string
+      description: The industry or sector the employer operates in.
+      examples:
+        - information technology and management consulting
+
     PolicyId:
       type: string
       pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
@@ -1791,6 +2204,12 @@ components:
       description: Technical ID of pension statement used in API calls.
       examples:
         - 550e8450-e59b-21d4-a346-442215440560
+
+    PensionStatementNo:
+      type: string
+      description: Pension statement number (as printed on statement).
+      examples:
+        - PS_ID_6789-ABC
 
     PensionStatementType:
       type: string
