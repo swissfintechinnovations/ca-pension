@@ -641,12 +641,14 @@ paths:
                     type: array
                     description: List of related pension plans.
                     items:
-                      pli:
-                        $ref: '#/components/schemas/PlanId'        
-                      pln:
-                        $ref: '#/components/schemas/PlanName'
-                      ospn:
-                        $ref: '#/components/schemas/OptionalSavingsPlanName'
+                      type: object
+                      properties:
+                        pli:
+                          $ref: '#/components/schemas/PlanId'        
+                        pln:
+                          $ref: '#/components/schemas/PlanName'
+                        ospn:
+                          $ref: '#/components/schemas/OptionalSavingsPlanName'
                   ora:
                     type: integer
                     format: int32
@@ -694,30 +696,32 @@ paths:
                       The list contains projections for each integer retirement age from 58 to the
                       regular retirement age. For persons of 58 or older, the list is restricted
                       to retirement ages higher than their current age.
-                    required:
-                      - ra
-                      - cb
-                      - cbm
-                      - p
                     items:
-                      ra:
-                        $ref: '#/components/schemas/RetirementAge'
-                      cb:
-                        $ref: '#/components/schemas/CapitalBalance'
-                      cbm:
-                        $ref: '#/components/schemas/CapitalBalanceMandatory'
-                      cbni:
-                        $ref: '#/components/schemas/CapitalBalanceNoInterest'
-                      cbnim:
-                        $ref: '#/components/schemas/CapitalBalanceNoInterestMandatory'
-                      p:
-                        $ref: '#/components/schemas/Pension'
-                      crm:
-                        $ref: '#/components/schemas/ConversionRateMandatory'
-                      crs:
-                        $ref: '#/components/schemas/ConversionRateSupplementary'
-                      cre:
-                        $ref: '#/components/schemas/ConversionRateEnveloping'
+                      type: object
+                      required:
+                        - ra
+                        - cb
+                        - cbm
+                        - p
+                      properties:
+                        ra:
+                          $ref: '#/components/schemas/RetirementAge'
+                        cb:
+                          $ref: '#/components/schemas/CapitalBalance'
+                        cbm:
+                          $ref: '#/components/schemas/CapitalBalanceMandatory'
+                        cbni:
+                          $ref: '#/components/schemas/CapitalBalanceNoInterest'
+                        cbnim:
+                          $ref: '#/components/schemas/CapitalBalanceNoInterestMandatory'
+                        p:
+                          $ref: '#/components/schemas/Pension'
+                        crm:
+                          $ref: '#/components/schemas/ConversionRateMandatory'
+                        crs:
+                          $ref: '#/components/schemas/ConversionRateSupplementary'
+                        cre:
+                          $ref: '#/components/schemas/ConversionRateEnveloping'
                   irms:
                     $ref: '#/components/schemas/InterestRate'
                     description: Saving interest rate for mandatory coverage (in percent).
