@@ -538,7 +538,7 @@ paths:
         '404':
           $ref: '#/components/responses/standard404'
 
-  /statements/{pensionStatementId}/statementForQrCode:
+  /statements/{pensionStatementId}/statement-for-qr-code:
     get:
       summary: Get the pension statement QR code json for the specified id
       description: |
