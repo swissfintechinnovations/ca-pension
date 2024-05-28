@@ -411,7 +411,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
-  - url: https://openpk.ch/v1
+  - url: https://pension.common-api.ch
 
 externalDocs:
   description: Find out more about SFTI API specifications
@@ -2928,7 +2928,6 @@ components:
 
   # ---- Responses - Standard Errors Common Data Model ----
   responses:
-
     standard400:
       description: Some of the input is incomplete or invalid for starting a request.
       content:
