@@ -648,7 +648,7 @@ paths:
                         - pln
                       properties:
                         pli:
-                          $ref: '#/components/schemas/PlanId'        
+                          $ref: '#/components/schemas/PlanId'
                         pln:
                           $ref: '#/components/schemas/PlanName'
                         ospn:
@@ -676,19 +676,19 @@ paths:
                       - el
                     properties:
                       ds:
-                        $ref: '#/components/schemas/DeclaredSalary' 
+                        $ref: '#/components/schemas/DeclaredSalary'
                       bo:
-                        $ref: '#/components/schemas/Bonus' 
+                        $ref: '#/components/schemas/Bonus'
                       as:
-                        $ref: '#/components/schemas/AdditionalSalary' 
+                        $ref: '#/components/schemas/AdditionalSalary'
                       osc:
-                        $ref: '#/components/schemas/OtherSalaryComponent' 
+                        $ref: '#/components/schemas/OtherSalaryComponent'
                       ism:
-                        $ref: '#/components/schemas/InsuredSalaryMandatory' 
+                        $ref: '#/components/schemas/InsuredSalaryMandatory'
                       isre:
-                        $ref: '#/components/schemas/InsuredSalaryRetirement' 
+                        $ref: '#/components/schemas/InsuredSalaryRetirement'
                       isri:
-                        $ref: '#/components/schemas/InsuredSalaryRisk' 
+                        $ref: '#/components/schemas/InsuredSalaryRisk'
                       el:
                         $ref: '#/components/schemas/EmploymentLevel'
                   rc:
@@ -779,7 +779,7 @@ paths:
                           Enveloping interest rate for combined mandatory and supplementary coverage (in percent),
                           used specifically in purchase calculations.
                         examples:
-                          - 6.300        
+                          - 6.300
                       irmp:
                         $ref: '#/components/schemas/InterestRate'
                         description: |
@@ -829,7 +829,7 @@ paths:
                     required:
                       - fcsip
                       - fcse
-                    properties: 
+                    properties:
                       fcsip:
                         $ref: '#/components/schemas/ContributionSavingsInsuredPerson'
                       fcse:
