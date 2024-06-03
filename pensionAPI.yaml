@@ -1534,7 +1534,7 @@ components:
         - planName
       properties:
         planId:
-          $ref: '#/components/schemas/PlanId'        
+          $ref: '#/components/schemas/PlanId'
         planName:
           $ref: '#/components/schemas/PlanName'
         optionalSavingsPlanName:
@@ -1545,8 +1545,8 @@ components:
       pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
       description: Technical ID of pension plan used in API calls.
       examples:
-        - Plan_XY4284_425   
-       
+        - Plan_XY4284_425
+
     PlanName:
       type: string
       description: Insurance plan name.
@@ -1570,21 +1570,21 @@ components:
         - employmentLevel
       properties:
         declaredSalary:
-          $ref: '#/components/schemas/DeclaredSalary' 
+          $ref: '#/components/schemas/DeclaredSalary'
         bonus:
-          $ref: '#/components/schemas/Bonus' 
+          $ref: '#/components/schemas/Bonus'
         additionalSalary:
-          $ref: '#/components/schemas/AdditionalSalary' 
+          $ref: '#/components/schemas/AdditionalSalary'
         otherSalaryComponent:
-          $ref: '#/components/schemas/OtherSalaryComponent' 
+          $ref: '#/components/schemas/OtherSalaryComponent'
         insuredSalaryMandatory:
-          $ref: '#/components/schemas/InsuredSalaryMandatory' 
+          $ref: '#/components/schemas/InsuredSalaryMandatory'
         insuredSalaryRetirement:
-          $ref: '#/components/schemas/InsuredSalaryRetirement' 
+          $ref: '#/components/schemas/InsuredSalaryRetirement'
         insuredSalaryRisk:
-          $ref: '#/components/schemas/InsuredSalaryRisk' 
+          $ref: '#/components/schemas/InsuredSalaryRisk'
         employmentLevel:
-          $ref: '#/components/schemas/EmploymentLevel' 
+          $ref: '#/components/schemas/EmploymentLevel'
 
     DeclaredSalary:
       type: number
