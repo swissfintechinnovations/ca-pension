@@ -571,28 +571,17 @@ paths:
                 description: Basic, reduced pension statement consisting of only the most important information in compact form for QR code.
                 required:
                   - pi
-                  - en
-                  - ppn
+                  - e
+                  - pp
                   - rd
                   - pst
-                  - pln
+                  - ppl
                   - ora
                   - era
-                  - ds
-                  - ism
-                  - isre
-                  - isri
-                  - el
-                  - brd
-                  - bmr
-                  - prb
-                  - pd
-                  - cpd
-                  - ppd
-                  - opd
-                  - mlswpb
-                  - fcsip
-                  - fcse
+                  - sd
+                  - rc
+                  - rb
+                  - f
                   - rpm
                   - hoaw
                 properties:
@@ -603,6 +592,8 @@ paths:
                   e:
                     type: object
                     description: Details of the insured person's employer.
+                    required:
+                      - en
                     properties:
                       ei:
                         $ref: '#/components/schemas/EmployerId'
@@ -613,6 +604,8 @@ paths:
                   pp:
                     type: object
                     description: Pension provider (foundation) administering the policy.
+                    required:
+                      - ppn
                     properties:
                       ppi:
                         $ref: '#/components/schemas/ProviderId'
@@ -651,6 +644,8 @@ paths:
                     description: List of related pension plans.
                     items:
                       type: object
+                      required:
+                        - pln
                       properties:
                         pli:
                           $ref: '#/components/schemas/PlanId'        
@@ -673,6 +668,12 @@ paths:
                   sd:
                     type: object
                     description: Details of salary relevant for insurance.
+                    required:
+                      - ds
+                      - ism
+                      - isre
+                      - isri
+                      - el
                     properties:
                       ds:
                         $ref: '#/components/schemas/DeclaredSalary' 
@@ -693,6 +694,10 @@ paths:
                   rc:
                     type: object
                     description: Retirement capital balances for the past and projections for the future.
+                    required:
+                      - brd
+                      - bmr
+                      - prb
                     properties:
                       tc:
                         $ref: '#/components/schemas/TransferredCapital'
@@ -799,6 +804,12 @@ paths:
                   rb:
                     type: object
                     description: Benefits in case of death or disability to work.
+                    required:
+                      - pd
+                      - cpd
+                      - ppd
+                      - opd
+                      - mlswpb
                     properties:
                       pd:
                         $ref: '#/components/schemas/PensionDisability'
@@ -815,6 +826,9 @@ paths:
                   f:
                     type: object
                     description: Contributions for financing the policy.
+                    required:
+                      - fcsip
+                      - fcse
                     properties: 
                       fcsip:
                         $ref: '#/components/schemas/ContributionSavingsInsuredPerson'
@@ -1377,7 +1391,7 @@ components:
       type: object
       description: Details of the insured person's employer.
       required:
-        - name
+        - employerName
       properties:
         employerId:
           $ref: '#/components/schemas/EmployerId'
