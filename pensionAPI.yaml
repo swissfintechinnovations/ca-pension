@@ -1854,7 +1854,7 @@ components:
             Enveloping interest rate for combined mandatory and supplementary coverage (in percent),
             used specifically in purchase calculations.
           examples:
-            - 6.300        
+            - 6.300
         interestRateMandatoryProjection:
           $ref: '#/components/schemas/InterestRate'
           description: |
