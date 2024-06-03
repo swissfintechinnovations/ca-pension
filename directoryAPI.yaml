@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.1.0
 info:
-  title: Central Directory
   version: 0.8.0
+  title: Central Directory
   # yamllint disable rule:indentiation
   description: |
     # Zentrales Verzeichnis API (deutsch)
@@ -50,7 +50,10 @@ info:
 
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: https://directory-dot-acrea-openpk.appspot.com/v1
 
 externalDocs:
   description: Find out more about SFTI API specifications
@@ -58,10 +61,9 @@ externalDocs:
 
 tags:
   - name: pension-funds
-    description: Pension fund directory
+    description: Pension fund directory.
 
-servers:
-  - url: https://directory-dot-acrea-openpk.appspot.com/v1
+security: []
 
 paths:
   /pension-funds:
@@ -85,42 +87,44 @@ paths:
                 ex1:
                   summary: Abbreviated pension fund list
                   value:
-                    - - 'id': SG 0227,
-                      - 'name': BVG-Stiftung der Plaston AG,
-                      - 'nameDe': BVG-Stiftung der Plaston AG,
-                      - 'address': c/o Alvisa Services AG, Seestrasse 6, 8027 Zürich,
-                      - 'openpkStatus': active,
-                      - 'openpkServices':
-                          - 'authorizeUrl': https://iam.company.com/pensionfund/auth/authorize,
-                          - 'grantUrl': https://star-fund-dot-acrea-openpk.appspot.com/consent,
-                          - 'identityProvider': https://iam.company.com/pensionfund,
-                          - 'tokenEndpoint': https://iam.company.com/pensionfund/auth/token,
-                          - 'policyEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1,
-                          - 'consentEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1
-                    - - 'id': SR-200127,
-                      - 'name': Fonds de prévoyance en faveur du personnel du groupe SICPA en Suisse,
-                      - 'nameFr': Fonds de prévoyance en faveur du personnel du groupe SICPA en Suisse,
-                      - 'address': Avenue Florissant 41 Case postale, 1000 Lausanne 16,
-                      - 'openpkStatus': active,
-                      - 'openpkServices':
-                          - 'authorizeUrl': https://identity.pensionfund.ch/auth/authorize,
-                          - 'grantUrl': https://star-fund-dot-acrea-openpk.appspot.com/consent,
-                          - 'identityProvider': https://identity.pensionfund.ch,
-                          - 'tokenEndpoint': https://identity.pensionfund.ch/auth/token,
-                          - 'policyEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1,
-                          - 'consentEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1
+                    - 'id': SG 0227
+                      'name': BVG-Stiftung der Plaston AG
+                      'nameDe': BVG-Stiftung der Plaston AG
+                      'address': c/o Alvisa Services AG, Seestrasse 6, 8027 Zürich
+                      'openpkStatus': active
+                      'openpkServices':
+                        'authorizeUrl': https://iam.company.com/pensionfund/auth/authorize
+                        'grantUrl': https://star-fund-dot-acrea-openpk.appspot.com/consent
+                        'identityProvider': https://iam.company.com/pensionfund
+                        'tokenEndpoint': https://iam.company.com/pensionfund/auth/token
+                        'policyEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1
+                        'consentEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1
+                    - 'id': SR-200127
+                      'name': Fonds de prévoyance en faveur du personnel du groupe SICPA en Suisse
+                      'nameFr': Fonds de prévoyance en faveur du personnel du groupe SICPA en Suisse
+                      'address': Avenue Florissant 41 Case postale, 1000 Lausanne 16
+                      'openpkStatus': active
+                      'openpkServices':
+                        'authorizeUrl': https://identity.pensionfund.ch/auth/authorize
+                        'grantUrl': https://star-fund-dot-acrea-openpk.appspot.com/consent
+                        'identityProvider': https://identity.pensionfund.ch
+                        'tokenEndpoint': https://identity.pensionfund.ch/auth/token
+                        'policyEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1
+                        'consentEndpoint': https://star-fund-dot-acrea-openpk.appspot.com/v1
+        '404':
+          $ref: '#/components/responses/standard404'
 
 components:
   schemas:
     PensionFunds:
       type: array
-      description: List of pension funds
+      description: List of pension funds.
       items:
         $ref: '#/components/schemas/PensionFund'
 
     PensionFund:
       type: object
-      description: Pension fund incl. technical service data
+      description: Pension fund incl. technical service data.
       required:
         - name
         - id
@@ -128,29 +132,45 @@ components:
       properties:
         id:
           type: string
-          description: Pension fund ID
+          description: Pension fund ID.
+          examples:
+            - VS-731
         name:
           type: string
-          description: Pension fund name in fund's preferred language
+          description: Pension fund name in fund's preferred language.
+          examples:
+            - Omnifund
         nameDe:
           type: string
-          description: Pension fund name in German
+          description: Pension fund name in German.
+          examples:
+            - Omni Fonds
         nameEn:
           type: string
-          description: Pension fund name in English
+          description: Pension fund name in English.
+          examples:
+            - Omnifund
         nameFr:
           type: string
-          description: Pension fund name in French
+          description: Pension fund name in French.
+          examples:
+            - Omni fonds
         nameIt:
           type: string
-          description: Pension fund name in Itlian
+          description: Pension fund name in Itlian.
+          examples:
+            - Omni fondo
         nameRm:
           type: string
-          description: Pension fund name in Rhaeto-Romanic
+          description: Pension fund name in Rhaeto-Romanic.
+          examples:
+            - Omni fondo
         webUrl:
           type: string
           format: uri
-          description: URL of pension funds web site
+          description: URL of pension funds web site.
+          examples:
+            - www.omnifund.ch
         logoUrl:
           type: string
           format: uri
@@ -158,6 +178,8 @@ components:
             Image URL of pension fund logo
             (at least 200 by 200 pixels, suitable for display on white background,
             JPEG or PNG format)
+          examples:
+            - www.omnifund.ch/logo.png
         openpkStatus:
           type: string
           description: |
@@ -171,16 +193,20 @@ components:
             - onboarding
             - paused
             - notJoined
+          examples:
+            - active
         address:
           type: string
           description: Pension fund address. Text excl. name.
+          examples:
+            - Gupfengasse 1, 9230 Flawil
         openpkServices:
-          description: Technical description of API service
+          description: Technical description of API service.
           $ref: '#/components/schemas/ServicesDescription'
 
     ServicesDescription:
       type: object
-      description: Technical description of API service
+      description: Technical description of API service.
       required:
         - authorizeUrl
         - tokenEndpoint
@@ -189,11 +215,15 @@ components:
         authorizeUrl:
           type: string
           format: uri
-          description: URL to initiate the user authentication interaction
+          description: URL to initiate the user authentication interaction.
+          examples:
+            - https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/auth
         grantUrl:
           type: string
           format: uri
-          description: URL to initate the user interaction for granting access
+          description: URL to initate the user interaction for granting access.
+          examples:
+            - https://fund.omnifund.ch/consents/grant?fund_name=Omnifund
         identityProvider:
           type: string
           format: uri
@@ -202,15 +232,79 @@ components:
             Open ID Connect discovery URLs derived relative to this URL,
             e.g. `https://iam.company.com/iam/.well-known/openid-configuration`
             for the issuer URL `https://iam.company.com/iam`.
+          examples:
+            - https://iam.omnifund.ch/auth/realms/pensionfund
         tokenEndpoint:
           type: string
           format: uri
-          description: Endpoint URI to request access token
+          description: Endpoint URI to request access token.
+          examples:
+            - https://iam.omnifund.ch/auth/realms/pensionfund/protocol/openid-connect/token
         policyEndpoint:
           type: string
           format: uri
-          description: Endpoint URI to query insured person and policy data
+          description: Endpoint URI to query insured person and policy data.
+          examples:
+            - https://fund.omnifund.ch/v1
         consentEndpoint:
           type: string
           format: uri
-          description: Endpoint URI to query the granted consents
+          description: Endpoint URI to query the granted consents.
+          examples:
+            - https://fund.omnifund.ch/v1
+
+    # ---- Common Error Response ----
+    CommonErrorResponse:
+      title: Common Error Response
+      type: object
+      description: Common Error Response.
+      properties:
+        type:
+          $ref: '#/components/schemas/CommonErrorType'
+        title:
+          type: string
+          description: The error title.
+          examples:
+            - This is the general problem description
+        detail:
+          type: string
+          description: Details about the error.
+          examples:
+            - Detailed problem description with respect to the current request, e.g., invalid account number format
+        instance:
+          type: string
+          description: Instance of the error.
+          examples:
+            - path/to/corresponding/resource
+
+    CommonErrorType:
+      title: Common Error Type
+      type: string
+      description: Error Types for commonErrorResponse.
+      enum:
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+      examples:
+        - /problems/TECHNICAL_ERROR
+
+  # ---- Responses - Standard Errors Common Data Model ----
+  responses:
+
+    standard404:
+      description: No authorization to access data
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
