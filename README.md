@@ -4,7 +4,7 @@
 
 ---
 [![GitHub release](https://img.shields.io/github/release/swissfintechinnovations/ca-pension)](https://github.com/swissfintechinnovations/ca-pension/releases/)
-[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/swissfintechinnovations/ca-pension/lint.yaml?label=Lint%20checks)](https://github.com/swissfintechinnovations/ca-pension/actions)
+[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/swissfintechinnovations/ca-pension/lint-yaml.yaml?label=Lint%20checks)](https://github.com/swissfintechinnovations/ca-pension/actions)
 [![Swagger Validator](https://img.shields.io/swagger/valid/3.0?specUrl=https://raw.githubusercontent.com/swissfintechinnovations/ca-pension/main/consentAPI.yaml)](https://github.com/swissfintechinnovations/ca-pension/wiki/Swagger-Editor)
 [![GitHub license](https://img.shields.io/github/license/swissfintechinnovations/ca-pension)](https://github.com/swissfintechinnovations/ca-pension/blob/main/LICENSE)
 
