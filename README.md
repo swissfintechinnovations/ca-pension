@@ -6,7 +6,6 @@
 [![GitHub release](https://img.shields.io/github/release/swissfintechinnovations/ca-pension?color=blue)](https://github.com/swissfintechinnovations/ca-pension/releases/)
 [![GitHub Action Status OpenAPI](https://img.shields.io/github/actions/workflow/status/swissfintechinnovations/ca-pension/lint-openapi.yaml?branch=main&label=openapi%20checks)](https://github.com/swissfintechinnovations/ca-pension/actions/workflows/lint-openapi.yaml)
 [![GitHub Action Status Yaml](https://img.shields.io/github/actions/workflow/status/swissfintechinnovations/ca-pension/lint-yaml.yaml?branch=main&label=yaml%20checks)](https://github.com/swissfintechinnovations/ca-pension/actions/workflows/lint-yaml.yaml)
-[![GitHub Action Status Swagger Validator](https://img.shields.io/github/actions/workflow/status/swissfintechinnovations/ca-pension/swagger-validator.yaml?branch=main&label=swagger%20validation)](https://github.com/swissfintechinnovations/ca-pension/actions/workflows/swagger-validator.yaml)
 [![OpenAPI version](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fgithub.com%2Fswissfintechinnovations%2Fca-pension%2Fraw%2Fmain%2FpensionAPI.yaml&query=openapi&prefix=v&label=OpenAPI&color=blue)](https://swagger.io/resources/open-api/)
 [![GitHub license](https://img.shields.io/github/license/swissfintechinnovations/ca-pension?color=de980d)](https://github.com/swissfintechinnovations/ca-pension/blob/main/LICENSE)
 
