@@ -4,10 +4,14 @@
 
 ---
 [![GitHub release](https://img.shields.io/github/release/swissfintechinnovations/ca-pension?color=blue)](https://github.com/swissfintechinnovations/ca-pension/releases/)
-[![GitHub Action Status OpenAPI](https://img.shields.io/github/actions/workflow/status/swissfintechinnovations/ca-pension/lint-openapi.yaml?branch=main&label=openapi%20checks)](https://github.com/swissfintechinnovations/ca-pension/actions/workflows/lint-openapi.yaml)
-[![GitHub Action Status Yaml](https://img.shields.io/github/actions/workflow/status/swissfintechinnovations/ca-pension/lint-yaml.yaml?branch=main&label=yaml%20checks)](https://github.com/swissfintechinnovations/ca-pension/actions/workflows/lint-yaml.yaml)
+![Pension Major Version](https://img.shields.io/badge/major_version-v1-blue)
 [![OpenAPI version](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fgithub.com%2Fswissfintechinnovations%2Fca-pension%2Fraw%2Fmain%2FpensionAPI.yaml&query=openapi&prefix=v&label=OpenAPI&color=blue)](https://swagger.io/resources/open-api/)
 [![GitHub license](https://img.shields.io/github/license/swissfintechinnovations/ca-pension?color=de980d)](https://github.com/swissfintechinnovations/ca-pension/blob/main/LICENSE)
+
+
+[![GitHub Action Status OpenAPI](https://img.shields.io/github/actions/workflow/status/swissfintechinnovations/ca-pension/lint-openapi.yaml?branch=main&label=openapi%20checks)](https://github.com/swissfintechinnovations/ca-pension/actions/workflows/lint-openapi.yaml)
+[![GitHub Action Status Yaml](https://img.shields.io/github/actions/workflow/status/swissfintechinnovations/ca-pension/lint-yaml.yaml?branch=main&label=yaml%20checks)](https://github.com/swissfintechinnovations/ca-pension/actions/workflows/lint-yaml.yaml)
+
 
 This is the official SFTI repo for the pension API. Documentations may be found in the [Wiki](https://github.com/swissfintechinnovations/ca-pension/wiki).
 
