@@ -572,6 +572,7 @@ paths:
                 type: object
                 description: Basic, reduced pension statement consisting of only the most important information in compact form for QR code.
                 required:
+                  - ts
                   - pi
                   - e
                   - pp
@@ -583,12 +584,14 @@ paths:
                   - sd
                   - rc
                   - rb
-                  - f
                   - rpm
                   - hoaw
                 properties:
                   psi:
                     $ref: '#/components/schemas/PensionStatementId'
+                  ts:
+                    $ref: '#/components/schemas/DateTime'
+                    description: Date and Time of generation of the PensionStatement
                   pi:
                     $ref: '#/components/schemas/PersonId'
                   e:
@@ -642,19 +645,16 @@ paths:
                     $ref: '#/components/schemas/Date'
                     description: Entry date into the pension fund.
                   ppl:
-                    type: array
-                    description: List of related pension plans.
-                    items:
-                      type: object
-                      required:
-                        - pln
-                      properties:
-                        pli:
-                          $ref: '#/components/schemas/PlanId'
-                        pln:
-                          $ref: '#/components/schemas/PlanName'
-                        ospn:
-                          $ref: '#/components/schemas/OptionalSavingsPlanName'
+                    type: object
+                    required:
+                      - pln
+                    properties:
+                      pli:
+                        $ref: '#/components/schemas/PlanId'
+                      pln:
+                        $ref: '#/components/schemas/PlanName'
+                      ospn:
+                        $ref: '#/components/schemas/OptionalSavingsPlanName'
                   ora:
                     type: integer
                     format: int32
@@ -725,7 +725,6 @@ paths:
                           required:
                             - ra
                             - cb
-                            - cbm
                             - p
                           properties:
                             ra:
@@ -1406,6 +1405,7 @@ components:
       type: object
       description: Basic, reduced pension statement consisting of only the most important information.
       required:
+        - timeStamp
         - personId
         - employer
         - pensionProvider
@@ -1423,6 +1423,9 @@ components:
       properties:
         pensionStatementId:
           $ref: '#/components/schemas/PensionStatementId'
+        timeStamp:
+          $ref: '#/components/schemas/DateTime'
+          description: Date and Time of generation of the PensionStatement
         personId:
           $ref: '#/components/schemas/PersonId'
         employer:
@@ -2943,6 +2946,13 @@ components:
       format: date
       examples:
         - 2018-04-13
+
+    DateTime:
+      type: string
+      description: Common date-time format.
+      format: date-time
+      examples:
+        - 2018-04-13T11:11:11Z
 
   securitySchemes:
     bearerAuthentication:
