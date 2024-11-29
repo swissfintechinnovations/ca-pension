@@ -540,9 +540,9 @@ paths:
         '404':
           $ref: '#/components/responses/standard404'
 
-  /statements/{pensionStatementId}/statement-for-qr-code:
+  /statements/{pensionStatementId}/statement-compact:
     get:
-      summary: Get the pension statement QR code json for the specified id
+      summary: Get the compact pension statement for the specified id
       description: |
         Provides the pension statement for the specified id as a compact json
         in the insured person's preferred language. Its sole purpose is to provide
@@ -551,7 +551,7 @@ paths:
 
         If the pension fund is unable to provide a json for the request id, the error
         code 400 should be returned.
-      operationId: getPensionStatementQrCodeJson
+      operationId: getPensionStatementCompact
       tags:
         - statement
       parameters:
@@ -568,7 +568,7 @@ paths:
             application/json:
               schema:
                 type: object
-                description: Basic, reduced pension statement consisting of only the most important information in compact form for QR code.
+                description: Basic, reduced pension statement consisting of only the most important information in compact form.
                 required:
                   - ts
                   - pi
@@ -1262,7 +1262,7 @@ components:
 
     PensionStatementBasic:
       type: object
-      description: Basic, reduced pension statement consisting of only the most important information.
+      description: Basic, reduced pension statement consisting of the most important information.
       required:
         - timeStamp
         - personId
