@@ -545,11 +545,9 @@ paths:
       summary: Get the pension statement QR code json for the specified id
       description: |
         Provides the pension statement for the specified id as a compact json
-        in the insured person's preferred language. This json has the same content
-        and structure as defined in the PensionStatementBasic schema. Its sole purpose
-        is to provide a compact json so it can be fit into a QR code. This endpoint
-        should not be used otherwise and will be deprecated once the QR code is no
-        longer needed.
+        in the insured person's preferred language. Its sole purpose is to provide
+        a compact json for use cases with tight data volume limits such as e.g.
+        a QR code. This endpoint should not be used otherwise.
 
         If the pension fund is unable to provide a json for the request id, the error
         code 400 should be returned.
@@ -587,11 +585,9 @@ paths:
                   - rpm
                   - hoaw
                 properties:
-                  psi:
-                    $ref: '#/components/schemas/PensionStatementId'
                   ts:
                     $ref: '#/components/schemas/DateTime'
-                    description: Date and Time of generation of the PensionStatement
+                    description: Date and time of generation of the PensionStatement
                   pi:
                     $ref: '#/components/schemas/PersonId'
                   e:
@@ -600,61 +596,28 @@ paths:
                     required:
                       - en
                     properties:
-                      ei:
-                        $ref: '#/components/schemas/EmployerId'
                       en:
                         $ref: '#/components/schemas/EmployerName'
-                      in:
-                        $ref: '#/components/schemas/Industry'
                   pp:
                     type: object
                     description: Pension provider (foundation) administering the policy.
                     required:
                       - ppn
                     properties:
-                      ppi:
-                        $ref: '#/components/schemas/ProviderId'
                       ppn:
                         $ref: '#/components/schemas/ProviderName'
-                      ppa:
-                        type: object
-                        description: Postal address of the pension provider.
-                        properties:
-                          st:
-                            $ref: '#/components/schemas/Street'
-                          pbo:
-                            $ref: '#/components/schemas/PoBox'
-                          to:
-                            $ref: '#/components/schemas/Town'
-                          pc:
-                            $ref: '#/components/schemas/PostalCode'
-                          cc:
-                            $ref: '#/components/schemas/CountryCode'
-                      pu:
-                        $ref: '#/components/schemas/PortalUrl'
-                      pn:
-                        $ref: '#/components/schemas/PortalName'
-                  psn:
-                    $ref: '#/components/schemas/PensionStatementNo'
                   rd:
                     $ref: '#/components/schemas/Date'
                     description: Reference date of pension statement.
                   pst:
                     $ref: '#/components/schemas/PensionStatementType'
-                  ed:
-                    $ref: '#/components/schemas/Date'
-                    description: Entry date into the pension fund.
                   ppl:
                     type: object
                     required:
                       - pln
                     properties:
-                      pli:
-                        $ref: '#/components/schemas/PlanId'
                       pln:
                         $ref: '#/components/schemas/PlanName'
-                      ospn:
-                        $ref: '#/components/schemas/OptionalSavingsPlanName'
                   ora:
                     type: integer
                     format: int32
@@ -679,12 +642,6 @@ paths:
                     properties:
                       ds:
                         $ref: '#/components/schemas/DeclaredSalary'
-                      bo:
-                        $ref: '#/components/schemas/Bonus'
-                      as:
-                        $ref: '#/components/schemas/AdditionalSalary'
-                      osc:
-                        $ref: '#/components/schemas/OtherSalaryComponent'
                       ism:
                         $ref: '#/components/schemas/InsuredSalaryMandatory'
                       isre:
@@ -701,18 +658,10 @@ paths:
                       - bmr
                       - prb
                     properties:
-                      tc:
-                        $ref: '#/components/schemas/TransferredCapital'
-                      tcm:
-                        $ref: '#/components/schemas/TransferredCapitalMandatory'
                       brd:
                         $ref: '#/components/schemas/BalanceReferenceDate'
                       bmr:
                         $ref: '#/components/schemas/BalanceMandatoryReferenceDate'
-                      bec:
-                        $ref: '#/components/schemas/BalanceEndCurrentYear'
-                      bmc:
-                        $ref: '#/components/schemas/BalanceMandatoryEndCurrentYear'
                       prb:
                         type: array
                         description: >
@@ -731,77 +680,8 @@ paths:
                               $ref: '#/components/schemas/RetirementAge'
                             cb:
                               $ref: '#/components/schemas/CapitalBalance'
-                            cbm:
-                              $ref: '#/components/schemas/CapitalBalanceMandatory'
-                            cbni:
-                              $ref: '#/components/schemas/CapitalBalanceNoInterest'
-                            cbnim:
-                              $ref: '#/components/schemas/CapitalBalanceNoInterestMandatory'
                             p:
                               $ref: '#/components/schemas/Pension'
-                            crm:
-                              $ref: '#/components/schemas/ConversionRateMandatory'
-                            crs:
-                              $ref: '#/components/schemas/ConversionRateSupplementary'
-                            cre:
-                              $ref: '#/components/schemas/ConversionRateEnveloping'
-                  ir:
-                    type: object
-                    description: A set of interest rates.
-                    properties:
-                      irms:
-                        $ref: '#/components/schemas/InterestRate'
-                        description: Saving interest rate for mandatory coverage (in percent).
-                        examples:
-                          - 6.800
-                      irss:
-                        $ref: '#/components/schemas/InterestRate'
-                        description: Saving interest rate for supplementary coverage (in percent).
-                        examples:
-                          - 5.500
-                      ires:
-                        $ref: '#/components/schemas/InterestRate'
-                        description: Saving enveloping interest rate for combined mandatory and supplementary coverage (in percent).
-                        examples:
-                          - 6.300
-                      irme:
-                        $ref: '#/components/schemas/InterestRate'
-                        description: Interest rate for mandatory coverage (in percent), used specifically in purchase calculations.
-                        examples:
-                          - 6.800
-                      irse:
-                        $ref: '#/components/schemas/InterestRate'
-                        description: Interest rate for supplementary coverage (in percent), used specifically in purchase calculations.
-                        examples:
-                          - 5.500
-                      iree:
-                        $ref: '#/components/schemas/InterestRate'
-                        description: >
-                          Enveloping interest rate for combined mandatory and supplementary coverage (in percent),
-                          used specifically in purchase calculations.
-                        examples:
-                          - 6.300
-                      irmp:
-                        $ref: '#/components/schemas/InterestRate'
-                        description: >
-                          Projection rate for mandatory coverage (in percent),
-                          used specifically for calculating projected future values.
-                        examples:
-                          - 6.800
-                      irsp:
-                        $ref: '#/components/schemas/InterestRate'
-                        description: >
-                          Projection rate for supplementary coverage (in percent),
-                          used specifically for calculating projected future values.
-                        examples:
-                          - 5.500
-                      irep:
-                        $ref: '#/components/schemas/InterestRate'
-                        description: >
-                          Projection enveloping interest rate for combined mandatory and supplementary coverage (in percent),
-                          used specifically for calculating projected future values.
-                        examples:
-                          - 6.300
                   rb:
                     type: object
                     description: Benefits in case of death or disability to work.
@@ -820,29 +700,8 @@ paths:
                         $ref: '#/components/schemas/PartnerPensionDeath'
                       opd:
                         $ref: '#/components/schemas/OrphanPensionDeath'
-                      lswpb:
-                        $ref: '#/components/schemas/LumpSumWithoutPensionBenefits'
                       mlswpb:
                         $ref: '#/components/schemas/MinimalLumpSumWithPensionBenefits'
-                  f:
-                    type: object
-                    description: Contributions for financing the policy.
-                    required:
-                      - fcsip
-                      - fcse
-                    properties:
-                      fcsip:
-                        $ref: '#/components/schemas/ContributionSavingsInsuredPerson'
-                      fcse:
-                        $ref: '#/components/schemas/ContributionSavingsEmployer'
-                      fcrip:
-                        $ref: '#/components/schemas/ContributionRiskInsuredPerson'
-                      fcre:
-                        $ref: '#/components/schemas/ContributionRiskEmployer'
-                      fcaip:
-                        $ref: '#/components/schemas/ContributionAdministrationInsuredPerson'
-                      fcae:
-                        $ref: '#/components/schemas/ContributionAdministrationEmployer'
                   rpm:
                     $ref: '#/components/schemas/RegularPurchaseMaxAmount'
                   hoaw:
@@ -1425,7 +1284,7 @@ components:
           $ref: '#/components/schemas/PensionStatementId'
         timeStamp:
           $ref: '#/components/schemas/DateTime'
-          description: Date and Time of generation of the PensionStatement
+          description: Date and time of generation of the PensionStatement
         personId:
           $ref: '#/components/schemas/PersonId'
         employer:
