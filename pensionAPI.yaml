@@ -1124,7 +1124,7 @@ components:
 
     PensionStatementBasic:
       type: object
-      description: Basic, reduced pension statement consisting of the most important information.
+      description: Pension statement consisting of the basic pension statement information.
       required:
         - timeStamp
         - personId
@@ -1195,7 +1195,7 @@ components:
 
     PensionStatementCompact:
       type: object
-      description: Basic, reduced pension statement consisting of only the most important information in compact form.
+      description: Reduced pension statement consisting of only the most important pension statement information in compact form.
       required:
         - ts
         - pi
