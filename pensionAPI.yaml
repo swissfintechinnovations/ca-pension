@@ -1240,6 +1240,9 @@ components:
           $ref: '#/components/schemas/PensionStatementType'
         ppl:
           type: object
+          description: >
+            The pension plan defines various conditions for the occupational pension provision
+            of the insured employees, incl. the contributions and insured benefits.
           required:
             - pln
           properties:
