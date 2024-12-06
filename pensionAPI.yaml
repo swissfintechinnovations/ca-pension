@@ -540,7 +540,7 @@ paths:
         '404':
           $ref: '#/components/responses/standard404'
 
-  /statements/{pensionStatementId}/statement-compact:
+  /statements/{pensionStatementId}/compact-statements:
     get:
       summary: Get the compact pension statement for the specified id
       description: |
@@ -567,145 +567,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                description: Basic, reduced pension statement consisting of only the most important information in compact form.
-                required:
-                  - ts
-                  - pi
-                  - e
-                  - pp
-                  - rd
-                  - pst
-                  - ppl
-                  - ora
-                  - era
-                  - sd
-                  - rc
-                  - rb
-                  - rpm
-                  - hoaw
-                properties:
-                  ts:
-                    $ref: '#/components/schemas/DateTime'
-                    description: Date and time of generation of the PensionStatement
-                  pi:
-                    $ref: '#/components/schemas/PersonId'
-                  e:
-                    type: object
-                    description: Details of the insured person's employer.
-                    required:
-                      - en
-                    properties:
-                      en:
-                        $ref: '#/components/schemas/EmployerName'
-                  pp:
-                    type: object
-                    description: Pension provider (foundation) administering the policy.
-                    required:
-                      - ppn
-                    properties:
-                      ppn:
-                        $ref: '#/components/schemas/ProviderName'
-                  rd:
-                    $ref: '#/components/schemas/Date'
-                    description: Reference date of pension statement.
-                  pst:
-                    $ref: '#/components/schemas/PensionStatementType'
-                  ppl:
-                    type: object
-                    required:
-                      - pln
-                    properties:
-                      pln:
-                        $ref: '#/components/schemas/PlanName'
-                  ora:
-                    type: integer
-                    format: int32
-                    description: Age (in month since birth) for ordinary retirement.
-                    examples:
-                      - 780
-                  era:
-                    type: integer
-                    format: int32
-                    description: Age (in month since birth) for earliest possible retirement.
-                    examples:
-                      - 696
-                  sd:
-                    type: object
-                    description: Details of salary relevant for insurance.
-                    required:
-                      - ds
-                      - ism
-                      - isre
-                      - isri
-                      - el
-                    properties:
-                      ds:
-                        $ref: '#/components/schemas/DeclaredSalary'
-                      ism:
-                        $ref: '#/components/schemas/InsuredSalaryMandatory'
-                      isre:
-                        $ref: '#/components/schemas/InsuredSalaryRetirement'
-                      isri:
-                        $ref: '#/components/schemas/InsuredSalaryRisk'
-                      el:
-                        $ref: '#/components/schemas/EmploymentLevel'
-                  rc:
-                    type: object
-                    description: Retirement capital balances for the past and projections for the future.
-                    required:
-                      - brd
-                      - bmr
-                      - prb
-                    properties:
-                      brd:
-                        $ref: '#/components/schemas/BalanceReferenceDate'
-                      bmr:
-                        $ref: '#/components/schemas/BalanceMandatoryReferenceDate'
-                      prb:
-                        type: array
-                        description: >
-                          Projected retirement benefits for a series of retirement ages.
-                          The list contains projections for each integer retirement age from 58 to the
-                          regular retirement age. For persons of 58 or older, the list is restricted
-                          to retirement ages higher than their current age.
-                        items:
-                          type: object
-                          required:
-                            - ra
-                            - cb
-                            - p
-                          properties:
-                            ra:
-                              $ref: '#/components/schemas/RetirementAge'
-                            cb:
-                              $ref: '#/components/schemas/CapitalBalance'
-                            p:
-                              $ref: '#/components/schemas/Pension'
-                  rb:
-                    type: object
-                    description: Benefits in case of death or disability to work.
-                    required:
-                      - pd
-                      - cpd
-                      - ppd
-                      - opd
-                      - mlswpb
-                    properties:
-                      pd:
-                        $ref: '#/components/schemas/PensionDisability'
-                      cpd:
-                        $ref: '#/components/schemas/ChildPensionDisability'
-                      ppd:
-                        $ref: '#/components/schemas/PartnerPensionDeath'
-                      opd:
-                        $ref: '#/components/schemas/OrphanPensionDeath'
-                      mlswpb:
-                        $ref: '#/components/schemas/MinimalLumpSumWithPensionBenefits'
-                  rpm:
-                    $ref: '#/components/schemas/RegularPurchaseMaxAmount'
-                  hoaw:
-                    $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
+                $ref: '#/components/schemas/PensionStatementCompact'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -1329,6 +1191,147 @@ components:
         regularPurchaseMaxAmount:
           $ref: '#/components/schemas/RegularPurchaseMaxAmount'
         homeOwnershipAvailableForWithdrawal:
+          $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
+
+    PensionStatementCompact:
+      type: object
+      description: Basic, reduced pension statement consisting of only the most important information in compact form.
+      required:
+        - ts
+        - pi
+        - e
+        - pp
+        - rd
+        - pst
+        - ppl
+        - ora
+        - era
+        - sd
+        - rc
+        - rb
+        - rpm
+        - hoaw
+      properties:
+        ts:
+          $ref: '#/components/schemas/DateTime'
+          description: Date and time of generation of the PensionStatement
+        pi:
+          $ref: '#/components/schemas/PersonId'
+        e:
+          type: object
+          description: Details of the insured person's employer.
+          required:
+            - en
+          properties:
+            en:
+              $ref: '#/components/schemas/EmployerName'
+        pp:
+          type: object
+          description: Pension provider (foundation) administering the policy.
+          required:
+            - ppn
+          properties:
+            ppn:
+              $ref: '#/components/schemas/ProviderName'
+        rd:
+          $ref: '#/components/schemas/Date'
+          description: Reference date of pension statement.
+        pst:
+          $ref: '#/components/schemas/PensionStatementType'
+        ppl:
+          type: object
+          required:
+            - pln
+          properties:
+            pln:
+              $ref: '#/components/schemas/PlanName'
+        ora:
+          type: integer
+          format: int32
+          description: Age (in month since birth) for ordinary retirement.
+          examples:
+            - 780
+        era:
+          type: integer
+          format: int32
+          description: Age (in month since birth) for earliest possible retirement.
+          examples:
+            - 696
+        sd:
+          type: object
+          description: Details of salary relevant for insurance.
+          required:
+            - ds
+            - ism
+            - isre
+            - isri
+            - el
+          properties:
+            ds:
+              $ref: '#/components/schemas/DeclaredSalary'
+            ism:
+              $ref: '#/components/schemas/InsuredSalaryMandatory'
+            isre:
+              $ref: '#/components/schemas/InsuredSalaryRetirement'
+            isri:
+              $ref: '#/components/schemas/InsuredSalaryRisk'
+            el:
+              $ref: '#/components/schemas/EmploymentLevel'
+        rc:
+          type: object
+          description: Retirement capital balances for the past and projections for the future.
+          required:
+            - brd
+            - bmr
+            - prb
+          properties:
+            brd:
+              $ref: '#/components/schemas/BalanceReferenceDate'
+            bmr:
+              $ref: '#/components/schemas/BalanceMandatoryReferenceDate'
+            prb:
+              type: array
+              description: >
+                Projected retirement benefits for a series of retirement ages.
+                The list contains projections for each integer retirement age from 58 to the
+                regular retirement age. For persons of 58 or older, the list is restricted
+                to retirement ages higher than their current age.
+              items:
+                type: object
+                required:
+                  - ra
+                  - cb
+                  - p
+                properties:
+                  ra:
+                    $ref: '#/components/schemas/RetirementAge'
+                  cb:
+                    $ref: '#/components/schemas/CapitalBalance'
+                  p:
+                    $ref: '#/components/schemas/Pension'
+        rb:
+          type: object
+          description: Benefits in case of death or disability to work.
+          required:
+            - pd
+            - cpd
+            - ppd
+            - opd
+            - mlswpb
+          properties:
+            pd:
+              $ref: '#/components/schemas/PensionDisability'
+            cpd:
+              $ref: '#/components/schemas/ChildPensionDisability'
+            ppd:
+              $ref: '#/components/schemas/PartnerPensionDeath'
+            opd:
+              $ref: '#/components/schemas/OrphanPensionDeath'
+            mlswpb:
+              $ref: '#/components/schemas/MinimalLumpSumWithPensionBenefits'
+        rpm:
+          $ref: '#/components/schemas/RegularPurchaseMaxAmount'
+        hoaw:
           $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
 
     Policy:
