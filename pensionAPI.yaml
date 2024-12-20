@@ -153,9 +153,6 @@ tags:
   - name: transactions
     description: Retirement capital transactions.
 
-security:
-  - bearerAuthentication: []
-
 paths:
   /insured-persons/{personId}:
     get:
@@ -173,6 +170,9 @@ paths:
           schema:
             $ref: '#/components/schemas/PersonId'
           description: Technical person ID.
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       responses:
         '200':
           description: Details of insured person
@@ -212,6 +212,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ReferenceDate'
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       responses:
         '200':
           description: Statement details
@@ -247,6 +250,9 @@ paths:
           schema:
             $ref: '#/components/schemas/PensionStatementId'
           description: Technical pension statement ID.
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       responses:
         '200':
           description: Binary PDF data of the pension statement
@@ -281,6 +287,9 @@ paths:
           schema:
             $ref: '#/components/schemas/PensionStatementId'
           description: Technical pension statement ID.
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       responses:
         '200':
           description: Compact statement details
@@ -310,6 +319,9 @@ paths:
           schema:
             $ref: '#/components/schemas/PolicyId'
           description: Technical policy ID.
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       responses:
         '200':
           description: Policy details
@@ -337,6 +349,9 @@ paths:
           schema:
             $ref: '#/components/schemas/PolicyId'
           description: Policy ID.
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       requestBody:
         description: Salary change simulation parameters
         required: true
@@ -385,6 +400,9 @@ paths:
           schema:
             $ref: '#/components/schemas/PolicyId'
           description: Policy ID.
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       requestBody:
         description: Voluntary purchase simulation parameters
         required: true
@@ -447,6 +465,9 @@ paths:
           schema:
             $ref: '#/components/schemas/Date'
           description: End of date range (inclusive).
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       responses:
         '200':
           description: Retirement capital transactions.
