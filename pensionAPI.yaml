@@ -160,6 +160,7 @@ tags:
     description: Retirement capital transactions.
 
 security:
+  TBD
 
 paths:
   /insured-persons/{personId}:
@@ -376,7 +377,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SimulationResult'
+                $ref: '#/components/schemas/SimulationResultPensionDetails'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -427,7 +428,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SimulationResult'
+                $ref: '#/components/schemas/SimulationResultPensionDetails'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -1685,16 +1686,16 @@ components:
             Date when the salary change takes effect.
             If omitted: tomorrow.
 
-    SimulationResult:
+    SimulationResultPensionDetails:
       type: object
-      description: Financial effect of voluntary purchase.
+      description: Financial effect of simulation.
       required:
         - personalPensionDetailsBeforeChange
         - personalPensionDetailsAfterChange
       properties:
         personalPensionDetailsBeforeChange:
-           $ref: '#/components/schemas/PersonalPensionDetails'
-           description: Provides the personal pension details before the change (referenceDate=today)
+          $ref: '#/components/schemas/PersonalPensionDetails'
+          description: Provides the personal pension details before the change (referenceDate=today)
         personalPensionDetailsAfterChange:
           $ref: '#/components/schemas/PersonalPensionDetails'
           description: |
@@ -1909,8 +1910,7 @@ components:
           authorizationUrl: https://example.com/oauth/authorize
           tokenUrl: https://example.com/oauth/token
           scopes:
-              read:basic_pension_data: Access to basic pension data (user profile, pension statements, and transactions).
-
+            read:basic_pension_data: Access to basic pension data (user profile, pension statements, and transactions).
 
   # ---- Responses - Standard Errors Common Data Model ----
   responses:
