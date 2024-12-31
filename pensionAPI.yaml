@@ -14,7 +14,7 @@ info:
     Auch die Erstellung bzw. das Beziehen von bereits erstellten Versicherungsausweisen als PDF-Datei
     ist möglich. Des Weiteren gibt es Endpunkte für Simulationen und für Transaktionen.
 
-    Als Einstieg fürs Pension-API wird eine technische Personen-, Statement oder Policen-ID benötigt.
+    Als Einstieg fürs Pension-API wird eine technische Personen-, Statement- oder Policen-ID benötigt.
 
     Die wesentlichen Objekte dieses APIs sind *Person*, *Police* und *Pension Statement*. Person bezieht sich
     immer auf eine natürliche Person, die bei einer Pensionskasse versichert ist.
@@ -23,11 +23,12 @@ info:
     (ArbeitnehmerIn) und der Pensionskasse. Ist eine Person über zwei Vorsorgepläne versichert,
     z.B. über einen Basis- und einen zusätzlichen Kaderplan, so hat sie zwei Policen.
 
-    Das Pension Statement umfasst grundsätzlich die gleichen persönlichen Vorsorgedaten wie die Policen, 
-    kann aber die Daten verschiedener Policen aggregieren. Je nach Pensionkasse wird dies unterschiedlich gehandhabt. 
+    Das Pension Statement umfasst grundsätzlich die gleichen persönlichen Vorsorgedaten wie die Policen,
+    kann aber die Daten verschiedener Policen aggregieren. Je nach Pensionkasse wird dies unterschiedlich
+    gehandhabt.
 
-    Die PDF-Version des Vorsorgeausweises entspricht dem Dokument, welches traditionell anfangs Jahr durch die Pensionskasse
-    für die Versicherten ausgestellt wird.
+    Die PDF-Version des Vorsorgeausweises entspricht dem Dokument, welches traditionell anfangs Jahr durch
+    die Pensionskasse für die Versicherten ausgestellt wird.
 
     Das API umfasst auch die Simulation einer Änderung des Beschäftigtengrads und/oder Lohns. Die
     Simulation berechnet die Effekte auf die monatlichen Beiträge sowie auf die voraussichtlichen
@@ -37,9 +38,11 @@ info:
     Vielzahl von Pensionskassen implementiert und jede Pensionskasse hat eine andere Basis-URL
     für das API. Die Basis-URL der jeweiligen Pensionskasse wird vom Directory API geliefert.
 
+
     ## Simulation
 
-    Die Simulation berechnet, wie hoch das Altersguthaben und die Rente mit und ohne Einkauf sein wird. Dabei können verschiedene Parameter gewählt werden:
+    Die Simulation berechnet, wie hoch das Altersguthaben und die Rente mit und ohne Einkauf sein wird.
+    Dabei können verschiedene Parameter gewählt werden:
 
     - Einkaufssumme (gesamt)
     - Pensionierungsalter
@@ -63,22 +66,22 @@ info:
     The Pension API serves to query details about the insured person and their pension situation.
     In simplified terms, this includes the data found on the insurance certificate.
     Additionally, policy statements can be generated or already generated statements can be
-    retrieved as PDF files. There are also endpoints for the purchasing process, for simulations
-    and for transactions.
+    retrieved as PDF files. There are also endpoints for simulations and for transactions.
 
-    Person, statement and policy IDs serve as the entry point for this API. 
+    Person, statement and policy IDs serve as the entry point for this API.
 
     The main objects of this API are *Person*, *Policy* and *Pension Statement*. Person always refers
     to a natural person who is insured with a pension fund.
 
-    The policy describes the indirect insurance contract between the insured person (employee) and the pension fund.
-    (employee) and the pension fund. If a person is insured under two pension plans,
+    The policy describes the indirect insurance contract between the insured person (employee)
+    and the pension fund. If a person is insured under two pension plans,
     e.g. via a basic plan and an additional management plan, he or she has two policies.
 
-    The pension statement basically contains the same personal pension data as the policies, 
-    but can aggregate the data from different policies. This is handled differently depending on the pension fund. 
+    The pension statement basically contains the same personal pension data as the policies,
+    but can aggregate the data from different policies. This is handled differently depending on the pension fund.
 
-    The PDF version of the pension certificate corresponds to the document that is traditionally issued by the pension fund at the beginning of the year.
+    The PDF version of the pension certificate corresponds to the document that is traditionally issued to the
+    insured persons by the pension fund at the beginning of the year.
 
     The API also includes the simulation of a change of employment level and/or salary. It
     calculates the effects on the monthly contributions as well as the effects of the
@@ -90,6 +93,7 @@ info:
     The URLs in the specification are examples only. The API is implemented by a many
     pension funds and each pension fund has an individual base URL for the API.
     The base URL of a specific pension fund is provided by the directory API.
+
 
     ## Simulation
 
@@ -105,9 +109,11 @@ info:
     The simulation assumes that the legal prerequisites for the purchase are fulfilled. It checks that the maximum purchase amount is not
     exceeded and modifies it if needed.
 
+
     ## Transactions
 
     The Transactions endpoints provide the transactions affecting the retirement capital of a policy.
+
 
     ### Glossar / Glossary
 
@@ -153,6 +159,8 @@ tags:
   - name: transactions
     description: Retirement capital transactions.
 
+security:
+
 paths:
   /insured-persons/{personId}:
     get:
@@ -188,11 +196,13 @@ paths:
   /insured-persons/{personId}/statements:
     post:
       summary: Get pension statement(s) data
-      description: >
-        Provides the pension statement(s) representing the state of the policy/policies for the specified date as structured data. 
-        If no date is specified, the latest (regular/official) pension statement(s) associated with the insured person is retrieved. 
-        If a person has several policies (associated to different pension plans), either an aggregated statement is delivered or one statement per pension plan. 
-        This can vary depending on the pension fund. In the aggregated statement, the related pension plans are listed. 
+      description: |
+        Provides the pension statement(s) representing the state of the policy/policies for the specified date as structured data.
+        If no date is specified, the latest (regular/official) pension statement(s) associated with the insured person is retrieved.
+        If a person has several policies (associated to different pension plans), either an aggregated statement is delivered or one
+        statement per pension plan. This can vary depending on the pension fund.
+        In the aggregated statement, the related pension plans are listed.
+
         If the pension fund is unable to provide a statement for the request date, the error
         code 400 should be returned.
       operationId: getPensionStatementsByDate
@@ -338,7 +348,8 @@ paths:
     post:
       summary: Simulate effects of salary and employment level change
       description: >
-        Simulates the effects of a salary and/or employment level change on personal pension details (e.g. retirement capital)
+        Simulates the effects of a salary and/or employment level change on
+        personal pension details (e.g. retirement capital)
       operationId: simulateSalaryChange
       tags:
         - simulation
@@ -644,7 +655,9 @@ components:
 
     PensionStatement:
       type: object
-      description: Pension statement consisting of the basic pension statement information, including aggregated personal pension data across related policies.
+      description: |
+        Pension statement consisting of the basic pension statement information,
+        including aggregated personal pension data across related policies.
       required:
         - pensionStatementId
         - timeStamp
@@ -871,7 +884,9 @@ components:
 
     PersonalPensionDetails:
       type: object
-      description: Shared pension-related data specific to the insured person. This data structure is used in policies and pension statements to represent key attributes like salary, capital and benefits.
+      description: |
+        Shared pension-related data specific to the insured person. This data structure is used in policies and pension statements
+        to represent key attributes like salary, capital and benefits.
       required:
         - referenceDate
         - ordinaryRetirementAge
@@ -1528,22 +1543,6 @@ components:
       examples:
         - 31000.00
 
-    HealthReservation:
-      type: object
-      description: >
-        Period of health reservation.
-      required:
-        - startDate
-      properties:
-        startDate:
-          $ref: '#/components/schemas/Date'
-          description: Start date of health reservation.
-        endDate:
-          $ref: '#/components/schemas/Date'
-          description: >
-            End date of health reservation.
-            If no end date is specified, the health reservation is currently still in force.
-
     Pledge:
       type: object
       description: >
@@ -1695,10 +1694,12 @@ components:
       properties:
         personalPensionDetailsBeforeChange:
            $ref: '#/components/schemas/PersonalPensionDetails'
-           description:  Provides the personal pension details before the change (referenceDate=today)
+           description: Provides the personal pension details before the change (referenceDate=today)
         personalPensionDetailsAfterChange:
           $ref: '#/components/schemas/PersonalPensionDetails'
-          description:  Provides the personal pension details after the change (referenceDate=tomorrow or effectiveDate, if specified as API parameter)
+          description: |
+            Provides the personal pension details after the change (referenceDate=tomorrow or effectiveDate,
+            if specified as API parameter)
 
     SimulationParameters:
       type: object
@@ -1748,7 +1749,6 @@ components:
       examples:
         - 0
 
-    
     Transactions:
       type: object
       description: Retirement capital transactions.
