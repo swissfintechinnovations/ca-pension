@@ -160,7 +160,8 @@ tags:
     description: Retirement capital transactions.
 
 security:
-  TBD
+  - OAuth2:
+      - read:basic_pension_data
 
 paths:
   /insured-persons/{personId}:
@@ -421,7 +422,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SimulationParameters'
+              $ref: '#/components/schemas/PurchaseSimParameters'
       responses:
         '200':
           description: Simulation result
@@ -1702,7 +1703,7 @@ components:
             Provides the personal pension details after the change (referenceDate=tomorrow or effectiveDate,
             if specified as API parameter)
 
-    SimulationParameters:
+    PurchaseSimParameters:
       type: object
       description: Voluntary purchase simulation parameters.
       required:
