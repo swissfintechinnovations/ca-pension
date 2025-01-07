@@ -30,8 +30,10 @@ info:
     Die PDF-Version des Vorsorgeausweises entspricht dem Dokument, welches traditionell anfangs Jahr durch
     die Pensionskasse für die Versicherten ausgestellt wird.
 
-    Das API umfasst auch die Simulation einer Änderung des Beschäftigtengrads und/oder Lohns. Die
-    Simulation berechnet die Effekte auf die monatlichen Beiträge sowie auf die voraussichtlichen
+    Das API umfasst auch Simulationen:
+    - Änderung des Beschäftigtengrads und/oder des Lohns
+    - Freiwilliger Einkauf in die Pensionskasse
+    Die Simulationen berechnen die Effekte auf die monatlichen Beiträge sowie auf die voraussichtlichen
     Rentenleistungen bei unterschiedlichem Pensionierungsalter.
 
     Die in dieser Spezifikation angegebenen URLs sind nur Beispiel-URLs. Das API wird von einer
@@ -83,12 +85,11 @@ info:
     The PDF version of the pension certificate corresponds to the document that is traditionally issued to the
     insured persons by the pension fund at the beginning of the year.
 
-    The API also includes the simulation of a change of employment level and/or salary. It
-    calculates the effects on the monthly contributions as well as the effects of the
+    The API also includes simulations:
+    - Change of employment level and/or salary
+    - Voluntary purchase into the pension fund
+    The simulations calculate the effects on the monthly contributions as well as the effects of the
     perspective pension benefits for different retirement ages.
-
-    The Purchases endpoints can simulate the prospective effects of voluntary purchases of retirement
-    benefits.
 
     The URLs in the specification are examples only. The API is implemented by a many
     pension funds and each pension fund has an individual base URL for the API.
@@ -666,6 +667,7 @@ components:
         - personId
         - employer
         - pensionProvider
+        - referenceDate
         - pensionStatementType
         - pensionPlans
         - personalPensionDetails
@@ -683,6 +685,9 @@ components:
           $ref: '#/components/schemas/PensionProvider'
         pensionStatementNo:
           $ref: '#/components/schemas/PensionStatementNo'
+        referenceDate:
+          $ref: '#/components/schemas/Date'
+          description: Reference date of pension statement.
         pensionStatementType:
           $ref: '#/components/schemas/PensionStatementType'
         pensionPlans:
@@ -845,6 +850,7 @@ components:
         - personId
         - employer
         - pensionProvider
+        - referenceDate
         - entryDate
         - policyNo
         - pensionPlan
@@ -858,6 +864,9 @@ components:
           $ref: '#/components/schemas/Employer'
         pensionProvider:
           $ref: '#/components/schemas/PensionProvider'
+        referenceDate:
+          $ref: '#/components/schemas/Date'
+          description: Reference date of the personal pension details.
         entryDate:
           $ref: '#/components/schemas/Date'
           description: Entry date into the pension plan.
@@ -890,7 +899,6 @@ components:
         Shared pension-related data specific to the insured person. This data structure is used in policies and pension statements
         to represent key attributes like salary, capital and benefits.
       required:
-        - referenceDate
         - ordinaryRetirementAge
         - earliestRetirementAge
         - salaryData
@@ -900,9 +908,6 @@ components:
         - regularPurchaseMaxAmount
         - homeOwnershipAvailableForWithdrawal
       properties:
-        referenceDate:
-          $ref: '#/components/schemas/Date'
-          description: Reference date of the data calculation.
         ordinaryRetirementAge:
           type: integer
           format: int32
@@ -1726,7 +1731,7 @@ components:
         date:
           $ref: '#/components/schemas/Date'
           description: >
-            Date of the (first) payments.
+            Date of the (first) payment.
             If omitted: tomorrow.
         paymentSize:
           type: number
