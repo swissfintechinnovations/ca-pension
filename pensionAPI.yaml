@@ -379,7 +379,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SimulationResultPensionDetails'
+                $ref: '#/components/schemas/SimulationResultPensionStatement'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -430,7 +430,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SimulationResultPensionDetails'
+                $ref: '#/components/schemas/SimulationResultPensionStatement'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -1691,21 +1691,22 @@ components:
             Date when the salary change takes effect.
             If omitted: tomorrow.
 
-    SimulationResultPensionDetails:
+    SimulationResultPensionStatement:
       type: object
       description: Financial effect of simulation.
       required:
-        - personalPensionDetailsBeforeChange
-        - personalPensionDetailsAfterChange
+        - pensionStatementBeforeChange
+        - pensionStatementAfterChange
       properties:
-        personalPensionDetailsBeforeChange:
-          $ref: '#/components/schemas/PersonalPensionDetails'
-          description: Provides the personal pension details before the change (referenceDate=today)
-        personalPensionDetailsAfterChange:
-          $ref: '#/components/schemas/PersonalPensionDetails'
+        pensionStatementBeforeChange:
+          $ref: '#/components/schemas/PensionStatement'
+          description: Provides the pension statement before the change (referenceDate = today)
+        pensionStatementAfterChange:
+          $ref: '#/components/schemas/PensionStatement'
           description: |
-            Provides the personal pension details after the change (referenceDate=tomorrow or effectiveDate,
-            if specified as API parameter)
+            Provides the pension statement after the change
+            In case of salaray change: referenceDate = tomorrow OR effectiveDate, if specified as API parameter
+            In case of purchase: referenceData = day after the (last) payment
 
     PurchaseSimParameters:
       type: object
