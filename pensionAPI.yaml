@@ -662,7 +662,6 @@ components:
         Pension statement consisting of the basic pension statement information,
         including aggregated personal pension data across related policies.
       required:
-        - pensionStatementId
         - timeStamp
         - personId
         - employer
@@ -848,12 +847,12 @@ components:
       required:
         - policyId
         - personId
-        - employer
         - pensionProvider
         - referenceDate
-        - entryDate
         - policyNo
         - pensionPlan
+        - entryDate
+        - contractNo
         - personalPensionDetails
       properties:
         policyId:
@@ -867,9 +866,6 @@ components:
         referenceDate:
           $ref: '#/components/schemas/Date'
           description: Reference date of the personal pension details.
-        entryDate:
-          $ref: '#/components/schemas/Date'
-          description: Entry date into the pension plan.
         policyNo:
           type: string
           description: Policy number (as printed on policy statements).
@@ -877,6 +873,9 @@ components:
             - 392'485'482
         pensionPlan:
           $ref: '#/components/schemas/PensionPlan'
+        entryDate:
+          $ref: '#/components/schemas/Date'
+          description: Entry date into the pension plan.
         contractNo:
           type: string
           description: Contract number of contract between employer and pension fund.
