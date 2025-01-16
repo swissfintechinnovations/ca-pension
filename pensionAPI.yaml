@@ -1340,7 +1340,8 @@ components:
     LumpSumWithoutPensionBenefits:
       type: number
       format: double
-      description: One-off payment in case of death where no other benefits are paid out.
+      description: >
+        One-off payment in the event of death if no other benefits are paid (i.e. there is no entitlement to a partner's pension, for example).
       examples:
         - 92834.00
 
@@ -1348,7 +1349,7 @@ components:
       type: number
       format: double
       description: >
-        Guaranteed, minimal one-off payment in case of death where other benefits are paid out.
+        Guaranteed, minimum one-off payment in the event of death, in addition to other benefits (e.g. in addition to the partner's pension)
       examples:
         - 74383.00
 
