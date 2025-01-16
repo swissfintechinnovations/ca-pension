@@ -12,174 +12,39 @@ info:
     Mit dem Pension-API können Daten zur versicherten Person und deren Vorsorgesituation abgefragt werden.
     Dies umfasst vereinfacht gesagt die Daten, die auf dem Versicherungsausweis zu finden sind.
     Auch die Erstellung bzw. das Beziehen von bereits erstellten Versicherungsausweisen als PDF-Datei
-    ist möglich. Des Weiteren gibt es Endpunkte zum Einkaufsprozess, für Simulationen und für Transaktionen.
+    ist möglich. Des Weiteren gibt es Endpunkte für Simulationen und für Transaktionen.
 
-    Als Einstieg fürs Pension-API wird eine technische Personen- oder Policen-ID benötigt.
-    Dies wird vom Consent API geliefert.
+    Als Einstieg fürs Pension-API wird eine technische Personen-, Statement- oder Policen-ID benötigt.
 
-    Die wesentlichen Objekte dieses APIs sind *Person*, *Police* und *Vorsorgeausweis*. Person bezieht sich
+    Die wesentlichen Objekte dieses APIs sind *Person*, *Police* und *Pension Statement*. Person bezieht sich
     immer auf eine natürliche Person, die bei einer Pensionskasse versichert ist.
 
     Die Police beschreibt den indirekten Versicherungsvertrag zwischen der versicherten Person
     (ArbeitnehmerIn) und der Pensionskasse. Ist eine Person über zwei Vorsorgepläne versichert,
     z.B. über einen Basis- und einen zusätzlichen Kaderplan, so hat sie zwei Policen.
 
-    Der Vorsorgeausweis entspricht dem Dokument, welches traditionell anfangs Jahr durch die Pensionskasse
-    für die Versicherten ausgestellt wird.
+    Das Pension Statement umfasst grundsätzlich die gleichen persönlichen Vorsorgedaten wie die Policen,
+    kann aber die Daten verschiedener Policen aggregieren. Je nach Pensionkasse wird dies unterschiedlich
+    gehandhabt.
 
-    Wo es relevant ist, Angaben in den obligatorischen und den über-obligatorischen Teil
-    aufzutrennen, wird jeweils das Total (obligatorisch plus über-obligatorisch) und der
-    obligatorische Wert separat ausgewiesen. Falls der über-obligatorische Wert benötigt wird, muss
-    er vom API-Konsumenten selbst berechnet werden (Differenz zwischen den beiden Werten).
+    Die PDF-Version des Vorsorgeausweises entspricht dem Dokument, welches traditionell anfangs Jahr durch
+    die Pensionskasse für die Versicherten ausgestellt wird.
 
-    Ausgenommen davon sind Zinssätze und Umwandlungssätze. Hier werden entweder der obligatorische
-    und der über-obligatorische Satz als zwei separate Werte geliefert, oder dann wird der
-    umhüllende Satz geliefert.
-
-    Das API umfasst auch die Simulation einer Änderung des Beschäftigtengrads und/oder Lohns. Die
-    Simulation berechnet die Effekte auf die monatlichen Beiträge sowie auf die voraussichtlichen
-    Rentenleistungen bei unterschiedlichem Penionierungsalter.
-
-    Das Einkaufsendpunkte erlauben es, die Auswirkungen eines freiwilligen Einkaufs in die Pensionskasse
-    zu simulieren und einen Einkauf zu starten.
+    Das API umfasst auch Simulationen:
+    - Änderung des Beschäftigtengrads und/oder des Lohns
+    - Freiwilliger Einkauf in die Pensionskasse
+    Die Simulationen berechnen die Effekte auf die monatlichen Beiträge sowie auf die voraussichtlichen
+    Rentenleistungen bei unterschiedlichem Pensionierungsalter.
 
     Die in dieser Spezifikation angegebenen URLs sind nur Beispiel-URLs. Das API wird von einer
     Vielzahl von Pensionskassen implementiert und jede Pensionskasse hat eine andere Basis-URL
     für das API. Die Basis-URL der jeweiligen Pensionskasse wird vom Directory API geliefert.
 
 
-    ## Einkaufsprozess
-
-    Für einen freiwilligen Einkauf gelten eine Reihe von gesetzlichen Voraussetzungen, die erfüllt
-    sein müssen, z.B. dass WEF-Vorbezüge zurückgezahlt wurden. Deshalb besteht der Einkaufsprozess grob aus zwei Phasen:
-
-    - Prüfung: In dieser Phase wird der Antrag geprüft und bei Bedarf weitere Unterlagen von der versicherten Person eingefordert.
-
-    - Zahlung: Ist der Antrag bewilligt, so macht die versicherte Person eine oder mehrere Zahlungen.
-
-
-    ## Einkaufsantrag
-
-    Beim Einkaufsprozess wird im ersten Schritt ein Einkaufsantrag erstellt. Er repräsentiert den nach aussen
-    sichtbaren Stand der Prozessinstanz. Der interne Prozess unterscheidet sich von Pensionskasse zu Pensionskasse
-    und besteht aus viel mehr Schritten als von aussen sichtbar. Der Antrag kann folgende Zustände haben, die für
-    die versicherte Person und im API sichtbar sind:
-
-    - In Prüfung: Die Pensionskasse ist dabei, den Antrag zu prüfen. Dies ist der erste Zustand eines neuen Antrags.
-
-    - Unterlagen erforderlich: Die Prüfung hat ergeben, dass die versicherte Person weitere Unterlagen einreichen oder
-    direkt mit der Pensionskasse Kontakt aufnehmen muss.
-
-    - Abgelehnt: Der Einkaufsantrag wurde abgelehnt. Dies ist ein Endzustand.
-
-    - Bewilligt: Der Einkaufsantrag wurde bewilligt. Die versicherte Person kann nun die Zahlungen vornehmen
-    (einmalige oder wiederkehrende).
-
-    - Abgeschlossen: Der Einkaufsantrag ist abgeschlossen. Eine oder mehrere Zahlungen sind erfolgt, und es sind keine
-    weiteren Zahlungen mehr möglich. Dies ist ein Endzustand.
-
-    Der Antrag kann über das API abgefragt werden und hat neben dem Antragszustand noch viele weitere Attribute,
-    z.B. die bewilligte Einkaufssumme, die Summe der erfolgten Zahlungen etc.
-
-
-    ## Fragen im Einkaufsantrag
-
-    Die Einkaufsprüfung ist massgeblich durch gesetzliche Regelungen bestimmt. Dennoch gibt es Unterschiede zwischen den
-    Pensionskassen. Einige stellen mehr und präzisere Fragen, andere stellen weniger Fragen und fordern schneller nach
-    zusätzlichen Dokumenten oder Kontaktaufnahme.
-
-    Das API deckt dies ab, indem die Pensionskasse bestimmen kann, ob gewisse Fragen überhaupt gestellt werden. Diese
-    Fragen sind in der Tabelle unten als Optional markiert. Optionale Fragen sind optional für die Pensionskasse. Wird
-    die Frage angezeigt, muss die versicherte Person sie beantworten. Optionale Fragen können auch benutzt werden, um
-    die Fragen für die versicherte Person zu individualisieren. So kann darauf verzichtet werden, nach laufenden Renten
-    zu fragen, wenn die Person noch nicht 55 Jahre alt ist.
-
-    Einige Fragen hängen von anderen Fragen ab, d.h. die Fragen sind nur zu beantworten, falls bei einer anderen Frage
-    eine bestimmte Antwort gegeben wurde. Diese Abhängigkeiten sind in der Tabelle unten erwähnt.
-
-    Bei einigen Fragen kann die Pensionskasse einen Wert vorgeben, z.B. eine bereits bekannte Emailadresse. Dieser Wert
-    wird in das Antwortfeld eingefüllt und kann von der versicherten Person bei Bedarf geändert werden.
-
-    | Nr. | Frage | Typ der Antwort | Bemerkungen |
-    | --- | ----- | --------------- | ----------- |
-    | 1   | **Betrag** | | |
-    | 1a  | Welchen Betrag möchten Sie in die Pensionskasse einzahlen? | Betrag |  |
-    | 2   | **Freizügigkeitskonten oder -policen** | | |
-    | 2a  | Verfügen Sie über Guthaben auf Freizügigkeitskonten bei Banken, bei der Stiftung Auffangeinrichtungen oder auf Freizügigkeitspolicen? | Ja/Nein | |
-    | 3   | **Selbständige Erwerbstätigkeit** | | |
-    | 3a  | Waren Sie in der Vergangenheit je selbständig erwerbstätig und haben während dieser Zeit Beiträge zugunsten der Säule 3a einbezahlt? | Ja/Nein | |
-    | 3b  | Wie hoch ist das Guthaben per 31.12. des letzten Jahrs? | Betrag | Optional. Nur fragen, falls Antwort auf Frage 3a “Ja” ist. |
-    | 4   | **Wohneigentum** | | |
-    | 4a  | Haben Sie bei früheren Pensionskassen oder von Freizügigkeitskonten/-policen Vorbezüge getätigt und diese noch nicht vollständig zurückbezahlt? | Ja/Nein | |
-    | 5   | **Zuzug aus dem Ausland** | | |
-    | 5a  | Sind Sie innerhalb der letzten 5 Jahre aus dem Ausland zugezogen? (gilt auch für Schweizer Staatsangehörige) | Ja/Nein | Optional. |
-    | 5b  | Wann sind Sie zugezogen? | Datum | Optional. Nur fragen, falls Antwort auf Frage 5a “Ja” ist. |
-    | 5c  | Waren Sie davor bereits bei einer Schweizer Vorsorgeeinrichtung versichert? | Ja/Nein | Optional. Nur fragen, falls Antwort auf Frage 5a “Ja” ist. |
-    | 5d  | Wann sind Sie zum ersten Mal einer Schweizer Vorsorgeeinrichtung beigetreten? | Datum | Optional. Nur fragen, falls Antwort auf Frage 5a “Ja” ist. |
-    | 6   | **Bezug Altersrente / Kapitalauszahlung** | | |
-    | 6a  | Beziehen Sie von einer Pensionskasse eine Altersrente oder haben Sie sich bereits Alterskapital auszahlen lassen? | Ja/Nein | Optional. |
-    | 7   | **Weitere Fragen zur Situation** | | |
-    | 7a  | Sind Sie zusätzlich bei einer anderen Vorsorgeversicherung versichert? | Ja/Nein | Optional. |
-    | 7b  | Sind Sie zu 100% arbeitsfähig? | Ja/Nein | Optional. |
-    | 7c  | Handelt es sich beim Einkauf um einen Wiedereinkauf nach Ehescheidung oder nach gerichtlicher Auflösung einer eingetragenen Partnerschaft? | Ja/Nein | Optional. |
-    | 7d  | Wird der Einkauf mit Geld aus der Säule 3a getätigt? | Ja/Nein | Optional. |
-    | 8   | **Kontaktangaben** | | |
-    | 8a  | Ist Ihre Adresse <adresse> korrekt? | Ja/Nein | Optional. Die Adresse wird von der Pensionskasse geliefert und muss im Text oder separat angezeigt werden. |
-    | 8b  | Unter welcher Telefonnummer dürfen wir Sie bei Fragen kontaktieren? | Telefonnummer | Optional. |
-    | 8c  | Über welche Emailadresse dürfen wir Sie bei Fragen kontaktieren? | Emailadresse | Optional. |
-
-
-    ## Instruktionen an die versicherte Person
-
-    Ergibt die Prüfung, dass weitere Unterlagen oder eine Kontaktaufnahme mit der Pensionskasse nötig sind, so können der
-    versicherten Person entsprechende Instruktionen erteilt werden. Diese können von der Pensionskasse frei formuliert werden.
-
-    Die Instruktionen bestehen aus einer Liste von Sätzen. Diese werden von der Applikation als unnummerierte Liste angezeigt, z.B:
-
-    - *Der Einkaufsbetrag reduziert sich um die Höhe des Guthabens auf den Freizügigkeitskonti / -policen. Bitte senden Sie uns
-    Kopien von Konto-/Policienauszügen, die den Stand per Ende letzten Jahres zeigen.*
-    - *Senden Sie die Dokumente an: Personalfürsorge der Firma Heierli AG, Bahnhofstrasse 13, 9000 St. Gallen.*
-    - *Alternativ können Sie die Dokumente an einkauf@heierli-pk.ch senden. Bitte beachten Sie, dass Emails einen Weg über Server
-    im Ausland nehmen können und die Vertraulichkeit auf dem Weg nicht gewährt ist.*
-
-    Sind weitere Unterlagen nötig, so müssen diese direkt an die Pensionskasse (und nicht über die Applikation) eingereicht werden.
-    Entsprechend gibt es kein API dafür.
-
-
-    ## Feedback an die versicherte Person
-
-    In vielen Fällen ist die Antragsprüfung nicht automatisiert und sofort erledigt. Stattdessen dauert sie Stunden oder sogar einige
-    Tage. Wenn das Ergebnis vorliegt, sollte der/die AntragsstellerIn benachrichtigt werden. Dazu nutzt die Pensionskasse direkte
-    Kommunikationskanäle (Email, SMS, Telefonanruf etc.)
-
-    Hat die App einen eigenen Kommunikationskanal mit der versicherten Person, so kann sie regelmässig prüfen, ob sich der Status des
-    Antrags verändert hat und bei einer Änderung benachrichtigen. Dieser Kanal ist freiwillig und zusätzlich zur direkten Kommunikation
-    zwischen Pensionskasse und versicherter Person.
-
-
-    ## Zahlungen
-
-    Wurde der Einkauf über einen bestimmten Betrag bewilligt, so kann der Betrag wie folgt überwiesen werden:
-
-    - **Einmalige Einzahlung mit Einzahlungsschein (QR-Rechnung)**: Die Pensionskasse stellt die Zahlungsdaten (Adresse, Kontonummer,
-    Referenznummer etc.) aus, die per API an die Applikation geliefert werden.
-
-    - **Einmalige Einzahlung über eBill**: Die Pensionskasse sendet eine eBill ans eBill-Konto der versicherten Person.
-
-    - **Regelmässige Einzahlungen per eBill**: Es wird ein Zahlungsrhythmus vereinbart, gemäss dem die Pensionskasse eBills ans
-    eBill-Konto der versicherten Person sendet.
-
-    - **Unregelmässige Einzahlungen per Einzahlungsschein (QR-Rechnung)**: Die Pensionskasse stellt die Zahlungsdaten (Adresse,
-    Kontonummer, Referenznummer etc.) aus, die die Applikation nutzt, um Zahlungen auszulösen, z.B. über eine E-Banking-Schnittstelle.
-    Es wird für alle Zahlungen die gleiche Referenznummer verwendet.
-
-    Eine Pensionskasse muss nicht alle vier Zahlungsmethoden unterstützen. Die unterstützen Zahlungsmethoden können über das API
-    abgefragt werden.
-
-
     ## Simulation
 
-    Die Simulation berechnet, wie hoch das Altersguthaben und die Rente mit und ohne Einkauf sein wird. Dabei können verschiedene Parameter gewählt werden:
+    Die Simulation berechnet, wie hoch das Altersguthaben und die Rente mit und ohne Einkauf sein wird.
+    Dabei können verschiedene Parameter gewählt werden:
 
     - Einkaufssumme (gesamt)
     - Pensionierungsalter
@@ -188,7 +53,7 @@ info:
     - Datum der (ersten) Zahlung
 
     Die Simulation geht davon aus, dass die gesetzlichen Voraussetzungen für den Einkauf gegeben sind. Sie prüft,
-    dass der maximale Einkaufsbetrag nicht überschritten wird, und passt in bei Bedarf an.
+    dass der maximale Einkaufsbetrag nicht überschritten wird, und passt ihn bei Bedarf an.
 
 
     ## Kontobewegung
@@ -203,170 +68,32 @@ info:
     The Pension API serves to query details about the insured person and their pension situation.
     In simplified terms, this includes the data found on the insurance certificate.
     Additionally, policy statements can be generated or already generated statements can be
-    retrieved as PDF files. There are also endpoints for the purchasing process, for simulations
-    and for transactions.
+    retrieved as PDF files. There are also endpoints for simulations and for transactions.
 
-    Person and policy IDs serve as the entry point for this API. They are provided by the
-    Consent API.
+    Person, statement and policy IDs serve as the entry point for this API.
 
-    The main objects are *person*, *policy* and *statement*. A person refers to a natural person
-    insured with a pension fund.
+    The main objects of this API are *Person*, *Policy* and *Pension Statement*. Person always refers
+    to a natural person who is insured with a pension fund.
 
-    A policy describes the indirect contractural relationship between the insured person
-    (employee) and the pension fund. If a person is insured by two separate insurance plans,
-    e.g. a basic and a supplementary executive plan, the person has two separate plans.
+    The policy describes the indirect insurance contract between the insured person (employee)
+    and the pension fund. If a person is insured under two pension plans,
+    e.g. via a basic plan and an additional management plan, he or she has two policies.
 
-    The pension certificate corresponds to the document that is traditionally issued to the
+    The pension statement basically contains the same personal pension data as the policies,
+    but can aggregate the data from different policies. This is handled differently depending on the pension fund.
+
+    The PDF version of the pension certificate corresponds to the document that is traditionally issued to the
     insured persons by the pension fund at the beginning of the year.
 
-    If it is relevant to distinguish between the mandatory and the supplementary insurance
-    coverage, a total value (mandatory and supplementary values combined) and a mandatory
-    coverage value are provided seperately. If the value for the supplementary coverage is
-    required, the API consumer must calculate it (difference between the two values).
-
-    Interest and conversion rates are the exception to this rule. The pension fund either
-    provides two separate values for the mandatory and the supplementary part, or  they
-    provide a single enveloping value.
-
-    The API also includes the simulation of a change of employment level and/or salary. It
-    calculates the effects on the monthly contributions as well as the effects of the
+    The API also includes simulations:
+    - Change of employment level and/or salary
+    - Voluntary purchase into the pension fund
+    The simulations calculate the effects on the monthly contributions as well as the effects of the
     perspective pension benefits for different retirement ages.
-
-    The Purchases endpoints can simulate the prospective effects of voluntary purchases of retirement
-    benefits and initiate a purchase.
 
     The URLs in the specification are examples only. The API is implemented by a many
     pension funds and each pension fund has an individual base URL for the API.
     The base URL of a specific pension fund is provided by the directory API.
-
-
-    ## Purchase Process
-
-    In order to make a voluntary purchase a number of legal requirements must be fulfilled, e.g. early withdrawal of savings
-    must have been paid back. Thus the purchase process consists of two phases:
-
-    - Validation: In the first phase, the purchase application is validated and - if needed - additional documentation is requests from the insured person.
-
-    - Payment: Once the application has been approved, the insured person makes one or several payments.
-
-
-    ## Purchase Application
-
-    The initial step of the purchase process is to create an application. It represent the externally visible state
-    of the process instance. The internal process differs from pension fund to pension fund and likely consists
-    of far more steps than are externally visible. The application can have the below states that are visible
-    for the insured person and in the API:
-
-    - In review: The pension fund is reviewing and validating the application. This is the initial state of a new application.
-
-    - Input required: The validation requires the the insured person provides additional documents or contacts the pension fund directly.
-
-    - Rejected: The application has been rejected. This is a final state.
-
-    - Approved: The purchase application was approved. The insured person can now make payments (once or repeating).
-
-    - Completed: The purchase application has been completed. One or more payments have been received, and no further payments
-    are possible. This is a final state.
-
-    The application can be queried using the API. It will return the application state and many additional attributes,
-    such as the approved purchase amount, the amount of received payments.
-
-
-    ## Purchase Questionnaire
-
-    The purchase application validation is mainly governed by legal regulation. Nevertheless, there are differences between
-    the pension funds. Some funds ask many precise questions while other funds ask few questions and quickly resort
-    to requesting additional documents or direct contact.
-
-    The API covers these differences as the pension fund can decide if certain questions are asked at all. These questions
-    are marked as optional in the below table. Optional questions are optional for the pension fund. If the questions is
-    displayed to the insured person, it must be answered. Optional questions can also be used to tailor the questionnaire
-    to the insured person, e.g. by not asking whether the person is already drawing a pension if he/she is younger than 55.
-
-    Some questions depend on the answer of other question, i.e. the question is only relevant if a certain answer has been
-    given to a previous question. Such dependencies are mentioned in the below table.
-
-    For certain questions, the pension fund can provide an initial value, e.g. an earlier provided email address. The answer field
-    will be prefilled with this value and the insured person can change it if needed.
-
-    | No  | Question | Answer type | Remark |
-    | --- | ----- | --------------- | ----------- |
-    | 1   | **Amount** | | |
-    | 1a  | What amount of payment would you like to make towards the pension fund? | Amount |  |
-    | 2   | **Pillar 2 Vested Benefits** | | |
-    | 2a  | Do you have any additional pillar 2 claims from vested benefits accounts, vested benefits policies or at the Foundation of the BVG Contingency Fund? | Yes/No | |
-    | 3   | **Self-employment** | | |
-    | 3a  | Have you ever been self-employed and paid into pillar 3a during that time? | Yes/No | |
-    | 3b  | What is the pillar 3a balance as of 31 December of last year? | Amount | Optional. Will only be asked if the answer for question 3a is 'Yes'. |
-    | 4   | **Residental property** | | |
-    | 4a  | Have you made an early withdrawal of pension savings to fund the purchase of residential property and have not fully paid it back? | Yes/No | |
-    | 5   | **Move to Switzerland** | | |
-    | 5a  | Have you moved to Switzerland from another country during the last 5 years? (applies to Swiss citizens as well) | Yes/No | Optional. |
-    | 5b  | When have you moved to Switzerland? | Date | Optional. Will only be asked if answer to question 5a is 'Yes'. |
-    | 5c  | Have you ever joined a Swiss pillar 2 pension plan before? | Yes/No | Optional. Will only be asked if answer to question 5a is 'Yes'. |
-    | 5d  | When have you joined a Swiss pillar 2 pension plan for the first time? | Date | Optional. Will only be asked if answer to question 5a is 'Yes'. |
-    | 6   | **Early retirement pension / savings capital withdrawal** | | |
-    | 6a  | Are you drawing a retirement pension or have you ever withdrawn retirement savings capital from a pension fund? | Yes/No | Optional. |
-    | 7   | **Additional question regarding the insured person** | | |
-    | 7a  | Are you currently insured in an additional pension plan? | Yes/No | Optional. |
-    | 7b  | Are you fully able for work? | Yes/No | Optional. |
-    | 7c  | Is the purchase made to make up for the pension savings surrender due to a divorce or a dissolution of a civil partnership?? | Yes/No | Optional. |
-    | 7d  | Is the purchase made with money originating from a pillar 3a account? | Yes/No | Optional. |
-    | 8   | **Contact** | | |
-    | 8a  | Is your address <adresse> correct? | Yes/No | Optional. The address will be provided by the pension fund and must be displayed in the question text or nearby on the screen. |
-    | 8b  | What is your phone number to contact you in case of questions? | Phone number | Optional. |
-    | 8c  | What is your email address to contact you in case of questions? | Email address | Optional. |
-
-
-    ## Instructions for the Insured Person
-
-    If the result of the initial review is that additional documents or direct contact with the pension fund is needed,
-    such instructions can be given to the insured person. The pension fund can phrase the instructions according to their needs.
-
-    Structurally, the instructions are a list of sentences. The application will display them as bullet list, e.g.:
-
-    - *Your purchasing potential will be reduced by your further claims from pillar 2 (vested benefits account or policy). Please
-    send us a copy of the current account statement for your vested benefit accounts.*
-    - *Please send the documents to: Personalfürsorge der Firma Heierli AG, Bahnhofstrasse 13, 9000 St. Gallen.*
-    - *Alternatively, you can send the documents to einkauf@heierli-pk.ch. Please not that emails can take a route via servers abroad,
-    and confidentially on this path cannot be guaranteed.*
-
-    If additional documents are required for the purchase, they must be sent directly to the pension fund (and not via the application).
-    Thus, there is no API to upload documents.
-
-
-    ## Feedback to the Insured Person
-
-    In many cases, the application validation is not fully automated and not immediately done. Instead, it can last hours or even days.
-    Once the result is ready, the insured person should be notified. The pension fund uses direct communication channels (email, short
-    text messages, phone calls etc.) for this purpose.
-
-    If an application has a communication channel to the insured person, it can regularly poll if the state of the purchase application
-    has changed and notify the person about changes. Such a channel is voluntary and in addition to the direct communication between
-    pension fund and insured person.
-
-
-    ## Payments
-
-    Once the voluntary purchase has been approved, the amount can paid in one four ways:
-
-    - **Single payment using a payment slip (QR bill)**: The pension fund provides the payment details (address,
-    account number, reference number etc.) via API to the application used by the insured person. He/she makes
-    a payment using the provided data.
-
-    - **Single payment by eBill**: The pension fund sends an eBill to the insured person's eBill account.
-    The insured person provides the eBill email address via the API to the pension fund.
-
-    - **Periodic payments by eBill**: The insured person chooses a payment periodicity, which is sent
-    to the pension fund via the API. The pension fund will later send an eBill for each payment to
-    the insured person's eBill account.
-
-    - **Irregular payments using a payment slip (QR bill)**: The pension fund provides the payment details (address,
-    account number, reference number etc.)  via API to the application. The application then triggers payments
-    (e.g. via an E-Banking-API). All payments use the same reference number.
-
-    A pension fund does not need to support a four payment methods. An application can query the supported methods
-    with an API call.
 
 
     ## Simulation
@@ -434,7 +161,8 @@ tags:
     description: Retirement capital transactions.
 
 security:
-  - bearerAuthentication: []
+  - OAuth2:
+      - read:basic_pension_data
 
 paths:
   /insured-persons/{personId}:
@@ -453,6 +181,9 @@ paths:
           schema:
             $ref: '#/components/schemas/PersonId'
           description: Technical person ID.
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       responses:
         '200':
           description: Details of insured person
@@ -468,10 +199,12 @@ paths:
   /insured-persons/{personId}/statements:
     post:
       summary: Get pension statement(s) data
-      description: >
-        Provides the pension statement(s) representing the state of the policy/policies for
-        the specified date (or most recent regular/official statement(s) when date not given)
-        as structured data.
+      description: |
+        Provides the pension statement(s) representing the state of the policy/policies for the specified date as structured data.
+        If no date is specified, the latest (regular/official) pension statement(s) associated with the insured person is retrieved.
+        If a person has several policies (associated to different pension plans), either an aggregated statement is delivered or one
+        statement per pension plan. This can vary depending on the pension fund.
+        In the aggregated statement, the related pension plans are listed.
 
         If the pension fund is unable to provide a statement for the request date, the error
         code 400 should be returned.
@@ -492,6 +225,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ReferenceDate'
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       responses:
         '200':
           description: Statement details
@@ -500,7 +236,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PensionStatementBasic'
+                  $ref: '#/components/schemas/PensionStatement'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -527,6 +263,9 @@ paths:
           schema:
             $ref: '#/components/schemas/PensionStatementId'
           description: Technical pension statement ID.
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       responses:
         '200':
           description: Binary PDF data of the pension statement
@@ -561,6 +300,9 @@ paths:
           schema:
             $ref: '#/components/schemas/PensionStatementId'
           description: Technical pension statement ID.
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       responses:
         '200':
           description: Compact statement details
@@ -577,7 +319,7 @@ paths:
     get:
       summary: Get details of a pension fund policy
       description: >
-        Provides extensive details about the insurance policy including current retirement capital,
+        Provides details about the insurance policy including current retirement capital,
         prospective pension benefits for different retirement ages, contributions to financing the
         insurance etc.
       operationId: getPolicy
@@ -590,6 +332,9 @@ paths:
           schema:
             $ref: '#/components/schemas/PolicyId'
           description: Technical policy ID.
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       responses:
         '200':
           description: Policy details
@@ -606,9 +351,8 @@ paths:
     post:
       summary: Simulate effects of salary and employment level change
       description: >
-        Simulates the effects of a salaray and/or employment level change on contributions
-        and prospective retirement benefits. Prospective retirements benefits are calculated
-        for retirement at the regular age as well as for multiple early retirement ages.
+        Simulates the effects of a salary and/or employment level change on
+        personal pension details (e.g. retirement capital)
       operationId: simulateSalaryChange
       tags:
         - simulation
@@ -619,6 +363,9 @@ paths:
           schema:
             $ref: '#/components/schemas/PolicyId'
           description: Policy ID.
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       requestBody:
         description: Salary change simulation parameters
         required: true
@@ -632,7 +379,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SalaryChangeSimResult'
+                $ref: '#/components/schemas/SimulationResultPensionStatement'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -667,224 +414,23 @@ paths:
           schema:
             $ref: '#/components/schemas/PolicyId'
           description: Policy ID.
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       requestBody:
         description: Voluntary purchase simulation parameters
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SimulationParameters'
+              $ref: '#/components/schemas/PurchaseSimParameters'
       responses:
         '200':
           description: Simulation result
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SimulationResult'
-        '401':
-          $ref: '#/components/responses/standard401'
-        '404':
-          $ref: '#/components/responses/standard404'
-
-  /policies/{policyId}/purchases/template:
-    get:
-      summary: Retrieves a purchase request template
-      description: >
-        The template purchase request serves to retrieve the configuration
-        and intial values for a new purchase request.
-      operationId: getTemplatePurchaseRequest
-      tags:
-        - purchase
-      parameters:
-        - in: path
-          name: policyId
-          required: true
-          schema:
-            $ref: '#/components/schemas/PolicyId'
-          description: Policy ID.
-      responses:
-        '200':
-          description: Purchase request with configuration and initial values
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PurchaseRequest'
-        '401':
-          $ref: '#/components/responses/standard401'
-        '404':
-          $ref: '#/components/responses/standard404'
-
-  /policies/{policyId}/purchases:
-    get:
-      summary: Query all purchase requests
-      description: >
-        Returns a list of all current and past purchase requests.
-      operationId: listPurchaseRequest
-      tags:
-        - purchase
-      parameters:
-        - in: path
-          name: policyId
-          required: true
-          schema:
-            $ref: '#/components/schemas/PolicyId'
-          description: Policy ID.
-      responses:
-        '200':
-          description: List of purchase requests
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PurchaseRequest'
-                description: List of purchase requests
-        '401':
-          $ref: '#/components/responses/standard401'
-        '404':
-          $ref: '#/components/responses/standard404'
-
-    post:
-      summary: Submit a new purchase request
-      description: |
-        Submit a new purchase request for voluntary purchase of additional pension benefits.
-
-        The submitted data must satisfy the requirements described above,
-        in particular which questions require an answer.
-
-        The response will contain an ID that can be used to query the submitted request in the future.
-      operationId: submitPurchaseRequest
-      tags:
-        - purchase
-      parameters:
-        - in: path
-          name: policyId
-          required: true
-          schema:
-            $ref: '#/components/schemas/PolicyId'
-          description: Policy ID.
-      requestBody:
-        description: Voluntary purchase request details
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PurchaseRequest'
-      responses:
-        '200':
-          description: Updated voluntary purchase request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PurchaseRequest'
-        '400':
-          $ref: '#/components/responses/standard400'
-        '401':
-          $ref: '#/components/responses/standard401'
-        '404':
-          $ref: '#/components/responses/standard404'
-
-  /policies/{policyId}/purchases/{purchaseRequestId}:
-    get:
-      summary: Get purchase request
-      description: >
-        Retrieves the current state of the specified purchase request.
-      operationId: getPurchaseRequest
-      tags:
-        - purchase
-      parameters:
-        - in: path
-          name: policyId
-          required: true
-          schema:
-            $ref: '#/components/schemas/PolicyId'
-          description: Policy ID.
-        - in: path
-          name: purchaseRequestId
-          required: true
-          schema:
-            $ref: '#/components/schemas/PurchaseRequestId'
-          description: Purchase Request ID.
-      responses:
-        '200':
-          description: Voluntary purchase request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PurchaseRequest'
-        '401':
-          $ref: '#/components/responses/standard401'
-        '404':
-          $ref: '#/components/responses/standard404'
-
-    put:
-      summary: Update purchase request.
-      description: |
-        Updates the insured person's input in the specified purchase request.
-
-        Updates are usually on possible if the request is in the state `inputRequired`.
-      operationId: updatePurchaseRequest
-      tags:
-        - purchase
-      parameters:
-        - in: path
-          name: policyId
-          required: true
-          schema:
-            $ref: '#/components/schemas/PolicyId'
-          description: Policy ID.
-        - in: path
-          name: purchaseRequestId
-          required: true
-          schema:
-            $ref: '#/components/schemas/PurchaseRequestId'
-          description: Purchase Request ID.
-      requestBody:
-        description: Voluntary purchase request details.
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PurchaseRequest'
-      responses:
-        '200':
-          description: Updated voluntary purchase request.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PurchaseRequest'
-        '400':
-          $ref: '#/components/responses/standard400'
-        '401':
-          $ref: '#/components/responses/standard401'
-        '404':
-          $ref: '#/components/responses/standard404'
-
-  /policies/{policyId}/payment-methods:
-    get:
-      summary: Retrieves the available payment methods
-      description: >
-        Returns the list of methods available to make payments for
-        a voluntary purchase of pension benefits.
-      operationId: getPaymentMethods
-      tags:
-        - purchase
-      parameters:
-        - in: path
-          name: policyId
-          required: true
-          schema:
-            $ref: '#/components/schemas/PolicyId'
-          description: Policy ID.
-      responses:
-        '200':
-          description: List of payment methods.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PaymentMethod'
+                $ref: '#/components/schemas/SimulationResultPensionStatement'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -933,6 +479,9 @@ paths:
           schema:
             $ref: '#/components/schemas/Date'
           description: End of date range (inclusive).
+      security:
+        - OAuth2:
+            - read:basic_pension_data
       responses:
         '200':
           description: Retirement capital transactions.
@@ -1024,21 +573,6 @@ components:
           items:
             $ref: '#/components/schemas/PolicyId'
           description: List of IDs of policies that insured person has with this pension fund.
-        disabilityDegree:
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 100
-          description: >
-            Degree (percent) of disability according to OASI (AHV/IV).
-            If not specified, 0 is assumed.
-          examples:
-            - 0
-        healthReservations:
-          type: array
-          items:
-            $ref: '#/components/schemas/HealthReservation'
-          description: List of health reservations.
 
     Address:
       type: object
@@ -1122,9 +656,11 @@ components:
         industry:
           $ref: '#/components/schemas/Industry'
 
-    PensionStatementBasic:
+    PensionStatement:
       type: object
-      description: Pension statement consisting of the basic pension statement information.
+      description: |
+        Pension statement consisting of the basic pension statement information,
+        including aggregated personal pension data across related policies.
       required:
         - timeStamp
         - personId
@@ -1133,14 +669,7 @@ components:
         - referenceDate
         - pensionStatementType
         - pensionPlans
-        - ordinaryRetirementAge
-        - earliestRetirementAge
-        - salaryData
-        - retirementCapital
-        - riskBenefits
-        - financing
-        - regularPurchaseMaxAmount
-        - homeOwnershipAvailableForWithdrawal
+        - personalPensionDetails
       properties:
         pensionStatementId:
           $ref: '#/components/schemas/PensionStatementId'
@@ -1160,38 +689,13 @@ components:
           description: Reference date of pension statement.
         pensionStatementType:
           $ref: '#/components/schemas/PensionStatementType'
-        entryDate:
-          $ref: '#/components/schemas/Date'
-          description: Entry date into the pension fund.
         pensionPlans:
           type: array
           description: List of related pension plans.
           items:
             $ref: '#/components/schemas/PensionPlan'
-        ordinaryRetirementAge:
-          type: integer
-          format: int32
-          description: Age (in month since birth) for ordinary retirement.
-          examples:
-            - 780
-        earliestRetirementAge:
-          type: integer
-          format: int32
-          description: Age (in month since birth) for earliest possible retirement.
-          examples:
-            - 696
-        salaryData:
-          $ref: '#/components/schemas/SalaryData'
-        retirementCapital:
-          $ref: '#/components/schemas/RetirementCapital'
-        riskBenefits:
-          $ref: '#/components/schemas/RiskBenefits'
-        financing:
-          $ref: '#/components/schemas/Financing'
-        regularPurchaseMaxAmount:
-          $ref: '#/components/schemas/RegularPurchaseMaxAmount'
-        homeOwnershipAvailableForWithdrawal:
-          $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
+        personalPensionDetails:
+          $ref: '#/components/schemas/PersonalPensionDetails'
 
     PensionStatementCompact:
       type: object
@@ -1344,34 +848,41 @@ components:
         - policyId
         - personId
         - pensionProvider
+        - referenceDate
         - policyNo
+        - pensionPlan
         - entryDate
-        - salaryData
-        - retirementCapital
-        - riskBenefits
-        - financing
+        - contractNo
+        - personalPensionDetails
       properties:
         policyId:
           $ref: '#/components/schemas/PolicyId'
         personId:
           $ref: '#/components/schemas/PersonId'
+        employer:
+          $ref: '#/components/schemas/Employer'
         pensionProvider:
           $ref: '#/components/schemas/PensionProvider'
+        referenceDate:
+          $ref: '#/components/schemas/Date'
+          description: Reference date of the personal pension details.
         policyNo:
           type: string
           description: Policy number (as printed on policy statements).
           examples:
             - 392'485'482
+        pensionPlan:
+          $ref: '#/components/schemas/PensionPlan'
         entryDate:
           $ref: '#/components/schemas/Date'
-          description: Entry date into policy
+          description: Entry date into the pension plan.
         contractNo:
           type: string
           description: Contract number of contract between employer and pension fund.
           examples:
             - C27-842.183
-        pensionPlan:
-          $ref: '#/components/schemas/PensionPlan'
+        personalPensionDetails:
+          $ref: '#/components/schemas/PersonalPensionDetails'
         isInVestedBenefitFoundation:
           type: boolean
           description: >
@@ -1380,6 +891,34 @@ components:
             set, a regular pension fund is assumed.
           examples:
             - false
+
+    PersonalPensionDetails:
+      type: object
+      description: |
+        Shared pension-related data specific to the insured person. This data structure is used in policies and pension statements
+        to represent key attributes like salary, capital and benefits.
+      required:
+        - ordinaryRetirementAge
+        - earliestRetirementAge
+        - salaryData
+        - retirementCapital
+        - riskBenefits
+        - financing
+        - regularPurchaseMaxAmount
+        - homeOwnershipAvailableForWithdrawal
+      properties:
+        ordinaryRetirementAge:
+          type: integer
+          format: int32
+          description: Age (in month since birth) for ordinary retirement.
+          examples:
+            - 780
+        earliestRetirementAge:
+          type: integer
+          format: int32
+          description: Age (in month since birth) for earliest possible retirement.
+          examples:
+            - 696
         salaryData:
           $ref: '#/components/schemas/SalaryData'
         retirementCapital:
@@ -1388,12 +927,12 @@ components:
           $ref: '#/components/schemas/RiskBenefits'
         financing:
           $ref: '#/components/schemas/Financing'
-        vestedBenefits:
-          $ref: '#/components/schemas/VestedBenefits'
         regularPurchaseMaxAmount:
           $ref: '#/components/schemas/RegularPurchaseMaxAmount'
         homeOwnershipAvailableForWithdrawal:
           $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
+        vestedBenefits:
+          $ref: '#/components/schemas/VestedBenefits'
 
     PensionPlan:
       type: object
@@ -1801,7 +1340,8 @@ components:
     LumpSumWithoutPensionBenefits:
       type: number
       format: double
-      description: One-off payment in case of death where no other benefits are paid out.
+      description: >
+        One-off payment in the event of death if no other benefits are paid (i.e. there is no entitlement to a partner's pension, for example).
       examples:
         - 92834.00
 
@@ -1809,7 +1349,7 @@ components:
       type: number
       format: double
       description: >
-        Guaranteed, minimal one-off payment in case of death where other benefits are paid out.
+        Guaranteed, minimum one-off payment in the event of death, in addition to other benefits (e.g. in addition to the partner's pension)
       examples:
         - 74383.00
 
@@ -2010,22 +1550,6 @@ components:
       examples:
         - 31000.00
 
-    HealthReservation:
-      type: object
-      description: >
-        Period of health reservation.
-      required:
-        - startDate
-      properties:
-        startDate:
-          $ref: '#/components/schemas/Date'
-          description: Start date of health reservation.
-        endDate:
-          $ref: '#/components/schemas/Date'
-          description: >
-            End date of health reservation.
-            If no end date is specified, the health reservation is currently still in force.
-
     Pledge:
       type: object
       description: >
@@ -2168,29 +1692,24 @@ components:
             Date when the salary change takes effect.
             If omitted: tomorrow.
 
-    SalaryChangeSimResult:
+    SimulationResultPensionStatement:
       type: object
-      description: Financial effect of voluntary purchase.
+      description: Financial effect of simulation.
       required:
-        - salaryData
-        - projectedRetirementBenefits
-        - financing
+        - pensionStatementBeforeChange
+        - pensionStatementAfterChange
       properties:
-        salaryData:
-          $ref: '#/components/schemas/SalaryData'
-        projectedRetirementBenefits:
-          type: array
-          description: >
-            Projected retirement benefits for a series of retirement ages.
-            The list contains projections for each integer retirement age from 58 to the
-            regular retirement age. For persons of 58 or older, the list is restricted
-            to retirement ages higher than their current age.
-          items:
-            $ref: '#/components/schemas/RetirementBenefits'
-        financing:
-          $ref: '#/components/schemas/Financing'
+        pensionStatementBeforeChange:
+          $ref: '#/components/schemas/PensionStatement'
+          description: Provides the pension statement before the change (referenceDate = today)
+        pensionStatementAfterChange:
+          $ref: '#/components/schemas/PensionStatement'
+          description: |
+            Provides the pension statement after the change
+            In case of salaray change: referenceDate = tomorrow OR effectiveDate, if specified as API parameter
+            In case of purchase: referenceData = day after the (last) payment
 
-    SimulationParameters:
+    PurchaseSimParameters:
       type: object
       description: Voluntary purchase simulation parameters.
       required:
@@ -2213,7 +1732,7 @@ components:
         date:
           $ref: '#/components/schemas/Date'
           description: >
-            Date of the (first) payments.
+            Date of the (first) payment.
             If omitted: tomorrow.
         paymentSize:
           type: number
@@ -2224,428 +1743,6 @@ components:
             - 10000.00
         paymentFrequency:
           $ref: '#/components/schemas/PaymentFrequency'
-
-    SimulationResult:
-      type: object
-      description: Financial effect of voluntary purchase.
-      required:
-        - maxAmount
-        - amount
-        - retirementAge
-        - capitalWithoutPurchase
-        - capitalWithPurchase
-        - pensionWithoutPurchase
-        - pensionWithPurchase
-      properties:
-        maxAmount:
-          type: number
-          description: Maximum allowed amount of voluntary purchase of additional pension benefits (in CHF).
-          examples:
-            - 48392.45
-        amount:
-          type: number
-          description: Effective amount of voluntary purchase (in CHF).
-          examples:
-            - 10000.00
-        retirementAge:
-          type: integer
-          description: Retirement age (in month since birth) assumed for simulation.
-          examples:
-            - 780
-        capitalWithoutPurchase:
-          type: number
-          description: Prospective savings capital at retirement without purchase (in CHF).
-          examples:
-            - 378832.05
-        capitalWithPurchase:
-          type: number
-          description: Prospective savings capital at retirement with purchase (in CHF).
-          examples:
-            - 390216.55
-        pensionWithoutPurchase:
-          type: number
-          description: Prospective pension after retirement without purchase (in CHF per year).
-          examples:
-            - 22835.00
-        pensionWithPurchase:
-          type: number
-          description: Prospective pension after retirement with purchase (in CHF per year).
-          examples:
-            - 23517.00
-
-    PurchaseRequest:
-      type: object
-      description: |
-        The *Purchase Request* object is the main data structure exchanged between application and pension fund
-        during the voluntary purchase process. It is updated by the the application and the pension fund.
-
-        The application updates:
-        - purchaseDetails
-        - paymentSchedule
-
-        The pension fund updates:
-        - id
-        - status
-        - purchaseDetails
-        - requiredPurchaseDetails
-        - instructions
-        - paymentInstructions
-        - paymentsReceived
-
-        The application should omit the above fields. If they are part of a REST request, the pension fund
-        will silently ignore them.
-
-        The application may only update the purchase request on creation and if it is in status `inputRequired`.
-
-        The pension fund will not update `purchaseDetails` except for minor cleanup (e.g. removing trailing whitespace)
-        that does not alter the insured person's input materially. The only exception is the purchase amount, which may
-        be lowered to maximum allowed amount.
-      properties:
-        id:
-          $ref: '#/components/schemas/PurchaseRequestId'
-        status:
-          type: string
-          description: |
-            Request status (set and updated by pension fund):
-            * `inReview` - Request was submitted and is in review
-            * `inputRequired` - Request requires additional input from insured person
-            * `rejected` - Request was rejected
-            * `approved` - Request was approved and is open for payments
-            * `completed` - Payment has been received and request is complete
-          enum:
-            - inReview
-            - inputRequired
-            - rejected
-            - approved
-            - completed
-          examples:
-            - inReview
-        purchaseDetails:
-          $ref: '#/components/schemas/PurchaseDetails'
-        requiredPurchaseDetails:
-          $ref: '#/components/schemas/RequiredPurchaseDetails'
-        instructions:
-          $ref: '#/components/schemas/Instructions'
-        paymentSchedule:
-          $ref: '#/components/schemas/PaymentSchedule'
-        paymentInstructions:
-          $ref: '#/components/schemas/PaymentInstructions'
-        paymentsReceived:
-          type: number
-          format: double
-          minimum: 0
-          description: Total amount of payments received (in CHF).
-          examples:
-            - 10000.00
-
-    PurchaseDetails:
-      type: object
-      description: |
-        Input from the insured person regarding the purchase request. These are the answers to the questions
-        described in detail in the introduction to this API. Most of the questions and answers are required to
-        ensure the purchase amount does not exceed the maximum allowed amount.
-
-        Some questions and answers are optional (in the sense that the pension fund does not want to ask them).
-        Optional questions are not displayed to the insured person and the answer can be omitted. The question
-        configuration depends on the pension fund and on the specific policy and can be found in the
-        `requiredPurchaseDetails` property.
-
-        The pension fund may set some of the properties when the empty purchase request is queried. These values
-        should be used as the initial values.
-      properties:
-        amount:
-          type: number
-          format: double
-          minimum: 1
-          description: >
-            Answer to question 1a: Requested purchase amount in CHF.
-          examples:
-            - 10000.00
-        hasVestedBenefits:
-          type: boolean
-          description: >
-            Answer to question 2a: Indicates if the insured person has pillar 2 vested benefits outside the pension fund (`true`)
-            or not (`false`)
-          examples:
-            - false
-        hasMadeSelfEmployedContributions:
-          type: boolean
-          description: >
-            Answer to question 3a: Indicates if the insured person has made pillar 3a contributions while being self-employed (`true`)
-            or not (`false`)
-          examples:
-            - false
-        selfEmployedContributionCredit:
-          type: number
-          format: double
-          minimum: 1
-          description: >
-            Answer to question 3b: Balance of pillar 3a credit as of the end of last year.
-          examples:
-            - 35000.00
-        hasNotRepaidEarlyWithdrawal:
-          type: boolean
-          description: >
-            Answer to question 4a: Indicates if the insured person has made an early withdrawal of savings to fund the purchase
-            of residential property and has not repaid it fully (`true`) or not (`false`).
-          examples:
-            - false
-        hasMovedFromAbroad:
-          type: boolean
-          description: >
-            Answer to question 5a: Indicates if the insured person has moved to Switzerland from abroad during the last 5 years (`true`)
-            or not (`false`).
-          examples:
-            - false
-        moveFromAbroadDate:
-          $ref: '#/components/schemas/Date'
-          description: >
-            Answert to question 5b: Date of move from another country to Switzerland.
-        hasBeenInsuredBefore:
-          type: boolean
-          description: >
-            Answer to question 5c: Indicates if the person has been insured in the Swiss pension system before (`true`) or not (`false`).
-          examples:
-            - false
-        firstInsuranceDate:
-          $ref: '#/components/schemas/Date'
-          description: >
-            Answert to question 5d: First entry date into the Swiss pension system.
-        isDrawingPensionBenefits:
-          type: boolean
-          description: >
-            Answer to question 6a: Indicates if the insured person is already drawing or has ever drawn retirement benefits
-            under another pension plan (`true`) or not (`false`).
-          examples:
-            - false
-        isInAnotherPensionPlan:
-          type: boolean
-          description: >
-            Answer to question 7a: Indicates if the person is insured in another pension plan (`true`) or not (`false`).
-          examples:
-            - false
-        isFullyAbleToWork:
-          type: boolean
-          description: >
-            Answer to question 7b: Indicates if the person is fully able to work (`true`) or not (`false`).
-          examples:
-            - true
-        isPurchaseAfterDivorce:
-          type: boolean
-          description: >
-            Answer to question 7c: Indicates if the purchase is to make up for the pension savings surrender due to a divorce (`true`)
-            or not (`false`).
-          examples:
-            - false
-        isPurchaseWithPillar3aSavings:
-          type: boolean
-          description: >
-            Answer to question 7d: Indicates if the purchase is made with funds from a pillar 3a pension plan (`true`) or not (`false`).
-          examples:
-            - false
-        isAddressUpToDate:
-          type: boolean
-          description: >
-            Answer to question 8a: Indicates if the postal address is up-to-date (`true`) or not (`false`).
-          examples:
-            - true
-        phoneContact:
-          type: string
-          description: >
-            Answer to question 8b: Phone number to contact the insured person regarding the purchase request.
-          examples:
-            - 0041 79 123 45 67
-        emailContact:
-          type: string
-          description: >
-            Answer to question 8c: Email address to contact the insured person regarding the purchase request.
-          examples:
-            - johndoe@gmail.com
-
-    RequiredPurchaseDetails:
-      type: object
-      description: >
-        Provides the configuration regarding which questions should be displayed/asked and additional data required for the questions.
-      properties:
-        askForSelfEmployedContributionCredit:
-          type: boolean
-          description: Indicates if question 3b is to be asked.
-          examples:
-            - true
-        askForHasMovedFromAbroad:
-          type: boolean
-          description: Indicates if question 5a is to be asked.
-          examples:
-            - true
-        askForMoveFromAbroadDate:
-          type: boolean
-          description: Indicates if question 5b is to be asked.
-          examples:
-            - true
-        askForHasBeenInsuredBefore:
-          type: boolean
-          description: Indicates if question 5c is to be asked.
-          examples:
-            - true
-        askForFirstInsuranceDate:
-          type: boolean
-          description: Indicates if question 5d is to be asked.
-          examples:
-            - true
-        askForIsDrawingPensionBenefits:
-          type: boolean
-          description: Indicates if question 6a is to be asked.
-          examples:
-            - true
-        askFoIsInAnotherPensionPlan:
-          type: boolean
-          description: Indicates if question 7a is to be asked.
-          examples:
-            - true
-        askForIsFullyAbleToWork:
-          type: boolean
-          description: Indicates if question 7b is to be asked.
-          examples:
-            - true
-        askForIsPurchaseAfterDivorce:
-          type: boolean
-          description: Indicates if question 7c is to be asked.
-          examples:
-            - true
-        askForIsPurchaseWithPillar3aSavings:
-          type: boolean
-          description: Indicates if question 7d is to be asked.
-          examples:
-            - true
-        askForIsAddressUpToDate:
-          type: boolean
-          description: Indicates if question 8a (postal address is up-to-date) is to be asked.
-          examples:
-            - true
-        postalAddress:
-          type: string
-          description: |
-            The current postal address on file.
-
-            The address should be formatted in a human-readable form, ready to be displayed in the question sentence.
-            Street, postal code and city, country etc. should be separated with comma and space; no newlines must be used.
-          examples:
-            - Brandstrasse 2, 3944 Unterbäch
-        askForPhoneContact:
-          type: boolean
-          description: Indicates if question 8b is to be asked.
-          examples:
-            - true
-        askForEmailContact:
-          type: boolean
-          description: Indicates if question 8c is to be asked.
-          examples:
-            - true
-
-    PaymentSchedule:
-      type: object
-      description: |
-        Desired payment method and payment schedule.
-
-        `eBillAccount` is required if eBill payment method is chosen
-        (`paymentMethod` = `singlePaymentEBill` or `paymentMethod` = `regularPaymentEBill`)
-
-        `paymentFrequency` and `paymentSize` are required if regular payments is chosen
-        (`paymentMethod` = `regularPaymentEBill`). Otherwise, they are ignored.
-
-        `paymentFrequency` = 1 is invalid. Instead, one of the one-time payment methods
-        should be chosen and the `paymentFrequency` property omitted.
-      required:
-        - paymentMethod
-      properties:
-        paymentMethod:
-          $ref: '#/components/schemas/PaymentMethod'
-        paymentFrequency:
-          $ref: '#/components/schemas/PaymentFrequency'
-        paymentSize:
-          type: number
-          format: double
-          description: >
-            Size (in CHF) of individual regular payments.
-          examples:
-            - 500.00
-        eBillAcount:
-          type: string
-          description: Email address of insured person's eBill account.
-          examples:
-            - johndoe@gmail.com
-
-    PaymentInstructions:
-      type: object
-      description: >
-        Payment instructions for to insured person to make the payment. This information will only be provided
-        if the request has the state `approved` and a QR bill related payment methode has been chosen
-        (`paymentMethod` = `singlePaymentQrBill` or `paymentMethod` = `irreularPaymentQrBill`).
-      properties:
-        qrBillText:
-          type: string
-          description: |
-            Text that is embedded in the QR code of a QR bill. It contains the relevant payment information
-            including creditor, account number and payment reference.
-
-            See chapter 4 'Swiss QR Code database' in
-            [SIX - Swiss Implementation Guidelines QR-bill (PDF, English)](https://www.paymentstandards.ch/dam/downloads/ig-qr-bill-de.pdf) or
-            [SIX - Schweizer Implementation Guidelines QR-Rechnung (PDF, German)](https://www.paymentstandards.ch/dam/downloads/ig-qr-bill-de.pdf).
-          examples:
-            - >
-                SPC
-                0200
-                1
-                CH4431999123000889012
-                S
-                Max Muster & Söhne
-                Musterstrasse
-                123
-                8000
-                Seldwyla
-                CH
-
-                0.00
-                CHF
-                S
-                Simon Muster
-                Musterstrasse
-                1
-                8000
-                Seldwyla
-                CH
-                QRR
-                210000000003139471430009017
-                DO NOT USE FOR PAYMENT
-                EPD
-
-    Instructions:
-      type: array
-      description: |
-        The instructions are a list of sentences that inform the insured person either about the next steps in the process
-        that are likely to happen, or - in particular in case of status `inputRequired` - about the steps the insured
-        person should take.
-
-        Instructions should be displayed in a bullet list, each array item becoming a list item.
-      items:
-        description: A single instruction, display as an item in a bullet list.
-        type: string
-
-    PaymentMethod:
-      type: string
-      description: |
-        Request status (set and updated by pension fund):
-        * `singlePaymentQrBill` - A single payment must be made using the provided payment information (account number, reference no)
-        * `singlePaymentEBill` - The pension fund will send a single eBill to the insured person's eBill account
-        * `regularPaymentEBill` - The pension fund will send eBills to the insured person's eBill account according to the requested installments
-        * `irreularPaymentQrBill` - Many payments can be made using the provided payment information (account number, reference no)
-      enum:
-        - singlePaymentQrBill
-        - singlePaymentEBill
-        - regularPaymentEBill
-        - irreularPaymentQrBill
-      examples:
-        - singlePaymentQrBill
 
     PaymentFrequency:
       type: integer
@@ -2659,13 +1756,6 @@ components:
         * 12: Monthly payment
       examples:
         - 0
-
-    PurchaseRequestId:
-      type: string
-      pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
-      description: Technical ID of purchase request used in API calls.
-      examples:
-        - PR-4838525
 
     Transactions:
       type: object
@@ -2820,11 +1910,14 @@ components:
         - 2018-04-13T11:11:11Z
 
   securitySchemes:
-    bearerAuthentication:
-      type: http
-      description: Bearer access token in HTTP header.
-      scheme: bearer
-      bearerFormat: JWT
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com/oauth/authorize
+          tokenUrl: https://example.com/oauth/token
+          scopes:
+            read:basic_pension_data: Access to basic pension data (user profile, pension statements, and transactions).
 
   # ---- Responses - Standard Errors Common Data Model ----
   responses:
