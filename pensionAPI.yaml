@@ -496,8 +496,47 @@ paths:
         '404':
           $ref: '#/components/responses/standard404'
 
+  /consents:
+    get:
+      tags:
+        - consents
+      summary: Retrieve a list of consents
+      description: >
+        The consents endpoint allows the client (e.g., a third party provider)
+        to query the consents for a user. The provider (e.g., a
+        pension provider) must return the consents linked with the access
+        token supplied with the request.
+      operationId: retrieveConsents
+      parameters:
+        - $ref: '#/components/parameters/authorization_in_header'
+      responses:
+        '200':
+          description: List of consents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/consentItem'
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '404':
+          $ref: '#/components/responses/standard404'
+
 components:
   schemas:
+    ConsentItem:
+      type: object
+      description: >
+        Information about a single consent, including only the person ID.
+      required:
+      - personId
+      properties:
+      personId:
+        $ref: '#/components/schemas/PersonId'
+    
     InsuredPerson:
       type: object
       description: Details of insured person.
@@ -946,9 +985,11 @@ components:
           $ref: '#/components/schemas/PlanId'
         planName:
           $ref: '#/components/schemas/PlanName'
-        optionalSavingsPlanName:
-          $ref: '#/components/schemas/OptionalSavingsPlanName'
-
+        optionalSavingsPlan:
+          $ref: '#/components/schemas/PensionPlan'
+        contractType:
+          $ref: '#/components/schemas/ContractType'
+        
     PlanId:
       type: string
       pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
@@ -962,11 +1003,39 @@ components:
       examples:
         - Basisplan
 
-    OptionalSavingsPlanName:
+    ContractType:
       type: string
-      description: Name of the optional savings plan.
-      examples:
-        - Sparplan 2
+      description: >
+        The contract type of the pension plan, represented by a string identifier.
+        Allowed values are:
+        - `mandatoryBVG`: Mandatory BVG contract.
+        - `supplementarySavings`: Plan for supplementary savings.
+        - `supplementaryRisk`: Plan covering supplementary risk.
+        - `supplementaryHomeownership`: Plan for supplementary homeownership.
+        - `supplementarySavingsWithBVG`: Plan combining supplementary savings with BVG coverage.
+        - `preMandatory`: Plan for pre-mandatory coverage.
+        - `pureCapitalBasedPlan`: Pure capital-based pension plan.
+        - `violationBVG`: Plan related to violation of BVG reporting obligations.
+        - `capitalSavings`: Plan for capital savings.
+        - `voluntarySavings`: Plan for voluntary pension savings.
+        - `loanAccount`: Plan involving a loan account.
+        - `1e`: 1e pension plan.
+        - Empty: The contract type is not specified.
+      enum:
+        - mandatoryBVG
+        - supplementarySavings
+        - supplementaryRisk
+        - supplementaryHomeownership
+        - supplementarySavingsWithBVG
+        - preMandatory
+        - pureCapitalBasedPlan
+        - violationBVG
+        - capitalSavings
+        - voluntarySavings
+        - loanAccount
+        - 1e
+        - ""
+      example: mandatoryBVG
 
     SalaryData:
       type: object
@@ -1083,6 +1152,9 @@ components:
             $ref: '#/components/schemas/RetirementBenefits'
         interestRates:
           $ref: '#/components/schemas/InterestRates'
+        lastYearDevelopment:
+          $ref: '#/components/schemas/LastYearDevelopment'
+
 
     TransferredCapital:
       type: number
@@ -1125,6 +1197,58 @@ components:
       description: Projected retirement capital under mandatory coverage as per end of the current year.
       examples:
         - 40846.60
+
+    LastYearDevelopment:
+      type: object
+      description: >
+        Details about the capital development for the last year.
+      required:
+        - balanceBeginningLastYear
+        - totalDepositsLastYear
+        - totalWithdrawalsLastYear
+        - oldAgeCreditLastYear
+        - interestCreditLastYear
+        - balanceEndLastYear
+        - interestRatesLastYear
+      properties:
+        balanceBeginningLastYear:
+          type: number
+          format: double
+          description: >
+            The capital balance at the beginning of the last year.
+          example: 100000.00
+        totalDepositsLastYear:
+          type: number
+          format: double
+          description: >
+            Total deposits made during the last year.
+          example: 5000.00
+        totalWithdrawalsLastYear:
+          type: number
+          format: double
+          description: >
+            Total withdrawals made during the last year.
+          example: 5000.00
+        oldAgeCreditLastYear:
+          type: number
+          format: double
+          description: >
+            Old age credits added during the last year.
+          example: 4000.00
+        interestCreditLastYear:
+          type: number
+          format: double
+          description: >
+            Interest credits added during the last year.
+          example: 2000.00
+        balanceEndLastYear:
+          type: number
+          format: double
+          description: >
+            The capital balance at the end of the last year.
+          example: 106000.00
+        interestRatesLastYear:
+          $ref: '#/components/schemas/InterestRates'  
 
     RetirementBenefits:
       type: object
@@ -1285,7 +1409,7 @@ components:
             used specifically for calculating projected future values.
           examples:
             - 6.300
-
+    
     RiskBenefits:
       type: object
       description: Benefits in case of death or disability to work.
@@ -1417,7 +1541,12 @@ components:
 
     VestedBenefits:
       type: object
-      description: Detail information about vested benefits.
+      description: >
+        The VestedBenefits object provides detailed information about the insured person's accrued retirement capital 
+        under occupational pension plans (2nd pillar). It includes key data such as retirement capital at significant 
+        milestones (e.g., age 50, marriage), and records of transactions like voluntary purchases, withdrawals for home 
+        ownership (WEF), or adjustments due to divorce. This information is essential for managing entitlements and 
+        processing pension transfers.
       properties:
         referenceDate:
           $ref: '#/components/schemas/Date'
@@ -1478,7 +1607,7 @@ components:
         voluntaryPurchases:
           type: array
           items:
-            $ref: '#/components/schemas/CapitalTransaction'
+            $ref: '#/components/schemas/VoluntaryPurchases'
           description: >
             List of voluntary purchases of additional pension benefits made in the past.
             At least the purchases of the last 3 years must be included. They can be
@@ -1486,13 +1615,13 @@ components:
         homeOwnerhsipWithdrawals:
           type: array
           items:
-            $ref: '#/components/schemas/CapitalTransaction'
+            $ref: '#/components/schemas/HomeOwnerhsipWithdrawals'
           description: >
             List of withdrawls and refunds for home ownership promotion made in the past.
         divorceWithdrawals:
           type: array
           items:
-            $ref: '#/components/schemas/CapitalTransaction'
+            $ref: '#/components/schemas/DivorceWithdrawals'
           description: >
             List of withdrawls and refunds due to divorce made in the past.
         pledges:
@@ -1502,6 +1631,29 @@ components:
           description: >
             List of pledges of parts of the retirement capital.
 
+    VoluntaryPurchases:
+      type: array
+      items:
+        $ref: '#/components/schemas/CapitalTransaction'
+      description: >
+        List of voluntary purchases of additional pension benefits made in the past.
+        At least the purchases of the last 3 years must be included. They can be
+        aggregated by calendar year.
+        
+    HomeOwnerhsipWithdrawals:
+      type: array
+      items:
+        $ref: '#/components/schemas/CapitalTransaction'
+      description: >
+        List of withdrawls and refunds for home ownership promotion made in the past.
+        
+    DivorceWithdrawals:
+      type: array
+      items:
+        $ref: '#/components/schemas/CapitalTransaction'
+      description: >
+        List of withdrawls and refunds due to divorce made in the past.
+
     CapitalTransaction:
       type: object
       description: >
@@ -1510,7 +1662,6 @@ components:
       required:
         - date
         - amount
-        - amountMandatory
       properties:
         date:
           $ref: '#/components/schemas/Date'
