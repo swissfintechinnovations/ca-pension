@@ -507,8 +507,8 @@ paths:
         pension provider) must return the consents linked with the access
         token supplied with the request.
       operationId: retrieveConsents
-      parameters:
-        - $ref: '#/components/parameters/authorization_in_header'
+      security:
+        - OAuth2: [] # No scopes required
       responses:
         '200':
           description: List of consents
@@ -517,7 +517,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/consentItem'
+                  $ref: '#/components/schemas/ConsentItem'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
