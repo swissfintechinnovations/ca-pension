@@ -985,10 +985,13 @@ components:
           $ref: '#/components/schemas/PlanId'
         planName:
           $ref: '#/components/schemas/PlanName'
-        optionalSavingsPlan:
-          $ref: '#/components/schemas/PensionPlan'
         contractType:
           $ref: '#/components/schemas/ContractType'
+        optionalSavingsPlanName:
+          type: string
+          description: Name of the optional savings plan.
+          examples:
+            - Sparplan 2
         
     PlanId:
       type: string
