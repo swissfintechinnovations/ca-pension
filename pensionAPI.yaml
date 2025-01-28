@@ -155,8 +155,6 @@ tags:
     description: Pension fund policy.
   - name: simulation
     description: Simulations of salary changes and voluntary purchases.
-  - name: purchase
-    description: Voluntary purchase operations.
   - name: transactions
     description: Retirement capital transactions.
 
