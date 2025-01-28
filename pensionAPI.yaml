@@ -1608,7 +1608,7 @@ components:
         voluntaryPurchases:
           type: array
           items:
-            $ref: '#/components/schemas/VoluntaryPurchases'
+            $ref: '#/components/schemas/CapitalTransaction'
           description: >
             List of voluntary purchases of additional pension benefits made in the past.
             At least the purchases of the last 3 years must be included. They can be
@@ -1616,13 +1616,13 @@ components:
         homeOwnerhsipWithdrawals:
           type: array
           items:
-            $ref: '#/components/schemas/HomeOwnerhsipWithdrawals'
+            $ref: '#/components/schemas/CapitalTransaction'
           description: >
             List of withdrawls and refunds for home ownership promotion made in the past.
         divorceWithdrawals:
           type: array
           items:
-            $ref: '#/components/schemas/DivorceWithdrawals'
+            $ref: '#/components/schemas/CapitalTransaction'
           description: >
             List of withdrawls and refunds due to divorce made in the past.
         pledges:
@@ -1631,29 +1631,6 @@ components:
             $ref: '#/components/schemas/Pledge'
           description: >
             List of pledges of parts of the retirement capital.
-
-    VoluntaryPurchases:
-      type: array
-      items:
-        $ref: '#/components/schemas/CapitalTransaction'
-      description: >
-        List of voluntary purchases of additional pension benefits made in the past.
-        At least the purchases of the last 3 years must be included. They can be
-        aggregated by calendar year.
-        
-    HomeOwnerhsipWithdrawals:
-      type: array
-      items:
-        $ref: '#/components/schemas/CapitalTransaction'
-      description: >
-        List of withdrawls and refunds for home ownership promotion made in the past.
-        
-    DivorceWithdrawals:
-      type: array
-      items:
-        $ref: '#/components/schemas/CapitalTransaction'
-      description: >
-        List of withdrawls and refunds due to divorce made in the past.
 
     CapitalTransaction:
       type: object
