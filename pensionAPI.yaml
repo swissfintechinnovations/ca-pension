@@ -157,6 +157,8 @@ tags:
     description: Simulations of salary changes and voluntary purchases.
   - name: transactions
     description: Retirement capital transactions.
+  - name: pension plan
+    description: Pension plan
 
 security:
   - OAuth2:
@@ -522,7 +524,7 @@ paths:
         If the specified pension plan description is not found for the insured person, a `404` error is returned.
       operationId: getPensionPlanDescriptionDocument
       tags:
-        - pensionPlan
+        - pension plan
       parameters:
         - in: path
           name: personId
