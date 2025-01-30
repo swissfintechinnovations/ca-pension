@@ -1019,6 +1019,8 @@ components:
           $ref: '#/components/schemas/RegularPurchaseMaxAmount'
         homeOwnershipAvailableForWithdrawal:
           $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
+        homeOwnershipAvailableForPledge:
+          $ref: '#/components/schemas/HomeOwnershipAvailableForPledge'
         vestedBenefits:
           $ref: '#/components/schemas/VestedBenefits'
 
@@ -1725,10 +1727,19 @@ components:
       type: number
       format: double
       description: >
-        The total amount available for the insured person to withdraw or borrow against from their retirement capital
+        The total amount available for the insured person to withdraw from their retirement capital
         for the purpose of financing home ownership.
       examples:
         - 31000.00
+
+    HomeOwnershipAvailableForPledge:
+      type: number
+      format: double
+      description: >
+        The total amount available for the insured person to pledge as collateral from their retirement capital
+        for the purpose of financing home ownership.
+      examples:
+        - 50000.00
 
     Pledge:
       type: object
