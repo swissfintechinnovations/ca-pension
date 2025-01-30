@@ -515,10 +515,10 @@ paths:
       summary: Get insured person's pension plan description
       description: >
         Retrieves the pension plan description for a specific insured person and pension plan.
-      
+        
         This document provides a description of the insured person's pension plan, including 
         covered benefits, contribution structure, and key conditions applicable under their employer’s pension scheme.
-      
+        
         If the specified pension plan description is not found for the insured person, a `404` error is returned.
       operationId: getPensionPlanDescriptionDocument
       tags:
