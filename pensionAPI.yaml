@@ -193,6 +193,8 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /insured-persons/{personId}/statements:
     post:
@@ -241,6 +243,8 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /statements/{pensionStatementId}/documents:
     get:
@@ -271,11 +275,13 @@ paths:
             application/pdf:
               schema:
                 type: string
-                contentEncoding: binary
+                format: binary
         '401':
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /statements/{pensionStatementId}/compact-statements:
     get:
@@ -312,6 +318,8 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /policies/{policyId}:
     get:
@@ -344,6 +352,8 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /policies/{policyId}/salary-change-simulation:
     post:
@@ -382,6 +392,8 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /policies/{policyId}/purchase-simulation:
     post:
@@ -433,6 +445,8 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /policies/{policyId}/transactions:
     get:
@@ -493,6 +507,43 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
+
+/pension-plans/{planId}/document:
+  get:
+    summary: Get pension plan document (PDF)
+    description: >
+      Retrieves the official pension plan document in PDF format for the specified plan ID.
+      
+      If the pension plan is not found, a `404` error is returned.
+    operationId: getPensionPlanDocument
+    tags:
+      - pensionPlan
+    parameters:
+      - in: path
+        name: planId
+        required: true
+        schema:
+          $ref: '#/components/schemas/PlanId'
+        description: Unique identifier of the pension plan.
+    security:
+      - OAuth2:
+          - read:basic_pension_data
+    responses:
+      '200':
+        description: Pension plan document in PDF format
+        content:
+          application/pdf:
+            schema:
+              type: string
+              format: binary
+      '401':
+        $ref: '#/components/responses/standard401'
+      '404':
+        $ref: '#/components/responses/standard404'
+      '500':
+        $ref: '#/components/responses/standard500'
 
   /consents:
     get:
@@ -521,6 +572,8 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
 components:
   schemas:
@@ -2018,6 +2071,7 @@ components:
         - /problems/TECHNICAL_ERROR
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
+        
       examples:
         - /problems/TECHNICAL_ERROR
 
@@ -2064,6 +2118,14 @@ components:
 
     standard404:
       description: Invalid ID / no authorization to access data.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+
+    standard500:
+      description: |
+        Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
       content:
         application/problem+json:
           schema:
