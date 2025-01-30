@@ -510,17 +510,26 @@ paths:
         '500':
           $ref: '#/components/responses/standard500'
 
-/pension-plans/{planId}/document:
+  /insured-persons/{personId}/pension-plans/{planId}/description-document:
   get:
-    summary: Get pension plan document (PDF)
+    summary: Get insured person's pension plan description
     description: >
-      Retrieves the official pension plan document in PDF format for the specified plan ID.
+      Retrieves the pension plan description for a specific insured person and pension plan.
       
-      If the pension plan is not found, a `404` error is returned.
-    operationId: getPensionPlanDocument
+      This document provides a description of the insured person's pension plan, including 
+      covered benefits, contribution structure, and key conditions applicable under their employer’s pension scheme.
+      
+      If the specified pension plan description is not found for the insured person, a `404` error is returned.
+    operationId: getPensionPlanDescriptionDocument
     tags:
       - pensionPlan
     parameters:
+      - in: path
+        name: personId
+        required: true
+        schema:
+          $ref: '#/components/schemas/PersonId'
+        description: Technical person ID.
       - in: path
         name: planId
         required: true
@@ -532,7 +541,7 @@ paths:
           - read:basic_pension_data
     responses:
       '200':
-        description: Pension plan document in PDF format
+        description: Pension plan description document for the insured person in PDF format
         content:
           application/pdf:
             schema:
