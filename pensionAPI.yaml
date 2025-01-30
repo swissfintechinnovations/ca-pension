@@ -511,48 +511,48 @@ paths:
           $ref: '#/components/responses/standard500'
 
   /insured-persons/{personId}/pension-plans/{planId}/description-document:
-  get:
-    summary: Get insured person's pension plan description
-    description: >
-      Retrieves the pension plan description for a specific insured person and pension plan.
+    get:
+      summary: Get insured person's pension plan description
+      description: >
+        Retrieves the pension plan description for a specific insured person and pension plan.
       
-      This document provides a description of the insured person's pension plan, including 
-      covered benefits, contribution structure, and key conditions applicable under their employer’s pension scheme.
+        This document provides a description of the insured person's pension plan, including 
+        covered benefits, contribution structure, and key conditions applicable under their employer’s pension scheme.
       
-      If the specified pension plan description is not found for the insured person, a `404` error is returned.
-    operationId: getPensionPlanDescriptionDocument
-    tags:
-      - pensionPlan
-    parameters:
-      - in: path
-        name: personId
-        required: true
-        schema:
-          $ref: '#/components/schemas/PersonId'
-        description: Technical person ID.
-      - in: path
-        name: planId
-        required: true
-        schema:
-          $ref: '#/components/schemas/PlanId'
-        description: Unique identifier of the pension plan.
-    security:
-      - OAuth2:
-          - read:basic_pension_data
-    responses:
-      '200':
-        description: Pension plan description document for the insured person in PDF format
-        content:
-          application/pdf:
-            schema:
-              type: string
-              format: binary
-      '401':
-        $ref: '#/components/responses/standard401'
-      '404':
-        $ref: '#/components/responses/standard404'
-      '500':
-        $ref: '#/components/responses/standard500'
+        If the specified pension plan description is not found for the insured person, a `404` error is returned.
+      operationId: getPensionPlanDescriptionDocument
+      tags:
+        - pensionPlan
+      parameters:
+        - in: path
+          name: personId
+          required: true
+          schema:
+            $ref: '#/components/schemas/PersonId'
+          description: Technical person ID.
+        - in: path
+          name: planId
+          required: true
+          schema:
+            $ref: '#/components/schemas/PlanId'
+          description: Unique identifier of the pension plan.
+      security:
+        - OAuth2:
+            - read:basic_pension_data
+      responses:
+        '200':
+          description: Pension plan description document for the insured person in PDF format
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/standard401'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /consents:
     get:
