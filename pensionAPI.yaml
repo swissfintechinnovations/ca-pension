@@ -569,7 +569,7 @@ paths:
       tags:
         - consents
       security:
-        - OAuth2: [] # No scopes required
+        - OAuth2: []  # No scopes required
       responses:
         '200':
           description: List of consents.
@@ -1101,7 +1101,7 @@ components:
         - voluntarySavings
         - loanAccount
         - 1e
-        - ""
+        - ''
       example: mandatoryBVG
 
     SalaryData:
@@ -1315,7 +1315,7 @@ components:
             The capital balance at the end of the last year.
           example: 106000.00
         interestRatesLastYear:
-          $ref: '#/components/schemas/InterestRates'  
+          $ref: '#/components/schemas/InterestRates'
 
     RetirementBenefits:
       type: object
