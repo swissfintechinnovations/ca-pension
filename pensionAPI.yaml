@@ -158,7 +158,9 @@ tags:
   - name: transactions
     description: Retirement capital transactions.
   - name: pension plan
-    description: Pension plan
+    description: Pension plan.
+  - name: consents
+    description: Consents.
 
 security:
   - OAuth2:
@@ -517,10 +519,10 @@ paths:
       summary: Get insured person's pension plan description
       description: >
         Retrieves the pension plan description for a specific insured person and pension plan.
-        
-        This document provides a description of the insured person's pension plan, including 
+
+        This document provides a description of the insured person's pension plan, including
         covered benefits, contribution structure, and key conditions applicable under their employer’s pension scheme.
-        
+
         If the specified pension plan description is not found for the insured person, a `404` error is returned.
       operationId: getPensionPlanDescriptionDocument
       tags:
@@ -596,7 +598,7 @@ components:
       properties:
         personId:
           $ref: '#/components/schemas/PersonId'
-    
+
     InsuredPerson:
       type: object
       description: Details of insured person.
@@ -1054,7 +1056,7 @@ components:
           description: Name of the optional savings plan.
           examples:
             - Sparplan 2
-        
+
     PlanId:
       type: string
       pattern: '^[A-Za-z0-9_\-.~]{1,64}$'
@@ -1607,10 +1609,10 @@ components:
     VestedBenefits:
       type: object
       description: >
-        The VestedBenefits object provides detailed information about the insured person's accrued retirement capital 
-        under occupational pension plans (2nd pillar). It includes key data such as retirement capital at significant 
-        milestones (e.g., age 50, marriage), and records of transactions like voluntary purchases, withdrawals for home 
-        ownership (WEF), or adjustments due to divorce. This information is essential for managing entitlements and 
+        The VestedBenefits object provides detailed information about the insured person's accrued retirement capital
+        under occupational pension plans (2nd pillar). It includes key data such as retirement capital at significant
+        milestones (e.g., age 50, marriage), and records of transactions like voluntary purchases, withdrawals for home
+        ownership (WEF), or adjustments due to divorce. This information is essential for managing entitlements and
         processing pension transfers.
       properties:
         referenceDate:
@@ -2093,7 +2095,6 @@ components:
         - /problems/TECHNICAL_ERROR
         - /problems/NOT_IMPLEMENTED
         - /problems/SERVICE_UNAVAILABLE
-        
       examples:
         - /problems/TECHNICAL_ERROR
 
