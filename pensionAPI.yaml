@@ -844,9 +844,12 @@ components:
             of the insured employees, incl. the contributions and insured benefits.
           required:
             - pln
+            - ct
           properties:
             pln:
               $ref: '#/components/schemas/PlanName'
+            ct:
+              $ref: '#/components/schemas/ContractType'
         ora:
           type: integer
           format: int32
@@ -1069,34 +1072,22 @@ components:
       description: >
         The contract type of the pension plan, represented by a string identifier.
         Allowed values are:
-        - `mandatoryBVG`: Mandatory BVG contract.
-        - `supplementarySavings`: Plan for supplementary savings.
-        - `supplementaryRisk`: Plan covering supplementary risk.
-        - `supplementaryHomeownership`: Plan for supplementary homeownership.
-        - `supplementarySavingsWithBVG`: Plan combining supplementary savings with BVG coverage.
-        - `preMandatory`: Plan for pre-mandatory coverage.
-        - `pureCapitalBasedPlan`: Pure capital-based pension plan.
-        - `violationBVG`: Plan related to violation of BVG reporting obligations.
-        - `capitalSavings`: Plan for capital savings.
-        - `voluntarySavings`: Plan for voluntary pension savings.
-        - `loanAccount`: Plan involving a loan account.
+        - `mandatory`: Mandatory BVG contract.
+        - `supplementary`: Supplementary pension plan.
+        - `earlyRetirement`: Plan for early retirement.
+        - `bridge`: Bridge pension plan.
         - `1e`: 1e pension plan.
+        - `other`: Other contract type not covered by the predefined categories.
         - Empty: The contract type is not specified.
       enum:
-        - mandatoryBVG
-        - supplementarySavings
-        - supplementaryRisk
-        - supplementaryHomeownership
-        - supplementarySavingsWithBVG
-        - preMandatory
-        - pureCapitalBasedPlan
-        - violationBVG
-        - capitalSavings
-        - voluntarySavings
-        - loanAccount
+        - mandatory
+        - supplementary
+        - earlyRetirement
+        - bridge
         - 1e
+        - other
         - ''
-      example: mandatoryBVG
+      example: mandatory
 
     SalaryData:
       type: object
