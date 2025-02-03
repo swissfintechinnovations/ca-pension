@@ -1072,22 +1072,20 @@ components:
       description: >
         The contract type of the pension plan, represented by a string identifier.
         Allowed values are:
-        - `mandatory`: Mandatory BVG contract.
-        - `supplementary`: Supplementary pension plan.
-        - `earlyRetirement`: Plan for early retirement.
+        - `mand`: Mandatory BVG contract.
+        - `suppl`: Supplementary pension plan.
+        - `earlyRet`: Plan for early retirement.
         - `bridge`: Bridge pension plan.
         - `1e`: 1e pension plan.
         - `other`: Other contract type not covered by the predefined categories.
-        - Empty: The contract type is not specified.
       enum:
-        - mandatory
-        - supplementary
-        - earlyRetirement
+        - mand
+        - suppl
+        - earlyRet
         - bridge
         - 1e
         - other
-        - ''
-      example: mandatory
+      example: mand
 
     SalaryData:
       type: object
