@@ -381,7 +381,7 @@ paths:
           description: Unique identifier of the pension plan.
       security:
         - OAuth2:
-            - read:basic_pension_data
+            - read:pension_plan
       responses:
         '200':
           description: Pension plan description document for the insured person in PDF format
@@ -586,12 +586,24 @@ components:
   schemas:
     ConsentItem:
       type: object
-      description: Information about a single consent, including only the person ID.
+      description: Information about a single consent, including the person ID and the allowed scopes.
       required:
         - personId
+        - scopes
       properties:
         personId:
           $ref: '#/components/schemas/PersonId'
+        scopes:
+          type: array
+          items:
+            type: string
+            enum:
+              - read:basic_pension_data
+              - read:pension_plan
+          description: List of granted scopes for this specific person.
+          example:
+            - read:basic_pension_data
+            - read:pension_plan
 
     InsuredPerson:
       type: object
@@ -2106,6 +2118,7 @@ components:
           tokenUrl: https://example.com/oauth/token
           scopes:
             read:basic_pension_data: Access to basic pension data (user profile, pension statements, and transactions).
+            read:pension_plan: Access to pension plan description.
 
   # ---- Responses - Standard Errors Common Data Model ----
   responses:
