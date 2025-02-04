@@ -1053,6 +1053,7 @@ components:
         of the insured employees, incl. the contributions and insured benefits.
       required:
         - planName
+        - contractType
       properties:
         planId:
           $ref: '#/components/schemas/PlanId'
@@ -1417,6 +1418,8 @@ components:
         A set of interest rates applicable/applied to the retirement capital, including
         actual rates for mandatory and supplementary coverage. Rates for saving/purchase
         and projection rates for future value calculations.
+      minProperties: 1  # Requires at least one property (specific interest rate) to be present.
+      additionalProperties: false  # Only allow properties defined in 'properties' below.
       properties:
         interestRateMandatorySaving:
           $ref: '#/components/schemas/InterestRate'
@@ -1480,6 +1483,7 @@ components:
         - childPensionDisability
         - partnerPensionDeath
         - orphanPensionDeath
+        - lumpSumWithoutPensionBenefits
         - minimalLumpSumWithPensionBenefits
       properties:
         pensionDisability:
