@@ -153,12 +153,12 @@ tags:
     description: Pension statement.
   - name: policy
     description: Pension fund policy.
+  - name: plan
+    description: Pension plan.
   - name: simulation
     description: Simulations of salary changes and voluntary purchases.
   - name: transactions
     description: Retirement capital transactions.
-  - name: pension plan
-    description: Pension plan.
   - name: consents
     description: Consents.
 
@@ -203,7 +203,7 @@ paths:
   /insured-persons/{personId}/statements:
     post:
       summary: Get pension statement(s) data
-      description: |
+      description: >
         Provides the pension statement(s) representing the state of the policy/policies for the specified date as structured data.
         If no date is specified, the latest (regular/official) pension statement(s) associated with the insured person is retrieved.
         If a person has several policies (associated to different pension plans), either an aggregated statement is delivered or one
@@ -290,7 +290,7 @@ paths:
   /statements/{pensionStatementId}/compact-statements:
     get:
       summary: Get the compact pension statement for the specified id
-      description: |
+      description: >
         Provides the pension statement for the specified id as a compact json
         in the insured person's preferred language. Its sole purpose is to provide
         a compact json for use cases with tight data volume limits such as e.g.
@@ -371,7 +371,7 @@ paths:
         If the specified pension plan description is not found for the insured person, a `404` error is returned.
       operationId: getPensionPlanDescriptionDocument
       tags:
-        - pension plan
+        - plan
       parameters:
         - in: path
           name: planId
@@ -440,7 +440,7 @@ paths:
   /policies/{policyId}/purchase-simulation:
     post:
       summary: Simulate effects of voluntary purchase
-      description: |
+      description: >
         Simulates the financial effect of voluntary purchase of additional pension benefits
         for the provided parameters (retirement age, purchase amount etc.)
 
@@ -493,7 +493,7 @@ paths:
   /policies/{policyId}/transactions:
     get:
       summary: Get the retirement capital transactions
-      description: |
+      description: >
         Retrieves all transactions affecting the policy's retirement capital in the specified
         date range.
 
@@ -555,7 +555,7 @@ paths:
   /consents:
     get:
       summary: Retrieve a list of consents
-      description: |
+      description: >
         The consents endpoint allows the client (e.g., a third party provider)
         to query the consents for a user. The provider (e.g., a pension provider)
         must return the consents linked with the access token supplied with the request.
@@ -765,7 +765,7 @@ components:
 
     PensionStatement:
       type: object
-      description: |
+      description: >
         Pension statement consisting of the basic pension statement information,
         including aggregated personal pension data across related policies.
       required:
@@ -1004,7 +1004,7 @@ components:
 
     PersonalPensionDetails:
       type: object
-      description: |
+      description: >
         Shared pension-related data specific to the insured person. This data structure is used in policies and pension statements
         to represent key attributes like salary, capital and benefits.
       required:
@@ -1082,7 +1082,7 @@ components:
 
     ContractType:
       type: string
-      description: >
+      description: |
         The contract type of the pension plan, represented by a string identifier.
         Allowed values are:
         - `mand`: Mandatory BVG contract.
@@ -1217,7 +1217,6 @@ components:
           $ref: '#/components/schemas/InterestRates'
         lastYearDevelopment:
           $ref: '#/components/schemas/LastYearDevelopment'
-
 
     TransferredCapital:
       type: number
@@ -1406,7 +1405,7 @@ components:
     ConversionRateEnveloping:
       type: number
       format: double
-      description: |
+      description: >
         Enveloping conversion rate (capital to pension) for combined mandatory and
         supplementary coverage
       examples:
@@ -1540,7 +1539,7 @@ components:
     MinimalLumpSumWithPensionBenefits:
       type: number
       format: double
-      description: >
+      description: |
         A guaranteed minimum one-off lump sum payment in the event of death, which is paid in addition to other pension benefits  
         (e.g., a partner’s pension, orphan’s pension, or other recurring survivor benefits). 
 
@@ -1646,7 +1645,7 @@ components:
         capitalAtMarriage:
           type: number
           format: double
-          description: |
+          description: >
             The insured person's retirement capital before he/she got married or entered
             a registered partnership (mandatory and supplementary). Relevant is the last
             marriage or registered partnership (the marriage/partnership date is part of
@@ -1658,7 +1657,7 @@ components:
         capitalAtMarriageMandatory:
           type: number
           format: double
-          description: |
+          description: >
             The insured person's retirement capital before he/she got married or entered
             a registered partnership (mandatory part only). Relevant is the last
             marriage or registered partnership (the marriage/partnership date is part of
@@ -1730,7 +1729,7 @@ components:
         amountMandatory:
           type: number
           format: double
-          description: |
+          description: >
             Transaction amount for mandatory part only.
             The amount is positive for payments towards the capital, and negative for withdrawals.
           examples:
@@ -1760,6 +1759,7 @@ components:
       description: >
         The total amount available for the insured person to pledge as collateral from their retirement capital
         for the purpose of financing home ownership.
+
         Note: If a fixed amount is contractually defined, it is usually lower than this value.
       examples:
         - 50000.00
@@ -2158,7 +2158,7 @@ components:
             $ref: '#/components/schemas/CommonErrorResponse'
 
     standard500:
-      description: |
+      description: >
         Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
       content:
         application/problem+json:
