@@ -153,12 +153,14 @@ tags:
     description: Pension statement.
   - name: policy
     description: Pension fund policy.
+  - name: plan
+    description: Pension plan.
   - name: simulation
     description: Simulations of salary changes and voluntary purchases.
-  - name: purchase
-    description: Voluntary purchase operations.
   - name: transactions
     description: Retirement capital transactions.
+  - name: consents
+    description: Consents.
 
 security:
   - OAuth2:
@@ -195,11 +197,13 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /insured-persons/{personId}/statements:
     post:
       summary: Get pension statement(s) data
-      description: |
+      description: >
         Provides the pension statement(s) representing the state of the policy/policies for the specified date as structured data.
         If no date is specified, the latest (regular/official) pension statement(s) associated with the insured person is retrieved.
         If a person has several policies (associated to different pension plans), either an aggregated statement is delivered or one
@@ -243,6 +247,8 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /statements/{pensionStatementId}/documents:
     get:
@@ -273,16 +279,18 @@ paths:
             application/pdf:
               schema:
                 type: string
-                contentEncoding: binary
+                format: binary
         '401':
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /statements/{pensionStatementId}/compact-statements:
     get:
       summary: Get the compact pension statement for the specified id
-      description: |
+      description: >
         Provides the pension statement for the specified id as a compact json
         in the insured person's preferred language. Its sole purpose is to provide
         a compact json for use cases with tight data volume limits such as e.g.
@@ -314,6 +322,8 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /policies/{policyId}:
     get:
@@ -346,6 +356,46 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
+
+  /plans/{planId}/description-documents:
+    get:
+      summary: Get insured person's pension plan description
+      description: >
+        Retrieves the pension plan description for a specific insured person and pension plan.
+
+        This document provides a description of the insured person's pension plan, including
+        covered benefits, contribution structure, and key conditions applicable under their employer’s pension scheme.
+
+        If the specified pension plan description is not found for the insured person, a `404` error is returned.
+      operationId: getPensionPlanDescriptionDocument
+      tags:
+        - plan
+      parameters:
+        - in: path
+          name: planId
+          required: true
+          schema:
+            $ref: '#/components/schemas/PlanId'
+          description: Unique identifier of the pension plan.
+      security:
+        - OAuth2:
+            - read:pension_plan
+      responses:
+        '200':
+          description: Pension plan description document for the insured person in PDF format
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/standard401'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /policies/{policyId}/salary-change-simulation:
     post:
@@ -384,11 +434,13 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /policies/{policyId}/purchase-simulation:
     post:
       summary: Simulate effects of voluntary purchase
-      description: |
+      description: >
         Simulates the financial effect of voluntary purchase of additional pension benefits
         for the provided parameters (retirement age, purchase amount etc.)
 
@@ -435,11 +487,13 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
   /policies/{policyId}/transactions:
     get:
       summary: Get the retirement capital transactions
-      description: |
+      description: >
         Retrieves all transactions affecting the policy's retirement capital in the specified
         date range.
 
@@ -495,9 +549,62 @@ paths:
           $ref: '#/components/responses/standard401'
         '404':
           $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
+
+  /consents:
+    get:
+      summary: Retrieve a list of consents
+      description: >
+        The consents endpoint allows the client (e.g., a third party provider)
+        to query the consents for a user. The provider (e.g., a pension provider)
+        must return the consents linked with the access token supplied with the request.
+      operationId: retrieveConsents
+      tags:
+        - consents
+      security:
+        - OAuth2: []  # No scopes required
+      responses:
+        '200':
+          description: List of consents.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConsentItem'
+        '400':
+          $ref: '#/components/responses/standard400'
+        '401':
+          $ref: '#/components/responses/standard401'
+        '404':
+          $ref: '#/components/responses/standard404'
+        '500':
+          $ref: '#/components/responses/standard500'
 
 components:
   schemas:
+    ConsentItem:
+      type: object
+      description: Information about a single consent, including the person ID and the allowed scopes.
+      required:
+        - personId
+        - scopes
+      properties:
+        personId:
+          $ref: '#/components/schemas/PersonId'
+        scopes:
+          type: array
+          items:
+            type: string
+            enum:
+              - read:basic_pension_data
+              - read:pension_plan
+          description: List of granted scopes for this specific person.
+          example:
+            - read:basic_pension_data
+            - read:pension_plan
+
     InsuredPerson:
       type: object
       description: Details of insured person.
@@ -658,7 +765,7 @@ components:
 
     PensionStatement:
       type: object
-      description: |
+      description: >
         Pension statement consisting of the basic pension statement information,
         including aggregated personal pension data across related policies.
       required:
@@ -749,9 +856,12 @@ components:
             of the insured employees, incl. the contributions and insured benefits.
           required:
             - pln
+            - ct
           properties:
             pln:
               $ref: '#/components/schemas/PlanName'
+            ct:
+              $ref: '#/components/schemas/ContractType'
         ora:
           type: integer
           format: int32
@@ -894,7 +1004,7 @@ components:
 
     PersonalPensionDetails:
       type: object
-      description: |
+      description: >
         Shared pension-related data specific to the insured person. This data structure is used in policies and pension statements
         to represent key attributes like salary, capital and benefits.
       required:
@@ -931,6 +1041,8 @@ components:
           $ref: '#/components/schemas/RegularPurchaseMaxAmount'
         homeOwnershipAvailableForWithdrawal:
           $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
+        homeOwnershipAvailableForPledge:
+          $ref: '#/components/schemas/HomeOwnershipAvailableForPledge'
         vestedBenefits:
           $ref: '#/components/schemas/VestedBenefits'
 
@@ -941,13 +1053,19 @@ components:
         of the insured employees, incl. the contributions and insured benefits.
       required:
         - planName
+        - contractType
       properties:
         planId:
           $ref: '#/components/schemas/PlanId'
         planName:
           $ref: '#/components/schemas/PlanName'
+        contractType:
+          $ref: '#/components/schemas/ContractType'
         optionalSavingsPlanName:
-          $ref: '#/components/schemas/OptionalSavingsPlanName'
+          type: string
+          description: Name of the optional savings plan.
+          examples:
+            - Sparplan 2
 
     PlanId:
       type: string
@@ -962,11 +1080,25 @@ components:
       examples:
         - Basisplan
 
-    OptionalSavingsPlanName:
+    ContractType:
       type: string
-      description: Name of the optional savings plan.
-      examples:
-        - Sparplan 2
+      description: |
+        The contract type of the pension plan, represented by a string identifier.
+        Allowed values are:
+        - `mand`: Mandatory BVG contract.
+        - `suppl`: Supplementary pension plan.
+        - `earlyRet`: Plan for early retirement.
+        - `bridge`: Bridge pension plan.
+        - `1e`: 1e pension plan.
+        - `other`: Other contract type not covered by the predefined categories.
+      enum:
+        - mand
+        - suppl
+        - earlyRet
+        - bridge
+        - 1e
+        - other
+      example: mand
 
     SalaryData:
       type: object
@@ -1083,6 +1215,8 @@ components:
             $ref: '#/components/schemas/RetirementBenefits'
         interestRates:
           $ref: '#/components/schemas/InterestRates'
+        lastYearDevelopment:
+          $ref: '#/components/schemas/LastYearDevelopment'
 
     TransferredCapital:
       type: number
@@ -1125,6 +1259,58 @@ components:
       description: Projected retirement capital under mandatory coverage as per end of the current year.
       examples:
         - 40846.60
+
+    LastYearDevelopment:
+      type: object
+      description: >
+        Details about the capital development for the last year.
+      required:
+        - balanceBeginningLastYear
+        - totalDepositsLastYear
+        - totalWithdrawalsLastYear
+        - oldAgeCreditLastYear
+        - interestCreditLastYear
+        - balanceEndLastYear
+        - interestRatesLastYear
+      properties:
+        balanceBeginningLastYear:
+          type: number
+          format: double
+          description: >
+            The capital balance at the beginning of the last year.
+          example: 100000.00
+        totalDepositsLastYear:
+          type: number
+          format: double
+          description: >
+            Total deposits made during the last year.
+          example: 5000.00
+        totalWithdrawalsLastYear:
+          type: number
+          format: double
+          description: >
+            Total withdrawals made during the last year.
+          example: 5000.00
+        oldAgeCreditLastYear:
+          type: number
+          format: double
+          description: >
+            Old age credits added during the last year.
+          example: 4000.00
+        interestCreditLastYear:
+          type: number
+          format: double
+          description: >
+            Interest credits added during the last year.
+          example: 2000.00
+        balanceEndLastYear:
+          type: number
+          format: double
+          description: >
+            The capital balance at the end of the last year.
+          example: 106000.00
+        interestRatesLastYear:
+          $ref: '#/components/schemas/InterestRates'
 
     RetirementBenefits:
       type: object
@@ -1219,7 +1405,7 @@ components:
     ConversionRateEnveloping:
       type: number
       format: double
-      description: |
+      description: >
         Enveloping conversion rate (capital to pension) for combined mandatory and
         supplementary coverage
       examples:
@@ -1231,6 +1417,8 @@ components:
         A set of interest rates applicable/applied to the retirement capital, including
         actual rates for mandatory and supplementary coverage. Rates for saving/purchase
         and projection rates for future value calculations.
+      minProperties: 1  # Requires at least one property (specific interest rate) to be present.
+      additionalProperties: false  # Only allow properties defined in 'properties' below.
       properties:
         interestRateMandatorySaving:
           $ref: '#/components/schemas/InterestRate'
@@ -1294,6 +1482,7 @@ components:
         - childPensionDisability
         - partnerPensionDeath
         - orphanPensionDeath
+        - lumpSumWithoutPensionBenefits
         - minimalLumpSumWithPensionBenefits
       properties:
         pensionDisability:
@@ -1341,15 +1530,25 @@ components:
       type: number
       format: double
       description: >
-        One-off payment in the event of death if no other benefits are paid (i.e. there is no entitlement to a partner's pension, for example).
+        A one-off lump sum payment in the event of death, provided no other recurring survivor benefits are paid.
+        This applies when there is no entitlement to a partner’s pension, orphan’s pension, or any other ongoing survivor benefits.
+        The amount typically corresponds to the insured person’s accrued retirement savings as defined by the pension plan.
       examples:
         - 92834.00
 
     MinimalLumpSumWithPensionBenefits:
       type: number
       format: double
-      description: >
-        Guaranteed, minimum one-off payment in the event of death, in addition to other benefits (e.g. in addition to the partner's pension)
+      description: |
+        A guaranteed minimum one-off lump sum payment in the event of death, which is paid in addition to other pension benefits
+        (e.g., a partner’s pension, orphan’s pension, or other recurring survivor benefits).
+
+        This amount can include:
+        - Voluntary additional contributions (Einkäufe) made by the insured person.
+        - Other supplementary pension capital as defined by the pension plan regulations.
+        For example, in some cases, the full accrued retirement savings may be paid in addition to ongoing pension benefits.
+
+        The exact composition and amount of this lump sum depend on the pension plan’s rules and the insured person’s specific situation.
       examples:
         - 74383.00
 
@@ -1417,7 +1616,12 @@ components:
 
     VestedBenefits:
       type: object
-      description: Detail information about vested benefits.
+      description: >
+        The VestedBenefits object provides detailed information about the insured person's accrued retirement capital
+        under occupational pension plans (2nd pillar). It includes key data such as retirement capital at significant
+        milestones (e.g., age 50, marriage), and records of transactions like voluntary purchases, withdrawals for home
+        ownership (WEF), or adjustments due to divorce. This information is essential for managing entitlements and
+        processing pension transfers.
       properties:
         referenceDate:
           $ref: '#/components/schemas/Date'
@@ -1441,7 +1645,7 @@ components:
         capitalAtMarriage:
           type: number
           format: double
-          description: |
+          description: >
             The insured person's retirement capital before he/she got married or entered
             a registered partnership (mandatory and supplementary). Relevant is the last
             marriage or registered partnership (the marriage/partnership date is part of
@@ -1453,7 +1657,7 @@ components:
         capitalAtMarriageMandatory:
           type: number
           format: double
-          description: |
+          description: >
             The insured person's retirement capital before he/she got married or entered
             a registered partnership (mandatory part only). Relevant is the last
             marriage or registered partnership (the marriage/partnership date is part of
@@ -1510,7 +1714,6 @@ components:
       required:
         - date
         - amount
-        - amountMandatory
       properties:
         date:
           $ref: '#/components/schemas/Date'
@@ -1526,7 +1729,7 @@ components:
         amountMandatory:
           type: number
           format: double
-          description: |
+          description: >
             Transaction amount for mandatory part only.
             The amount is positive for payments towards the capital, and negative for withdrawals.
           examples:
@@ -1545,10 +1748,21 @@ components:
       type: number
       format: double
       description: >
-        The total amount available for the insured person to withdraw or borrow against from their retirement capital
+        The total amount available for the insured person to withdraw from their retirement capital
         for the purpose of financing home ownership.
       examples:
         - 31000.00
+
+    HomeOwnershipAvailableForPledge:
+      type: number
+      format: double
+      description: >
+        The total amount available for the insured person to pledge as collateral from their retirement capital
+        for the purpose of financing home ownership.
+
+        Note: If a fixed amount is contractually defined, it is usually lower than this value.
+      examples:
+        - 50000.00
 
     Pledge:
       type: object
@@ -1918,6 +2132,7 @@ components:
           tokenUrl: https://example.com/oauth/token
           scopes:
             read:basic_pension_data: Access to basic pension data (user profile, pension statements, and transactions).
+            read:pension_plan: Access to pension plan description.
 
   # ---- Responses - Standard Errors Common Data Model ----
   responses:
@@ -1937,6 +2152,14 @@ components:
 
     standard404:
       description: Invalid ID / no authorization to access data.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
+
+    standard500:
+      description: >
+        Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.
       content:
         application/problem+json:
           schema:
