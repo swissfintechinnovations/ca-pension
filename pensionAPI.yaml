@@ -804,9 +804,11 @@ components:
         personalPensionDetails:
           $ref: '#/components/schemas/PersonalPensionDetails'
 
-    PensionStatementCompact:
+    psc:
       type: object
-      description: Reduced pension statement consisting of only the most important pension statement information in compact form.
+      description: >
+        psc = pension statement compact, is a reduced pension statement
+        consisting of only the most important pension statement information.
       required:
         - ts
         - pi
