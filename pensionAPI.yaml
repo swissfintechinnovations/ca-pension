@@ -317,7 +317,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PensionStatementCompact'
+                $ref: '#/components/schemas/Psc'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -804,10 +804,10 @@ components:
         personalPensionDetails:
           $ref: '#/components/schemas/PersonalPensionDetails'
 
-    psc:
+    Psc:
       type: object
       description: >
-        psc = pension statement compact, is a reduced pension statement
+        Psc = pension statement compact, is a reduced pension statement
         consisting of only the most important pension statement information.
       required:
         - ts
