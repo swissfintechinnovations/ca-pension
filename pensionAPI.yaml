@@ -810,8 +810,8 @@ components:
       required:
         - ts
         - pi
-        - e
-        - pp
+        - en
+        - ppn
         - rd
         - pst
         - ppl
@@ -828,22 +828,10 @@ components:
           description: Date and time of generation of the PensionStatement
         pi:
           $ref: '#/components/schemas/PersonId'
-        e:
-          type: object
-          description: Details of the insured person's employer.
-          required:
-            - en
-          properties:
-            en:
-              $ref: '#/components/schemas/EmployerName'
-        pp:
-          type: object
-          description: Pension provider (foundation) administering the policy.
-          required:
-            - ppn
-          properties:
-            ppn:
-              $ref: '#/components/schemas/ProviderName'
+        en:
+          $ref: '#/components/schemas/EmployerName'
+        ppn:
+          $ref: '#/components/schemas/ProviderName'
         rd:
           $ref: '#/components/schemas/Date'
           description: Reference date of pension statement.
