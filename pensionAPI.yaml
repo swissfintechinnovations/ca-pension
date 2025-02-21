@@ -137,13 +137,14 @@ info:
 
   license:
     name: Apache 2.0
+    identifier: Apache-2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 
 servers:
   - url: https://pension.common-api.ch
 
 externalDocs:
-  description: Find out more about SFTI API specifications
+  description: Find out more about SFTI API specifications.
   url: https://www.common-api.ch
 
 tags:
@@ -188,7 +189,7 @@ paths:
             - read:basic_pension_data
       responses:
         '200':
-          description: Details of insured person
+          description: Details of insured person.
           content:
             application/json:
               schema:
@@ -223,7 +224,7 @@ paths:
             $ref: '#/components/schemas/PersonId'
           description: Technical person ID.
       requestBody:
-        description: Reference date for information in output
+        description: Reference date for information in output.
         required: false
         content:
           application/json:
@@ -234,7 +235,7 @@ paths:
             - read:basic_pension_data
       responses:
         '200':
-          description: Statement details
+          description: Statement details.
           content:
             application/json:
               schema:
@@ -274,7 +275,7 @@ paths:
             - read:basic_pension_data
       responses:
         '200':
-          description: Binary PDF data of the pension statement
+          description: Binary PDF data of the pension statement.
           content:
             application/pdf:
               schema:
@@ -313,7 +314,7 @@ paths:
             - read:basic_pension_data
       responses:
         '200':
-          description: Compact statement details
+          description: Compact statement details.
           content:
             application/json:
               schema:
@@ -347,7 +348,7 @@ paths:
             - read:basic_pension_data
       responses:
         '200':
-          description: Policy details
+          description: Policy details.
           content:
             application/json:
               schema:
@@ -384,7 +385,7 @@ paths:
             - read:pension_plan
       responses:
         '200':
-          description: Pension plan description document for the insured person in PDF format
+          description: Pension plan description document for the insured person in PDF format.
           content:
             application/pdf:
               schema:
@@ -417,7 +418,7 @@ paths:
         - OAuth2:
             - read:basic_pension_data
       requestBody:
-        description: Salary change simulation parameters
+        description: Salary change simulation parameters.
         required: true
         content:
           application/json:
@@ -425,7 +426,7 @@ paths:
               $ref: '#/components/schemas/SalaryChangeSimParameters'
       responses:
         '200':
-          description: Simulation result
+          description: Simulation result.
           content:
             application/json:
               schema:
@@ -470,7 +471,7 @@ paths:
         - OAuth2:
             - read:basic_pension_data
       requestBody:
-        description: Voluntary purchase simulation parameters
+        description: Voluntary purchase simulation parameters.
         required: true
         content:
           application/json:
@@ -478,7 +479,7 @@ paths:
               $ref: '#/components/schemas/PurchaseSimParameters'
       responses:
         '200':
-          description: Simulation result
+          description: Simulation result.
           content:
             application/json:
               schema:
