@@ -1,0 +1,11 @@
+description: Details of the insured person's employer.
+type: object
+required:
+  - employerName
+properties:
+  employerName:
+    $ref: ./EmployerName.yaml
+  employerId:
+    $ref: ./EmployerId.yaml
+  industry:
+    $ref: ./Industry.yaml

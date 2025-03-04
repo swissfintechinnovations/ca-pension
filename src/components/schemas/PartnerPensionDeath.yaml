@@ -1,0 +1,5 @@
+description: Annual partner pension in case of death.
+type: number
+format: double
+examples:
+  - 24817

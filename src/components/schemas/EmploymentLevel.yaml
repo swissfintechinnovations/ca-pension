@@ -1,0 +1,5 @@
+description: Level of full-time/part-time employment (in percent, 100 for full-time employment).
+type: number
+format: double
+examples:
+  - 100

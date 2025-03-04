@@ -1,0 +1,14 @@
+description: |
+  A guaranteed minimum one-off lump sum payment in the event of death, which is paid in addition to other pension benefits (e.g., a partner’s pension, orphan’s pension, or other recurring survivor benefits).
+
+  This amount can include:
+  - Voluntary additional contributions (Einkäufe) made by the insured person.
+  - Other supplementary pension capital as defined by the pension plan regulations.
+
+  For example, in some cases, the full accrued retirement savings may be paid in addition to ongoing pension benefits.
+
+  The exact composition and amount of this lump sum depend on the pension plan's rules and the insured person's specific situation.
+type: number
+format: double
+examples:
+  - 74383

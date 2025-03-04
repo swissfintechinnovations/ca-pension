@@ -1,0 +1,6 @@
+in: path
+name: pensionStatementId
+description: Technical pension statement ID.
+required: true
+schema:
+  $ref: ../../schemas/PensionStatementId.yaml

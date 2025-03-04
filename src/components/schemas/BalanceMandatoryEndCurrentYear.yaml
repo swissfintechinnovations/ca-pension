@@ -1,0 +1,5 @@
+description: Projected retirement capital under mandatory coverage as per end of the current year.
+type: number
+format: double
+examples:
+  - 40846.6

@@ -1,0 +1,5 @@
+description: Annual contribution towards risk benefits financed by the employer.
+type: number
+format: double
+examples:
+  - 0

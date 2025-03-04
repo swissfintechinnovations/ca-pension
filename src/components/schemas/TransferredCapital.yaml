@@ -1,0 +1,5 @@
+description: Total retirement capital (mandatory and supplementary coverage) brought from other funds into this fund.
+type: number
+format: double
+examples:
+  - 45210.25

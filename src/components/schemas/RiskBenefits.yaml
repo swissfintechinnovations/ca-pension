@@ -1,0 +1,22 @@
+description: Benefits in case of death or disability to work.
+type: object
+required:
+  - childPensionDisability
+  - lumpSumWithoutPensionBenefits
+  - minimalLumpSumWithPensionBenefits
+  - orphanPensionDeath
+  - partnerPensionDeath
+  - pensionDisability
+properties:
+  childPensionDisability:
+    $ref: ./ChildPensionDisability.yaml
+  lumpSumWithoutPensionBenefits:
+    $ref: ./LumpSumWithoutPensionBenefits.yaml
+  minimalLumpSumWithPensionBenefits:
+    $ref: ./MinimalLumpSumWithPensionBenefits.yaml
+  orphanPensionDeath:
+    $ref: ./OrphanPensionDeath.yaml
+  partnerPensionDeath:
+    $ref: ./PartnerPensionDeath.yaml
+  pensionDisability:
+    $ref: ./PensionDisability.yaml

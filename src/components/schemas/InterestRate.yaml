@@ -1,0 +1,5 @@
+description: Common interest rate object.
+type: number
+format: double
+examples:
+  - 3.175

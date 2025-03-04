@@ -1,0 +1,5 @@
+description: Annual salary insured under mandatory coverage.
+type: number
+format: double
+examples:
+  - 59215

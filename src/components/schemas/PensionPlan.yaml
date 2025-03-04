@@ -1,0 +1,17 @@
+description: The pension plan defines various conditions for the occupational pension provision of the insured employees, incl. the contributions and insured benefits.
+type: object
+required:
+  - contractType
+  - planName
+properties:
+  contractType:
+    $ref: ./ContractType.yaml
+  planName:
+    $ref: ./PlanName.yaml
+  optionalSavingsPlanName:
+    type: string
+    description: Name of the optional savings plan.
+    examples:
+      - Sparplan 2
+  planId:
+    $ref: ./PlanId.yaml

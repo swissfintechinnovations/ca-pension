@@ -1,0 +1,6 @@
+in: path
+name: planId
+description: Unique identifier of the pension plan.
+required: true
+schema:
+  $ref: ./.../schemas/PlanId.yaml

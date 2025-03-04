@@ -1,0 +1,4 @@
+description: Insurance plan name.
+type: string
+examples:
+  - Basisplan
