@@ -1,0 +1,74 @@
+description: Details of insured person.
+type: object
+required:
+  - birthDate
+  - firstName
+  - lastName
+  - maritalStatus
+  - personId
+  - sex
+  - ssn
+properties:
+  birthDate:
+    $ref: ./generic/Date.yaml
+    description: Birth date.
+  firstName:
+    type: string
+    description: First name(s).
+    examples:
+      - John
+  lastName:
+    type: string
+    description: Last name / family name.
+    examples:
+      - Doe
+  maritalStatus:
+    type: string
+    enum:
+      - single
+      - married
+      - divorced
+      - widowed
+      - registeredPartnership
+      - dissolvedRegisteredPartnership
+      - unknown
+    description: |
+      Marital status:
+      * `single`: single
+      * `married`: married
+      * `divorced`: divorced
+      * `widowed`: widowed
+      * `registeredPartnership`: living in a registered partnership
+      * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
+      * `unknown`: marital status is not known
+    examples:
+      - married
+  personId:
+    $ref: ./PersonId.yaml
+  sex:
+    type: string
+    enum:
+      - male
+      - female
+    description: |
+      Sex:
+      * `male`: male
+      * `female`: female
+    examples:
+      - male
+  ssn:
+    type: integer
+    format: int64
+    description: Social security number.
+    examples:
+      - 7561234567890
+  address:
+    $ref: ./Address.yaml
+  marriageDate:
+    $ref: ./generic/Date.yaml
+    description: Date of marriage (or registration of partnership).
+  policyIds:
+    type: array
+    items:
+      $ref: ./PolicyId.yaml
+    description: List of IDs of policies that insured person has with this pension fund.

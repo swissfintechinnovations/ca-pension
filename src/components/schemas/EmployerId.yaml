@@ -1,0 +1,4 @@
+description: Swiss Enterprise Identification Number UID.
+type: string
+examples:
+  - CHE115873291

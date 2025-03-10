@@ -1,0 +1,26 @@
+description: 'Retirement benefits for retirement at the specified age. The conversion rate is mandatory: either the pair for mandatory and supplementary coverage is provided, or the enveloping conversion rate.'
+type: object
+required:
+  - capitalBalance
+  - capitalBalanceMandatory
+  - pension
+  - retirementAge
+properties:
+  capitalBalance:
+    $ref: ./CapitalBalance.yaml
+  capitalBalanceMandatory:
+    $ref: ./CapitalBalanceMandatory.yaml
+  pension:
+    $ref: ./Pension.yaml
+  retirementAge:
+    $ref: ./RetirementAge.yaml
+  capitalBalanceNoInterest:
+    $ref: ./CapitalBalanceNoInterest.yaml
+  capitalBalanceNoInterestMandatory:
+    $ref: ./CapitalBalanceNoInterestMandatory.yaml
+  conversionRateEnveloping:
+    $ref: ./ConversionRateEnveloping.yaml
+  conversionRateMandatory:
+    $ref: ./ConversionRateMandatory.yaml
+  conversionRateSupplementary:
+    $ref: ./ConversionRateSupplementary.yaml

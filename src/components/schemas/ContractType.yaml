@@ -1,0 +1,18 @@
+description: |
+  The contract type of the pension plan, represented by a string identifier.
+  Allowed values are:
+  - `mand`: Mandatory BVG contract.
+  - `suppl`: Supplementary pension plan.
+  - `earlyRet`: Plan for early retirement.
+  - `bridge`: Bridge pension plan.
+  - `1e`: 1e pension plan.
+  - `other`: Other contract type not covered by the predefined categories.
+type: string
+enum:
+  - mand
+  - suppl
+  - earlyRet
+  - bridge
+  - 1e
+  - other
+example: mand

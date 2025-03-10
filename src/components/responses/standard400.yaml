@@ -1,0 +1,5 @@
+description: Some of the input is incomplete or invalid for starting a request.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/CommonErrorResponse.yaml

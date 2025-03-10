@@ -1,0 +1,18 @@
+description: Postal/residence address.
+type: object
+required:
+  - countryCode
+  - postalCode
+  - street
+  - town
+properties:
+  countryCode:
+    $ref: ./CountryCode.yaml
+  postalCode:
+    $ref: ./PostalCode.yaml
+  street:
+    $ref: ./Street.yaml
+  town:
+    $ref: ./Town.yaml
+  poBox:
+    $ref: ./PoBox.yaml

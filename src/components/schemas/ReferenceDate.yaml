@@ -1,0 +1,7 @@
+description: Reference date for information in generated document.
+type: object
+required:
+  - referenceDate
+properties:
+  referenceDate:
+    $ref: ./generic/Date.yaml

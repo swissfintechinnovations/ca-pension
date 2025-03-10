@@ -1,0 +1,5 @@
+description: Annual contribution towards the retirement captial financed by the insured person.
+type: number
+format: double
+examples:
+  - 4025

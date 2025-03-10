@@ -1,0 +1,4 @@
+description: Pension statement number (as printed on statement).
+type: string
+examples:
+  - PS_ID_6789-ABC

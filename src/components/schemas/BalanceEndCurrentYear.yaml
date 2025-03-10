@@ -1,0 +1,5 @@
+description: Projected retirement capital as per end of the current year (mandatory and supplementary coverage).
+type: number
+format: double
+examples:
+  - 56325.25

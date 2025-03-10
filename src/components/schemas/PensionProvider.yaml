@@ -1,0 +1,16 @@
+description: Pension provider (foundation) administering the policy.
+type: object
+required:
+  - providerName
+properties:
+  providerName:
+    $ref: ./ProviderName.yaml
+  portalName:
+    $ref: ./PortalName.yaml
+  portalUrl:
+    $ref: ./PortalUrl.yaml
+  providerAddress:
+    $ref: ./Address.yaml
+    description: Postal address of the pension provider.
+  providerId:
+    $ref: ./ProviderId.yaml

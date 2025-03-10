@@ -1,0 +1,25 @@
+description: Details of salary relevant for insurance.
+type: object
+required:
+  - declaredSalary
+  - employmentLevel
+  - insuredSalaryMandatory
+  - insuredSalaryRetirement
+  - insuredSalaryRisk
+properties:
+  declaredSalary:
+    $ref: ./DeclaredSalary.yaml
+  employmentLevel:
+    $ref: ./EmploymentLevel.yaml
+  insuredSalaryMandatory:
+    $ref: ./InsuredSalaryMandatory.yaml
+  insuredSalaryRetirement:
+    $ref: ./InsuredSalaryRetirement.yaml
+  insuredSalaryRisk:
+    $ref: ./InsuredSalaryRisk.yaml
+  additionalSalary:
+    $ref: ./AdditionalSalary.yaml
+  bonus:
+    $ref: ./Bonus.yaml
+  otherSalaryComponent:
+    $ref: ./OtherSalaryComponent.yaml

@@ -1,0 +1,5 @@
+description: Specified age (in month since birth) used for the retirement benefits calculation.
+type: integer
+format: int32
+examples:
+  - 756
