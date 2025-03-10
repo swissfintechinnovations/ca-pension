@@ -132,7 +132,7 @@ paths:
       tags:
         - person
       parameters:
-        - $ref: ./components/parameters/path/PersonId.yaml
+        - $ref: ./components/parameters/path/person_id.yaml
       security:
         - OAuth2:
             - read:basic_pension_data
@@ -160,7 +160,7 @@ paths:
       tags:
         - statement
       parameters:
-        - $ref: ./components/parameters/path/PersonId.yaml
+        - $ref: ./components/parameters/path/person_id.yaml
       requestBody:
         description: Reference date for information in output.
         required: false
@@ -196,7 +196,7 @@ paths:
       tags:
         - statement
       parameters:
-        - $ref: ./components/parameters/path/pensionStatementId.yaml
+        - $ref: ./components/parameters/path/pension_statement_id.yaml
       security:
         - OAuth2:
             - read:basic_pension_data
@@ -222,7 +222,7 @@ paths:
       tags:
         - statement
       parameters:
-        - $ref: ./components/parameters/path/pensionStatementId.yaml
+        - $ref: ./components/parameters/path/pension_statement_id.yaml
       security:
         - OAuth2:
             - read:basic_pension_data
@@ -247,7 +247,7 @@ paths:
       tags:
         - policy
       parameters:
-        - $ref: ./components/parameters/path/policyId.yaml
+        - $ref: ./components/parameters/path/policy_id.yaml
       security:
         - OAuth2:
             - read:basic_pension_data
@@ -272,7 +272,7 @@ paths:
       tags:
         - plan
       parameters:
-        - $ref: ./components/parameters/path/planId.yaml
+        - $ref: ./components/parameters/path/plan_id.yaml
       security:
         - OAuth2:
             - read:pension_plan
@@ -298,7 +298,7 @@ paths:
       tags:
         - simulation
       parameters:
-        - $ref: ./components/parameters/path/policyId.yaml
+        - $ref: ./components/parameters/path/policy_id.yaml
       security:
         - OAuth2:
             - read:basic_pension_data
@@ -330,7 +330,7 @@ paths:
       tags:
         - simulation
       parameters:
-        - $ref: ./components/parameters/path/policyId.yaml
+        - $ref: ./components/parameters/path/policy_id.yaml
       security:
         - OAuth2:
             - read:basic_pension_data
@@ -362,7 +362,7 @@ paths:
       tags:
         - transactions
       parameters:
-        - $ref: ./components/parameters/path/policyId.yaml
+        - $ref: ./components/parameters/path/policy_id.yaml
         - $ref: ./components/parameters/query/from_date.yaml
         - $ref: ./components/parameters/query/to_date.yaml
       security:
