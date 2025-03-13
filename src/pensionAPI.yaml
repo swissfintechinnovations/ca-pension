@@ -106,20 +106,20 @@ externalDocs:
   description: Find out more about SFTI API specifications.
   url: https://www.common-api.ch
 tags:
-  - name: consents
-    description: Consents.
   - name: person
     description: Insured person.
-  - name: plan
-    description: Pension plan.
-  - name: policy
-    description: Pension fund policy.
-  - name: simulation
-    description: Simulations of salary changes and voluntary purchases.
   - name: statement
     description: Pension statement.
+  - name: policy
+    description: Pension fund policy.
+  - name: plan
+    description: Pension plan.
+  - name: simulation
+    description: Simulations of salary changes and voluntary purchases.
   - name: transactions
     description: Retirement capital transactions.
+  - name: consents
+    description: Consents.
 security:
   - OAuth2:
       - read:basic_pension_data
