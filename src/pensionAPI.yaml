@@ -190,7 +190,10 @@ paths:
   /statements/{pensionStatementId}/documents:
     get:
       summary: Get the pension statement document for the specified id
-      description: Provides the pension statement for the specified id as a PDF document in the insured person's preferred language. If the pension fund is unable to provide a document for the request id, the error code 400 should be returned.
+      description: |
+        Provides the pension statement for the specified id as a PDF document in the insured person's preferred language.
+        
+        If the pension fund is unable to provide a document for the request id, the error code 400 should be returned.
       operationId: getPensionStatementDocument
       tags:
         - statement
@@ -216,7 +219,10 @@ paths:
   /statements/{pensionStatementId}/compact-statements:
     get:
       summary: Get the compact pension statement for the specified id
-      description: Provides the pension statement for the specified id as a compact json in the insured person's preferred language. Its sole purpose is to provide a compact json for use cases with tight data volume limits such as e.g. a QR code. This endpoint should not be used otherwise. If the pension fund is unable to provide a json for the request id, the error code 400 should be returned.
+      description: |
+        Provides the pension statement for the specified id as a compact json in the insured person's preferred language. Its sole purpose is to provide a compact json for use cases with tight data volume limits such as e.g. a QR code. This endpoint should not be used otherwise. 
+        
+        If the pension fund is unable to provide a json for the request id, the error code 400 should be returned.
       operationId: getPensionStatementCompact
       tags:
         - statement
@@ -266,7 +272,12 @@ paths:
   /plans/{planId}/description-documents:
     get:
       summary: Get insured person's pension plan description
-      description: Retrieves the pension plan description for a specific insured person and pension plan. This document provides a description of the insured person's pension plan, including covered benefits, contribution structure, and key conditions applicable under their employer's pension scheme. If the specified pension plan description is not found for the insured person, a `404` error is returned.
+      description: |
+        Retrieves the pension plan description for a specific insured person and pension plan.
+        
+        This document provides a description of the insured person's pension plan, including covered benefits, contribution structure, and key conditions applicable under their employer's pension scheme. 
+        
+        If the specified pension plan description is not found for the insured person, a `404` error is returned.
       operationId: getPensionPlanDescriptionDocument
       tags:
         - plan
@@ -324,7 +335,16 @@ paths:
   /policies/{policyId}/purchase-simulation:
     post:
       summary: Simulate effects of voluntary purchase
-      description: Simulates the financial effect of voluntary purchase of additional pension benefits for the provided parameters (retirement age, purchase amount etc.) If the specified purchase amount is higher the maximum allowed purchase amount, it will be reduced to the allowed amount. The simulation result contains the effective purchase amount. For periodic payments, the simulation assumes that the payments are made with the specified payment size and payment frequency until the maximum purchase amount has been exhausted or the retirement date has been reached (whichever is first). If the retirement date is reached before the purchase amount is exhausted, the returned effective purchase amount will be lower than both the requested and the maximum purchase amount. Using a very high amount (e.g. CHF 10 million), it is possible to query the maximum purchase amount and the maximum additional pension at once.
+      description: |
+        Simulates the financial effect of voluntary purchase of additional pension benefits for the provided parameters (retirement age, purchase amount etc.)
+        
+        If the specified purchase amount is higher the maximum allowed purchase amount, it will be reduced to the allowed amount. The simulation result contains the effective purchase amount.
+        
+        For periodic payments, the simulation assumes that the payments are made with the specified payment size and payment frequency until the maximum purchase amount has been exhausted or the retirement date has been reached (whichever is first).
+        
+        If the retirement date is reached before the purchase amount is exhausted, the returned effective purchase amount will be lower than both the requested and the maximum purchase amount.
+        
+        Using a very high amount (e.g. CHF 10 million), it is possible to query the maximum purchase amount and the maximum additional pension at once.
       operationId: simulatePurchase
       tags:
         - simulation
@@ -356,7 +376,16 @@ paths:
   /policies/{policyId}/transactions:
     get:
       summary: Get the retirement capital transactions
-      description: Retrieves all transactions affecting the policy's retirement capital in the specified date range. The resulting transaction list is sorted in chronological order, starting with the oldest transaction. If several transactions occurred on the same date, they are ordered such that adding the transaction amount to the previous transactions balance results in the balance provided by the current transaction. The first transaction in the list is a pseudo transaction providing the carryover balance from the previous period. It is the only transaction with the category `carryover`. The `from` date must be before or be equal to the `to` date. The result contains a date range as well. It is usually equal to the request date range. However, if the requested `from` date is before the start of the policy or if the request `to` date is in the future, the date range may be adjusted to reflect the effective date range.
+      description: |
+        Retrieves all transactions affecting the policy's retirement capital in the specified date range.
+        
+        The resulting transaction list is sorted in chronological order, starting with the oldest transaction. If several transactions occurred on the same date, they are ordered such that adding the transaction amount to the previous transactions balance results in the balance provided by the current transaction.
+        
+        The first transaction in the list is a pseudo transaction providing the carryover balance from the previous period. It is the only transaction with the category `carryover`.
+        
+        The `from` date must be before or be equal to the `to` date.
+        
+        The result contains a date range as well. It is usually equal to the request date range. However, if the requested `from` date is before the start of the policy or if the request `to` date is in the future, the date range may be adjusted to reflect the effective date range.
       operationId: getRetirementCapitalTransactions
       tags:
         - transactions
