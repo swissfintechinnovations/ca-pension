@@ -240,7 +240,7 @@ paths:
       summary: Get the compact pension statement for the specified id
       description: >
         Provides the pension statement for the specified id as a compact json in the insured person's preferred language. Its sole purpose is to
-        provide a compact json for use cases with tight data volume limits such as e.g. a QR code. This endpoint should not be used otherwise. 
+        provide a compact json for use cases with tight data volume limits such as e.g. a QR code. This endpoint should not be used otherwise.
 
         If the pension fund is unable to provide a json for the request id, the error code 400 should be returned.
       operationId: getPensionStatementCompact
@@ -298,7 +298,7 @@ paths:
         Retrieves the pension plan description for a specific insured person and pension plan.
 
         This document provides a description of the insured person's pension plan, including covered benefits, contribution structure, and key
-        conditions applicable under their employer's pension scheme. 
+        conditions applicable under their employer's pension scheme.
 
         If the specified pension plan description is not found for the insured person, a `404` error is returned.
       operationId: getPensionPlanDescriptionDocument
