@@ -4,177 +4,86 @@ info:
   title: Pension
   description: >
     # Pension-API (Deutsch)
-
-
     **** Deutsch (for English see below) ****
-
-
     Mit dem Pension-API können Daten zur versicherten Person und deren Vorsorgesituation abgefragt werden. Dies umfasst vereinfacht gesagt die Daten,
     die auf dem Versicherungsausweis zu finden sind. Auch die Erstellung bzw. das Beziehen von bereits erstellten Versicherungsausweisen als PDF-Datei
     ist möglich. Des Weiteren gibt es Endpunkte für Simulationen und für Transaktionen.
-
-
     Als Einstieg fürs Pension-API wird eine technische Personen-, Statement- oder Policen-ID benötigt.
-
-
     Die wesentlichen Objekte dieses APIs sind *Person*, *Police* und *Pension Statement*. Person bezieht sich immer auf eine natürliche Person, die
     bei einer Pensionskasse versichert ist.
-
-
     Die Police beschreibt den indirekten Versicherungsvertrag zwischen der versicherten Person (ArbeitnehmerIn) und der Pensionskasse. Ist eine Person
     über zwei Vorsorgepläne versichert, z.B. über einen Basis- und einen zusätzlichen Kaderplan, so hat sie zwei Policen.
-
-
     Das Pension Statement umfasst grundsätzlich die gleichen persönlichen Vorsorgedaten wie die Policen, kann aber die Daten verschiedener Policen
     aggregieren. Je nach Pensionkasse wird dies unterschiedlich gehandhabt.
-
-
     Die PDF-Version des Vorsorgeausweises entspricht dem Dokument, welches traditionell anfangs Jahr durch die Pensionskasse für die Versicherten
     ausgestellt wird.
-
-
     Das API umfasst auch Simulationen:
-
     - Änderung des Beschäftigtengrads und/oder des Lohns
-
     - Freiwilliger Einkauf in die Pensionskasse
-
     Die Simulationen berechnen die Effekte auf die monatlichen Beiträge sowie auf die voraussichtlichen Rentenleistungen bei unterschiedlichem
     Pensionierungsalter.
-
-
     Die in dieser Spezifikation angegebenen URLs sind nur Beispiel-URLs. Das API wird von einer Vielzahl von Pensionskassen implementiert und jede
     Pensionskasse hat eine andere Basis-URL für das API. Die Basis-URL der jeweiligen Pensionskasse wird vom Directory API geliefert.
-
-
-
     ## Simulation
-
-
     Die Simulation berechnet, wie hoch das Altersguthaben und die Rente mit und ohne Einkauf sein wird. Dabei können verschiedene Parameter gewählt
     werden:
-
     - Einkaufssumme (gesamt)
-
     - Pensionierungsalter
-
     - Betrag pro Zahlung (bei mehreren Zahlungen)
-
     - Zahlungsperiodizität (bei mehreren Zahlungen)
-
     - Datum der (ersten) Zahlung
-
-
     Die Simulation geht davon aus, dass die gesetzlichen Voraussetzungen für den Einkauf gegeben sind. Sie prüft, dass der maximale Einkaufsbetrag
     nicht überschritten wird, und passt ihn bei Bedarf an.
-
-
-
     ## Kontobewegung
-
-
     Das Kontobewegungsendpunkte liefert die Kontobewegungen des Altersguthabens einer Police.
-
-
-
     # Pension API (English)
-
-
-
     **** English (für Deutsch siehe weiter oben) ****
-
-
     The Pension API serves to query details about the insured person and their pension situation. In simplified terms, this includes the data found on
     the insurance certificate. Additionally, policy statements can be generated or already generated statements can be retrieved as PDF files. There
     are also endpoints for simulations and for transactions.
-
-
     Person, statement and policy IDs serve as the entry point for this API.
-
-
     The main objects of this API are *Person*, *Policy* and *Pension Statement*. Person always refers to a natural person who is insured with a
     pension fund.
-
-
     The policy describes the indirect insurance contract between the insured person (employee) and the pension fund. If a person is insured under two
     pension plans, e.g. via a basic plan and an additional management plan, he or she has two policies.
-
-
     The pension statement basically contains the same personal pension data as the policies, but can aggregate the data from different policies. This
     is handled differently depending on the pension fund.
-
-
     The PDF version of the pension certificate corresponds to the document that is traditionally issued to the insured persons by the pension fund at
     the beginning of the year.
-
-
     The API also includes simulations:
-
     - Change of employment level and/or salary
-
     - Voluntary purchase into the pension fund
-
     The simulations calculate the effects on the monthly contributions as well as the effects of the perspective pension benefits for different
     retirement ages.
-
-
     The URLs in the specification are examples only. The API is implemented by a many pension funds and each pension fund has an individual base URL
     for the API. The base URL of a specific pension fund is provided by the directory API.
-
-
-
     ## Simulation
-
-
     The simulation calculates the prospective retirement capital and pension with and without voluntary purchase. Several parameters of the simulation
     can be specified:
-
     - Purchase amount (total)
-
     - Pension age
-
     - Amount of individual payments (if several payments are made towards a purchase)
-
     - Payment frequency (if several payments are made towards a purchase)
-
     - Date of (first) payment
-
-
     The simulation assumes that the legal prerequisites for the purchase are fulfilled. It checks that the maximum purchase amount is not exceeded and
     modifies it if needed.
-
-
     ## Transactions
-
     The Transactions endpoints provide the transactions affecting the retirement capital of a policy.
-
-
     ### Glossar / Glossary
-
     Folgende englischen Begriffe werden im API verwendet / The following English terms are used in the API :
-
     - **Social Security Number (SSN)**: Sozialversicherungsnummer (SVN) - 13 stellige, Schweizer Sozialversicherungsnummer.
-
     - **Mandatory / supplementary coverage**: Obligatorischer / überobligatorische Anteil / Deckung
-
     - **Retirement benefits**: Versicherungsleistungen bei Pensionierung (Altersrente und Altersguthaben)
-
     - **Risk benefits**: Versicherungsleistungen bei Invalidität und Tod
-
     - **Enveloping interest/conversion rate**: Umhüllender Zinssatz / Umwandlungssatz
-
     - **Retirement capital**: Altersguthaben / Alterskapital
-
     - **Savings contribution**: Sparbeitrag (Beitrag an Altersgutben)
-
     - **Risk contribution**: Risikobeitrag (Beitrag für Leistungen bei Invalidität und Tod)
-
     - **Vested benefits**: Freizügigkeitsleistungen
   contact:
     email: info@common-api.ch
   license:
     name: Apache 2.0
-    identifier: Apache-2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
   - url: https://pension.common-api.ch
@@ -182,20 +91,20 @@ externalDocs:
   description: Find out more about SFTI API specifications.
   url: https://www.common-api.ch
 tags:
-  - name: consents
-    description: Consents.
   - name: person
     description: Insured person.
-  - name: plan
-    description: Pension plan.
-  - name: policy
-    description: Pension fund policy.
-  - name: simulation
-    description: Simulations of salary changes and voluntary purchases.
   - name: statement
     description: Pension statement.
+  - name: policy
+    description: Pension fund policy.
+  - name: plan
+    description: Pension plan.
+  - name: simulation
+    description: Simulations of salary changes and voluntary purchases.
   - name: transactions
     description: Retirement capital transactions.
+  - name: consents
+    description: Consents.
 security:
   - OAuth2:
       - read:basic_pension_data
@@ -235,8 +144,6 @@ paths:
         specified, the latest (regular/official) pension statement(s) associated with the insured person is retrieved. If a person has several
         policies (associated to different pension plans), either an aggregated statement is delivered or one statement per pension plan. This can vary
         depending on the pension fund. In the aggregated statement, the related pension plans are listed.
-
-
         If the pension fund is unable to provide a statement for the request date, the error code 400 should be returned.
       operationId: getPensionStatementsByDate
       tags:
@@ -519,38 +426,12 @@ paths:
           $ref: '#/components/responses/standard500'
 components:
   schemas:
-    PersonId:
-      description: Technical ID of insured person used in API calls.
-      type: string
-      pattern: ^[A-Za-z0-9_\-.~]{1,64}$
+    AdditionalSalary:
+      description: Additional salary component.
+      type: number
+      format: double
       examples:
-        - JohnDoe_1234
-    CountryCode:
-      description: ISO country code.
-      type: string
-      pattern: ^[A-Z]{2}$
-      examples:
-        - CH
-    PostalCode:
-      description: Postal code.
-      type: string
-      examples:
-        - '3944'
-    Street:
-      description: Street and house number.
-      type: string
-      examples:
-        - Brandstrasse 2
-    Town:
-      description: Town.
-      type: string
-      examples:
-        - Unterbäch
-    PoBox:
-      description: PO box.
-      type: string
-      examples:
-        - PO Box 42
+        - 0
     Address:
       description: Postal/residence address.
       type: object
@@ -570,12 +451,316 @@ components:
           $ref: '#/components/schemas/Town'
         poBox:
           $ref: '#/components/schemas/PoBox'
-    PolicyId:
-      description: Technical ID of policy used in API calls.
-      type: string
-      pattern: ^[A-Za-z0-9_\-.~]{1,64}$
+    BalanceEndCurrentYear:
+      description: Projected retirement capital as per end of the current year (mandatory and supplementary coverage).
+      type: number
+      format: double
       examples:
-        - Pol_56789-2024
+        - 56325.25
+    BalanceMandatoryEndCurrentYear:
+      description: Projected retirement capital under mandatory coverage as per end of the current year.
+      type: number
+      format: double
+      examples:
+        - 40846.6
+    BalanceMandatoryReferenceDate:
+      description: Retirement capital under mandatory coverage as per a specified reference date.
+      type: number
+      format: double
+      examples:
+        - 38942.15
+    BalanceReferenceDate:
+      description: Retirement capital as per a specified reference date (mandatory and supplementary coverage).
+      type: number
+      format: double
+      examples:
+        - 53842.5
+    Bonus:
+      description: Bonus component of the salary.
+      type: number
+      format: double
+      examples:
+        - 0
+    CapitalBalance:
+      description: Retirement capital balance with interest (mandatory and supplementary coverage).
+      type: number
+      format: double
+      examples:
+        - 378832.05
+    CapitalBalanceMandatory:
+      description: Retirement capital balance with interest (mandatory coverage only).
+      type: number
+      format: double
+      examples:
+        - 284832.15
+    CapitalBalanceNoInterest:
+      description: Retirement capital balance assuming no interest on assets (mandatory and supplementary coverage)
+      type: number
+      format: double
+      examples:
+        - 331285.25
+    CapitalBalanceNoInterestMandatory:
+      description: Retirement capital balance assuming no interest on assets (mandatory coverage only)
+      type: number
+      format: double
+      examples:
+        - 248862.65
+    CapitalTransaction:
+      description: >-
+        Capital transaction made by the insured persons. It includes volunatry purchases, withdrawals for and refunds of home ownerhsip promotion,
+        withdrawals or refunds due to divorce.
+      type: object
+      required:
+        - amount
+        - date
+      properties:
+        amount:
+          type: number
+          format: double
+          description: >-
+            Total transaction amount for mandatory and supplementary part. The amount is positive for payments towards the capital, and negative for
+            withdrawals.
+          examples:
+            - 0
+        date:
+          description: Date of transaction
+          type: string
+          format: date
+          examples:
+            - '2018-04-13'
+        amountMandatory:
+          type: number
+          format: double
+          description: Transaction amount for mandatory part only. The amount is positive for payments towards the capital, and negative for withdrawals.
+          examples:
+            - 0
+    ChildPensionDisability:
+      description: Annual child pension in case of disability.
+      type: number
+      format: double
+      examples:
+        - 5382
+    CommonErrorResponse:
+      title: Common Error Response
+      description: Common Error Response.
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Details about the error.
+          examples:
+            - Detailed problem description with respect to the current request, e.g., invalid account number format
+        instance:
+          type: string
+          description: Instance of the error.
+          examples:
+            - path/to/corresponding/resource
+        title:
+          type: string
+          description: The error title.
+          examples:
+            - This is the general problem description
+        type:
+          $ref: '#/components/schemas/CommonErrorType'
+    CommonErrorType:
+      title: Common Error Type
+      description: Error Types for commonErrorResponse.
+      type: string
+      enum:
+        - /problems/INVALID_PAYLOAD
+        - /problems/MALFORMED_PAYLOAD
+        - /problems/INVALID_TOKEN
+        - /problems/EXPIRED_TOKEN
+        - /problems/INSUFFICIENT_PRIVILEGES
+        - /problems/NO_ACCESS_TO_RESOURCE
+        - /problems/RESOURCE_DOES_NOT_EXIST
+        - /problems/RESOURCE_NOT_READY
+        - /problems/RESOURCE_TOO_LARGE
+        - /problems/WRONG_METHOD
+        - /problems/OPERATION_NOT_ALLOWED
+        - /problems/TECHNICAL_ERROR
+        - /problems/NOT_IMPLEMENTED
+        - /problems/SERVICE_UNAVAILABLE
+      examples:
+        - /problems/TECHNICAL_ERROR
+    ConsentItem:
+      description: Information about a single consent, including the person ID and the allowed scopes.
+      type: object
+      required:
+        - personId
+        - scopes
+      properties:
+        personId:
+          $ref: '#/components/schemas/PersonId'
+        scopes:
+          type: array
+          items:
+            type: string
+            enum:
+              - read:basic_pension_data
+              - read:pension_plan
+          description: List of granted scopes for this specific person.
+          example:
+            - read:basic_pension_data
+            - read:pension_plan
+    ContractType:
+      description: |
+        The contract type of the pension plan, represented by a string identifier.
+        Allowed values are:
+        - `mand`: Mandatory BVG contract.
+        - `suppl`: Supplementary pension plan.
+        - `earlyRet`: Plan for early retirement.
+        - `bridge`: Bridge pension plan.
+        - `1e`: 1e pension plan.
+        - `other`: Other contract type not covered by the predefined categories.
+      type: string
+      enum:
+        - mand
+        - suppl
+        - earlyRet
+        - bridge
+        - 1e
+        - other
+      example: mand
+    ContributionAdministrationEmployer:
+      description: Annual contribution towards fund administration financed by the employer.
+      type: number
+      format: double
+      examples:
+        - 0
+    ContributionAdministrationInsuredPerson:
+      description: Annual contribution towards fund administration financed by the insured person.
+      type: number
+      format: double
+      examples:
+        - 0
+    ContributionRiskEmployer:
+      description: Annual contribution towards risk benefits financed by the employer.
+      type: number
+      format: double
+      examples:
+        - 0
+    ContributionRiskInsuredPerson:
+      description: Annual contribution towards risk benefits financed by the insured person.
+      type: number
+      format: double
+      examples:
+        - 0
+    ContributionSavingsEmployer:
+      description: Annual contribution towards the retirement captial financed by the employer.
+      type: number
+      format: double
+      examples:
+        - 4025
+    ContributionSavingsInsuredPerson:
+      description: Annual contribution towards the retirement captial financed by the insured person.
+      type: number
+      format: double
+      examples:
+        - 4025
+    ConversionRateEnveloping:
+      description: Enveloping conversion rate (capital to pension) for combined mandatory and supplementary coverage
+      type: number
+      format: double
+      examples:
+        - 6.3
+    ConversionRateMandatory:
+      description: Conversion rate (capital to pension) for mandatory coverage.
+      type: number
+      format: double
+      examples:
+        - 6.8
+    ConversionRateSupplementary:
+      description: Conversion rate (capital to pension) for supplementary coverage.
+      type: number
+      format: double
+      examples:
+        - 5.5
+    CountryCode:
+      description: ISO country code.
+      type: string
+      pattern: ^[A-Z]{2}$
+      examples:
+        - CH
+    Date:
+      description: Common date format.
+      type: string
+      format: date
+      examples:
+        - '2018-04-13'
+    DeclaredSalary:
+      description: Gross annual salary.
+      type: number
+      format: double
+      examples:
+        - 78000
+    Employer:
+      description: Details of the insured person's employer.
+      type: object
+      required:
+        - employerName
+      properties:
+        employerName:
+          $ref: '#/components/schemas/EmployerName'
+        employerId:
+          $ref: '#/components/schemas/EmployerId'
+        industry:
+          $ref: '#/components/schemas/Industry'
+    EmployerId:
+      description: Swiss Enterprise Identification Number UID.
+      type: string
+      examples:
+        - CHE115873291
+    EmployerName:
+      description: The name of the employer.
+      type: string
+      examples:
+        - Acrea AG
+    EmploymentLevel:
+      description: Level of full-time/part-time employment (in percent, 100 for full-time employment).
+      type: number
+      format: double
+      examples:
+        - 100
+    Financing:
+      description: Contributions for financing the policy.
+      type: object
+      required:
+        - contributionSavingsEmployer
+        - contributionSavingsInsuredPerson
+      properties:
+        contributionSavingsEmployer:
+          $ref: '#/components/schemas/ContributionSavingsEmployer'
+        contributionSavingsInsuredPerson:
+          $ref: '#/components/schemas/ContributionSavingsInsuredPerson'
+        contributionAdministrationEmployer:
+          $ref: '#/components/schemas/ContributionAdministrationEmployer'
+        contributionAdministrationInsuredPerson:
+          $ref: '#/components/schemas/ContributionAdministrationInsuredPerson'
+        contributionRiskEmployer:
+          $ref: '#/components/schemas/ContributionRiskEmployer'
+        contributionRiskInsuredPerson:
+          $ref: '#/components/schemas/ContributionRiskInsuredPerson'
+    HomeOwnershipAvailableForPledge:
+      description: >
+        The total amount available for the insured person to pledge as collateral from their retirement capital for the purpose of financing home
+        ownership.
+        Note: If a fixed amount is contractually defined, it is usually lower than this value.
+      type: number
+      format: double
+      examples:
+        - 50000
+    HomeOwnershipAvailableForWithdrawal:
+      description: The total amount available for the insured person to withdraw from their retirement capital for the purpose of financing home ownership.
+      type: number
+      format: double
+      examples:
+        - 31000
+    Industry:
+      description: The industry or sector the employer operates in.
+      type: string
+      examples:
+        - information technology and management consulting
     InsuredPerson:
       description: Details of insured person.
       type: object
@@ -657,265 +842,24 @@ components:
           items:
             $ref: '#/components/schemas/PolicyId'
           description: List of IDs of policies that insured person has with this pension fund.
-    CommonErrorType:
-      title: Common Error Type
-      description: Error Types for commonErrorResponse.
-      type: string
-      enum:
-        - /problems/INVALID_PAYLOAD
-        - /problems/MALFORMED_PAYLOAD
-        - /problems/INVALID_TOKEN
-        - /problems/EXPIRED_TOKEN
-        - /problems/INSUFFICIENT_PRIVILEGES
-        - /problems/NO_ACCESS_TO_RESOURCE
-        - /problems/RESOURCE_DOES_NOT_EXIST
-        - /problems/RESOURCE_NOT_READY
-        - /problems/RESOURCE_TOO_LARGE
-        - /problems/WRONG_METHOD
-        - /problems/OPERATION_NOT_ALLOWED
-        - /problems/TECHNICAL_ERROR
-        - /problems/NOT_IMPLEMENTED
-        - /problems/SERVICE_UNAVAILABLE
-      examples:
-        - /problems/TECHNICAL_ERROR
-    CommonErrorResponse:
-      title: Common Error Response
-      description: Common Error Response.
-      type: object
-      properties:
-        detail:
-          type: string
-          description: Details about the error.
-          examples:
-            - Detailed problem description with respect to the current request, e.g., invalid account number format
-        instance:
-          type: string
-          description: Instance of the error.
-          examples:
-            - path/to/corresponding/resource
-        title:
-          type: string
-          description: The error title.
-          examples:
-            - This is the general problem description
-        type:
-          $ref: '#/components/schemas/CommonErrorType'
-    ReferenceDate:
-      description: Reference date for information in generated document.
-      type: object
-      required:
-        - referenceDate
-      properties:
-        referenceDate:
-          description: Common date format.
-          type: string
-          format: date
-          examples:
-            - '2018-04-13'
-    EmployerName:
-      description: The name of the employer.
-      type: string
-      examples:
-        - Acrea AG
-    EmployerId:
-      description: Swiss Enterprise Identification Number UID.
-      type: string
-      examples:
-        - CHE115873291
-    Industry:
-      description: The industry or sector the employer operates in.
-      type: string
-      examples:
-        - information technology and management consulting
-    Employer:
-      description: Details of the insured person's employer.
-      type: object
-      required:
-        - employerName
-      properties:
-        employerName:
-          $ref: '#/components/schemas/EmployerName'
-        employerId:
-          $ref: '#/components/schemas/EmployerId'
-        industry:
-          $ref: '#/components/schemas/Industry'
-    ContractType:
-      description: |
-        The contract type of the pension plan, represented by a string identifier.
-        Allowed values are:
-        - `mand`: Mandatory BVG contract.
-        - `suppl`: Supplementary pension plan.
-        - `earlyRet`: Plan for early retirement.
-        - `bridge`: Bridge pension plan.
-        - `1e`: 1e pension plan.
-        - `other`: Other contract type not covered by the predefined categories.
-      type: string
-      enum:
-        - mand
-        - suppl
-        - earlyRet
-        - bridge
-        - 1e
-        - other
-      example: mand
-    PlanName:
-      description: Insurance plan name.
-      type: string
-      examples:
-        - Basisplan
-    PlanId:
-      description: Technical ID of pension plan used in API calls.
-      type: string
-      pattern: ^[A-Za-z0-9_\-.~]{1,64}$
-      examples:
-        - Plan_XY4284_425
-    PensionPlan:
-      description: >-
-        The pension plan defines various conditions for the occupational pension provision of the insured employees, incl. the contributions and
-        insured benefits.
-      type: object
-      required:
-        - contractType
-        - planName
-      properties:
-        contractType:
-          $ref: '#/components/schemas/ContractType'
-        planName:
-          $ref: '#/components/schemas/PlanName'
-        optionalSavingsPlanName:
-          type: string
-          description: Name of the optional savings plan.
-          examples:
-            - Sparplan 2
-        planId:
-          $ref: '#/components/schemas/PlanId'
-    ProviderName:
-      description: The name of the pension provider.
-      type: string
-      examples:
-        - Omnifund
-    PortalName:
-      description: Offical name of the insurance portal.
-      type: string
-      examples:
-        - Omni Portal
-    PortalUrl:
-      description: URL of the insurance portal of the pension fund.
-      type: string
-      examples:
-        - www.omnifund.ch
-    ProviderId:
-      description: Swiss Enterprise Identification Number UID.
-      type: string
-      examples:
-        - CHE123456789
-    PensionProvider:
-      description: Pension provider (foundation) administering the policy.
-      type: object
-      required:
-        - providerName
-      properties:
-        providerName:
-          $ref: '#/components/schemas/ProviderName'
-        portalName:
-          $ref: '#/components/schemas/PortalName'
-        portalUrl:
-          $ref: '#/components/schemas/PortalUrl'
-        providerAddress:
-          $ref: '#/components/schemas/Address'
-          description: Postal address of the pension provider.
-        providerId:
-          $ref: '#/components/schemas/ProviderId'
-    PensionStatementType:
-      description: |
-        Pension statement type:
-        - `regular`: the pension statement is an offical, regular statement on the basis of real values (not changed for simulation purposes)
-        - `simulated`: the pension statement is a non-offical, simulated statement, i.e. some values might have been changed for simulation purposes
-      type: string
-      enum:
-        - regular
-        - simulated
-      examples:
-        - regular
-    ContributionSavingsEmployer:
-      description: Annual contribution towards the retirement captial financed by the employer.
+    InsuredSalaryMandatory:
+      description: Annual salary insured under mandatory coverage.
       type: number
       format: double
       examples:
-        - 4025
-    ContributionSavingsInsuredPerson:
-      description: Annual contribution towards the retirement captial financed by the insured person.
+        - 59215
+    InsuredSalaryRetirement:
+      description: Annual salary insured for retirement benefits (mandatory and supplementary coverage).
       type: number
       format: double
       examples:
-        - 4025
-    ContributionAdministrationEmployer:
-      description: Annual contribution towards fund administration financed by the employer.
+        - 59215
+    InsuredSalaryRisk:
+      description: Annual salary insured for risk benefits (mandatory and supplementary coverage).
       type: number
       format: double
       examples:
-        - 0
-    ContributionAdministrationInsuredPerson:
-      description: Annual contribution towards fund administration financed by the insured person.
-      type: number
-      format: double
-      examples:
-        - 0
-    ContributionRiskEmployer:
-      description: Annual contribution towards risk benefits financed by the employer.
-      type: number
-      format: double
-      examples:
-        - 0
-    ContributionRiskInsuredPerson:
-      description: Annual contribution towards risk benefits financed by the insured person.
-      type: number
-      format: double
-      examples:
-        - 0
-    Financing:
-      description: Contributions for financing the policy.
-      type: object
-      required:
-        - contributionSavingsEmployer
-        - contributionSavingsInsuredPerson
-      properties:
-        contributionSavingsEmployer:
-          $ref: '#/components/schemas/ContributionSavingsEmployer'
-        contributionSavingsInsuredPerson:
-          $ref: '#/components/schemas/ContributionSavingsInsuredPerson'
-        contributionAdministrationEmployer:
-          $ref: '#/components/schemas/ContributionAdministrationEmployer'
-        contributionAdministrationInsuredPerson:
-          $ref: '#/components/schemas/ContributionAdministrationInsuredPerson'
-        contributionRiskEmployer:
-          $ref: '#/components/schemas/ContributionRiskEmployer'
-        contributionRiskInsuredPerson:
-          $ref: '#/components/schemas/ContributionRiskInsuredPerson'
-    HomeOwnershipAvailableForWithdrawal:
-      description: The total amount available for the insured person to withdraw from their retirement capital for the purpose of financing home ownership.
-      type: number
-      format: double
-      examples:
-        - 31000
-    RegularPurchaseMaxAmount:
-      description: The maximum amount the insured person is permitted to contribute to their pension plan as an ordinary purchase.
-      type: number
-      format: double
-      examples:
-        - 48392.45
-    BalanceMandatoryReferenceDate:
-      description: Retirement capital under mandatory coverage as per a specified reference date.
-      type: number
-      format: double
-      examples:
-        - 38942.15
-    BalanceReferenceDate:
-      description: Retirement capital as per a specified reference date (mandatory and supplementary coverage).
-      type: number
-      format: double
-      examples:
-        - 53842.5
+        - 59215
     InterestRate:
       description: Common interest rate object.
       type: number
@@ -977,101 +921,6 @@ components:
             - 5.5
       minProperties: 1
       additionalProperties: false
-    CapitalBalance:
-      description: Retirement capital balance with interest (mandatory and supplementary coverage).
-      type: number
-      format: double
-      examples:
-        - 378832.05
-    CapitalBalanceMandatory:
-      description: Retirement capital balance with interest (mandatory coverage only).
-      type: number
-      format: double
-      examples:
-        - 284832.15
-    Pension:
-      description: Annual pension credit.
-      type: number
-      format: double
-      examples:
-        - 22835
-    RetirementAge:
-      description: Specified age (in month since birth) used for the retirement benefits calculation.
-      type: integer
-      format: int32
-      examples:
-        - 756
-    CapitalBalanceNoInterest:
-      description: Retirement capital balance assuming no interest on assets (mandatory and supplementary coverage)
-      type: number
-      format: double
-      examples:
-        - 331285.25
-    CapitalBalanceNoInterestMandatory:
-      description: Retirement capital balance assuming no interest on assets (mandatory coverage only)
-      type: number
-      format: double
-      examples:
-        - 248862.65
-    ConversionRateEnveloping:
-      description: Enveloping conversion rate (capital to pension) for combined mandatory and supplementary coverage
-      type: number
-      format: double
-      examples:
-        - 6.3
-    ConversionRateMandatory:
-      description: Conversion rate (capital to pension) for mandatory coverage.
-      type: number
-      format: double
-      examples:
-        - 6.8
-    ConversionRateSupplementary:
-      description: Conversion rate (capital to pension) for supplementary coverage.
-      type: number
-      format: double
-      examples:
-        - 5.5
-    RetirementBenefits:
-      description: >-
-        Retirement benefits for retirement at the specified age. The conversion rate is mandatory: either the pair for mandatory and supplementary
-        coverage is provided, or the enveloping conversion rate.
-      type: object
-      required:
-        - capitalBalance
-        - capitalBalanceMandatory
-        - pension
-        - retirementAge
-      properties:
-        capitalBalance:
-          $ref: '#/components/schemas/CapitalBalance'
-        capitalBalanceMandatory:
-          $ref: '#/components/schemas/CapitalBalanceMandatory'
-        pension:
-          $ref: '#/components/schemas/Pension'
-        retirementAge:
-          $ref: '#/components/schemas/RetirementAge'
-        capitalBalanceNoInterest:
-          $ref: '#/components/schemas/CapitalBalanceNoInterest'
-        capitalBalanceNoInterestMandatory:
-          $ref: '#/components/schemas/CapitalBalanceNoInterestMandatory'
-        conversionRateEnveloping:
-          $ref: '#/components/schemas/ConversionRateEnveloping'
-        conversionRateMandatory:
-          $ref: '#/components/schemas/ConversionRateMandatory'
-        conversionRateSupplementary:
-          $ref: '#/components/schemas/ConversionRateSupplementary'
-    BalanceEndCurrentYear:
-      description: Projected retirement capital as per end of the current year (mandatory and supplementary coverage).
-      type: number
-      format: double
-      examples:
-        - 56325.25
-    BalanceMandatoryEndCurrentYear:
-      description: Projected retirement capital under mandatory coverage as per end of the current year.
-      type: number
-      format: double
-      examples:
-        - 40846.6
     LastYearDevelopment:
       description: Details about the capital development for the last year.
       type: object
@@ -1116,56 +965,6 @@ components:
           format: double
           description: Total withdrawals made during the last year.
           example: 5000
-    TransferredCapital:
-      description: Total retirement capital (mandatory and supplementary coverage) brought from other funds into this fund.
-      type: number
-      format: double
-      examples:
-        - 45210.25
-    TransferredCapitalMandatory:
-      description: Retirement capital under mandatory coverage brought from other funds into this fund.
-      type: number
-      format: double
-      examples:
-        - 32840.55
-    RetirementCapital:
-      description: Retirement capital balances for the past and projections for the future.
-      type: object
-      required:
-        - balanceMandatoryReferenceDate
-        - balanceReferenceDate
-        - interestRates
-        - projectedRetirementBenefits
-      properties:
-        balanceMandatoryReferenceDate:
-          $ref: '#/components/schemas/BalanceMandatoryReferenceDate'
-        balanceReferenceDate:
-          $ref: '#/components/schemas/BalanceReferenceDate'
-        interestRates:
-          $ref: '#/components/schemas/InterestRates'
-        projectedRetirementBenefits:
-          type: array
-          description: >-
-            Projected retirement benefits for a series of retirement ages. The list contains projections for each integer retirement age from 58 to
-            the regular retirement age. For persons of 58 or older, the list is restricted to retirement ages higher than their current age.
-          items:
-            $ref: '#/components/schemas/RetirementBenefits'
-        balanceEndCurrentYear:
-          $ref: '#/components/schemas/BalanceEndCurrentYear'
-        balanceMandatoryEndCurrentYear:
-          $ref: '#/components/schemas/BalanceMandatoryEndCurrentYear'
-        lastYearDevelopment:
-          $ref: '#/components/schemas/LastYearDevelopment'
-        transferredCapital:
-          $ref: '#/components/schemas/TransferredCapital'
-        transferredCapitalMandatory:
-          $ref: '#/components/schemas/TransferredCapitalMandatory'
-    ChildPensionDisability:
-      description: Annual child pension in case of disability.
-      type: number
-      format: double
-      examples:
-        - 5382
     LumpSumWithoutPensionBenefits:
       description: >-
         A one-off lump sum payment in the event of death, provided no other recurring survivor benefits are paid. This applies when there is no
@@ -1179,18 +978,10 @@ components:
       description: >
         A guaranteed minimum one-off lump sum payment in the event of death, which is paid in addition to other pension benefits (e.g., a partner’s
         pension, orphan’s pension, or other recurring survivor benefits).
-
-
         This amount can include:
-
         - Voluntary additional contributions (Einkäufe) made by the insured person.
-
         - Other supplementary pension capital as defined by the pension plan regulations.
-
-
         For example, in some cases, the full accrued retirement savings may be paid in addition to ongoing pension benefits.
-
-
         The exact composition and amount of this lump sum depend on the pension plan's rules and the insured person's specific situation.
       type: number
       format: double
@@ -1202,318 +993,79 @@ components:
       format: double
       examples:
         - 5382
-    PartnerPensionDeath:
-      description: Annual partner pension in case of death.
-      type: number
-      format: double
-      examples:
-        - 24817
-    PensionDisability:
-      description: Annual pension in case of disability.
-      type: number
-      format: double
-      examples:
-        - 40213
-    RiskBenefits:
-      description: Benefits in case of death or disability to work.
-      type: object
-      required:
-        - childPensionDisability
-        - lumpSumWithoutPensionBenefits
-        - minimalLumpSumWithPensionBenefits
-        - orphanPensionDeath
-        - partnerPensionDeath
-        - pensionDisability
-      properties:
-        childPensionDisability:
-          $ref: '#/components/schemas/ChildPensionDisability'
-        lumpSumWithoutPensionBenefits:
-          $ref: '#/components/schemas/LumpSumWithoutPensionBenefits'
-        minimalLumpSumWithPensionBenefits:
-          $ref: '#/components/schemas/MinimalLumpSumWithPensionBenefits'
-        orphanPensionDeath:
-          $ref: '#/components/schemas/OrphanPensionDeath'
-        partnerPensionDeath:
-          $ref: '#/components/schemas/PartnerPensionDeath'
-        pensionDisability:
-          $ref: '#/components/schemas/PensionDisability'
-    DeclaredSalary:
-      description: Gross annual salary.
-      type: number
-      format: double
-      examples:
-        - 78000
-    EmploymentLevel:
-      description: Level of full-time/part-time employment (in percent, 100 for full-time employment).
-      type: number
-      format: double
-      examples:
-        - 100
-    InsuredSalaryMandatory:
-      description: Annual salary insured under mandatory coverage.
-      type: number
-      format: double
-      examples:
-        - 59215
-    InsuredSalaryRetirement:
-      description: Annual salary insured for retirement benefits (mandatory and supplementary coverage).
-      type: number
-      format: double
-      examples:
-        - 59215
-    InsuredSalaryRisk:
-      description: Annual salary insured for risk benefits (mandatory and supplementary coverage).
-      type: number
-      format: double
-      examples:
-        - 59215
-    AdditionalSalary:
-      description: Additional salary component.
-      type: number
-      format: double
-      examples:
-        - 0
-    Bonus:
-      description: Bonus component of the salary.
-      type: number
-      format: double
-      examples:
-        - 0
     OtherSalaryComponent:
       description: Other salary component.
       type: number
       format: double
       examples:
         - 0
-    SalaryData:
-      description: Details of salary relevant for insurance.
-      type: object
-      required:
-        - declaredSalary
-        - employmentLevel
-        - insuredSalaryMandatory
-        - insuredSalaryRetirement
-        - insuredSalaryRisk
-      properties:
-        declaredSalary:
-          $ref: '#/components/schemas/DeclaredSalary'
-        employmentLevel:
-          $ref: '#/components/schemas/EmploymentLevel'
-        insuredSalaryMandatory:
-          $ref: '#/components/schemas/InsuredSalaryMandatory'
-        insuredSalaryRetirement:
-          $ref: '#/components/schemas/InsuredSalaryRetirement'
-        insuredSalaryRisk:
-          $ref: '#/components/schemas/InsuredSalaryRisk'
-        additionalSalary:
-          $ref: '#/components/schemas/AdditionalSalary'
-        bonus:
-          $ref: '#/components/schemas/Bonus'
-        otherSalaryComponent:
-          $ref: '#/components/schemas/OtherSalaryComponent'
-    HomeOwnershipAvailableForPledge:
-      description: >
-        The total amount available for the insured person to pledge as collateral from their retirement capital for the purpose of financing home
-        ownership.
-
-
-        Note: If a fixed amount is contractually defined, it is usually lower than this value.
+    PartnerPensionDeath:
+      description: Annual partner pension in case of death.
       type: number
       format: double
       examples:
-        - 50000
-    CapitalTransaction:
+        - 24817
+    PaymentFrequency:
+      description: |
+        Number of payments per year.
+        Possible values:
+        * 0: One-time payment
+        * 1: Annual payment
+        * 2: Semi-annual payment
+        * 4: Quarterly payment
+        * 12: Monthly payment
+      type: integer
+      examples:
+        - 0
+    Pension:
+      description: Annual pension credit.
+      type: number
+      format: double
+      examples:
+        - 22835
+    PensionDisability:
+      description: Annual pension in case of disability.
+      type: number
+      format: double
+      examples:
+        - 40213
+    PensionPlan:
       description: >-
-        Capital transaction made by the insured persons. It includes volunatry purchases, withdrawals for and refunds of home ownerhsip promotion,
-        withdrawals or refunds due to divorce.
+        The pension plan defines various conditions for the occupational pension provision of the insured employees, incl. the contributions and
+        insured benefits.
       type: object
       required:
-        - amount
-        - date
+        - contractType
+        - planName
       properties:
-        amount:
-          type: number
-          format: double
-          description: >-
-            Total transaction amount for mandatory and supplementary part. The amount is positive for payments towards the capital, and negative for
-            withdrawals.
-          examples:
-            - 0
-        date:
-          description: Date of transaction
+        contractType:
+          $ref: '#/components/schemas/ContractType'
+        planName:
+          $ref: '#/components/schemas/PlanName'
+        optionalSavingsPlanName:
           type: string
-          format: date
+          description: Name of the optional savings plan.
           examples:
-            - '2018-04-13'
-        amountMandatory:
-          type: number
-          format: double
-          description: Transaction amount for mandatory part only. The amount is positive for payments towards the capital, and negative for withdrawals.
-          examples:
-            - 0
-    Pledge:
-      description: Details about pledged capital.
+            - Sparplan 2
+        planId:
+          $ref: '#/components/schemas/PlanId'
+    PensionProvider:
+      description: Pension provider (foundation) administering the policy.
       type: object
+      required:
+        - providerName
       properties:
-        amount:
-          type: number
-          format: double
-          description: Amount of retirement capital used for pledging (mandatory and supplementary).
-          examples:
-            - 20000
-        amountMandatory:
-          type: number
-          format: double
-          description: Amount of retirement capital used for pledging (mandatory part only).
-          examples:
-            - 20000
-        pledgee:
-          type: string
-          description: The name of the pledgee.
-          examples:
-            - UBS AG
-        pledgeeAddress:
+        providerName:
+          $ref: '#/components/schemas/ProviderName'
+        portalName:
+          $ref: '#/components/schemas/PortalName'
+        portalUrl:
+          $ref: '#/components/schemas/PortalUrl'
+        providerAddress:
           $ref: '#/components/schemas/Address'
-    VestedBenefits:
-      description: >-
-        The VestedBenefits object provides detailed information about the insured person's accrued retirement capital under occupational pension plans
-        (2nd pillar). It includes key data such as retirement capital at significant milestones (e.g., age 50, marriage), and records of transactions
-        like voluntary purchases, withdrawals for home ownership (WEF), or adjustments due to divorce. This information is essential for managing
-        entitlements and processing pension transfers.
-      type: object
-      properties:
-        capitalAt50:
-          type: number
-          format: double
-          description: The insured person's retirement capital when he/she was 50 (mandatory and supplementary). Empty for persons younger than 50.
-          examples:
-            - 0
-        capitalAt50Mandatory:
-          type: number
-          format: double
-          description: The insured person's retirement capital when he/she was 50 (mandatory part only). Empty for persons younger than 50.
-          examples:
-            - 0
-        capitalAtMarriage:
-          type: number
-          format: double
-          description: >
-            The insured person's retirement capital before he/she got married or entered a registered partnership (mandatory and supplementary).
-            Relevant is the last marriage or registered partnership (the marriage/partnership date is part of the insured person object.)
-
-
-            Empty for persons who are not married or in a registered partnership.
-          examples:
-            - 28483.35
-        capitalAtMarriageMandatory:
-          type: number
-          format: double
-          description: >
-            The insured person's retirement capital before he/she got married or entered a registered partnership (mandatory part only). Relevant is
-            the last marriage or registered partnership (the marriage/partnership date is part of the insured person object.)
-
-
-            Empty for persons who are not married or in a registered partnership.
-          examples:
-            - 23863.15
-        capitalFirstCommunicated:
-          type: number
-          format: double
-          description: >-
-            Vested benefit capital that has been initially communicated or had become due after January 1, 1995 (for insured persons having married
-            before January 1, 1995).
-          examples:
-            - 0
-        capitalFirstCommunicatedDate:
-          description: >-
-            Date when vested benefit capital has been initially communicated or had become due after January 1, 1995 (for insured persons having
-            married before January 1, 1995).
-          type: string
-          format: date
-          examples:
-            - '2018-04-13'
-        divorceWithdrawals:
-          type: array
-          items:
-            $ref: '#/components/schemas/CapitalTransaction'
-          description: List of withdrawls and refunds due to divorce made in the past.
-        homeOwnerhsipWithdrawals:
-          type: array
-          items:
-            $ref: '#/components/schemas/CapitalTransaction'
-          description: List of withdrawls and refunds for home ownership promotion made in the past.
-        pledges:
-          type: array
-          items:
-            $ref: '#/components/schemas/Pledge'
-          description: List of pledges of parts of the retirement capital.
-        referenceDate:
-          description: Reference date of the vested benefit information.
-          type: string
-          format: date
-          examples:
-            - '2018-04-13'
-        voluntaryPurchases:
-          type: array
-          items:
-            $ref: '#/components/schemas/CapitalTransaction'
-          description: >-
-            List of voluntary purchases of additional pension benefits made in the past. At least the purchases of the last 3 years must be included.
-            They can be aggregated by calendar year.
-    PersonalPensionDetails:
-      description: >-
-        Shared pension-related data specific to the insured person. This data structure is used in policies and pension statements to represent key
-        attributes like salary, capital and benefits.
-      type: object
-      required:
-        - earliestRetirementAge
-        - financing
-        - homeOwnershipAvailableForWithdrawal
-        - ordinaryRetirementAge
-        - regularPurchaseMaxAmount
-        - retirementCapital
-        - riskBenefits
-        - salaryData
-      properties:
-        earliestRetirementAge:
-          type: integer
-          format: int32
-          description: Age (in month since birth) for earliest possible retirement.
-          examples:
-            - 696
-        financing:
-          $ref: '#/components/schemas/Financing'
-        homeOwnershipAvailableForWithdrawal:
-          $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
-        ordinaryRetirementAge:
-          type: integer
-          format: int32
-          description: Age (in month since birth) for ordinary retirement.
-          examples:
-            - 780
-        regularPurchaseMaxAmount:
-          $ref: '#/components/schemas/RegularPurchaseMaxAmount'
-        retirementCapital:
-          $ref: '#/components/schemas/RetirementCapital'
-        riskBenefits:
-          $ref: '#/components/schemas/RiskBenefits'
-        salaryData:
-          $ref: '#/components/schemas/SalaryData'
-        homeOwnershipAvailableForPledge:
-          $ref: '#/components/schemas/HomeOwnershipAvailableForPledge'
-        vestedBenefits:
-          $ref: '#/components/schemas/VestedBenefits'
-    PensionStatementId:
-      description: Technical ID of pension statement used in API calls.
-      type: string
-      pattern: ^[A-Za-z0-9_\-.~]{1,64}$
-      examples:
-        - 550e8450-e59b-21d4-a346-442215440560
-    PensionStatementNo:
-      description: Pension statement number (as printed on statement).
-      type: string
-      examples:
-        - PS_ID_6789-ABC
+          description: Postal address of the pension provider.
+        providerId:
+          $ref: '#/components/schemas/ProviderId'
     PensionStatement:
       description: Pension statement consisting of the basic pension statement information, including aggregated personal pension data across related policies.
       type: object
@@ -1558,6 +1110,202 @@ components:
           $ref: '#/components/schemas/PensionStatementId'
         pensionStatementNo:
           $ref: '#/components/schemas/PensionStatementNo'
+    PensionStatementId:
+      description: Technical ID of pension statement used in API calls.
+      type: string
+      pattern: ^[A-Za-z0-9_\-.~]{1,64}$
+      examples:
+        - 550e8450-e59b-21d4-a346-442215440560
+    PensionStatementNo:
+      description: Pension statement number (as printed on statement).
+      type: string
+      examples:
+        - PS_ID_6789-ABC
+    PensionStatementType:
+      description: |
+        Pension statement type:
+        - `regular`: the pension statement is an offical, regular statement on the basis of real values (not changed for simulation purposes)
+        - `simulated`: the pension statement is a non-offical, simulated statement, i.e. some values might have been changed for simulation purposes
+      type: string
+      enum:
+        - regular
+        - simulated
+      examples:
+        - regular
+    PersonId:
+      description: Technical ID of insured person used in API calls.
+      type: string
+      pattern: ^[A-Za-z0-9_\-.~]{1,64}$
+      examples:
+        - JohnDoe_1234
+    PersonalPensionDetails:
+      description: >-
+        Shared pension-related data specific to the insured person. This data structure is used in policies and pension statements to represent key
+        attributes like salary, capital and benefits.
+      type: object
+      required:
+        - earliestRetirementAge
+        - financing
+        - homeOwnershipAvailableForWithdrawal
+        - ordinaryRetirementAge
+        - regularPurchaseMaxAmount
+        - retirementCapital
+        - riskBenefits
+        - salaryData
+      properties:
+        earliestRetirementAge:
+          type: integer
+          format: int32
+          description: Age (in month since birth) for earliest possible retirement.
+          examples:
+            - 696
+        financing:
+          $ref: '#/components/schemas/Financing'
+        homeOwnershipAvailableForWithdrawal:
+          $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
+        ordinaryRetirementAge:
+          type: integer
+          format: int32
+          description: Age (in month since birth) for ordinary retirement.
+          examples:
+            - 780
+        regularPurchaseMaxAmount:
+          $ref: '#/components/schemas/RegularPurchaseMaxAmount'
+        retirementCapital:
+          $ref: '#/components/schemas/RetirementCapital'
+        riskBenefits:
+          $ref: '#/components/schemas/RiskBenefits'
+        salaryData:
+          $ref: '#/components/schemas/SalaryData'
+        homeOwnershipAvailableForPledge:
+          $ref: '#/components/schemas/HomeOwnershipAvailableForPledge'
+        vestedBenefits:
+          $ref: '#/components/schemas/VestedBenefits'
+    PlanId:
+      description: Technical ID of pension plan used in API calls.
+      type: string
+      pattern: ^[A-Za-z0-9_\-.~]{1,64}$
+      examples:
+        - Plan_XY4284_425
+    PlanName:
+      description: Insurance plan name.
+      type: string
+      examples:
+        - Basisplan
+    Pledge:
+      description: Details about pledged capital.
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Amount of retirement capital used for pledging (mandatory and supplementary).
+          examples:
+            - 20000
+        amountMandatory:
+          type: number
+          format: double
+          description: Amount of retirement capital used for pledging (mandatory part only).
+          examples:
+            - 20000
+        pledgee:
+          type: string
+          description: The name of the pledgee.
+          examples:
+            - UBS AG
+        pledgeeAddress:
+          $ref: '#/components/schemas/Address'
+    PoBox:
+      description: PO box.
+      type: string
+      examples:
+        - PO Box 42
+    Policy:
+      description: Details of policy.
+      type: object
+      required:
+        - contractNo
+        - entryDate
+        - pensionPlan
+        - pensionProvider
+        - personId
+        - personalPensionDetails
+        - policyId
+        - policyNo
+        - referenceDate
+      properties:
+        contractNo:
+          type: string
+          description: Contract number of contract between employer and pension fund.
+          examples:
+            - C27-842.183
+        entryDate:
+          description: Entry date into the pension plan.
+          type: string
+          format: date
+          examples:
+            - '2018-04-13'
+        pensionPlan:
+          $ref: '#/components/schemas/PensionPlan'
+        pensionProvider:
+          $ref: '#/components/schemas/PensionProvider'
+        personId:
+          $ref: '#/components/schemas/PersonId'
+        personalPensionDetails:
+          $ref: '#/components/schemas/PersonalPensionDetails'
+        policyId:
+          $ref: '#/components/schemas/PolicyId'
+        policyNo:
+          type: string
+          description: Policy number (as printed on policy statements).
+          examples:
+            - 392'485'482
+        referenceDate:
+          description: Reference date of the personal pension details.
+          type: string
+          format: date
+          examples:
+            - '2018-04-13'
+        employer:
+          $ref: '#/components/schemas/Employer'
+        isInVestedBenefitFoundation:
+          type: boolean
+          description: >-
+            Indicates if policy is part of a vested benefit foundation (as opposed to a regular pension fund with payments from an employer). If the
+            field is not set, a regular pension fund is assumed.
+          examples:
+            - false
+    PolicyId:
+      description: Technical ID of policy used in API calls.
+      type: string
+      pattern: ^[A-Za-z0-9_\-.~]{1,64}$
+      examples:
+        - Pol_56789-2024
+    PortalName:
+      description: Offical name of the insurance portal.
+      type: string
+      examples:
+        - Omni Portal
+    PortalUrl:
+      description: URL of the insurance portal of the pension fund.
+      type: string
+      examples:
+        - www.omnifund.ch
+    PostalCode:
+      description: Postal code.
+      type: string
+      examples:
+        - '3944'
+    ProviderId:
+      description: Swiss Enterprise Identification Number UID.
+      type: string
+      examples:
+        - CHE123456789
+    ProviderName:
+      description: The name of the pension provider.
+      type: string
+      examples:
+        - Omnifund
     Psc:
       description: Psc = pension statement compact, is a reduced pension statement consisting of only the most important pension statement information.
       type: object
@@ -1696,115 +1444,6 @@ components:
           format: date-time
           examples:
             - '2018-04-13T11:11:11Z'
-    Policy:
-      description: Details of policy.
-      type: object
-      required:
-        - contractNo
-        - entryDate
-        - pensionPlan
-        - pensionProvider
-        - personId
-        - personalPensionDetails
-        - policyId
-        - policyNo
-        - referenceDate
-      properties:
-        contractNo:
-          type: string
-          description: Contract number of contract between employer and pension fund.
-          examples:
-            - C27-842.183
-        entryDate:
-          description: Entry date into the pension plan.
-          type: string
-          format: date
-          examples:
-            - '2018-04-13'
-        pensionPlan:
-          $ref: '#/components/schemas/PensionPlan'
-        pensionProvider:
-          $ref: '#/components/schemas/PensionProvider'
-        personId:
-          $ref: '#/components/schemas/PersonId'
-        personalPensionDetails:
-          $ref: '#/components/schemas/PersonalPensionDetails'
-        policyId:
-          $ref: '#/components/schemas/PolicyId'
-        policyNo:
-          type: string
-          description: Policy number (as printed on policy statements).
-          examples:
-            - 392'485'482
-        referenceDate:
-          description: Reference date of the personal pension details.
-          type: string
-          format: date
-          examples:
-            - '2018-04-13'
-        employer:
-          $ref: '#/components/schemas/Employer'
-        isInVestedBenefitFoundation:
-          type: boolean
-          description: >-
-            Indicates if policy is part of a vested benefit foundation (as opposed to a regular pension fund with payments from an employer). If the
-            field is not set, a regular pension fund is assumed.
-          examples:
-            - false
-    SalaryChangeSimParameters:
-      description: Salary change simulation parameters.
-      type: object
-      required:
-        - declaredSalary
-        - employmentLevel
-      properties:
-        declaredSalary:
-          type: number
-          format: double
-          description: Changed gross annual salary in CHF (for employment level 100%).
-          examples:
-            - 80000
-        employmentLevel:
-          type: number
-          format: double
-          description: Changed level of full-time/part-time employment (in percent, 100 for full-time employment).
-          examples:
-            - 80
-        effectiveDate:
-          description: 'Date when the salary change takes effect. If omitted: tomorrow.'
-          type: string
-          format: date
-          examples:
-            - '2018-04-13'
-    SimulationResultPensionStatement:
-      description: Financial effect of simulation.
-      type: object
-      required:
-        - pensionStatementAfterChange
-        - pensionStatementBeforeChange
-      properties:
-        pensionStatementAfterChange:
-          $ref: '#/components/schemas/PensionStatement'
-          description: |
-            Provides the pension statement after the change.
-
-            In case of salaray change: referenceDate = tomorrow OR effectiveDate, if specified as API parameter
-            In case of purchase: referenceData = day after the (last) payment
-        pensionStatementBeforeChange:
-          $ref: '#/components/schemas/PensionStatement'
-          description: Provides the pension statement before the change (referenceDate = today)
-    PaymentFrequency:
-      description: |
-        Number of payments per year.
-        Possible values:
-        * 0: One-time payment
-        * 1: Annual payment
-        * 2: Semi-annual payment
-        * 4: Quarterly payment
-        * 12: Monthly payment
-      type: integer
-      examples:
-        - 0
     PurchaseSimParameters:
       description: Voluntary purchase simulation parameters.
       type: object
@@ -1834,12 +1473,191 @@ components:
           description: Planned retirement age (in month since birth). If omitted, the regular payment age is assumed.
           examples:
             - 780
-    Date:
-      description: Common date format.
-      type: string
-      format: date
+    ReferenceDate:
+      description: Reference date for information in generated document.
+      type: object
+      required:
+        - referenceDate
+      properties:
+        referenceDate:
+          description: Common date format.
+          type: string
+          format: date
+          examples:
+            - '2018-04-13'
+    RegularPurchaseMaxAmount:
+      description: The maximum amount the insured person is permitted to contribute to their pension plan as an ordinary purchase.
+      type: number
+      format: double
       examples:
-        - '2018-04-13'
+        - 48392.45
+    RetirementAge:
+      description: Specified age (in month since birth) used for the retirement benefits calculation.
+      type: integer
+      format: int32
+      examples:
+        - 756
+    RetirementBenefits:
+      description: >-
+        Retirement benefits for retirement at the specified age. The conversion rate is mandatory: either the pair for mandatory and supplementary
+        coverage is provided, or the enveloping conversion rate.
+      type: object
+      required:
+        - capitalBalance
+        - capitalBalanceMandatory
+        - pension
+        - retirementAge
+      properties:
+        capitalBalance:
+          $ref: '#/components/schemas/CapitalBalance'
+        capitalBalanceMandatory:
+          $ref: '#/components/schemas/CapitalBalanceMandatory'
+        pension:
+          $ref: '#/components/schemas/Pension'
+        retirementAge:
+          $ref: '#/components/schemas/RetirementAge'
+        capitalBalanceNoInterest:
+          $ref: '#/components/schemas/CapitalBalanceNoInterest'
+        capitalBalanceNoInterestMandatory:
+          $ref: '#/components/schemas/CapitalBalanceNoInterestMandatory'
+        conversionRateEnveloping:
+          $ref: '#/components/schemas/ConversionRateEnveloping'
+        conversionRateMandatory:
+          $ref: '#/components/schemas/ConversionRateMandatory'
+        conversionRateSupplementary:
+          $ref: '#/components/schemas/ConversionRateSupplementary'
+    RetirementCapital:
+      description: Retirement capital balances for the past and projections for the future.
+      type: object
+      required:
+        - balanceMandatoryReferenceDate
+        - balanceReferenceDate
+        - interestRates
+        - projectedRetirementBenefits
+      properties:
+        balanceMandatoryReferenceDate:
+          $ref: '#/components/schemas/BalanceMandatoryReferenceDate'
+        balanceReferenceDate:
+          $ref: '#/components/schemas/BalanceReferenceDate'
+        interestRates:
+          $ref: '#/components/schemas/InterestRates'
+        projectedRetirementBenefits:
+          type: array
+          description: >-
+            Projected retirement benefits for a series of retirement ages. The list contains projections for each integer retirement age from 58 to
+            the regular retirement age. For persons of 58 or older, the list is restricted to retirement ages higher than their current age.
+          items:
+            $ref: '#/components/schemas/RetirementBenefits'
+        balanceEndCurrentYear:
+          $ref: '#/components/schemas/BalanceEndCurrentYear'
+        balanceMandatoryEndCurrentYear:
+          $ref: '#/components/schemas/BalanceMandatoryEndCurrentYear'
+        lastYearDevelopment:
+          $ref: '#/components/schemas/LastYearDevelopment'
+        transferredCapital:
+          $ref: '#/components/schemas/TransferredCapital'
+        transferredCapitalMandatory:
+          $ref: '#/components/schemas/TransferredCapitalMandatory'
+    RiskBenefits:
+      description: Benefits in case of death or disability to work.
+      type: object
+      required:
+        - childPensionDisability
+        - lumpSumWithoutPensionBenefits
+        - minimalLumpSumWithPensionBenefits
+        - orphanPensionDeath
+        - partnerPensionDeath
+        - pensionDisability
+      properties:
+        childPensionDisability:
+          $ref: '#/components/schemas/ChildPensionDisability'
+        lumpSumWithoutPensionBenefits:
+          $ref: '#/components/schemas/LumpSumWithoutPensionBenefits'
+        minimalLumpSumWithPensionBenefits:
+          $ref: '#/components/schemas/MinimalLumpSumWithPensionBenefits'
+        orphanPensionDeath:
+          $ref: '#/components/schemas/OrphanPensionDeath'
+        partnerPensionDeath:
+          $ref: '#/components/schemas/PartnerPensionDeath'
+        pensionDisability:
+          $ref: '#/components/schemas/PensionDisability'
+    SalaryChangeSimParameters:
+      description: Salary change simulation parameters.
+      type: object
+      required:
+        - declaredSalary
+        - employmentLevel
+      properties:
+        declaredSalary:
+          type: number
+          format: double
+          description: Changed gross annual salary in CHF (for employment level 100%).
+          examples:
+            - 80000
+        employmentLevel:
+          type: number
+          format: double
+          description: Changed level of full-time/part-time employment (in percent, 100 for full-time employment).
+          examples:
+            - 80
+        effectiveDate:
+          description: 'Date when the salary change takes effect. If omitted: tomorrow.'
+          type: string
+          format: date
+          examples:
+            - '2018-04-13'
+    SalaryData:
+      description: Details of salary relevant for insurance.
+      type: object
+      required:
+        - declaredSalary
+        - employmentLevel
+        - insuredSalaryMandatory
+        - insuredSalaryRetirement
+        - insuredSalaryRisk
+      properties:
+        declaredSalary:
+          $ref: '#/components/schemas/DeclaredSalary'
+        employmentLevel:
+          $ref: '#/components/schemas/EmploymentLevel'
+        insuredSalaryMandatory:
+          $ref: '#/components/schemas/InsuredSalaryMandatory'
+        insuredSalaryRetirement:
+          $ref: '#/components/schemas/InsuredSalaryRetirement'
+        insuredSalaryRisk:
+          $ref: '#/components/schemas/InsuredSalaryRisk'
+        additionalSalary:
+          $ref: '#/components/schemas/AdditionalSalary'
+        bonus:
+          $ref: '#/components/schemas/Bonus'
+        otherSalaryComponent:
+          $ref: '#/components/schemas/OtherSalaryComponent'
+    SimulationResultPensionStatement:
+      description: Financial effect of simulation.
+      type: object
+      required:
+        - pensionStatementAfterChange
+        - pensionStatementBeforeChange
+      properties:
+        pensionStatementAfterChange:
+          $ref: '#/components/schemas/PensionStatement'
+          description: |
+            Provides the pension statement after the change.
+            In case of salaray change: referenceDate = tomorrow OR effectiveDate, if specified as API parameter
+            In case of purchase: referenceData = day after the (last) payment
+        pensionStatementBeforeChange:
+          $ref: '#/components/schemas/PensionStatement'
+          description: Provides the pension statement before the change (referenceDate = today)
+    Street:
+      description: Street and house number.
+      type: string
+      examples:
+        - Brandstrasse 2
+    Town:
+      description: Town.
+      type: string
+      examples:
+        - Unterbäch
     Transaction:
       description: Transaction affecting the retirement capital.
       type: object
@@ -1929,27 +1747,107 @@ components:
           items:
             $ref: '#/components/schemas/Transaction'
           description: Chronologically sorted list of transactions.
-    ConsentItem:
-      description: Information about a single consent, including the person ID and the allowed scopes.
+    TransferredCapital:
+      description: Total retirement capital (mandatory and supplementary coverage) brought from other funds into this fund.
+      type: number
+      format: double
+      examples:
+        - 45210.25
+    TransferredCapitalMandatory:
+      description: Retirement capital under mandatory coverage brought from other funds into this fund.
+      type: number
+      format: double
+      examples:
+        - 32840.55
+    VestedBenefits:
+      description: >-
+        The VestedBenefits object provides detailed information about the insured person's accrued retirement capital under occupational pension plans
+        (2nd pillar). It includes key data such as retirement capital at significant milestones (e.g., age 50, marriage), and records of transactions
+        like voluntary purchases, withdrawals for home ownership (WEF), or adjustments due to divorce. This information is essential for managing
+        entitlements and processing pension transfers.
       type: object
-      required:
-        - personId
-        - scopes
       properties:
-        personId:
-          $ref: '#/components/schemas/PersonId'
-        scopes:
+        capitalAt50:
+          type: number
+          format: double
+          description: The insured person's retirement capital when he/she was 50 (mandatory and supplementary). Empty for persons younger than 50.
+          examples:
+            - 0
+        capitalAt50Mandatory:
+          type: number
+          format: double
+          description: The insured person's retirement capital when he/she was 50 (mandatory part only). Empty for persons younger than 50.
+          examples:
+            - 0
+        capitalAtMarriage:
+          type: number
+          format: double
+          description: >
+            The insured person's retirement capital before he/she got married or entered a registered partnership (mandatory and supplementary).
+            Relevant is the last marriage or registered partnership (the marriage/partnership date is part of the insured person object.)
+            Empty for persons who are not married or in a registered partnership.
+          examples:
+            - 28483.35
+        capitalAtMarriageMandatory:
+          type: number
+          format: double
+          description: >
+            The insured person's retirement capital before he/she got married or entered a registered partnership (mandatory part only). Relevant is
+            the last marriage or registered partnership (the marriage/partnership date is part of the insured person object.)
+            Empty for persons who are not married or in a registered partnership.
+          examples:
+            - 23863.15
+        capitalFirstCommunicated:
+          type: number
+          format: double
+          description: >-
+            Vested benefit capital that has been initially communicated or had become due after January 1, 1995 (for insured persons having married
+            before January 1, 1995).
+          examples:
+            - 0
+        capitalFirstCommunicatedDate:
+          description: >-
+            Date when vested benefit capital has been initially communicated or had become due after January 1, 1995 (for insured persons having
+            married before January 1, 1995).
+          type: string
+          format: date
+          examples:
+            - '2018-04-13'
+        divorceWithdrawals:
           type: array
           items:
-            type: string
-            enum:
-              - read:basic_pension_data
-              - read:pension_plan
-          description: List of granted scopes for this specific person.
-          example:
-            - read:basic_pension_data
-            - read:pension_plan
+            $ref: '#/components/schemas/CapitalTransaction'
+          description: List of withdrawls and refunds due to divorce made in the past.
+        homeOwnerhsipWithdrawals:
+          type: array
+          items:
+            $ref: '#/components/schemas/CapitalTransaction'
+          description: List of withdrawls and refunds for home ownership promotion made in the past.
+        pledges:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pledge'
+          description: List of pledges of parts of the retirement capital.
+        referenceDate:
+          description: Reference date of the vested benefit information.
+          type: string
+          format: date
+          examples:
+            - '2018-04-13'
+        voluntaryPurchases:
+          type: array
+          items:
+            $ref: '#/components/schemas/CapitalTransaction'
+          description: >-
+            List of voluntary purchases of additional pension benefits made in the past. At least the purchases of the last 3 years must be included.
+            They can be aggregated by calendar year.
   responses:
+    standard400:
+      description: Some of the input is incomplete or invalid for starting a request.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/CommonErrorResponse'
     standard401:
       description: Access token is missing or invalid.
       content:
@@ -1968,41 +1866,7 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/CommonErrorResponse'
-    standard400:
-      description: Some of the input is incomplete or invalid for starting a request.
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/CommonErrorResponse'
   parameters:
-    person_id:
-      in: path
-      name: personId
-      description: Technical person ID.
-      required: true
-      schema:
-        $ref: '#/components/schemas/PersonId'
-    pension_statement_id:
-      in: path
-      name: pensionStatementId
-      description: Technical pension statement ID.
-      required: true
-      schema:
-        $ref: '#/components/schemas/PensionStatementId'
-    policy_id:
-      in: path
-      name: policyId
-      description: Technical policy ID.
-      required: true
-      schema:
-        $ref: '#/components/schemas/PolicyId'
-    plan_id:
-      in: path
-      name: planId
-      description: Unique identifier of the pension plan.
-      required: true
-      schema:
-        $ref: '#/components/schemas/PlanId'
     from_date:
       in: query
       name: from
@@ -2010,6 +1874,34 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/Date'
+    pension_statement_id:
+      in: path
+      name: pensionStatementId
+      description: Technical pension statement ID.
+      required: true
+      schema:
+        $ref: '#/components/schemas/PensionStatementId'
+    person_id:
+      in: path
+      name: personId
+      description: Technical person ID.
+      required: true
+      schema:
+        $ref: '#/components/schemas/PersonId'
+    plan_id:
+      in: path
+      name: planId
+      description: Unique identifier of the pension plan.
+      required: true
+      schema:
+        $ref: '#/components/schemas/PlanId'
+    policy_id:
+      in: path
+      name: policyId
+      description: Technical policy ID.
+      required: true
+      schema:
+        $ref: '#/components/schemas/PolicyId'
     to_date:
       in: query
       name: to
