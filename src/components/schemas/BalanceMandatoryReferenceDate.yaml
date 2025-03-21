@@ -1,0 +1,5 @@
+description: Retirement capital under mandatory coverage as per a specified reference date.
+type: number
+format: double
+examples:
+  - 38942.15

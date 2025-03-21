@@ -1,0 +1,18 @@
+description: Retirement capital transactions.
+type: object
+required:
+  - from
+  - to
+  - transaction
+properties:
+  from:
+    $ref: ./generic/Date.yaml
+    description: Start of date range (inclusive).
+  to:
+    $ref: ./generic/Date.yaml
+    description: End of date range (inclusive).
+  transactions:
+    type: array
+    items:
+      $ref: ./Transaction.yaml
+    description: Chronologically sorted list of transactions.

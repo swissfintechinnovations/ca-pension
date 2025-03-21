@@ -1,0 +1,5 @@
+description: Retirement capital balance with interest (mandatory and supplementary coverage).
+type: number
+format: double
+examples:
+  - 378832.05

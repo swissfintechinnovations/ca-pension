@@ -1,0 +1,5 @@
+description: Technical ID of insured person used in API calls.
+type: string
+pattern: ^[A-Za-z0-9_\-.~]{1,64}$
+examples:
+  - JohnDoe_1234

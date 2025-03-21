@@ -1,0 +1,60 @@
+description: Transaction affecting the retirement capital.
+type: object
+required:
+  - amount
+  - balance
+  - category
+  - date
+  - reason
+properties:
+  amount:
+    type: number
+    description: Transaction amount (in CHF, positive numbers for credits, negative numb for debits).
+    examples:
+      - 10000
+  balance:
+    type: number
+    format: double
+    description: Retirement capital balance after transaction.
+    examples:
+      - 63842.5
+  category:
+    type: string
+    description: |
+      Transaction category:
+      - `carryover`: Pseudo transaction to provide the carryover from the preceding period
+      - `transfer`: Transfer in and out of the fund (related to an start and end of employment)
+      - `employeeContribution`: Employee contribution as part of salary payment
+      - `employerContribution`: Employer contribution as part of salary payment
+      - `homeOwnershipEncouragement`: Transaction related to home ownerhsip encouragement scheme
+      - `voluntaryPurchase`: Transaction related to voluntary purchse of retirement benefits
+      - `securityInvestment`: Transaction related to a security investment or deinvestment
+      - `dividend`: Transaction related to payouts/distributions from security investments
+      - `fee`: Transaction related to fees
+      - `other`: Other reason for transaction not listed above
+    enum:
+      - carryover
+      - transfer
+      - employeeContribution
+      - employerContribution
+      - homeOwnershipEncouragement
+      - voluntaryPurchase
+      - securityInvestment
+      - dividend
+      - fee
+      - other
+    examples:
+      - voluntaryPurchase
+  date:
+    $ref: ./generic/Date.yaml
+    description: Transaction date (date the transaction becomes effective financially).
+  reason:
+    type: string
+    description: A human-readable description of the transaction reason, in the insured person's preferred language.
+    examples:
+      - Freiwilliger Einkauf
+  id:
+    type: string
+    description: Transaction ID.
+    examples:
+      - TR-683463823

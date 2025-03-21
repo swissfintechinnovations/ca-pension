@@ -1,0 +1,16 @@
+description: Financial effect of simulation.
+type: object
+required:
+  - pensionStatementAfterChange
+  - pensionStatementBeforeChange
+properties:
+  pensionStatementAfterChange:
+    $ref: ./PensionStatement.yaml
+    description: |
+      Provides the pension statement after the change.
+
+      In case of salaray change: referenceDate = tomorrow OR effectiveDate, if specified as API parameter
+      In case of purchase: referenceData = day after the (last) payment
+  pensionStatementBeforeChange:
+    $ref: ./PensionStatement.yaml
+    description: Provides the pension statement before the change (referenceDate = today)

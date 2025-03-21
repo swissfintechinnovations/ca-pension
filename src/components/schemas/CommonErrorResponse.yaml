@@ -1,0 +1,21 @@
+title: Common Error Response
+description: Common Error Response.
+type: object
+properties:
+  detail:
+    type: string
+    description: Details about the error.
+    examples:
+      - Detailed problem description with respect to the current request, e.g., invalid account number format
+  instance:
+    type: string
+    description: Instance of the error.
+    examples:
+      - path/to/corresponding/resource
+  title:
+    type: string
+    description: The error title.
+    examples:
+      - This is the general problem description
+  type:
+    $ref: ./CommonErrorType.yaml

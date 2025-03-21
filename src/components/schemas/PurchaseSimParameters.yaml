@@ -1,0 +1,25 @@
+description: Voluntary purchase simulation parameters.
+type: object
+required:
+  - totalAmount
+properties:
+  totalAmount:
+    type: number
+    description: Purchase amount in CHF. For periodic purchases, the sum of all payments.
+    examples:
+      - 10000
+  date:
+    $ref: ./generic/Date.yaml
+    description: 'Date of the (first) payment. If omitted: tomorrow.'
+  paymentFrequency:
+    $ref: ./PaymentFrequency.yaml
+  paymentSize:
+    type: number
+    description: The size of individual periodic payments. If omitted, 0 or equal to 'amount', a one-time payment is assumed.
+    examples:
+      - 10000
+  retirementAge:
+    type: integer
+    description: Planned retirement age (in month since birth). If omitted, the regular payment age is assumed.
+    examples:
+      - 780

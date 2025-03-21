@@ -1,0 +1,5 @@
+description: Gross annual salary.
+type: number
+format: double
+examples:
+  - 78000

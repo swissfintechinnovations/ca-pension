@@ -1,0 +1,5 @@
+description: Annual pension in case of disability.
+type: number
+format: double
+examples:
+  - 40213

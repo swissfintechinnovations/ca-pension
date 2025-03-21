@@ -1,0 +1,4 @@
+description: The name of the employer.
+type: string
+examples:
+  - Acrea AG

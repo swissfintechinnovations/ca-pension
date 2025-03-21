@@ -1,0 +1,5 @@
+description: Annual contribution towards fund administration financed by the insured person.
+type: number
+format: double
+examples:
+  - 0

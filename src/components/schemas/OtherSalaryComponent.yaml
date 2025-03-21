@@ -1,0 +1,5 @@
+description: Other salary component.
+type: number
+format: double
+examples:
+  - 0

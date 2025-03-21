@@ -1,0 +1,4 @@
+description: Postal code.
+type: string
+examples:
+  - '3944'
