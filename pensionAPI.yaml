@@ -540,7 +540,8 @@ components:
         amountMandatory:
           type: number
           format: double
-          description: Transaction amount for mandatory part only. The amount is positive for payments towards the capital, and negative for withdrawals.
+          description: |
+            Transaction amount for mandatory part only. The amount is positive for payments towards the capital, and negative for withdrawals.
           examples:
             - 0
     ChildPensionDisability:
@@ -760,7 +761,8 @@ components:
       examples:
         - 50000
     HomeOwnershipAvailableForWithdrawal:
-      description: The total amount available for the insured person to withdraw from their retirement capital for the purpose of financing home ownership.
+      description: |
+        The total amount available for the insured person to withdraw from their retirement capital for the purpose of financing home ownership.
       type: number
       format: double
       examples:
@@ -890,7 +892,8 @@ components:
             - 6.3
         interestRateEnvelopingPurchase:
           $ref: '#/components/schemas/InterestRate'
-          description: Enveloping interest rate for combined mandatory and supplementary coverage (in percent), used specifically in purchase calculations.
+          description: |
+            Enveloping interest rate for combined mandatory and supplementary coverage (in percent), used specifically in purchase calculations.
           examples:
             - 6.3
         interestRateEnvelopingSaving:
@@ -1319,7 +1322,8 @@ components:
       examples:
         - Omnifund
     Psc:
-      description: Psc = pension statement compact, is a reduced pension statement consisting of only the most important pension statement information.
+      description: |
+        Psc = pension statement compact, is a reduced pension statement consisting of only the most important pension statement information.
       type: object
       required:
         - en
