@@ -1,4 +1,6 @@
-description: Capital transaction made by the insured persons. It includes volunatry purchases, withdrawals for and refunds of home ownerhsip promotion, withdrawals or refunds due to divorce.
+description: |
+  Capital transaction made by the insured persons. It includes volunatry purchases, withdrawals for and refunds of home ownerhsip promotion,
+  withdrawals or refunds due to divorce.
 type: object
 required:
   - amount
@@ -7,7 +9,9 @@ properties:
   amount:
     type: number
     format: double
-    description: Total transaction amount for mandatory and supplementary part. The amount is positive for payments towards the capital, and negative for withdrawals.
+    description: |
+      Total transaction amount for mandatory and supplementary part. The amount is positive for payments towards the capital, and negative
+      for withdrawals.
     examples:
       - 0
   date:

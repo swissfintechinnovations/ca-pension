@@ -8,7 +8,6 @@ properties:
     $ref: ./PensionStatement.yaml
     description: |
       Provides the pension statement after the change.
-
       In case of salaray change: referenceDate = tomorrow OR effectiveDate, if specified as API parameter
       In case of purchase: referenceData = day after the (last) payment
   pensionStatementBeforeChange:

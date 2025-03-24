@@ -1,4 +1,6 @@
-description: Shared pension-related data specific to the insured person. This data structure is used in policies and pension statements to represent key attributes like salary, capital and benefits.
+description: |
+  Shared pension-related data specific to the insured person. This data structure is used in policies and pension statements to represent
+  key attributes like salary, capital and benefits.
 type: object
 required:
   - earliestRetirementAge

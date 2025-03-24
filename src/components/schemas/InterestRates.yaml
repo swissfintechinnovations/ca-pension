@@ -1,9 +1,13 @@
-description: A set of interest rates applicable/applied to the retirement capital, including actual rates for mandatory and supplementary coverage. Rates for saving/purchase and projection rates for future value calculations.
+description: |
+  A set of interest rates applicable/applied to the retirement capital, including actual rates for mandatory and supplementary coverage.
+  Rates for saving/purchase and projection rates for future value calculations.
 type: object
 properties:
   interestRateEnvelopingProjection:
     $ref: ./InterestRate.yaml
-    description: Projection enveloping interest rate for combined mandatory and supplementary coverage (in percent), used specifically for calculating projected future values.
+    description: |
+      Projection enveloping interest rate for combined mandatory and supplementary coverage (in percent), used specifically for calculating
+      projected future values.
     examples:
       - 6.3
   interestRateEnvelopingPurchase:

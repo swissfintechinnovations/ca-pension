@@ -36,7 +36,9 @@ properties:
     $ref: ./PersonId.yaml
   ppl:
     type: object
-    description: The pension plan defines various conditions for the occupational pension provision of the insured employees, incl. the contributions and insured benefits.
+    description: |
+      The pension plan defines various conditions for the occupational pension provision of the insured employees, incl. the contributions
+      and insured benefits.
     required:
       - pln
       - ct
@@ -83,7 +85,10 @@ properties:
         $ref: ./BalanceMandatoryReferenceDate.yaml
       prb:
         type: array
-        description: Projected retirement benefits for a series of retirement ages. The list contains projections for each integer retirement age from 58 to the regular retirement age. For persons of 58 or older, the list is restricted to retirement ages higher than their current age.
+        description: |
+          Projected retirement benefits for a series of retirement ages. The list contains projections for each integer retirement age from
+          58 to the regular retirement age. For persons of 58 or older, the list is restricted to retirement ages higher than their current
+          age.
         items:
           type: object
           required:

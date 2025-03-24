@@ -1,4 +1,6 @@
-description: The pension plan defines various conditions for the occupational pension provision of the insured employees, incl. the contributions and insured benefits.
+description: |
+  The pension plan defines various conditions for the occupational pension provision of the insured employees, incl. the contributions and
+  insured benefits.
 type: object
 required:
   - contractType

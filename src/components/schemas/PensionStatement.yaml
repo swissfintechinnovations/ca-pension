@@ -1,4 +1,6 @@
-description: Pension statement consisting of the basic pension statement information, including aggregated personal pension data across related policies.
+description: |
+  Pension statement consisting of the basic pension statement information, including aggregated personal pension data across related
+  policies.
 type: object
 required:
   - employer

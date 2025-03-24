@@ -41,6 +41,8 @@ properties:
     $ref: ./Employer.yaml
   isInVestedBenefitFoundation:
     type: boolean
-    description: Indicates if policy is part of a vested benefit foundation (as opposed to a regular pension fund with payments from an employer). If the field is not set, a regular pension fund is assumed.
+    description: |
+      Indicates if policy is part of a vested benefit foundation (as opposed to a regular pension fund with payments from an employer). If
+      the field is not set, a regular pension fund is assumed.
     examples:
       - false
