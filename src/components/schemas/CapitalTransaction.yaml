@@ -20,6 +20,7 @@ properties:
   amountMandatory:
     type: number
     format: double
-    description: Transaction amount for mandatory part only. The amount is positive for payments towards the capital, and negative for withdrawals.
+    description: |
+      Transaction amount for mandatory part only. The amount is positive for payments towards the capital, and negative for withdrawals.
     examples:
       - 0

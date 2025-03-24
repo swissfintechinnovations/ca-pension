@@ -12,7 +12,8 @@ properties:
       - 6.3
   interestRateEnvelopingPurchase:
     $ref: ./InterestRate.yaml
-    description: Enveloping interest rate for combined mandatory and supplementary coverage (in percent), used specifically in purchase calculations.
+    description: |
+      Enveloping interest rate for combined mandatory and supplementary coverage (in percent), used specifically in purchase calculations.
     examples:
       - 6.3
   interestRateEnvelopingSaving:

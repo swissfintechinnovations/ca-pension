@@ -1,4 +1,5 @@
-description: The total amount available for the insured person to withdraw from their retirement capital for the purpose of financing home ownership.
+description: |
+  The total amount available for the insured person to withdraw from their retirement capital for the purpose of financing home ownership.
 type: number
 format: double
 examples:

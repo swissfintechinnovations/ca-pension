@@ -1,4 +1,5 @@
-description: Psc = pension statement compact, is a reduced pension statement consisting of only the most important pension statement information.
+description: |
+  Psc = pension statement compact, is a reduced pension statement consisting of only the most important pension statement information.
 type: object
 required:
   - en
