@@ -1,0 +1,11 @@
+description: |
+  Number of payments per year.
+  Possible values:
+  * 0: One-time payment
+  * 1: Annual payment
+  * 2: Semi-annual payment
+  * 4: Quarterly payment
+  * 12: Monthly payment
+type: integer
+examples:
+  - 0

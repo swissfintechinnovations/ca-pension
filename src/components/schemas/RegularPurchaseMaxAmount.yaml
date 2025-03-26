@@ -1,0 +1,5 @@
+description: The maximum amount the insured person is permitted to contribute to their pension plan as an ordinary purchase.
+type: number
+format: double
+examples:
+  - 48392.45

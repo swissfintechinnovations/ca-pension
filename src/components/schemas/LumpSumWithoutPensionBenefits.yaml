@@ -1,0 +1,8 @@
+description: |
+  A one-off lump sum payment in the event of death, provided no other recurring survivor benefits are paid. This applies when there is no
+  entitlement to a partner's pension, orphan's pension, or any other ongoing survivor benefits. The amount typically corresponds to the
+  insured person's accrued retirement savings as defined by the pension plan.
+type: number
+format: double
+examples:
+  - 92834

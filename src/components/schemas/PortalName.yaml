@@ -1,0 +1,4 @@
+description: Offical name of the insurance portal.
+type: string
+examples:
+  - Omni Portal

@@ -1,0 +1,42 @@
+description: |
+  Shared pension-related data specific to the insured person. This data structure is used in policies and pension statements to represent
+  key attributes like salary, capital and benefits.
+type: object
+required:
+  - earliestRetirementAge
+  - financing
+  - homeOwnershipAvailableForWithdrawal
+  - ordinaryRetirementAge
+  - regularPurchaseMaxAmount
+  - retirementCapital
+  - riskBenefits
+  - salaryData
+properties:
+  earliestRetirementAge:
+    type: integer
+    format: int32
+    description: Age (in month since birth) for earliest possible retirement.
+    examples:
+      - 696
+  financing:
+    $ref: ./Financing.yaml
+  homeOwnershipAvailableForWithdrawal:
+    $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
+  ordinaryRetirementAge:
+    type: integer
+    format: int32
+    description: Age (in month since birth) for ordinary retirement.
+    examples:
+      - 780
+  regularPurchaseMaxAmount:
+    $ref: ./RegularPurchaseMaxAmount.yaml
+  retirementCapital:
+    $ref: ./RetirementCapital.yaml
+  riskBenefits:
+    $ref: ./RiskBenefits.yaml
+  salaryData:
+    $ref: ./SalaryData.yaml
+  homeOwnershipAvailableForPledge:
+    $ref: ./HomeOwnershipAvailableForPledge.yaml
+  vestedBenefits:
+    $ref: ./VestedBenefits.yaml

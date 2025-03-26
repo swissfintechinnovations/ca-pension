@@ -1,0 +1,9 @@
+description: |
+  The total amount available for the insured person to pledge as collateral from their retirement capital for the purpose of financing home
+  ownership.
+
+  Note: If a fixed amount is contractually defined, it is usually lower than this value.
+type: number
+format: double
+examples:
+  - 50000

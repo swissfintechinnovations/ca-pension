@@ -1,0 +1,5 @@
+description: Retirement capital as per a specified reference date (mandatory and supplementary coverage).
+type: number
+format: double
+examples:
+  - 53842.5

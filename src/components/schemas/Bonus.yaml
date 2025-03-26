@@ -1,0 +1,5 @@
+description: Bonus component of the salary.
+type: number
+format: double
+examples:
+  - 0

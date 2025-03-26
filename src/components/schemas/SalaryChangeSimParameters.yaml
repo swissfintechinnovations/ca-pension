@@ -1,0 +1,21 @@
+description: Salary change simulation parameters.
+type: object
+required:
+  - declaredSalary
+  - employmentLevel
+properties:
+  declaredSalary:
+    type: number
+    format: double
+    description: Changed gross annual salary in CHF (for employment level 100%).
+    examples:
+      - 80000
+  employmentLevel:
+    type: number
+    format: double
+    description: Changed level of full-time/part-time employment (in percent, 100 for full-time employment).
+    examples:
+      - 80
+  effectiveDate:
+    $ref: ./generic/Date.yaml
+    description: 'Date when the salary change takes effect. If omitted: tomorrow.'

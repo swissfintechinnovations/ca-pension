@@ -1,0 +1,6 @@
+in: path
+name: personId
+description: Technical person ID.
+required: true
+schema:
+  $ref: ../../schemas/PersonId.yaml

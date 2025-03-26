@@ -1,0 +1,5 @@
+description: Access token is missing or invalid.
+content:
+  application/problem+json:
+    schema:
+      $ref: ../schemas/CommonErrorResponse.yaml

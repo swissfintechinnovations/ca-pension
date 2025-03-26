@@ -1,0 +1,31 @@
+description: Retirement capital balances for the past and projections for the future.
+type: object
+required:
+  - balanceMandatoryReferenceDate
+  - balanceReferenceDate
+  - interestRates
+  - projectedRetirementBenefits
+properties:
+  balanceMandatoryReferenceDate:
+    $ref: ./BalanceMandatoryReferenceDate.yaml
+  balanceReferenceDate:
+    $ref: ./BalanceReferenceDate.yaml
+  interestRates:
+    $ref: ./InterestRates.yaml
+  projectedRetirementBenefits:
+    type: array
+    description: |
+      Projected retirement benefits for a series of retirement ages. The list contains projections for each integer retirement age from 58
+      to the regular retirement age. For persons of 58 or older, the list is restricted to retirement ages higher than their current age.
+    items:
+      $ref: ./RetirementBenefits.yaml
+  balanceEndCurrentYear:
+    $ref: ./BalanceEndCurrentYear.yaml
+  balanceMandatoryEndCurrentYear:
+    $ref: ./BalanceMandatoryEndCurrentYear.yaml
+  lastYearDevelopment:
+    $ref: ./LastYearDevelopment.yaml
+  transferredCapital:
+    $ref: ./TransferredCapital.yaml
+  transferredCapitalMandatory:
+    $ref: ./TransferredCapitalMandatory.yaml

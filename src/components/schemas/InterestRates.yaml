@@ -1,0 +1,55 @@
+description: |
+  A set of interest rates applicable/applied to the retirement capital, including actual rates for mandatory and supplementary coverage.
+  Rates for saving/purchase and projection rates for future value calculations.
+type: object
+properties:
+  interestRateEnvelopingProjection:
+    $ref: ./InterestRate.yaml
+    description: |
+      Projection enveloping interest rate for combined mandatory and supplementary coverage (in percent), used specifically for calculating
+      projected future values.
+    examples:
+      - 6.3
+  interestRateEnvelopingPurchase:
+    $ref: ./InterestRate.yaml
+    description: |
+      Enveloping interest rate for combined mandatory and supplementary coverage (in percent), used specifically in purchase calculations.
+    examples:
+      - 6.3
+  interestRateEnvelopingSaving:
+    $ref: ./InterestRate.yaml
+    description: Saving enveloping interest rate for combined mandatory and supplementary coverage (in percent).
+    examples:
+      - 6.3
+  interestRateMandatoryProjection:
+    $ref: ./InterestRate.yaml
+    description: Projection rate for mandatory coverage (in percent), used specifically for calculating projected future values.
+    examples:
+      - 6.8
+  interestRateMandatoryPurchase:
+    $ref: ./InterestRate.yaml
+    description: Interest rate for mandatory coverage (in percent), used specifically in purchase calculations.
+    examples:
+      - 6.8
+  interestRateMandatorySaving:
+    $ref: ./InterestRate.yaml
+    description: Saving interest rate for mandatory coverage (in percent).
+    examples:
+      - 6.8
+  interestRateSupplementaryProjection:
+    $ref: ./InterestRate.yaml
+    description: Projection rate for supplementary coverage (in percent), used specifically for calculating projected future values.
+    examples:
+      - 5.5
+  interestRateSupplementaryPurchase:
+    $ref: ./InterestRate.yaml
+    description: Interest rate for supplementary coverage (in percent), used specifically in purchase calculations.
+    examples:
+      - 5.5
+  interestRateSupplementarySaving:
+    $ref: ./InterestRate.yaml
+    description: Saving interest rate for supplementary coverage (in percent).
+    examples:
+      - 5.5
+minProperties: 1
+additionalProperties: false

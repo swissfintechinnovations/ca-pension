@@ -1,0 +1,5 @@
+description: Annual orphan pension in case of death.
+type: number
+format: double
+examples:
+  - 5382

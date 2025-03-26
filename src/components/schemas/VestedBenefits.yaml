@@ -1,0 +1,77 @@
+description: |
+  The VestedBenefits object provides detailed information about the insured person's accrued retirement capital under occupational pension
+  plans (2nd pillar). It includes key data such as retirement capital at significant milestones (e.g., age 50, marriage), and records of
+  transactions like voluntary purchases, withdrawals for home ownership (WEF), or adjustments due to divorce. This information is essential
+  for managing entitlements and processing pension transfers.
+type: object
+properties:
+  capitalAt50:
+    type: number
+    format: double
+    description: The insured person's retirement capital when he/she was 50 (mandatory and supplementary). Empty for persons younger than 50.
+    examples:
+      - 0
+  capitalAt50Mandatory:
+    type: number
+    format: double
+    description: The insured person's retirement capital when he/she was 50 (mandatory part only). Empty for persons younger than 50.
+    examples:
+      - 0
+  capitalAtMarriage:
+    type: number
+    format: double
+    description: |
+      The insured person's retirement capital before he/she got married or entered a registered partnership (mandatory and supplementary).
+      Relevant is the last marriage or registered partnership (the marriage/partnership date is part of the insured person object.)
+
+      Empty for persons who are not married or in a registered partnership.
+    examples:
+      - 28483.35
+  capitalAtMarriageMandatory:
+    type: number
+    format: double
+    description: |
+      The insured person's retirement capital before he/she got married or entered a registered partnership (mandatory part only). Relevant
+      is the last marriage or registered partnership (the marriage/partnership date is part of the insured person object.)
+
+      Empty for persons who are not married or in a registered partnership.
+    examples:
+      - 23863.15
+  capitalFirstCommunicated:
+    type: number
+    format: double
+    description: |
+      Vested benefit capital that has been initially communicated or had become due after January 1, 1995 (for insured persons having
+      married before January 1, 1995).
+    examples:
+      - 0
+  capitalFirstCommunicatedDate:
+    $ref: ./generic/Date.yaml
+    description: |
+      Date when vested benefit capital has been initially communicated or had become due after January 1, 1995 (for insured persons having
+      married before January 1, 1995).
+  divorceWithdrawals:
+    type: array
+    items:
+      $ref: ./CapitalTransaction.yaml
+    description: List of withdrawls and refunds due to divorce made in the past.
+  homeOwnerhsipWithdrawals:
+    type: array
+    items:
+      $ref: ./CapitalTransaction.yaml
+    description: List of withdrawls and refunds for home ownership promotion made in the past.
+  pledges:
+    type: array
+    items:
+      $ref: ./Pledge.yaml
+    description: List of pledges of parts of the retirement capital.
+  referenceDate:
+    $ref: ./generic/Date.yaml
+    description: Reference date of the vested benefit information.
+  voluntaryPurchases:
+    type: array
+    items:
+      $ref: ./CapitalTransaction.yaml
+    description: |
+      List of voluntary purchases of additional pension benefits made in the past. At least the purchases of the last 3 years must be
+      included. They can be aggregated by calendar year.

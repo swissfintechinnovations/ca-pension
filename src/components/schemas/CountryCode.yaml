@@ -1,0 +1,5 @@
+description: ISO country code.
+type: string
+pattern: ^[A-Z]{2}$
+examples:
+  - CH

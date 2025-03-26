@@ -1,0 +1,5 @@
+description: Technical ID of pension statement used in API calls.
+type: string
+pattern: ^[A-Za-z0-9_\-.~]{1,64}$
+examples:
+  - 550e8450-e59b-21d4-a346-442215440560

@@ -1,0 +1,5 @@
+description: Retirement capital under mandatory coverage brought from other funds into this fund.
+type: number
+format: double
+examples:
+  - 32840.55

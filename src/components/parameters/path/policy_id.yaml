@@ -1,0 +1,6 @@
+in: path
+name: policyId
+description: Technical policy ID.
+required: true
+schema:
+  $ref: ../../schemas/PolicyId.yaml

@@ -1,0 +1,4 @@
+description: The industry or sector the employer operates in.
+type: string
+examples:
+  - information technology and management consulting

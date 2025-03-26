@@ -1,0 +1,5 @@
+description: Annual child pension in case of disability.
+type: number
+format: double
+examples:
+  - 5382

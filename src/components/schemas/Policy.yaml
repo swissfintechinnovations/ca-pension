@@ -1,0 +1,48 @@
+description: Details of policy.
+type: object
+required:
+  - contractNo
+  - entryDate
+  - pensionPlan
+  - pensionProvider
+  - personId
+  - personalPensionDetails
+  - policyId
+  - policyNo
+  - referenceDate
+properties:
+  contractNo:
+    type: string
+    description: Contract number of contract between employer and pension fund.
+    examples:
+      - C27-842.183
+  entryDate:
+    $ref: ./generic/Date.yaml
+    description: Entry date into the pension plan.
+  pensionPlan:
+    $ref: ./PensionPlan.yaml
+  pensionProvider:
+    $ref: ./PensionProvider.yaml
+  personId:
+    $ref: ./PersonId.yaml
+  personalPensionDetails:
+    $ref: ./PersonalPensionDetails.yaml
+  policyId:
+    $ref: ./PolicyId.yaml
+  policyNo:
+    type: string
+    description: Policy number (as printed on policy statements).
+    examples:
+      - 392'485'482
+  referenceDate:
+    $ref: ./generic/Date.yaml
+    description: Reference date of the personal pension details.
+  employer:
+    $ref: ./Employer.yaml
+  isInVestedBenefitFoundation:
+    type: boolean
+    description: |
+      Indicates if policy is part of a vested benefit foundation (as opposed to a regular pension fund with payments from an employer). If
+      the field is not set, a regular pension fund is assumed.
+    examples:
+      - false

@@ -1,0 +1,133 @@
+description: |
+  Psc = pension statement compact, is a reduced pension statement consisting of only the most important pension statement information.
+type: object
+required:
+  - en
+  - era
+  - hoaw
+  - ora
+  - pi
+  - ppl
+  - ppn
+  - pst
+  - rb
+  - rc
+  - rd
+  - rpm
+  - sd
+  - ts
+properties:
+  en:
+    $ref: ./EmployerName.yaml
+  era:
+    type: integer
+    format: int32
+    description: Age (in month since birth) for earliest possible retirement.
+    examples:
+      - 696
+  hoaw:
+    $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
+  ora:
+    type: integer
+    format: int32
+    description: Age (in month since birth) for ordinary retirement.
+    examples:
+      - 780
+  pi:
+    $ref: ./PersonId.yaml
+  ppl:
+    type: object
+    description: |
+      The pension plan defines various conditions for the occupational pension provision of the insured employees, incl. the contributions
+      and insured benefits.
+    required:
+      - pln
+      - ct
+    properties:
+      pln:
+        $ref: ./PlanName.yaml
+      ct:
+        $ref: ./ContractType.yaml
+  ppn:
+    $ref: ./ProviderName.yaml
+  pst:
+    $ref: ./PensionStatementType.yaml
+  rb:
+    type: object
+    description: Benefits in case of death or disability to work.
+    required:
+      - pd
+      - cpd
+      - ppd
+      - opd
+      - mlswpb
+    properties:
+      pd:
+        $ref: ./PensionDisability.yaml
+      cpd:
+        $ref: ./ChildPensionDisability.yaml
+      ppd:
+        $ref: ./PartnerPensionDeath.yaml
+      opd:
+        $ref: ./OrphanPensionDeath.yaml
+      mlswpb:
+        $ref: ./MinimalLumpSumWithPensionBenefits.yaml
+  rc:
+    type: object
+    description: Retirement capital balances for the past and projections for the future.
+    required:
+      - brd
+      - bmr
+      - prb
+    properties:
+      brd:
+        $ref: ./BalanceReferenceDate.yaml
+      bmr:
+        $ref: ./BalanceMandatoryReferenceDate.yaml
+      prb:
+        type: array
+        description: |
+          Projected retirement benefits for a series of retirement ages. The list contains projections for each integer retirement age from
+          58 to the regular retirement age. For persons of 58 or older, the list is restricted to retirement ages higher than their current
+          age.
+        items:
+          type: object
+          required:
+            - ra
+            - cb
+            - p
+          properties:
+            ra:
+              $ref: ./RetirementAge.yaml
+            cb:
+              $ref: ./CapitalBalance.yaml
+            p:
+              $ref: ./Pension.yaml
+  rd:
+    $ref: ./generic/Date.yaml
+    description: Reference date of pension statement.
+  rpm:
+    $ref: ./RegularPurchaseMaxAmount.yaml
+  sd:
+    type: object
+    description: Details of salary relevant for insurance.
+    required:
+      - ds
+      - ism
+      - isre
+      - isri
+      - el
+    properties:
+      ds:
+        $ref: ./DeclaredSalary.yaml
+      ism:
+        $ref: ./InsuredSalaryMandatory.yaml
+      isre:
+        $ref: ./InsuredSalaryRetirement.yaml
+      isri:
+        $ref: ./InsuredSalaryRisk.yaml
+      el:
+        $ref: ./EmploymentLevel.yaml
+  ts:
+    $ref: ./generic/DateTime.yaml
+    description: Date and time of generation of the PensionStatement

@@ -1,0 +1,5 @@
+description: Conversion rate (capital to pension) for supplementary coverage.
+type: number
+format: double
+examples:
+  - 5.5

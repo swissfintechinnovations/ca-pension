@@ -1,0 +1,4 @@
+description: Street and house number.
+type: string
+examples:
+  - Brandstrasse 2

@@ -1,0 +1,39 @@
+description: |
+  Pension statement consisting of the basic pension statement information, including aggregated personal pension data across related
+  policies.
+type: object
+required:
+  - employer
+  - pensionPlans
+  - pensionProvider
+  - pensionStatementType
+  - personId
+  - personalPensionDetails
+  - referenceDate
+  - timeStamp
+properties:
+  employer:
+    $ref: ./Employer.yaml
+  pensionPlans:
+    type: array
+    description: List of related pension plans.
+    items:
+      $ref: ./PensionPlan.yaml
+  pensionProvider:
+    $ref: ./PensionProvider.yaml
+  pensionStatementType:
+    $ref: ./PensionStatementType.yaml
+  personId:
+    $ref: ./PersonId.yaml
+  personalPensionDetails:
+    $ref: ./PersonalPensionDetails.yaml
+  referenceDate:
+    $ref: ./generic/Date.yaml
+    description: Reference date of pension statement.
+  timeStamp:
+    $ref: ./generic/DateTime.yaml
+    description: Date and time of generation of the PensionStatement
+  pensionStatementId:
+    $ref: ./PensionStatementId.yaml
+  pensionStatementNo:
+    $ref: ./PensionStatementNo.yaml

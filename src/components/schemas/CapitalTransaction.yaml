@@ -1,0 +1,26 @@
+description: |
+  Capital transaction made by the insured persons. It includes volunatry purchases, withdrawals for and refunds of home ownerhsip promotion,
+  withdrawals or refunds due to divorce.
+type: object
+required:
+  - amount
+  - date
+properties:
+  amount:
+    type: number
+    format: double
+    description: |
+      Total transaction amount for mandatory and supplementary part. The amount is positive for payments towards the capital, and negative
+      for withdrawals.
+    examples:
+      - 0
+  date:
+    $ref: ./generic/Date.yaml
+    description: Date of transaction
+  amountMandatory:
+    type: number
+    format: double
+    description: |
+      Transaction amount for mandatory part only. The amount is positive for payments towards the capital, and negative for withdrawals.
+    examples:
+      - 0

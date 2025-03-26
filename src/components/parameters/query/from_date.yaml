@@ -1,0 +1,6 @@
+in: query
+name: from
+description: Start of date range (inclusive).
+required: true
+schema:
+  $ref: ../../schemas/generic/Date.yaml

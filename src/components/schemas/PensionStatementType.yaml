@@ -1,0 +1,11 @@
+description: |
+  Pension statement type:
+  - `regular`: the pension statement is an offical, regular statement on the basis of real values (not changed for simulation purposes)
+  - `simulated`: the pension statement is a non-offical, simulated statement, i.e. some values might have been changed for simulation
+  purposes
+type: string
+enum:
+  - regular
+  - simulated
+examples:
+  - regular

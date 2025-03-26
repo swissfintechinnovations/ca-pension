@@ -1,0 +1,18 @@
+description: Contributions for financing the policy.
+type: object
+required:
+  - contributionSavingsEmployer
+  - contributionSavingsInsuredPerson
+properties:
+  contributionSavingsEmployer:
+    $ref: ./ContributionSavingsEmployer.yaml
+  contributionSavingsInsuredPerson:
+    $ref: ./ContributionSavingsInsuredPerson.yaml
+  contributionAdministrationEmployer:
+    $ref: ./ContributionAdministrationEmployer.yaml
+  contributionAdministrationInsuredPerson:
+    $ref: ./ContributionAdministrationInsuredPerson.yaml
+  contributionRiskEmployer:
+    $ref: ./ContributionRiskEmployer.yaml
+  contributionRiskInsuredPerson:
+    $ref: ./ContributionRiskInsuredPerson.yaml
