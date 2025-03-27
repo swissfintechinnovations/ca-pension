@@ -133,8 +133,6 @@ tags:
     description: Simulations of salary changes and voluntary purchases.
   - name: transactions
     description: Retirement capital transactions.
-  - name: consents
-    description: Consents.
 security:
   - OAuth2:
       - read:basic_pension_data
