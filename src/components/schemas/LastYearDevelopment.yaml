@@ -13,31 +13,37 @@ properties:
     type: number
     format: double
     description: The capital balance at the beginning of the last year.
-    example: 100000
+    examples:
+      - 100000
   balanceEndLastYear:
     type: number
     format: double
     description: The capital balance at the end of the last year.
-    example: 106000
+    examples:
+      - 106000
   interestCreditLastYear:
     type: number
     format: double
     description: Interest credits added during the last year.
-    example: 2000
+    examples:
+      - 2000
   interestRatesLastYear:
     $ref: ./InterestRates.yaml
   oldAgeCreditLastYear:
     type: number
     format: double
     description: Old age credits added during the last year.
-    example: 4000
+    examples:
+      - 4000
   totalDepositsLastYear:
     type: number
     format: double
     description: Total deposits made during the last year.
-    example: 5000
+    examples:
+      - 5000
   totalWithdrawalsLastYear:
     type: number
     format: double
     description: Total withdrawals made during the last year.
-    example: 5000
+    examples:
+      - 5000

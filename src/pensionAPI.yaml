@@ -141,15 +141,16 @@ security:
 paths:
   /insured-persons:
     get:
-      summary: Retrieve a list of insured persons that are accessible with a given access token
-      description: >
-        This endpoint allows a client to retrieve the person ID(s) of the insured individual(s) for whom a user has granted consent during an OAuth2 authorization flow.
-        The provider, such as a pension provider, must return the insured person(s) linked to the given access token.
+      summary: Retrieve a list of insured persons that are accessible with the presented access token
+      description: |
+        This endpoint allows a client to retrieve the person ID(s) of the insured individual(s) for whom a user has granted consent during
+        an OAuth2 authorization flow. The provider, such as a pension provider, must return the insured person(s) linked to the presented
+        access token. Note: The related scope is to be exchanged during consent flow and persisted by the client (see RFC 6749 section 5.1).
       operationId: retrieveInsuredPersons
       tags:
         - person
       security:
-        - OAuth2: []  # No scopes required
+        - OAuth2: []
       responses:
         '200':
           description: A list of insured persons.
@@ -159,7 +160,7 @@ paths:
                 type: array
                 items:
                   type: object
-                  description: person ID of the insured person(s).
+                  description: Person ID of the insured person(s).
                   required:
                     - personId
                   properties:
