@@ -133,12 +133,45 @@ tags:
     description: Simulations of salary changes and voluntary purchases.
   - name: transactions
     description: Retirement capital transactions.
-  - name: consents
-    description: Consents.
 security:
   - OAuth2:
       - read:basic_pension_data
 paths:
+  /insured-persons:
+    get:
+      summary: Retrieve a list of insured persons that are accessible with the presented access token
+      description: |
+        This endpoint allows a client to retrieve the person ID(s) of the insured individual(s) for whom a user has granted consent during
+        an OAuth2 authorization flow. The provider, such as a pension provider, must return the insured person(s) linked to the presented
+        access token. Note: The related scope is to be exchanged during consent flow and persisted by the client (see RFC 6749 section 5.1).
+      operationId: retrieveInsuredPersons
+      tags:
+        - person
+      security:
+        - OAuth2: []
+      responses:
+        '200':
+          description: A list of insured persons.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  description: Person ID of the insured person(s).
+                  required:
+                    - personId
+                  properties:
+                    personId:
+                      $ref: ./components/schemas/PersonId.yaml
+        '400':
+          $ref: ./components/responses/standard400.yaml
+        '401':
+          $ref: ./components/responses/standard401.yaml
+        '404':
+          $ref: ./components/responses/standard404.yaml
+        '500':
+          $ref: ./components/responses/standard500.yaml
   /insured-persons/{personId}:
     get:
       summary: Get details of an insured person
@@ -438,34 +471,6 @@ paths:
             application/json:
               schema:
                 $ref: ./components/schemas/Transactions.yaml
-        '400':
-          $ref: ./components/responses/standard400.yaml
-        '401':
-          $ref: ./components/responses/standard401.yaml
-        '404':
-          $ref: ./components/responses/standard404.yaml
-        '500':
-          $ref: ./components/responses/standard500.yaml
-  /consents:
-    get:
-      summary: Retrieve a list of consents
-      description: |
-        The consents endpoint allows the client (e.g., a third party provider) to query the consents for a user. The provider (e.g., a
-        pension provider) must return the consents linked with the access token supplied with the request.
-      operationId: retrieveConsents
-      tags:
-        - consents
-      security:
-        - OAuth2: []
-      responses:
-        '200':
-          description: List of consents.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: ./components/schemas/ConsentItem.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':

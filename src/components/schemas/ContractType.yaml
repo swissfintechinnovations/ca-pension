@@ -15,4 +15,5 @@ enum:
   - bridge
   - 1e
   - other
-example: mand
+examples:
+  - mand
