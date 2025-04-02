@@ -4,7 +4,7 @@
 
 ---
 [![GitHub release](https://img.shields.io/github/release/swissfintechinnovations/ca-pension?color=blue)](https://github.com/swissfintechinnovations/ca-pension/releases/)
-![Pension Major Version](https://img.shields.io/badge/major_version-v1-blue)
+![Pension Major Version](https://img.shields.io/badge/major_version-v2-blue)
 [![OpenAPI version](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fgithub.com%2Fswissfintechinnovations%2Fca-pension%2Fraw%2Fmain%2FpensionAPI.yaml&query=openapi&prefix=v&label=OpenAPI&color=blue)](https://swagger.io/resources/open-api/)
 [![GitHub license](https://img.shields.io/github/license/swissfintechinnovations/ca-pension?color=de980d)](https://github.com/swissfintechinnovations/ca-pension/blob/main/LICENSE)
 
