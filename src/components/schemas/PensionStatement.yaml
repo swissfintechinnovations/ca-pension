@@ -37,3 +37,5 @@ properties:
     $ref: ./PensionStatementId.yaml
   pensionStatementNo:
     $ref: ./PensionStatementNo.yaml
+  languageCode: 
+    $ref: ./LanguageCode.yaml

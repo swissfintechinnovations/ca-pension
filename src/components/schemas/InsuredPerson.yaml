@@ -8,6 +8,7 @@ required:
   - personId
   - sex
   - ssn
+  - policyIds
 properties:
   birthDate:
     $ref: ./generic/Date.yaml
@@ -66,7 +67,7 @@ properties:
     $ref: ./Address.yaml
   marriageDate:
     $ref: ./generic/Date.yaml
-    description: Date of marriage (or registration of partnership).
+    description: Date of marriage (or registration of partnership). Required if `maritalStatus` is `married`.
   policyIds:
     type: array
     items:
