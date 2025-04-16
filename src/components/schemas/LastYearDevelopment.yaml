@@ -2,7 +2,7 @@ description: |
   Details about the capital development for the last year.
 
   In most cases, all fields should be populated with actual values reflecting the previous calendar year.
-  However, if the insured person joined during the current year, some or all of the fields 
+  However, if the insured person joined during the current year, some or all of the fields
   may be missing due to the absence of a full year of history.
 
   Consumers of this data should account for potentially missing values in such cases.
