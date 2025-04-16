@@ -16,7 +16,7 @@ properties:
       - 0
   date:
     $ref: ./generic/Date.yaml
-    description: Date of transaction
+    description: Date of transaction.
   amountMandatory:
     type: number
     format: double
