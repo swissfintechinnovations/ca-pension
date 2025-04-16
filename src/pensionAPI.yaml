@@ -228,7 +228,7 @@ paths:
         - statement
       parameters:
         - $ref: ./components/parameters/path/person_id.yaml
-        - $ref: ./components/parameters/path/reference_date.yaml
+        - $ref: ./components/parameters/query/reference_date.yaml
       security:
         - OAuth2:
             - read:basic_pension_data
@@ -369,7 +369,7 @@ paths:
   /policies/{policyId}/salary-change-simulation:
     post:
       summary: Simulate effects of salary and employment level change
-      description: Simulates the effects of a salary and/or employment level change on personal pension details (e.g. retirement capital)
+      description: Simulates the effects of a salary and/or employment level change on personal pension details (e.g. retirement capital).
       operationId: simulateSalaryChange
       tags:
         - simulation
