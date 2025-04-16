@@ -5,7 +5,6 @@ type: object
 required:
   - capitalBalance
   - capitalBalanceMandatory
-  - pension
   - retirementAge
 properties:
   capitalBalance:
