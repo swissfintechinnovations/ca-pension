@@ -369,7 +369,7 @@ paths:
   /policies/{policyId}/salary-change-simulation:
     post:
       summary: Simulate effects of salary and employment level change
-      description: Simulates the effects of a salary and/or employment level change on personal pension details (e.g. retirement capital)
+      description: Simulates the effects of a salary and/or employment level change on personal pension details (e.g. retirement capital).
       operationId: simulateSalaryChange
       tags:
         - simulation
@@ -557,13 +557,13 @@ components:
       examples:
         - 284832.15
     CapitalBalanceNoInterest:
-      description: Retirement capital balance assuming no interest on assets (mandatory and supplementary coverage)
+      description: Retirement capital balance assuming no interest on assets (mandatory and supplementary coverage).
       type: number
       format: double
       examples:
         - 331285.25
     CapitalBalanceNoInterestMandatory:
-      description: Retirement capital balance assuming no interest on assets (mandatory coverage only)
+      description: Retirement capital balance assuming no interest on assets (mandatory coverage only).
       type: number
       format: double
       examples:
@@ -973,16 +973,15 @@ components:
       minProperties: 1
       additionalProperties: false
     LanguageCode:
-      LanguageCode:
-        description: |
-          Language code according to ISO 639-1. Examples: `de` (German), `fr` (French), `it` (Italian), `en` (English).
-          Used to indicate the language of content based on the insured person's profile.
-        type: string
-        examples:
-          - de
-          - fr
-          - it
-          - en
+      description: |
+        Language code according to ISO 639-1. Examples: `de` (German), `fr` (French), `it` (Italian), `en` (English).
+        Used to indicate the language of content based on the insured person's profile.
+      type: string
+      examples:
+        - de
+        - fr
+        - it
+        - en
     LastYearDevelopment:
       description: |
         Details about the capital development for the last year.
@@ -1173,7 +1172,7 @@ components:
           examples:
             - '2018-04-13'
         timeStamp:
-          description: Date and time of generation of the PensionStatement
+          description: Date and time of generation of the PensionStatement.
           type: string
           format: date-time
           examples:
@@ -1517,7 +1516,7 @@ components:
             el:
               $ref: '#/components/schemas/EmploymentLevel'
         ts:
-          description: Date and time of generation of the PensionStatement
+          description: Date and time of generation of the PensionStatement.
           type: string
           format: date-time
           examples:
@@ -1972,7 +1971,7 @@ components:
         $ref: '#/components/schemas/PolicyId'
     reference_date:
       in: query
-      name: referenceDate
+      name: reference_date
       description: Reference date for information in output.
       required: false
       schema:
