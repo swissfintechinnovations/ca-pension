@@ -37,7 +37,7 @@ info:
 
     ## Lokalisierung und Währungshinweise
 
-    Die Sprache der API-Responses kann nicht über die API beeinflusst werden. Sie richtet sich nach den Spracheinstellungen, 
+    Die Sprache der API-Responses kann nicht über die API beeinflusst werden. Sie richtet sich nach den Spracheinstellungen,
     die beim jeweiligen Service Provider für die versicherte Person hinterlegt sind (in der Regel Deutsch, Französisch oder Italienisch).
 
     Alle monetären Werte (z. B. Guthaben, Beiträge, Leistungen) sind in **Schweizer Franken (CHF)** angegeben.
@@ -92,7 +92,7 @@ info:
 
     ## Localization and Currency Notes
 
-    The response language cannot be influenced via the API. It is determined by the language setting stored by the service provider for 
+    The response language cannot be influenced via the API. It is determined by the language setting stored by the service provider for
     the insured person (typically German, French, or Italian).
 
     All monetary values (e.g., balances, contributions, benefits) are expressed in **Swiss Francs (CHF)**.
@@ -987,7 +987,7 @@ components:
         Details about the capital development for the last year.
 
         In most cases, all fields should be populated with actual values reflecting the previous calendar year.
-        However, if the insured person joined during the current year, some or all of the fields 
+        However, if the insured person joined during the current year, some or all of the fields
         may be missing due to the absence of a full year of history.
 
         Consumers of this data should account for potentially missing values in such cases.
