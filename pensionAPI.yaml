@@ -35,6 +35,13 @@ info:
     und jede Pensionskasse hat eine andere Basis-URL für das API. Die Basis-URL der jeweiligen Pensionskasse wird vom Directory API
     geliefert.
 
+    ## Lokalisierung und Währungshinweise
+
+    Die Sprache der API-Responses kann nicht über die API beeinflusst werden. Sie richtet sich nach den Spracheinstellungen, 
+    die beim jeweiligen Service Provider für die versicherte Person hinterlegt sind (in der Regel Deutsch, Französisch oder Italienisch).
+
+    Alle monetären Werte (z. B. Guthaben, Beiträge, Leistungen) sind in **Schweizer Franken (CHF)** angegeben.
+
     ## Simulation
 
     Die Simulation berechnet, wie hoch das Altersguthaben und die Rente mit und ohne Einkauf sein wird. Dabei können verschiedene Parameter
@@ -82,6 +89,13 @@ info:
 
     The URLs in the specification are examples only. The API is implemented by a many pension funds and each pension fund has an individual
     base URL for the API. The base URL of a specific pension fund is provided by the directory API.
+
+    ## Localization and Currency Notes
+
+    The response language cannot be influenced via the API. It is determined by the language setting stored by the service provider for 
+    the insured person (typically German, French, or Italian).
+
+    All monetary values (e.g., balances, contributions, benefits) are expressed in **Swiss Francs (CHF)**.
 
     ## Simulation
 
@@ -200,7 +214,7 @@ paths:
         '500':
           $ref: '#/components/responses/standard500'
   /insured-persons/{personId}/statements:
-    post:
+    get:
       summary: Get pension statement(s) data
       description: |
         Provides the pension statement(s) representing the state of the policy/policies for the specified date as structured data. If no
@@ -214,13 +228,7 @@ paths:
         - statement
       parameters:
         - $ref: '#/components/parameters/person_id'
-      requestBody:
-        description: Reference date for information in output.
-        required: false
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ReferenceDate'
+        - $ref: '#/components/parameters/reference_date'
       security:
         - OAuth2:
             - read:basic_pension_data
@@ -782,6 +790,7 @@ components:
       description: |
         The total amount available for the insured person to pledge as collateral from their retirement capital for the purpose of financing home
         ownership.
+        After age 50, this amount is subject to legal limitations, which are already reflected in the stated value.
 
         Note: If a fixed amount is contractually defined, it is usually lower than this value.
       type: number
@@ -791,6 +800,7 @@ components:
     HomeOwnershipAvailableForWithdrawal:
       description: |
         The total amount available for the insured person to withdraw from their retirement capital for the purpose of financing home ownership.
+        After age 50, this amount is subject to legal limitations, which are already reflected in the stated value.
       type: number
       format: double
       examples:
@@ -811,6 +821,7 @@ components:
         - personId
         - sex
         - ssn
+        - policyIds
       properties:
         birthDate:
           description: Birth date.
@@ -871,7 +882,7 @@ components:
         address:
           $ref: '#/components/schemas/Address'
         marriageDate:
-          description: Date of marriage (or registration of partnership).
+          description: Date of marriage (or registration of partnership). Required if `maritalStatus` is `married`.
           type: string
           format: date
           examples:
@@ -961,17 +972,27 @@ components:
             - 5.5
       minProperties: 1
       additionalProperties: false
+    LanguageCode:
+      LanguageCode:
+        description: |
+          Language code according to ISO 639-1. Examples: `de` (German), `fr` (French), `it` (Italian), `en` (English).
+          Used to indicate the language of content based on the insured person's profile.
+        type: string
+        examples:
+          - de
+          - fr
+          - it
+          - en
     LastYearDevelopment:
-      description: Details about the capital development for the last year.
+      description: |
+        Details about the capital development for the last year.
+
+        In most cases, all fields should be populated with actual values reflecting the previous calendar year.
+        However, if the insured person joined during the current year, some or all of the fields 
+        may be missing due to the absence of a full year of history.
+
+        Consumers of this data should account for potentially missing values in such cases.
       type: object
-      required:
-        - balanceBeginningLastYear
-        - balanceEndLastYear
-        - interestCreditLastYear
-        - interestRatesLastYear
-        - oldAgeCreditLastYear
-        - totalDepositsLastYear
-        - totalWithdrawalsLastYear
       properties:
         balanceBeginningLastYear:
           type: number
@@ -1161,6 +1182,8 @@ components:
           $ref: '#/components/schemas/PensionStatementId'
         pensionStatementNo:
           $ref: '#/components/schemas/PensionStatementNo'
+        languageCode:
+          $ref: '#/components/schemas/LanguageCode'
     PensionStatementId:
       description: Technical ID of pension statement used in API calls.
       type: string
@@ -1204,6 +1227,7 @@ components:
         - retirementCapital
         - riskBenefits
         - salaryData
+        - vestedBenefits
       properties:
         earliestRetirementAge:
           type: integer
@@ -1527,18 +1551,6 @@ components:
           description: Planned retirement age (in month since birth). If omitted, the regular payment age is assumed.
           examples:
             - 780
-    ReferenceDate:
-      description: Reference date for information in generated document.
-      type: object
-      required:
-        - referenceDate
-      properties:
-        referenceDate:
-          description: Common date format.
-          type: string
-          format: date
-          examples:
-            - '2018-04-13'
     RegularPurchaseMaxAmount:
       description: The maximum amount the insured person is permitted to contribute to their pension plan as an ordinary purchase.
       type: number
@@ -1559,7 +1571,6 @@ components:
       required:
         - capitalBalance
         - capitalBalanceMandatory
-        - pension
         - retirementAge
       properties:
         capitalBalance:
@@ -1588,6 +1599,7 @@ components:
         - balanceReferenceDate
         - interestRates
         - projectedRetirementBenefits
+        - lastYearDevelopment
       properties:
         balanceMandatoryReferenceDate:
           $ref: '#/components/schemas/BalanceMandatoryReferenceDate'
@@ -1874,7 +1886,7 @@ components:
           items:
             $ref: '#/components/schemas/CapitalTransaction'
           description: List of withdrawls and refunds due to divorce made in the past.
-        homeOwnerhsipWithdrawals:
+        homeOwnershipWithdrawals:
           type: array
           items:
             $ref: '#/components/schemas/CapitalTransaction'
@@ -1958,6 +1970,15 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/PolicyId'
+    reference_date:
+      in: query
+      name: referenceDate
+      description: Reference date for information in output.
+      required: false
+      schema:
+        type: string
+        format: date
+        example: '2023-12-31'
     to_date:
       in: query
       name: to
