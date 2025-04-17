@@ -130,4 +130,4 @@ properties:
         $ref: ./EmploymentLevel.yaml
   ts:
     $ref: ./generic/DateTime.yaml
-    description: Date and time of generation of the PensionStatement
+    description: Date and time of generation of the PensionStatement.

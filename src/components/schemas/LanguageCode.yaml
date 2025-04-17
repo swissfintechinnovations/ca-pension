@@ -1,0 +1,9 @@
+description: |
+  Language code according to ISO 639-1. Examples: `de` (German), `fr` (French), `it` (Italian), `en` (English).
+  Used to indicate the language of content based on the insured person's profile.
+type: string
+examples:
+    - de
+    - fr
+    - it
+    - en

@@ -1,6 +1,7 @@
 description: |
   The total amount available for the insured person to pledge as collateral from their retirement capital for the purpose of financing home
   ownership.
+  After age 50, this amount is subject to legal limitations, which are already reflected in the stated value.
 
   Note: If a fixed amount is contractually defined, it is usually lower than this value.
 type: number

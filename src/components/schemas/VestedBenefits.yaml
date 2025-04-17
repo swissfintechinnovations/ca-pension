@@ -55,7 +55,7 @@ properties:
     items:
       $ref: ./CapitalTransaction.yaml
     description: List of withdrawls and refunds due to divorce made in the past.
-  homeOwnerhsipWithdrawals:
+  homeOwnershipWithdrawals:
     type: array
     items:
       $ref: ./CapitalTransaction.yaml

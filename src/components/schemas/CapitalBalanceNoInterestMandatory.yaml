@@ -1,4 +1,4 @@
-description: Retirement capital balance assuming no interest on assets (mandatory coverage only)
+description: Retirement capital balance assuming no interest on assets (mandatory coverage only).
 type: number
 format: double
 examples:

@@ -1,5 +1,6 @@
 description: |
   The total amount available for the insured person to withdraw from their retirement capital for the purpose of financing home ownership.
+  After age 50, this amount is subject to legal limitations, which are already reflected in the stated value.
 type: number
 format: double
 examples:

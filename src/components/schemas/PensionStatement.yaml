@@ -32,8 +32,10 @@ properties:
     description: Reference date of pension statement.
   timeStamp:
     $ref: ./generic/DateTime.yaml
-    description: Date and time of generation of the PensionStatement
+    description: Date and time of generation of the PensionStatement.
   pensionStatementId:
     $ref: ./PensionStatementId.yaml
   pensionStatementNo:
     $ref: ./PensionStatementNo.yaml
+  languageCode: 
+    $ref: ./LanguageCode.yaml

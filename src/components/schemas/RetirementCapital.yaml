@@ -5,6 +5,7 @@ required:
   - balanceReferenceDate
   - interestRates
   - projectedRetirementBenefits
+  - lastYearDevelopment
 properties:
   balanceMandatoryReferenceDate:
     $ref: ./BalanceMandatoryReferenceDate.yaml
