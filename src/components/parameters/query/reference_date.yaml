@@ -1,5 +1,5 @@
 in: query
-name: reference_date
+name: referenceDate
 description: Reference date for information in output.
 required: false
 schema:
