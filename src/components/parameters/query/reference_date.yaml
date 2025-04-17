@@ -3,6 +3,4 @@ name: reference_date
 description: Reference date for information in output.
 required: false
 schema:
-  type: string
-  format: date
-  example: '2023-12-31'
+  $ref: ../../schemas/generic/Date.yaml
