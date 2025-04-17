@@ -1971,13 +1971,11 @@ components:
         $ref: '#/components/schemas/PolicyId'
     reference_date:
       in: query
-      name: reference_date
+      name: referenceDate
       description: Reference date for information in output.
       required: false
       schema:
-        type: string
-        format: date
-        example: '2023-12-31'
+        $ref: '#/components/schemas/Date'
     to_date:
       in: query
       name: to
