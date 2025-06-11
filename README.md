@@ -15,6 +15,9 @@
 
 This is the official SFTI repo for the pension API. Documentations may be found in the [Wiki](https://github.com/swissfintechinnovations/ca-pension/wiki).
 
-We refer to the [offical government website](https://www.kmu.admin.ch/kmu/de/home/praktisches-wissen/personal/personalmanagement/pflichten-der-arbeitgebenden/sozialversicherungen/pensionskasse-bvg.html) for more information.
+An easy-to-read representation of the Pension API is accessible via the following link:
+* [Pension API](https://editor-next.swagger.io/?url=https://raw.githubusercontent.com/swissfintechinnovations/ca-pension/main/pensionAPI.yaml)
+
+We refer to the [offical government website](https://www.kmu.admin.ch/kmu/de/home/praktisches-wissen/personal/personalmanagement/pflichten-der-arbeitgebenden/sozialversicherungen/pensionskasse-bvg.html) for more information about the Swiss pension system.
 
 <!-- An easy-to-read representation of the pension/XS2A APIs is accessible via the following links: -->
