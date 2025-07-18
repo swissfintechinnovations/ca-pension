@@ -307,6 +307,36 @@ paths:
           $ref: ./components/responses/standard404.yaml
         '500':
           $ref: ./components/responses/standard500.yaml
+  /statements/{pensionStatementId}/compact-vb-statements:
+    get:
+      summary: Get the compact vested benefits statement for the specified id
+      description: |
+        Provides the vested benefits statement for the specified id as a compact json in the insured person's preferred language. Its sole
+        purpose is to provide a compact json for use cases with tight data volume limits such as e.g. a QR code. This endpoint should not
+        be used otherwise.
+
+        If the pension fund is unable to provide a json for the request id, the error code 400 should be returned.
+      operationId: getVestedBenefitStatementCompact
+      tags:
+        - statement
+      parameters:
+        - $ref: ./components/parameters/path/pension_statement_id.yaml
+      security:
+        - OAuth2:
+            - read:basic_pension_data
+      responses:
+        '200':
+          description: Compact vested benefits statement details.
+          content:
+            application/json:
+              schema:
+                $ref: ./components/schemas/Vbsc.yaml
+        '401':
+          $ref: ./components/responses/standard401.yaml
+        '404':
+          $ref: ./components/responses/standard404.yaml
+        '500':
+          $ref: ./components/responses/standard500.yaml
   /policies/{policyId}:
     get:
       summary: Get details of a pension fund policy
