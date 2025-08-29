@@ -155,7 +155,7 @@ paths:
     get:
       summary: Retrieve a list of insured persons that are accessible with the presented access token
       description: |
-        Returns the list of person identifier(s) (`personId`) that the authenticated user can currently access via the API.
+        Returns the list of person identifier(s) (`personId`) that the authenticated user can access via the API.
 
         A valid OAuth2 access token, obtained through a user consent flow, is required. No specific scope is enforced
         for this endpoint, but the presence of a valid consent is mandatory.
