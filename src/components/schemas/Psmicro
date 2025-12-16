@@ -1,8 +1,12 @@
 description: |
-  Psmicro = pension statement micro, is a temporary, very much reduced pension statement consisting of only key pension statement attributes.
-  compared to the Psc schema, the Psmicro schema does not contain employer information, home ownership / max purchase information, 
-  pension plan references and no information related to pension provider. In addition, information about the statement type is removed.
-  All this information is not relevant for the temporary pension statement generation use case of providing a quick overview of the pension situation in an anonymous way.
+  Psmicro = pension statement micro, is a temporary and highly reduced pension statement 
+  containing only key attributes for an anonymous and quick overview.
+  Compared to the Psc schema, employer data, pension provider information, person ID,
+  plan references, home ownership / max purchase information and statement type details are intentionally omitted.
+
+  IMPORTANT: This schema is strictly temporary and not part of the target architecture.
+  In the target state, the PensionStatement or Psc schemas must be used instead.
+  Psmicro can be removed once pension providers support modern secure APIs.
 type: object
 required:
   - era
