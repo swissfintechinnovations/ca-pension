@@ -9,26 +9,41 @@ description: |
   Psmicro can be removed once pension providers support modern secure APIs.
 type: object
 required:
+  - bym
   - era
+  - emi
   - ora
+  - pki
   - rb
   - rc
   - rd
   - sd
   - ts
 properties:
+  bym:
+    type: string
+    description: Year and month of birth (Format YYYY-MM).
+    pattern: '^[0-9]{4}-(0[1-9]|1[0-2])$'
+    examples:
+      - "1985-05"
   era:
     type: integer
     format: int32
     description: Age (in month since birth) for earliest possible retirement.
     examples:
       - 696
+  emi:
+    $ref: ./EmployerId.yaml
+    description: Swiss Enterprise Identification Number UID of the employer.
   ora:
     type: integer
     format: int32
     description: Age (in month since birth) for ordinary retirement.
     examples:
       - 780
+  pki:
+    $ref: ./ProviderId.yaml
+    description: Swiss Enterprise Identification Number UID of the pension provider.
   rb:
     type: object
     description: Benefits in case of death or disability to work.
