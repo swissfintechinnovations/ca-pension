@@ -7,7 +7,6 @@ type: object
 required:
   - era
   - ora
-  - pi
   - rb
   - rc
   - rd
@@ -26,8 +25,6 @@ properties:
     description: Age (in month since birth) for ordinary retirement.
     examples:
       - 780
-  pi:
-    $ref: ./PersonId.yaml
   rb:
     type: object
     description: Benefits in case of death or disability to work.
