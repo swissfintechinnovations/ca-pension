@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  version: 2.0.0
+  version: 3.0.0
   title: Pension
   description: |
     # Pension-API (Deutsch)
@@ -163,10 +163,10 @@ paths:
         The returned list acts as a mapping between the authenticated user (represented by the access token) and the
         insured persons that are technically accessible through this API. The service provider MUST ensure that
         only those person IDs are returned which are both:
-        
-          1. authorized for the user in the provider’s system, AND
-          2. explicitly permitted for API access under the user’s current consent.
-        
+
+        1. authorized for the user in the provider’s system, AND
+        2. explicitly permitted for API access under the user’s current consent.
+
         This prevents exposing additional person IDs that the user might be entitled to in the backend but which are
         not covered by the API consent agreement.
 
