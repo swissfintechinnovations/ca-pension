@@ -44,8 +44,9 @@ properties:
     required:
       - bb
       - be
+      - cg
+      - fe
       - ic
-      - oa
       - td
       - tw
     properties:
@@ -58,27 +59,39 @@ properties:
       be:
         type: number
         format: double
-        description: Balance end last year.
+        description: Balance at the end of last year. Matches the sum of bb and all other fields.
         examples:
-          - 106000
+          - 106900
+      cg:
+        type: number
+        format: double
+        description: Capital gains (positive) or losses (negative) from investments.
+        examples:
+          - 1000
+      fe:
+        type: number
+        format: double
+        description: Management or administrative fees. Must be provided as a negative value.
+        examples:
+          - -100
       ic:
         type: number
         format: double
-        description: Interest credit last year.
+        description: Interest credit for the period.
         examples:
           - 2000
       td:
         type: number
         format: double
-        description: Total deposits last year.
+        description: Total deposits or inflows. Usually positive.
         examples:
           - 5000
       tw:
         type: number
         format: double
-        description: Total withdrawals last year.
+        description: Total withdrawals or outflows. Must be provided as a negative value.
         examples:
-          - 5000
+          - -1000
   plg:
     type: object
     description: Pledged (yes/no). Value is an optional sub-element.
