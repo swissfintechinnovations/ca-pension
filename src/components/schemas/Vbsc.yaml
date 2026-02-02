@@ -1,123 +1,135 @@
 description: |
   Vbsc = vested benefit statement compact, is a reduced pension statement consisting of only the most important pension statement information.
+  Short property names (3-4 chars) for QR code payload.
 type: object
 required:
-  - pst
+  - pi
+  - ppn
   - rc
+  - lyd
+  - plg
+  - wth
+  - pn
+  - hoaw
   - rd
   - ts
 properties:
-  en:
-    $ref: ./EmployerName.yaml
-  era:
-    type: integer
-    format: int32
-    description: Age (in month since birth) for earliest possible retirement.
-    examples:
-      - 696
-  hoaw:
-    $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
-  ora:
-    type: integer
-    format: int32
-    description: Age (in month since birth) for ordinary retirement.
-    examples:
-      - 780
   pi:
     $ref: ./PersonId.yaml
-  ppl:
-    type: object
-    description: |
-      The pension plan defines various conditions for the occupational pension provision of the insured employees, incl. the contributions
-      and insured benefits.
-    required:
-      - pln
-      - ct
-    properties:
-      pln:
-        $ref: ./PlanName.yaml
-      ct:
-        $ref: ./ContractType.yaml
   ppn:
     $ref: ./ProviderName.yaml
-  pst:
-    $ref: ./PensionStatementType.yaml
-  rb:
-    type: object
-    description: Benefits in case of death or disability to work.
-    required:
-      - pd
-      - cpd
-      - ppd
-      - opd
-      - mlswpb
-    properties:
-      pd:
-        $ref: ./PensionDisability.yaml
-      cpd:
-        $ref: ./ChildPensionDisability.yaml
-      ppd:
-        $ref: ./PartnerPensionDeath.yaml
-      opd:
-        $ref: ./OrphanPensionDeath.yaml
-      mlswpb:
-        $ref: ./MinimalLumpSumWithPensionBenefits.yaml
   rc:
     type: object
-    description: Retirement capital balances for the past and projections for the future.
+    description: Retirement capital (balance and share breakdown).
     required:
-      - brd
-      - bmr
-      - prb
+      - cb
     properties:
-      brd:
-        $ref: ./BalanceReferenceDate.yaml
-      bmr:
-        $ref: ./BalanceMandatoryReferenceDate.yaml
-      prb:
-        type: array
-        description: |
-          Projected retirement benefits for a series of retirement ages. The list contains projections for each integer retirement age from
-          58 to the regular retirement age. For persons of 58 or older, the list is restricted to retirement ages higher than their current
-          age.
-        items:
-          type: object
-          required:
-            - ra
-            - cb
-            - p
-          properties:
-            ra:
-              $ref: ./RetirementAge.yaml
-            cb:
-              $ref: ./CapitalBalance.yaml
-            p:
-              $ref: ./Pension.yaml
+      cb:
+        $ref: ./CapitalBalance.yaml
+      bvg:
+        type: number
+        format: double
+        description: BVG share in percent (%).
+        examples:
+          - 65.5
+      inv:
+        type: number
+        format: double
+        description: Invested share in percent (%). The remaining percentage (100% minus inv) represents the cash/liquidity balance.
+        examples:
+          - 80.0
+  lyd:
+    type: object
+    description: Last year data (capital development); compact property names for QR code.
+    required:
+      - bb
+      - be
+      - ic
+      - oa
+      - td
+      - tw
+    properties:
+      bb:
+        type: number
+        format: double
+        description: Balance beginning last year.
+        examples:
+          - 100000
+      be:
+        type: number
+        format: double
+        description: Balance end last year.
+        examples:
+          - 106000
+      ic:
+        type: number
+        format: double
+        description: Interest credit last year.
+        examples:
+          - 2000
+      oa:
+        type: number
+        format: double
+        description: Old age credit last year.
+        examples:
+          - 4000
+      td:
+        type: number
+        format: double
+        description: Total deposits last year.
+        examples:
+          - 5000
+      tw:
+        type: number
+        format: double
+        description: Total withdrawals last year.
+        examples:
+          - 5000
+  plg:
+    type: object
+    description: Pledged (yes/no). Value is an optional sub-element.
+    required:
+      - has
+    properties:
+      has:
+        type: boolean
+        description: Pledged (yes/no).
+        examples:
+          - false
+      val:
+        type: number
+        format: double
+        description: Pledged amount (optional).
+        examples:
+          - 20000
+  wth:
+    type: object
+    description: Withdrawal (yes/no). Value is an optional sub-element.
+    required:
+      - has
+    properties:
+      has:
+        type: boolean
+        description: Withdrawal (yes/no).
+        examples:
+          - false
+      val:
+        type: number
+        format: double
+        description: Withdrawal amount (optional).
+        examples:
+          - 0
+  pn:
+    type: string
+    description: Product name.
+    examples:
+      - "frankly vested benefits"
+  hoaw:
+    $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
+    description: Home ownership available for withdrawal.
   rd:
     $ref: ./generic/Date.yaml
-    description: Reference date of pension statement.
-  rpm:
-    $ref: ./RegularPurchaseMaxAmount.yaml
-  sd:
-    type: object
-    description: Details of salary relevant for insurance.
-    required:
-      - ds
-      - ism
-      - isre
-      - isri
-      - el
-    properties:
-      ds:
-        $ref: ./DeclaredSalary.yaml
-      ism:
-        $ref: ./InsuredSalaryMandatory.yaml
-      isre:
-        $ref: ./InsuredSalaryRetirement.yaml
-      isri:
-        $ref: ./InsuredSalaryRisk.yaml
-      el:
-        $ref: ./EmploymentLevel.yaml
+    description: Reference date of vested benefit statement.
   ts:
     $ref: ./generic/DateTime.yaml
-    description: Date and time of generation of the PensionStatement.
+    description: Date and time of generation of the VestedBenefitStatement.
