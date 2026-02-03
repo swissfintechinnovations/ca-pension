@@ -1,0 +1,4 @@
+apis:
+  pension:
+    root: ../src/pensionAPI.yaml
+    output: ../pensionAPI.yaml
