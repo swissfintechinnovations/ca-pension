@@ -44,7 +44,6 @@ properties:
     required:
       - bb
       - be
-      - cg
       - fe
       - ic
       - td
