@@ -40,96 +40,40 @@ properties:
         examples:
           - 80.0
   ayd:
-    type: object
-    description: Actual year capital development. The sum of all fields must equal the current balance (rc.cb).
-    required:
-      - bb
-    properties:
-      bb:
-        type: number
-        format: double
-        description: Balance beginning of the actual year.
-        examples:
-          - 100000
-      cg:
-        type: number
-        format: double
-        description: Total capital gains (positive) or losses (negative) from investments for the period. Must be set to 0 if there are no investments (cash only).
-        examples:
-          - 1000
-      fe:
-        type: number
-        format: double
-        description: Total management or administrative fees for the period. Must be provided as a negative value.
-        examples:
-          - -100
-      ic:
-        type: number
-        format: double
-        description: Total interest credits for the period.
-        examples:
-          - 2000
-      td:
-        type: number
-        format: double
-        description: Total deposits or inflows for the period.
-        examples:
-          - 5000
-      tw:
-        type: number
-        format: double
-        description: Total withdrawals or outflows for the period, e.g. for home ownership (WEF) or divorce settlements. Must be provided as a negative value.
-        examples:
-          - -1000
+    description: Actual year capital development. The sum of bb and all capital development fields must equal the current balance (rc.cb).
+    allOf:
+      - $ref: ./CapitalDevelopment.yaml
+      - type: object
+        required:
+          - bb
+        properties:
+          bb:
+            type: number
+            format: double
+            description: Balance beginning of the actual year.
+            examples:
+              - 100000
   lyd:
-    type: object
-    description: Last year data (capital development). The sum of all fields (except lyd.be) must equal the balance at the end of last year (lyd.be).
-    required:
-      - bb
-      - be
-    properties:
-      bb:
-        type: number
-        format: double
-        description: Balance beginning last year.
-        examples:
-          - 100000
-      be:
-        type: number
-        format: double
-        description: Balance at the end of last year. Matches the sum of bb and all other fields.
-        examples:
-          - 106900
-      cg:
-        type: number
-        format: double
-        description: Total capital gains (positive) or losses (negative) from investments for the period. Must be set to 0 if there are no investments (cash only).
-        examples:
-          - 1000
-      fe:
-        type: number
-        format: double
-        description: Total management or administrative fees for the period. Must be provided as a negative value.
-        examples:
-          - -100
-      ic:
-        type: number
-        format: double
-        description: Total interest credits for the period.
-        examples:
-          - 2000
-      td:
-        type: number
-        format: double
-        description: Total deposits or inflows for the period.
-        examples:
-          - 5000
-      tw:
-        type: number
-        format: double
-        description: Total withdrawals or outflows for the period, e.g. for home ownership (WEF) or divorce settlements. Must be provided as a negative value.
-        examples:
-          - -1000
+    description: Last year data (capital development). The sum of bb and all capital development fields must equal be.
+    allOf:
+      - $ref: ./CapitalDevelopment.yaml
+      - type: object
+        required:
+          - bb
+          - be
+        properties:
+          bb:
+            type: number
+            format: double
+            description: Balance beginning last year.
+            examples:
+              - 100000
+          be:
+            type: number
+            format: double
+            description: Balance at the end of last year.
+            examples:
+              - 106900
   plg:
     type: object
     description: Pledged (yes/no). Value is an optional sub-element.
@@ -140,7 +84,7 @@ properties:
         type: boolean
         description: Pledged (yes/no).
         examples:
-          - false
+          - true
       val:
         type: number
         format: double
@@ -157,13 +101,13 @@ properties:
         type: boolean
         description: Withdrawal (yes/no).
         examples:
-          - false
+          - true
       val:
         type: number
         format: double
         description: Withdrawal amount (optional).
         examples:
-          - 0
+          - 50000
   pn:
     type: string
     description: Product name.
