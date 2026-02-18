@@ -1,7 +1,7 @@
 description: |
-  Vbsc = vested benefit statement compact, is a reduced pension statement consisting of only the most important pension statement information.
+  3asc = 3a statement compact, is a reduced account statement consisting of only the most important account statement information.
   All monetary values are in Swiss Francs (CHF) unless explicitly stated otherwise.
-  Short property names (3-4 chars) for QR code payload.
+  Short property names (3-4 chars) are used to minimize payload size.
 type: object
 required:
   - pi
@@ -11,8 +11,9 @@ required:
   - lyd
   - plg
   - wth
+  - pw
   - pn
-  - hoaw
+  - cp
   - rd
   - ts
 properties:
@@ -28,12 +29,6 @@ properties:
     properties:
       cb:
         $ref: ./CapitalBalance.yaml
-      bvg:
-        type: number
-        format: double
-        description: BVG share in percent (%).
-        examples:
-          - 65.5
       inv:
         type: number
         format: double
@@ -109,17 +104,39 @@ properties:
         description: Withdrawal amount (optional).
         examples:
           - 50000
+  pw:
+    type: boolean
+    description: Premium waiver in case of disability (yes/no).
+    examples:
+      - true
   pn:
     type: string
     description: Product name.
     examples:
-      - "frankly vested benefits"
-  hoaw:
-    $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
-    description: Home ownership available for withdrawal.
+      - "sparen 3a"
+  cp:
+    type: object
+    description: Contribution potential (indicative, provider-specific view).
+    properties:
+      cy:
+        type: number
+        format: double
+        description: |
+          Indicative remaining contribution capacity for the current year at this provider. 
+          Calculated as the applicable annual cap minus deposits already made at THIS provider. 
+          No guarantee of total tax deductibility if other 3a accounts exist.
+        examples: [2500.00]
+      ret:
+        type: number
+        format: double
+        description: |
+          Indicative potential for retroactive purchases (past years). 
+          Based solely on information available to this provider. 
+          Non-binding and without legal effect regarding tax deductibility.
+        examples: [8400.00]
   rd:
     $ref: ./generic/Date.yaml
-    description: Reference date of vested benefit statement.
+    description: Reference date of 3a account statement.
   ts:
     $ref: ./generic/DateTime.yaml
-    description: Date and time of generation of the VestedBenefitStatement.
+    description: Date and time of generation of the 3a account statement.
