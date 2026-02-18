@@ -26,50 +26,32 @@ properties:
     description: Retirement capital (balance and share breakdown).
     required:
       - cb
+      - cbly
     properties:
       cb:
+        description: Current capital balance.
         $ref: ./CapitalBalance.yaml
+        examples:
+          - 110000
       inv:
         type: number
         format: double
-        description: Invested share in percent (%). The remaining percentage (100% minus inv) represents the cash/liquidity balance.
+        description: Current invested share in percent (%). The remaining percentage (100% minus inv) represents the cash/liquidity balance.
         examples:
           - 80.0
+      cbly:
+        $ref: ./CapitalBalance.yaml
+        description: |
+          Capital balance at the end of last year (Dec 31st). 
+          Set to 0.0 if the account was opened or transferred to this provider during the current year.
+        examples:
+          - 106900
   ayd:
-    description: Actual year capital development. The sum of bb and all capital development fields must equal the current balance (rc.cb).
-    allOf:
-      - $ref: ./CapitalDevelopment.yaml
-      - type: object
-        required:
-          - bb
-        properties:
-          bb:
-            type: number
-            format: double
-            description: Balance beginning of the actual year.
-            examples:
-              - 100000
+    $ref: ./CapitalDevelopment.yaml
+    description: Capital development from Jan 1st of the current year to the reference date.
   lyd:
-    description: Last year data (capital development). The sum of bb and all capital development fields must equal be.
-    allOf:
-      - $ref: ./CapitalDevelopment.yaml
-      - type: object
-        required:
-          - bb
-          - be
-        properties:
-          bb:
-            type: number
-            format: double
-            description: Balance beginning last year.
-            examples:
-              - 100000
-          be:
-            type: number
-            format: double
-            description: Balance at the end of last year.
-            examples:
-              - 106900
+    $ref: ./CapitalDevelopment.yaml
+    description: Capital development for the full previous calendar year.
   plg:
     type: object
     description: Pledged (yes/no). Value is an optional sub-element.
