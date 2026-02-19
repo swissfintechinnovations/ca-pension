@@ -32,7 +32,7 @@ properties:
         description: Current capital balance.
         $ref: ./CapitalBalance.yaml
         examples:
-          - 110000
+          - 44000
       inv:
         type: number
         format: double
@@ -45,13 +45,30 @@ properties:
           Capital balance at the end of last year (Dec 31st). 
           Set to 0.0 if the account was opened or transferred to this provider during the current year.
         examples:
-          - 106900
+          - 42000
+      cbbly:
+        $ref: ./CapitalBalance.yaml
+        description: Capital balance at the beginning of last year (Jan 1st).
+        examples:
+          - 33414
   ayd:
     $ref: ./CapitalDevelopment.yaml
-    description: Capital development from Jan 1st of the current year to the reference date.
+    description: Capital development from Jan 1st of the current year to the reference date. The sum of all fields must equal rc.cb minus rc.cbly.
+    examples:
+      - cg: 200
+        fe: 0
+        ic: 0
+        td: 1800
+        tw: 0
   lyd:
     $ref: ./CapitalDevelopment.yaml
-    description: Capital development for the full previous calendar year.
+    description: Capital development for the full previous calendar year. rc.cbbly + sum of all fields must equal rc.cbly.
+    examples:
+      - cg: 1500
+        fe: -20
+        ic: 50
+        td: 7056
+        tw: 0
   plg:
     type: object
     description: Pledged (yes/no). Value is an optional sub-element.
@@ -107,7 +124,8 @@ properties:
           Indicative remaining contribution capacity for the current year at this provider. 
           Calculated as the applicable annual cap minus deposits already made at THIS provider. 
           No guarantee of total tax deductibility if other 3a accounts exist.
-        examples: [2500.00]
+        examples: 
+        - 2500.00
       ret:
         type: number
         format: double
@@ -115,7 +133,8 @@ properties:
           Indicative potential for retroactive purchases (past years). 
           Based solely on information available to this provider. 
           Non-binding and without legal effect regarding tax deductibility.
-        examples: [8400.00]
+        examples:
+          - 8400.00
   rd:
     $ref: ./generic/Date.yaml
     description: Reference date of 3a account statement.
