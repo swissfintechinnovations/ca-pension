@@ -32,6 +32,12 @@ properties:
         $ref: ./CapitalBalance.yaml
         examples:
           - 110000
+      bvg:
+        type: number
+        format: double
+        description: BVG share in percent (%).
+        examples:
+          - 65.5
       inv:
         type: number
         format: double
@@ -45,12 +51,29 @@ properties:
           Set to 0.0 if the account was opened or transferred to this provider during the current year.
         examples:
           - 106900
+      cbbly:
+        $ref: ./CapitalBalance.yaml
+        description: Capital balance at the beginning of last year (Jan 1st).
+        examples:
+          - 98300
   ayd:
     $ref: ./CapitalDevelopment.yaml
-    description: Capital development from Jan 1st of the current year to the reference date.
+    description: Capital development from Jan 1st of the current year to the reference date. The sum of all fields must equal rc.cb minus rc.cbly.
+    examples:
+      - cg: 570
+        fe: -20
+        ic: 50
+        td: 2500
+        tw: 0
   lyd:
     $ref: ./CapitalDevelopment.yaml
-    description: Capital development for the full previous calendar year.
+    description: Capital development for the full previous calendar year. rc.cbbly + sum of all fields must equal rc.cbly.
+    examples:
+      - cg: 1500
+        fe: -20
+        ic: 120
+        td: 7000
+        tw: 0
   plg:
     type: object
     description: Pledged (yes/no). Value is an optional sub-element.
@@ -89,7 +112,7 @@ properties:
     type: string
     description: Product name.
     examples:
-      - "frankly vested benefits"
+      - "vested benefits account"
   hoaw:
     $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
     description: Home ownership available for withdrawal.
