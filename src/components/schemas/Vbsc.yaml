@@ -4,18 +4,25 @@ description: |
   Short property names (3-4 chars) for QR code payload.
 type: object
 required:
+  - ai
   - pi
   - ppn
   - rc
   - ayd
   - lyd
   - plg
-  - wth
+  - wef
+  - div
+  - bch
+  - p3y
   - pn
   - hoaw
   - rd
   - ts
 properties:
+  ai:
+    type: string
+    description: Unique Account Identifier. Use IBAN format (ISO 13616) whenever possible. If the product does not have an IBAN, use the policy or contract number.
   pi:
     $ref: ./PersonId.yaml
   ppn:
@@ -35,9 +42,9 @@ properties:
       bvg:
         type: number
         format: double
-        description: BVG share in percent (%).
+        description: BVG share as an absolute amount.
         examples:
-          - 65.5
+          - 71500
       inv:
         type: number
         format: double
@@ -76,7 +83,7 @@ properties:
         tw: 0
   plg:
     type: object
-    description: Pledged (yes/no). Value is an optional sub-element.
+    description: Pledged (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
     required:
       - has
     properties:
@@ -88,26 +95,69 @@ properties:
       val:
         type: number
         format: double
-        description: Pledged amount (optional).
+        description: Pledged amount.
         examples:
           - 20000
-  wth:
+  wef:
     type: object
-    description: Withdrawal (yes/no). Value is an optional sub-element.
+    description: WEF withdrawal (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
     required:
       - has
     properties:
       has:
         type: boolean
-        description: Withdrawal (yes/no).
+        description: WEF withdrawal (yes/no).
         examples:
           - true
       val:
         type: number
         format: double
-        description: Withdrawal amount (optional).
+        description: WEF withdrawal amount.
         examples:
           - 50000
+  div:
+    type: object
+    description: Divorce pension equalization withdrawal (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
+    required:
+      - has
+    properties:
+      has:
+        type: boolean
+        description: Divorce pension equalization withdrawal (yes/no).
+        examples:
+          - false
+      val:
+        type: number
+        format: double
+        description: Divorce pension equalization withdrawal amount.
+        examples:
+          - 0
+  bch:
+    type: object
+    description: Beneficiary change (yes/no).
+    required:
+      - has
+    properties:
+      has:
+        type: boolean
+        description: Beneficiary change (yes/no).
+        examples:
+          - false
+  p3y:
+    type: object
+    description: Purchase activity within the last 3 years.
+    required:
+      - s
+    properties:
+      s:
+        type: number
+        format: double
+        description: Cumulative purchase amount within the last 3 years. Use 0 if no purchases were made.
+        examples:
+          - 15000
+      d:
+        $ref: ./generic/Date.yaml
+        description: Date of the most recent purchase within the last 3 years. May be omitted when s is 0.
   pn:
     type: string
     description: Product name.
