@@ -29,7 +29,11 @@ properties:
     $ref: ./ProviderName.yaml
   rc:
     type: object
-    description: Retirement capital (balance and share breakdown).
+    description: |
+      Retirement capital balances.
+      Consistency rules:
+      - cb = cbly + sum of ayd-properties
+      Minor rounding differences up to CHF 0.05 are acceptable.
     required:
       - cb
       - cbly
@@ -58,14 +62,9 @@ properties:
           Set to 0.0 if the account was opened or transferred to this provider during the current year.
         examples:
           - 106900
-      cbbly:
-        $ref: ./CapitalBalance.yaml
-        description: Capital balance at the beginning of last year (Jan 1st).
-        examples:
-          - 98300
   ayd:
     $ref: ./CapitalDevelopment.yaml
-    description: Capital development from Jan 1st of the current year to the reference date. The sum of all fields must equal rc.cb minus rc.cbly.
+    description: Capital development from Jan 1st of the current year to the reference date.
     examples:
       - cg: 570
         fe: -20
@@ -74,7 +73,7 @@ properties:
         tw: 0
   lyd:
     $ref: ./CapitalDevelopment.yaml
-    description: Capital development for the full previous calendar year. rc.cbbly + sum of all fields must equal rc.cbly.
+    description: Capital development for the full previous calendar year.
     examples:
       - cg: 1500
         fe: -20
