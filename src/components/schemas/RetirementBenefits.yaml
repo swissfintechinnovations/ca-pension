@@ -11,8 +11,6 @@ properties:
     $ref: ./CapitalBalance.yaml
   capitalBalanceMandatory:
     $ref: ./CapitalBalanceMandatory.yaml
-  pension:
-    $ref: ./Pension.yaml
   retirementAge:
     $ref: ./RetirementAge.yaml
   capitalBalanceNoInterest:
@@ -25,3 +23,5 @@ properties:
     $ref: ./ConversionRateMandatory.yaml
   conversionRateSupplementary:
     $ref: ./ConversionRateSupplementary.yaml
+  pension:
+    $ref: ./Pension.yaml  
