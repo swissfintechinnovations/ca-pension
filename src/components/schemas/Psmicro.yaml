@@ -10,8 +10,8 @@ description: |
 type: object
 required:
   - bym
-  - era
   - emi
+  - era
   - ora
   - pki
   - rb
@@ -26,15 +26,15 @@ properties:
     pattern: '^[0-9]{4}-(0[1-9]|1[0-2])$'
     examples:
       - "1985-05"
+  emi:
+    $ref: ./EmployerId.yaml
+    description: Swiss Enterprise Identification Number UID of the employer.
   era:
     type: integer
     format: int32
     description: Age (in month since birth) for earliest possible retirement.
     examples:
       - 696
-  emi:
-    $ref: ./EmployerId.yaml
-    description: Swiss Enterprise Identification Number UID of the employer.
   ora:
     type: integer
     format: int32
@@ -48,34 +48,34 @@ properties:
     type: object
     description: Benefits in case of death or disability to work.
     required:
-      - pd
       - cpd
-      - ppd
-      - opd
       - mlswpb
+      - opd
+      - pd
+      - ppd
     properties:
-      pd:
-        $ref: ./PensionDisability.yaml
       cpd:
         $ref: ./ChildPensionDisability.yaml
-      ppd:
-        $ref: ./PartnerPensionDeath.yaml
-      opd:
-        $ref: ./OrphanPensionDeath.yaml
       mlswpb:
         $ref: ./MinimalLumpSumWithPensionBenefits.yaml
+      opd:
+        $ref: ./OrphanPensionDeath.yaml
+      pd:
+        $ref: ./PensionDisability.yaml
+      ppd:
+        $ref: ./PartnerPensionDeath.yaml
   rc:
     type: object
     description: Retirement capital balances for the past and projections for the future.
     required:
-      - brd
       - bmr
+      - brd
       - prb
     properties:
-      brd:
-        $ref: ./BalanceReferenceDate.yaml
       bmr:
         $ref: ./BalanceMandatoryReferenceDate.yaml
+      brd:
+        $ref: ./BalanceReferenceDate.yaml
       prb:
         type: array
         description: |
@@ -85,16 +85,16 @@ properties:
         items:
           type: object
           required:
-            - ra
             - cb
             - p
+            - ra
           properties:
-            ra:
-              $ref: ./RetirementAge.yaml
             cb:
               $ref: ./CapitalBalance.yaml
             p:
               $ref: ./Pension.yaml
+            ra:
+              $ref: ./RetirementAge.yaml
   rd:
     $ref: ./generic/Date.yaml
     description: Reference date of pension statement.
@@ -103,21 +103,21 @@ properties:
     description: Details of salary relevant for insurance.
     required:
       - ds
+      - el
       - ism
       - isre
       - isri
-      - el
     properties:
       ds:
         $ref: ./DeclaredSalary.yaml
+      el:
+        $ref: ./EmploymentLevel.yaml
       ism:
         $ref: ./InsuredSalaryMandatory.yaml
       isre:
         $ref: ./InsuredSalaryRetirement.yaml
       isri:
         $ref: ./InsuredSalaryRisk.yaml
-      el:
-        $ref: ./EmploymentLevel.yaml
   ts:
     $ref: ./generic/DateTime.yaml
     description: Date and time of generation of the PensionStatement.
