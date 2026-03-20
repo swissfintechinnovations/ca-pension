@@ -37,7 +37,7 @@ properties:
     $ref: ./RiskBenefits.yaml
   salaryData:
     $ref: ./SalaryData.yaml
-  homeOwnershipAvailableForPledge:
-    $ref: ./HomeOwnershipAvailableForPledge.yaml
   vestedBenefits:
     $ref: ./VestedBenefits.yaml
+  homeOwnershipAvailableForPledge:
+    $ref: ./HomeOwnershipAvailableForPledge.yaml

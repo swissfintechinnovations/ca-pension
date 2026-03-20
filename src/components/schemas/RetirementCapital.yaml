@@ -4,8 +4,8 @@ required:
   - balanceMandatoryReferenceDate
   - balanceReferenceDate
   - interestRates
-  - projectedRetirementBenefits
   - lastYearDevelopment
+  - projectedRetirementBenefits
 properties:
   balanceMandatoryReferenceDate:
     $ref: ./BalanceMandatoryReferenceDate.yaml
@@ -13,6 +13,8 @@ properties:
     $ref: ./BalanceReferenceDate.yaml
   interestRates:
     $ref: ./InterestRates.yaml
+  lastYearDevelopment:
+    $ref: ./LastYearDevelopment.yaml
   projectedRetirementBenefits:
     type: array
     description: |
@@ -24,8 +26,6 @@ properties:
     $ref: ./BalanceEndCurrentYear.yaml
   balanceMandatoryEndCurrentYear:
     $ref: ./BalanceMandatoryEndCurrentYear.yaml
-  lastYearDevelopment:
-    $ref: ./LastYearDevelopment.yaml
   transferredCapital:
     $ref: ./TransferredCapital.yaml
   transferredCapitalMandatory:

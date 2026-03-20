@@ -6,9 +6,9 @@ required:
   - lastName
   - maritalStatus
   - personId
+  - policyIds
   - sex
   - ssn
-  - policyIds
 properties:
   birthDate:
     $ref: ./generic/Date.yaml
@@ -46,6 +46,11 @@ properties:
       - married
   personId:
     $ref: ./PersonId.yaml
+  policyIds:
+    type: array
+    items:
+      $ref: ./PolicyId.yaml
+    description: List of IDs of policies that insured person has with this pension fund.
   sex:
     type: string
     enum:
@@ -68,8 +73,3 @@ properties:
   marriageDate:
     $ref: ./generic/Date.yaml
     description: Date of marriage (or registration of partnership). Required if `maritalStatus` is `married`.
-  policyIds:
-    type: array
-    items:
-      $ref: ./PolicyId.yaml
-    description: List of IDs of policies that insured person has with this pension fund.
