@@ -1808,7 +1808,7 @@ components:
       required:
         - from
         - to
-        - transaction
+        - transactions
       properties:
         from:
           description: Start of date range (inclusive).
