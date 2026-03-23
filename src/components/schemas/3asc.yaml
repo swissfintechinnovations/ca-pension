@@ -5,57 +5,24 @@ description: |
 type: object
 required:
   - ai
-  - pi
-  - ppn
-  - rc
   - ayd
-  - lyd
-  - plg
-  - wef
-  - div
   - bch
-  - pw
-  - pn
   - cp
+  - div
+  - lyd
+  - pi
+  - plg
+  - pn
+  - ppn
+  - pw
+  - rc
   - rd
   - ts
+  - wef
 properties:
   ai:
     type: string
     description: Unique Account Identifier. Use IBAN format (ISO 13616) whenever possible. If the product does not have an IBAN, use the policy or contract number.
-  pi:
-    $ref: ./PersonId.yaml
-  ppn:
-    $ref: ./ProviderName.yaml
-  rc:
-    type: object
-    description: |
-      Retirement capital properties.
-      Consistency rules:
-      - cb = cbly + sum of ayd-properties
-      Minor rounding differences up to CHF 0.05 are acceptable.
-    required:
-      - cb
-      - cbly
-    properties:
-      cb:
-        description: Current capital balance.
-        $ref: ./CapitalBalance.yaml
-        examples:
-          - 44000
-      inv:
-        type: number
-        format: double
-        description: Current invested share in percent (%). The remaining percentage (100% minus inv) represents the cash/liquidity balance.
-        examples:
-          - 80.0
-      cbly:
-        $ref: ./CapitalBalance.yaml
-        description: |
-          Capital balance at the end of last year (Dec 31st). 
-          Set to 0.0 if the account was opened or transferred to this provider during the current year.
-        examples:
-          - 42000
   ayd:
     $ref: ./CapitalDevelopment.yaml
     description: Capital development from Jan 1st of the current year to the reference date.
@@ -65,66 +32,6 @@ properties:
         ic: 0
         td: 1800
         tw: 0
-  lyd:
-    $ref: ./CapitalDevelopment.yaml
-    description: Capital development for the full previous calendar year.
-    examples:
-      - cg: 1500
-        fe: -20
-        ic: 50
-        td: 7056
-        tw: 0
-  plg:
-    type: object
-    description: Pledged (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
-    required:
-      - has
-    properties:
-      has:
-        type: boolean
-        description: Pledged (yes/no).
-        examples:
-          - true
-      val:
-        type: number
-        format: double
-        description: Pledged amount.
-        examples:
-          - 20000
-  wef:
-    type: object
-    description: WEF withdrawal (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
-    required:
-      - has
-    properties:
-      has:
-        type: boolean
-        description: WEF withdrawal (yes/no).
-        examples:
-          - true
-      val:
-        type: number
-        format: double
-        description: WEF withdrawal amount.
-        examples:
-          - 50000
-  div:
-    type: object
-    description: Divorce pension equalization withdrawal (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
-    required:
-      - has
-    properties:
-      has:
-        type: boolean
-        description: Divorce pension equalization withdrawal (yes/no).
-        examples:
-          - false
-      val:
-        type: number
-        format: double
-        description: Divorce pension equalization withdrawal amount.
-        examples:
-          - 0
   bch:
     type: object
     description: Beneficiary change (yes/no).
@@ -136,16 +43,6 @@ properties:
         description: Beneficiary change (yes/no).
         examples:
           - false
-  pw:
-    type: boolean
-    description: Premium waiver in case of disability (yes/no).
-    examples:
-      - true
-  pn:
-    type: string
-    description: Product name.
-    examples:
-      - "sparen 3a"
   cp:
     type: object
     description: Contribution potential (indicative, provider-specific view).
@@ -168,9 +65,112 @@ properties:
           Non-binding and without legal effect regarding tax deductibility.
         examples:
           - 8400.00
+  div:
+    type: object
+    description: Divorce pension equalization withdrawal (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
+    required:
+      - has
+    properties:
+      has:
+        type: boolean
+        description: Divorce pension equalization withdrawal (yes/no).
+        examples:
+          - false
+      val:
+        type: number
+        format: double
+        description: Divorce pension equalization withdrawal amount.
+        examples:
+          - 0
+  lyd:
+    $ref: ./CapitalDevelopment.yaml
+    description: Capital development for the full previous calendar year.
+    examples:
+      - cg: 1500
+        fe: -20
+        ic: 50
+        td: 7056
+        tw: 0
+  pi:
+    $ref: ./PersonId.yaml
+  plg:
+    type: object
+    description: Pledged (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
+    required:
+      - has
+    properties:
+      has:
+        type: boolean
+        description: Pledged (yes/no).
+        examples:
+          - true
+      val:
+        type: number
+        format: double
+        description: Pledged amount.
+        examples:
+          - 20000
+  pn:
+    type: string
+    description: Product name.
+    examples:
+      - "sparen 3a"
+  ppn:
+    $ref: ./ProviderName.yaml
+  pw:
+    type: boolean
+    description: Premium waiver in case of disability (yes/no).
+    examples:
+      - true
+  rc:
+    type: object
+    description: |
+      Retirement capital properties.
+      Consistency rules:
+      - cb = cbly + sum of ayd-properties
+      Minor rounding differences up to CHF 0.05 are acceptable.
+    required:
+      - cb
+      - cbly
+    properties:
+      cb:
+        description: Current capital balance.
+        $ref: ./CapitalBalance.yaml
+        examples:
+          - 44000
+      cbly:
+        $ref: ./CapitalBalance.yaml
+        description: |
+          Capital balance at the end of last year (Dec 31st). 
+          Set to 0.0 if the account was opened or transferred to this provider during the current year.
+        examples:
+          - 42000
+      inv:
+        type: number
+        format: double
+        description: Current invested share in percent (%). The remaining percentage (100% minus inv) represents the cash/liquidity balance.
+        examples:
+          - 80.0
   rd:
     $ref: ./generic/Date.yaml
     description: Reference date of 3a account statement.
   ts:
     $ref: ./generic/DateTime.yaml
     description: Date and time of generation of the 3a account statement.
+  wef:
+    type: object
+    description: WEF withdrawal (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
+    required:
+      - has
+    properties:
+      has:
+        type: boolean
+        description: WEF withdrawal (yes/no).
+        examples:
+          - true
+      val:
+        type: number
+        format: double
+        description: WEF withdrawal amount.
+        examples:
+          - 50000

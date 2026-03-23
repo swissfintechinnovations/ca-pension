@@ -5,26 +5,112 @@ description: |
 type: object
 required:
   - ai
+  - ayd
+  - bch
+  - div
+  - hoaw
+  - lyd
+  - p3y
   - pi
+  - plg
+  - pn
   - ppn
   - rc
-  - ayd
-  - lyd
-  - plg
-  - wef
-  - div
-  - bch
-  - p3y
-  - pn
-  - hoaw
   - rd
   - ts
+  - wef
 properties:
   ai:
     type: string
     description: Unique Account Identifier. Use IBAN format (ISO 13616) whenever possible. If the product does not have an IBAN, use the policy or contract number.
+  ayd:
+    $ref: ./CapitalDevelopment.yaml
+    description: Capital development from Jan 1st of the current year to the reference date.
+    examples:
+      - cg: 570
+        fe: -20
+        ic: 50
+        td: 2500
+        tw: 0
+  bch:
+    type: object
+    description: Beneficiary change (yes/no).
+    required:
+      - has
+    properties:
+      has:
+        type: boolean
+        description: Beneficiary change (yes/no).
+        examples:
+          - false
+  div:
+    type: object
+    description: Divorce pension equalization withdrawal (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
+    required:
+      - has
+    properties:
+      has:
+        type: boolean
+        description: Divorce pension equalization withdrawal (yes/no).
+        examples:
+          - false
+      val:
+        type: number
+        format: double
+        description: Divorce pension equalization withdrawal amount.
+        examples:
+          - 0
+  hoaw:
+    $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
+    description: Home ownership available for withdrawal.
+  lyd:
+    $ref: ./CapitalDevelopment.yaml
+    description: Capital development for the full previous calendar year.
+    examples:
+      - cg: 1500
+        fe: -20
+        ic: 120
+        td: 7000
+        tw: 0
+  p3y:
+    type: object
+    description: Purchase activity within the last 3 years.
+    required:
+      - s
+    properties:
+      s:
+        type: number
+        format: double
+        description: Cumulative purchase amount within the last 3 years. Use 0 if no purchases were made.
+        examples:
+          - 15000
+      d:
+        $ref: ./generic/Date.yaml
+        description: Date of the most recent purchase within the last 3 years. May be omitted when s is 0.
   pi:
     $ref: ./PersonId.yaml
+  plg:
+    type: object
+    description: Pledged (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
+    required:
+      - has
+    properties:
+      has:
+        type: boolean
+        description: Pledged (yes/no).
+        examples:
+          - true
+      val:
+        type: number
+        format: double
+        description: Pledged amount.
+        examples:
+          - 20000
+  pn:
+    type: string
+    description: Product name.
+    examples:
+      - "vested benefits account"
   ppn:
     $ref: ./ProviderName.yaml
   rc:
@@ -43,6 +129,13 @@ properties:
         $ref: ./CapitalBalance.yaml
         examples:
           - 110000
+      cbly:
+        $ref: ./CapitalBalance.yaml
+        description: |
+          Capital balance at the end of last year (Dec 31st). 
+          Set to 0.0 if the account was opened or transferred to this provider during the current year.
+        examples:
+          - 106900
       bvg:
         type: number
         format: double
@@ -55,48 +148,12 @@ properties:
         description: Current invested share in percent (%). The remaining percentage (100% minus inv) represents the cash/liquidity balance.
         examples:
           - 80.0
-      cbly:
-        $ref: ./CapitalBalance.yaml
-        description: |
-          Capital balance at the end of last year (Dec 31st). 
-          Set to 0.0 if the account was opened or transferred to this provider during the current year.
-        examples:
-          - 106900
-  ayd:
-    $ref: ./CapitalDevelopment.yaml
-    description: Capital development from Jan 1st of the current year to the reference date.
-    examples:
-      - cg: 570
-        fe: -20
-        ic: 50
-        td: 2500
-        tw: 0
-  lyd:
-    $ref: ./CapitalDevelopment.yaml
-    description: Capital development for the full previous calendar year.
-    examples:
-      - cg: 1500
-        fe: -20
-        ic: 120
-        td: 7000
-        tw: 0
-  plg:
-    type: object
-    description: Pledged (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
-    required:
-      - has
-    properties:
-      has:
-        type: boolean
-        description: Pledged (yes/no).
-        examples:
-          - true
-      val:
-        type: number
-        format: double
-        description: Pledged amount.
-        examples:
-          - 20000
+  rd:
+    $ref: ./generic/Date.yaml
+    description: Reference date of vested benefit statement.
+  ts:
+    $ref: ./generic/DateTime.yaml
+    description: Date and time of generation of the VestedBenefitStatement.
   wef:
     type: object
     description: WEF withdrawal (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
@@ -114,60 +171,3 @@ properties:
         description: WEF withdrawal amount.
         examples:
           - 50000
-  div:
-    type: object
-    description: Divorce pension equalization withdrawal (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
-    required:
-      - has
-    properties:
-      has:
-        type: boolean
-        description: Divorce pension equalization withdrawal (yes/no).
-        examples:
-          - false
-      val:
-        type: number
-        format: double
-        description: Divorce pension equalization withdrawal amount.
-        examples:
-          - 0
-  bch:
-    type: object
-    description: Beneficiary change (yes/no).
-    required:
-      - has
-    properties:
-      has:
-        type: boolean
-        description: Beneficiary change (yes/no).
-        examples:
-          - false
-  p3y:
-    type: object
-    description: Purchase activity within the last 3 years.
-    required:
-      - s
-    properties:
-      s:
-        type: number
-        format: double
-        description: Cumulative purchase amount within the last 3 years. Use 0 if no purchases were made.
-        examples:
-          - 15000
-      d:
-        $ref: ./generic/Date.yaml
-        description: Date of the most recent purchase within the last 3 years. May be omitted when s is 0.
-  pn:
-    type: string
-    description: Product name.
-    examples:
-      - "vested benefits account"
-  hoaw:
-    $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
-    description: Home ownership available for withdrawal.
-  rd:
-    $ref: ./generic/Date.yaml
-    description: Reference date of vested benefit statement.
-  ts:
-    $ref: ./generic/DateTime.yaml
-    description: Date and time of generation of the VestedBenefitStatement.
