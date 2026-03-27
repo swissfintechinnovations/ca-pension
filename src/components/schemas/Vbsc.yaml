@@ -23,6 +23,12 @@ properties:
   ayd:
     $ref: ./CapitalDevelopment.yaml
     description: Capital development from Jan 1st of the current year to the reference date.
+    required:
+      - cg
+      - fe
+      - ic
+      - td
+      - tw
     examples:
       - cg: 570
         fe: -20
@@ -52,6 +58,12 @@ properties:
   lyd:
     $ref: ./CapitalDevelopment.yaml
     description: Capital development for the full previous calendar year.
+    required:
+      - cg
+      - fe
+      - ic
+      - td
+      - tw
     examples:
       - cg: 1500
         fe: -20
@@ -107,7 +119,6 @@ properties:
     required:
       - cb
       - cbly
-      - bvg
       - inv
     properties:
       cb:
