@@ -18,6 +18,8 @@ properties:
   ai:
     type: string
     description: Unique Account Identifier. Use IBAN format (ISO 13616) whenever possible. If the product does not have an IBAN, use the policy or contract number.
+    examples:
+      - 'CH9300762011623852957'
   ayd:
     $ref: ./CapitalDevelopment.yaml
     description: Capital development from Jan 1st of the current year to the reference date.
