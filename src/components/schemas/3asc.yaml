@@ -6,19 +6,14 @@ type: object
 required:
   - ai
   - ayd
-  - bch
   - cp
-  - div
   - lyd
   - pi
-  - plg
   - pn
   - ppn
-  - pw
   - rc
   - rd
   - ts
-  - wef
 properties:
   ai:
     type: string
@@ -34,15 +29,9 @@ properties:
         tw: 0
   bch:
     type: object
-    description: Beneficiary change (yes/no).
-    required:
-      - has
-    properties:
-      has:
-        type: boolean
-        description: Beneficiary change (yes/no).
-        examples:
-          - false
+    description: Presence of this object indicates a beneficiary change. 
+    examples:
+      - {}
   cp:
     type: object
     description: Contribution potential (indicative, provider-specific view).
@@ -55,7 +44,7 @@ properties:
           Calculated as the applicable annual cap minus deposits already made at THIS provider. 
           No guarantee of total tax deductibility if other 3a accounts exist.
         examples: 
-        - 2500.00
+          - 2500.00
       ret:
         type: number
         format: double
@@ -67,21 +56,16 @@ properties:
           - 8400.00
   div:
     type: object
-    description: Divorce pension equalization withdrawal (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
+    description: Presence of this object indicates a divorce pension equalization withdrawal.
     required:
-      - has
+      - val 
     properties:
-      has:
-        type: boolean
-        description: Divorce pension equalization withdrawal (yes/no).
-        examples:
-          - false
       val:
         type: number
         format: double
         description: Divorce pension equalization withdrawal amount.
         examples:
-          - 0
+          - 10000
   lyd:
     $ref: ./CapitalDevelopment.yaml
     description: Capital development for the full previous calendar year.
@@ -95,15 +79,10 @@ properties:
     $ref: ./PersonId.yaml
   plg:
     type: object
-    description: Pledged (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
+    description: Presence of this object indicates a pledged capital.
     required:
-      - has
+      - val
     properties:
-      has:
-        type: boolean
-        description: Pledged (yes/no).
-        examples:
-          - true
       val:
         type: number
         format: double
@@ -118,10 +97,10 @@ properties:
   ppn:
     $ref: ./ProviderName.yaml
   pw:
-    type: boolean
-    description: Premium waiver in case of disability (yes/no).
+    type: object
+    description: Presence of this object indicates a premium waiver in case of disability.
     examples:
-      - true
+      - {}
   rc:
     type: object
     description: |
@@ -132,6 +111,7 @@ properties:
     required:
       - cb
       - cbly
+      - inv
     properties:
       cb:
         description: Current capital balance.
@@ -159,15 +139,10 @@ properties:
     description: Date and time of generation of the 3a account statement.
   wef:
     type: object
-    description: WEF withdrawal (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
+    description: Presence of this object indicates a WEF withdrawal.
     required:
-      - has
+      - val
     properties:
-      has:
-        type: boolean
-        description: WEF withdrawal (yes/no).
-        examples:
-          - true
       val:
         type: number
         format: double

@@ -6,19 +6,14 @@ type: object
 required:
   - ai
   - ayd
-  - bch
-  - div
   - hoaw
   - lyd
-  - p3y
   - pi
-  - plg
   - pn
   - ppn
   - rc
   - rd
   - ts
-  - wef
 properties:
   ai:
     type: string
@@ -34,32 +29,21 @@ properties:
         tw: 0
   bch:
     type: object
-    description: Beneficiary change (yes/no).
-    required:
-      - has
-    properties:
-      has:
-        type: boolean
-        description: Beneficiary change (yes/no).
-        examples:
-          - false
+    description: Presence of this object indicates a beneficiary change.
+    examples:
+      - {}
   div:
     type: object
-    description: Divorce pension equalization withdrawal (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
+    description: Presence of this object indicates a divorce pension equalization withdrawal.
     required:
-      - has
+      - val
     properties:
-      has:
-        type: boolean
-        description: Divorce pension equalization withdrawal (yes/no).
-        examples:
-          - false
       val:
         type: number
         format: double
         description: Divorce pension equalization withdrawal amount.
         examples:
-          - 0
+          - 10000
   hoaw:
     $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
     description: Home ownership available for withdrawal.
@@ -74,32 +58,30 @@ properties:
         tw: 0
   p3y:
     type: object
-    description: Purchase activity within the last 3 years.
+    description: Presence of this object indicates a purchase activity within the last 3 years.
     required:
       - s
+      - d
     properties:
       s:
         type: number
         format: double
-        description: Cumulative purchase amount within the last 3 years. Use 0 if no purchases were made.
+        description: Cumulative purchase amount within the last 3 years.
         examples:
           - 15000
       d:
         $ref: ./generic/Date.yaml
-        description: Date of the most recent purchase within the last 3 years. May be omitted when s is 0.
+        description: Date of the most recent purchase within the last 3 years.
+        examples:
+          - '2018-04-13'
   pi:
     $ref: ./PersonId.yaml
   plg:
     type: object
-    description: Pledged (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
+    description: Presence of this object indicates a pledged capital.
     required:
-      - has
+      - val
     properties:
-      has:
-        type: boolean
-        description: Pledged (yes/no).
-        examples:
-          - true
       val:
         type: number
         format: double
@@ -123,6 +105,8 @@ properties:
     required:
       - cb
       - cbly
+      - bvg
+      - inv
     properties:
       cb:
         description: Current capital balance.
@@ -156,15 +140,10 @@ properties:
     description: Date and time of generation of the VestedBenefitStatement.
   wef:
     type: object
-    description: WEF withdrawal (yes/no). If has is true, val must be provided. If has is false, val must be omitted.
+    description: Presence of this object indicates a WEF withdrawal.
     required:
-      - has
+      - val
     properties:
-      has:
-        type: boolean
-        description: WEF withdrawal (yes/no).
-        examples:
-          - true
       val:
         type: number
         format: double
