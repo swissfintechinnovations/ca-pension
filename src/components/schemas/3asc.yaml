@@ -36,10 +36,15 @@ properties:
         td: 1800
         tw: 0
   bch:
-    type: object
-    description: Presence of this object indicates a beneficiary change. 
+    type: boolean
+    description: |
+      Indicates whether a beneficiary change occurred.
+      true = there was a beneficiary change.
+      false = there was no beneficiary change.
+      Presence of this field confirms the status is known; omission indicates the status is unknown.
     examples:
-      - {}
+      - true
+      - false
   cp:
     type: object
     description: Contribution potential (indicative, provider-specific view).
@@ -65,17 +70,13 @@ properties:
         examples:
           - 8400.00
   div:
-    type: object
-    description: Presence of this object indicates a divorce pension equalization withdrawal.
-    required:
-      - val 
-    properties:
-      val:
-        type: number
-        format: double
-        description: Divorce pension equalization withdrawal amount.
-        examples:
-          - 10000
+    type: number
+    format: double
+    description: |
+      The amount withdrawn for pension equalization following a divorce.
+      Presence of this field confirms a withdrawal occurred; omission indicates the status or amount is unknown.
+    examples:
+      - 10000
   lyd:
     $ref: ./CapitalDevelopment.yaml
     description: Capital development for the full previous calendar year.
@@ -94,17 +95,13 @@ properties:
   pi:
     $ref: ./PersonId.yaml
   plg:
-    type: object
-    description: Presence of this object indicates a pledged capital.
-    required:
-      - val
-    properties:
-      val:
-        type: number
-        format: double
-        description: Pledged amount.
-        examples:
-          - 20000
+    type: number
+    format: double
+    description: |
+      The amount of pledged capital.
+      Presence of this field confirms pledged capital information is known; omission indicates the status or amount is unknown.
+    examples:
+      - 20000
   pn:
     type: string
     description: Product name.
@@ -113,10 +110,15 @@ properties:
   ppn:
     $ref: ./ProviderName.yaml
   pw:
-    type: object
-    description: Presence of this object indicates a premium waiver in case of disability.
+    type: boolean
+    description: |
+      Indicates whether a premium waiver in case of disability applies.
+      true = a premium waiver applies.
+      false = no premium waiver applies.
+      Presence of this field confirms the status is known; omission indicates the status is unknown.
     examples:
-      - {}
+      - true
+      - false
   rc:
     type: object
     description: |
@@ -154,14 +156,10 @@ properties:
     $ref: ./generic/DateTime.yaml
     description: Date and time of generation of the 3a account statement.
   wef:
-    type: object
-    description: Presence of this object indicates a WEF withdrawal.
-    required:
-      - val
-    properties:
-      val:
-        type: number
-        format: double
-        description: WEF withdrawal amount.
-        examples:
-          - 50000
+    type: number
+    format: double
+    description: |
+      The amount withdrawn for home ownership financing (WEF).
+      Presence of this field confirms a withdrawal occurred; omission indicates the status or amount is unknown.
+    examples:
+      - 50000
