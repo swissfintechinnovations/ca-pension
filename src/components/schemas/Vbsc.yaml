@@ -58,7 +58,7 @@ properties:
     description: Home ownership available for withdrawal.
   lyd:
     $ref: ./CapitalDevelopment.yaml
-    description: Capital development for the full previous calendar year.
+    description: Capital development for the full previous calendar year. When not available set all values to 0.
     required:
       - cg
       - fe
