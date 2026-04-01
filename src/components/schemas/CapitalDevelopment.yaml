@@ -19,13 +19,13 @@ properties:
     description: Total interest credits for the period.
     examples:
       - 2000
-  td:
+  de:
     type: number
     format: double
     description: Total deposits or inflows for the period.
     examples:
       - 5000
-  tw:
+  wi:
     type: number
     format: double
     description: Total withdrawals or outflows for the period, e.g. for home ownership (WEF) or divorce settlements. Must be provided as a negative value.

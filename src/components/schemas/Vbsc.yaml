@@ -7,7 +7,7 @@ required:
   - ai
   - ayd
   - hoaw
-  - lyd
+  - pyd
   - pi
   - pn
   - ppn
@@ -27,14 +27,14 @@ properties:
       - cg
       - fe
       - ic
-      - td
-      - tw
+      - de
+      - wi
     examples:
       - cg: 570
         fe: -20
         ic: 50
-        td: 2500
-        tw: 0
+        de: 2500
+        wi: 0
   bch:
     type: boolean
     description: |
@@ -56,26 +56,26 @@ properties:
       - 10000
   hoaw:
     $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
-    description: Home ownership available for withdrawal.
-  lyd:
+    description: Amount available for withdrawal for home ownership.
+  pyd:
     $ref: ./CapitalDevelopment.yaml
     description: Capital development for the full previous calendar year. When not available set all values to 0.
     required:
       - cg
       - fe
       - ic
-      - td
-      - tw
+      - de
+      - wi
     examples:
       - cg: 1500
         fe: -20
         ic: 120
-        td: 7000
-        tw: 0
+        de: 7000
+        wi: 0
   p3y:
     type: object
     description: |
-      If this field is present, purchase activity information for the last 3 years is known.
+      If this field is present, then there is known purchase activity information for the last 3 years.
       Based solely on information available to this provider.
       If it is missing, this information is unknown.
     required:
@@ -120,11 +120,11 @@ properties:
     description: |
       Retirement capital balances.
       Consistency rules:
-      - cb = cbly + sum of ayd-properties
+      - cb = cbpy + sum of ayd-properties
       Minor rounding differences up to CHF 0.05 are acceptable.
     required:
       - cb
-      - cbly
+      - cbpy
       - inv
     properties:
       cb:
@@ -132,10 +132,10 @@ properties:
         $ref: ./CapitalBalance.yaml
         examples:
           - 110000
-      cbly:
+      cbpy:
         $ref: ./CapitalBalance.yaml
         description: |
-          Capital balance at the end of last year (Dec 31st). 
+          Capital balance at the end of the previous year (Dec 31st). 
           Set to 0.0 if the account was opened or transferred to this provider during the current year.
         examples:
           - 106900

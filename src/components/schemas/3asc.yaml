@@ -7,7 +7,7 @@ required:
   - ai
   - ayd
   - cp
-  - lyd
+  - pyd
   - pi
   - pn
   - ppn
@@ -27,14 +27,14 @@ properties:
       - cg
       - fe
       - ic
-      - td
-      - tw
+      - de
+      - wi
     examples:
       - cg: 200
         fe: 0
         ic: 0
-        td: 1800
-        tw: 0
+        de: 1800
+        wi: 0
   bch:
     type: boolean
     description: |
@@ -79,21 +79,21 @@ properties:
       Omission indicates that the status or amount is unknown.
     examples:
       - 10000
-  lyd:
+  pyd:
     $ref: ./CapitalDevelopment.yaml
     description: Capital development for the full previous calendar year. When not available set all values to 0.
     required:
       - cg
       - fe
       - ic
-      - td
-      - tw
+      - de
+      - wi
     examples:
       - cg: 1500
         fe: -20
         ic: 50
-        td: 7056
-        tw: 0
+        de: 7056
+        wi: 0
   pi:
     $ref: ./PersonId.yaml
   plg:
@@ -128,11 +128,11 @@ properties:
     description: |
       Retirement capital properties.
       Consistency rules:
-      - cb = cbly + sum of ayd-properties
+      - cb = cbpy + sum of ayd-properties
       Minor rounding differences up to CHF 0.05 are acceptable.
     required:
       - cb
-      - cbly
+      - cbpy
       - inv
     properties:
       cb:
@@ -140,10 +140,10 @@ properties:
         $ref: ./CapitalBalance.yaml
         examples:
           - 44000
-      cbly:
+      cbpy:
         $ref: ./CapitalBalance.yaml
         description: |
-          Capital balance at the end of last year (Dec 31st). 
+          Capital balance at the end of the previous year (Dec 31st). 
           Set to 0.0 if the account was opened or transferred to this provider during the current year.
         examples:
           - 42000
