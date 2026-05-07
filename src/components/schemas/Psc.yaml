@@ -2,6 +2,7 @@ description: |
   Psc = pension statement compact, is a reduced pension statement consisting of only the most important pension statement information.
 type: object
 required:
+  - bym
   - en
   - era
   - hoaw
@@ -16,6 +17,12 @@ required:
   - sd
   - ts
 properties:
+  bym:
+    type: string
+    description: Year and month of birth (Format YYYY-MM).
+    pattern: '^[0-9]{4}-(0[1-9]|1[0-2])$'
+    examples:
+      - "1985-05"    
   en:
     $ref: ./EmployerName.yaml
   era:
@@ -85,7 +92,7 @@ properties:
         type: array
         description: |
           Projected retirement benefits for selected retirement ages. The list contains projections for the earliest possible retirement age, 
-          the regular retirement age, and the latest possible retirement age. If the insured person has already reached or exceeded the earliest possible retirement age, 
+          the regular retirement age, and the latest possible retirement age. If the insured person has already exceeded the earliest possible retirement age, 
           the projection for the earliest possible retirement age is replaced by a projection for the earliest remaining retirement age above the person’s current age. 
           In all cases, the projections for the regular and the latest possible retirement age are included, provided they are higher than the current age.
         items:
@@ -129,3 +136,9 @@ properties:
   ts:
     $ref: ./generic/DateTime.yaml
     description: Date and time of generation of the PensionStatement.
+  ei:
+    $ref: ./EmployerId.yaml
+    description: Swiss Enterprise Identification Number UID of the employer.
+  ppi:
+    $ref: ./ProviderId.yaml
+    description: Swiss Enterprise Identification Number UID of the pension provider.
