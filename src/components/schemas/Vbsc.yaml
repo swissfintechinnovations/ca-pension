@@ -8,7 +8,6 @@ required:
   - ayd
   - hoaw
   - pyd
-  - pi
   - pn
   - ppn
   - rc
@@ -97,8 +96,6 @@ properties:
           Omit this field if no purchase occurred within the last 3 years.
         examples:
           - '2025-04-13'
-  pi:
-    $ref: ./PersonId.yaml
   plg:
     type: number
     format: double

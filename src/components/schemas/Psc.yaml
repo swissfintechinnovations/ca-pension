@@ -6,7 +6,6 @@ required:
   - era
   - hoaw
   - ora
-  - pi
   - ppl
   - ppn
   - pst
@@ -33,8 +32,6 @@ properties:
     description: Age (in month since birth) for ordinary retirement.
     examples:
       - 780
-  pi:
-    $ref: ./PersonId.yaml
   ppl:
     type: object
     description: |

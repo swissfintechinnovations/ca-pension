@@ -8,7 +8,6 @@ required:
   - ayd
   - cp
   - pyd
-  - pi
   - pn
   - ppn
   - rc
@@ -94,8 +93,6 @@ properties:
         ic: 50
         de: 7056
         wi: 0
-  pi:
-    $ref: ./PersonId.yaml
   plg:
     type: number
     format: double
