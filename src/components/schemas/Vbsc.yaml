@@ -5,11 +5,11 @@ description: |
 type: object
 required:
   - ai
-  - ayd
+  - cyd
   - hoaw
-  - pyd
   - pn
   - ppn
+  - pyd
   - rc
   - rd
   - ts
@@ -19,9 +19,28 @@ properties:
     description: Unique Account Identifier. Use IBAN format (ISO 13616) whenever possible. If the product does not have an IBAN, use the policy or contract number.
     examples:
       - 'CH9300762011623852957'
-  ayd:
+  cyd:
     $ref: ./CapitalDevelopment.yaml
     description: Capital development from Jan 1st of the current year to the reference date.
+    examples:
+      - cg: 570
+        fe: -20
+        ic: 50
+        de: 2500
+        wi: 0
+  hoaw:
+    $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
+    description: Amount available for withdrawal for home ownership.
+  pn:
+    type: string
+    description: Product name.
+    examples:
+      - "vested benefits account"
+  ppn:
+    $ref: ./ProviderName.yaml
+  pyd:
+    $ref: ./CapitalDevelopment.yaml
+    description: Capital development for the full previous calendar year. When not available set all values to 0.
     required:
       - cg
       - fe
@@ -29,11 +48,53 @@ properties:
       - de
       - wi
     examples:
-      - cg: 570
+      - cg: 1500
         fe: -20
-        ic: 50
-        de: 2500
+        ic: 120
+        de: 7000
         wi: 0
+  rc:
+    type: object
+    description: |
+      Retirement capital balances.
+      Consistency rules:
+      - cb = cbpy + sum of cyd-properties
+      Minor rounding differences up to CHF 0.05 are acceptable.
+    required:
+      - cb
+      - cbpy
+      - inv
+    properties:
+      cb:
+        description: Current capital balance.
+        $ref: ./CapitalBalance.yaml
+        examples:
+          - 110000
+      cbpy:
+        $ref: ./CapitalBalance.yaml
+        description: |
+          Capital balance at the end of the previous year (Dec 31st). 
+          Set to 0.0 if the account was opened or transferred to this provider during the current year.
+        examples:
+          - 106900
+      bvg:
+        type: number
+        format: double
+        description: BVG share as an absolute amount.
+        examples:
+          - 71500
+      inv:
+        type: number
+        format: double
+        description: Current invested share as an absolute amount. The remaining amount (cb minus inv) represents the cash/liquidity balance.
+        examples:
+          - 85520
+  rd:
+    $ref: ./generic/Date.yaml
+    description: Reference date of vested benefit statement.
+  ts:
+    $ref: ./generic/DateTime.yaml
+    description: Date and time of generation of the VestedBenefitStatement.
   bch:
     type: boolean
     description: |
@@ -53,24 +114,6 @@ properties:
       Omission indicates that the status or amount is unknown.
     examples:
       - 10000
-  hoaw:
-    $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
-    description: Amount available for withdrawal for home ownership.
-  pyd:
-    $ref: ./CapitalDevelopment.yaml
-    description: Capital development for the full previous calendar year. When not available set all values to 0.
-    required:
-      - cg
-      - fe
-      - ic
-      - de
-      - wi
-    examples:
-      - cg: 1500
-        fe: -20
-        ic: 120
-        de: 7000
-        wi: 0
   p3y:
     type: object
     description: |
@@ -100,65 +143,16 @@ properties:
     type: number
     format: double
     description: |
-      The amount of pledged capital.
+      The amount of currently pledged capital.
       Presence of this field confirms that the status and amount are known. Set to 0 if no pledged capital exists.
       Omission indicates that the status or amount is unknown.
     examples:
       - 20000
-  pn:
-    type: string
-    description: Product name.
-    examples:
-      - "vested benefits account"
-  ppn:
-    $ref: ./ProviderName.yaml
-  rc:
-    type: object
-    description: |
-      Retirement capital balances.
-      Consistency rules:
-      - cb = cbpy + sum of ayd-properties
-      Minor rounding differences up to CHF 0.05 are acceptable.
-    required:
-      - cb
-      - cbpy
-      - inv
-    properties:
-      cb:
-        description: Current capital balance.
-        $ref: ./CapitalBalance.yaml
-        examples:
-          - 110000
-      cbpy:
-        $ref: ./CapitalBalance.yaml
-        description: |
-          Capital balance at the end of the previous year (Dec 31st). 
-          Set to 0.0 if the account was opened or transferred to this provider during the current year.
-        examples:
-          - 106900
-      bvg:
-        type: number
-        format: double
-        description: BVG share as an absolute amount.
-        examples:
-          - 71500
-      inv:
-        type: number
-        format: double
-        description: Current invested share in percent (%). The remaining percentage (100% minus inv) represents the cash/liquidity balance.
-        examples:
-          - 80.0
-  rd:
-    $ref: ./generic/Date.yaml
-    description: Reference date of vested benefit statement.
-  ts:
-    $ref: ./generic/DateTime.yaml
-    description: Date and time of generation of the VestedBenefitStatement.
   wef:
     type: number
     format: double
     description: |
-      The amount withdrawn for home ownership financing (WEF).
+      The cumulative net amount withdrawn for home ownership financing (WEF).
       Presence of this field confirms that the status and amount are known. Set to 0 if no withdrawal occurred.
       Omission indicates that the status or amount is unknown.
     examples:

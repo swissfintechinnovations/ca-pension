@@ -5,11 +5,11 @@ description: |
 type: object
 required:
   - ai
-  - ayd
   - cp
-  - pyd
+  - cyd
   - pn
   - ppn
+  - pyd
   - rc
   - rd
   - ts
@@ -19,31 +19,6 @@ properties:
     description: Unique Account Identifier. Use IBAN format (ISO 13616) whenever possible. If the product does not have an IBAN, use the policy or contract number.
     examples:
       - 'CH9300762011623852957'
-  ayd:
-    $ref: ./CapitalDevelopment.yaml
-    description: Capital development from Jan 1st of the current year to the reference date.
-    required:
-      - cg
-      - fe
-      - ic
-      - de
-      - wi
-    examples:
-      - cg: 200
-        fe: 0
-        ic: 0
-        de: 1800
-        wi: 0
-  bch:
-    type: boolean
-    description: |
-      Indicates whether a beneficiary change occurred.
-      true = there was a beneficiary change.
-      false = there was no beneficiary change.
-      Presence of this field confirms the status is known; omission indicates the status is unknown.
-    examples:
-      - true
-      - false
   cp:
     type: object
     description: Contribution potential (indicative, provider-specific view).
@@ -69,15 +44,22 @@ properties:
           Omission of this field indicates the amount is unknown.
         examples:
           - 8400.00
-  div:
-    type: number
-    format: double
-    description: |
-      The amount withdrawn for pension equalization following a divorce.
-      Presence of this field confirms that the status and amount are known. Set to 0 if no withdrawal occurred.
-      Omission indicates that the status or amount is unknown.
+  cyd:
+    $ref: ./CapitalDevelopment.yaml
+    description: Capital development from Jan 1st of the current year to the reference date.
     examples:
-      - 10000
+      - cg: 200
+        fe: 0
+        ic: 0
+        de: 1800
+        wi: 0
+  pn:
+    type: string
+    description: Product name.
+    examples:
+      - "sparen 3a"
+  ppn:
+    $ref: ./ProviderName.yaml
   pyd:
     $ref: ./CapitalDevelopment.yaml
     description: Capital development for the full previous calendar year. When not available set all values to 0.
@@ -93,39 +75,12 @@ properties:
         ic: 50
         de: 7056
         wi: 0
-  plg:
-    type: number
-    format: double
-    description: |
-      The amount of pledged capital.
-      Presence of this field confirms that the status and amount are known. Set to 0 if no pledged capital exists.
-      Omission indicates that the status or amount is unknown.
-    examples:
-      - 20000
-  pn:
-    type: string
-    description: Product name.
-    examples:
-      - "sparen 3a"
-  ppn:
-    $ref: ./ProviderName.yaml
-  pw:
-    type: boolean
-    description: |
-      Indicates whether a premium waiver in case of disability applies.
-      true = a premium waiver applies.
-      false = no premium waiver applies.
-      Presence of this field confirms the status is known.
-      Omission indicates the status is unknown.
-    examples:
-      - true
-      - false
   rc:
     type: object
     description: |
       Retirement capital properties.
       Consistency rules:
-      - cb = cbpy + sum of ayd-properties
+      - cb = cbpy + sum of cyd-properties
       Minor rounding differences up to CHF 0.05 are acceptable.
     required:
       - cb
@@ -147,20 +102,59 @@ properties:
       inv:
         type: number
         format: double
-        description: Current invested share in percent (%). The remaining percentage (100% minus inv) represents the cash/liquidity balance.
+        description: Current invested share as an absolute amount. The remaining amount (cb minus inv) represents the cash/liquidity balance.
         examples:
-          - 80.0
+          - 85520
   rd:
     $ref: ./generic/Date.yaml
     description: Reference date of 3a account statement.
   ts:
     $ref: ./generic/DateTime.yaml
     description: Date and time of generation of the 3a account statement.
+  bch:
+    type: boolean
+    description: |
+      Indicates whether a beneficiary change occurred.
+      true = there was a beneficiary change.
+      false = there was no beneficiary change.
+      Presence of this field confirms the status is known; omission indicates the status is unknown.
+    examples:
+      - true
+      - false
+  div:
+    type: number
+    format: double
+    description: |
+      The amount withdrawn for pension equalization following a divorce.
+      Presence of this field confirms that the status and amount are known. Set to 0 if no withdrawal occurred.
+      Omission indicates that the status or amount is unknown.
+    examples:
+      - 10000
+  plg:
+    type: number
+    format: double
+    description: |
+      The amount of currently pledged capital.
+      Presence of this field confirms that the status and amount are known. Set to 0 if no pledged capital exists.
+      Omission indicates that the status or amount is unknown.
+    examples:
+      - 20000
+  pw:
+    type: boolean
+    description: |
+      Indicates whether a premium waiver in case of disability applies.
+      true = a premium waiver applies.
+      false = no premium waiver applies.
+      Presence of this field confirms the status is known.
+      Omission indicates the status is unknown.
+    examples:
+      - true
+      - false
   wef:
     type: number
     format: double
     description: |
-      The amount withdrawn for home ownership financing (WEF).
+      The cumulative net amount withdrawn for home ownership financing (WEF).
       Presence of this field confirms that the status and amount are known. Set to 0 if no withdrawal occurred.
       Omission indicates that the status or amount is unknown.
     examples:
