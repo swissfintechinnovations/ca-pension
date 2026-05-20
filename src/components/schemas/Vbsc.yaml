@@ -5,7 +5,6 @@ description: |
 type: object
 required:
   - ai
-  - cyd
   - hoaw
   - pn
   - ppn
@@ -19,15 +18,6 @@ properties:
     description: Unique Account Identifier. Use IBAN format (ISO 13616) whenever possible. If the product does not have an IBAN, use the policy or contract number.
     examples:
       - 'CH9300762011623852957'
-  cyd:
-    $ref: ./CapitalDevelopment.yaml
-    description: Capital development from Jan 1st of the current year to the reference date.
-    examples:
-      - cg: 570
-        fe: -20
-        ic: 50
-        de: 2500
-        wi: 0
   hoaw:
     $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
     description: Amount available for withdrawal for home ownership.
@@ -105,6 +95,21 @@ properties:
     examples:
       - true
       - false
+  cyd:
+    $ref: ./CapitalDevelopment.yaml
+    description: Capital development from Jan 1st of the current year to the reference date.
+    required:
+      - cg
+      - fe
+      - ic
+      - de
+      - wi
+    examples:
+      - cg: 570
+        fe: -20
+        ic: 50
+        de: 2500
+        wi: 0
   div:
     type: number
     format: double

@@ -6,7 +6,6 @@ type: object
 required:
   - ai
   - cp
-  - cyd
   - pn
   - ppn
   - pyd
@@ -44,15 +43,6 @@ properties:
           Omission of this field indicates the amount is unknown.
         examples:
           - 8400.00
-  cyd:
-    $ref: ./CapitalDevelopment.yaml
-    description: Capital development from Jan 1st of the current year to the reference date.
-    examples:
-      - cg: 200
-        fe: 0
-        ic: 0
-        de: 1800
-        wi: 0
   pn:
     type: string
     description: Product name.
@@ -121,6 +111,21 @@ properties:
     examples:
       - true
       - false
+  cyd:
+    $ref: ./CapitalDevelopment.yaml
+    description: Capital development from Jan 1st of the current year to the reference date.
+    required:
+      - cg
+      - fe
+      - ic
+      - de
+      - wi
+    examples:
+      - cg: 200
+        fe: 0
+        ic: 0
+        de: 1800
+        wi: 0
   div:
     type: number
     format: double
