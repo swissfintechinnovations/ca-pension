@@ -155,7 +155,7 @@ properties:
     format: double
     description: |
       The cumulative net amount withdrawn for home ownership financing (WEF).
-      Presence of this field confirms that the status and amount are known. Set to 0 if no withdrawal occurred.
-      Omission indicates that the status or amount is unknown.
+      Based solely on information available to this provider, might be incomplete for technical reasons.
+      Set to 0 if no withdrawal occurred. Omission indicates that the status or amount is unknown.
     examples:
       - 50000
