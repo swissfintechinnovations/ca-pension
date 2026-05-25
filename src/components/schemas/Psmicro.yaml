@@ -21,11 +21,7 @@ required:
   - ts
 properties:
   bym:
-    type: string
-    description: Year and month of birth (Format YYYY-MM).
-    pattern: '^[0-9]{4}-(0[1-9]|1[0-2])$'
-    examples:
-      - "1985-05"
+    $ref: ./BirthYearMonth.yaml
   emi:
     $ref: ./EmployerId.yaml
     description: Swiss Enterprise Identification Number UID of the employer.
