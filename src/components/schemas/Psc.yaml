@@ -89,7 +89,7 @@ properties:
         description: |
           Projected retirement benefits for selected retirement ages. The list contains projections for the earliest possible retirement age, 
           the regular retirement age, and the latest possible retirement age. If the insured person has already exceeded the earliest possible retirement age, 
-          the projection for the earliest possible retirement age is replaced by a projection for the earliest remaining retirement age above the person’s current age. 
+          the projection for the earliest possible retirement age is replaced by a projection for the earliest remaining retirement age above the personâ€™s current age. 
           In all cases, the projections for the regular and the latest possible retirement age are included, provided they are higher than the current age.
         items:
           type: object
@@ -133,8 +133,7 @@ properties:
     $ref: ./generic/DateTime.yaml
     description: Date and time of generation of the PensionStatement.
   ei:
-    $ref: ./EmployerId.yaml
-    description: Swiss Enterprise Identification Number UID of the employer.
+    $ref: ./EmployerInternalId.yaml
   ppi:
     $ref: ./ProviderId.yaml
     description: Swiss Enterprise Identification Number UID of the pension provider.

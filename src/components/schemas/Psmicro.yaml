@@ -23,8 +23,7 @@ properties:
   bym:
     $ref: ./BirthYearMonth.yaml
   emi:
-    $ref: ./EmployerId.yaml
-    description: Swiss Enterprise Identification Number UID of the employer.
+    $ref: ./EmployerInternalId.yaml
   era:
     type: integer
     format: int32
