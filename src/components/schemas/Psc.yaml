@@ -3,10 +3,12 @@ description: |
 type: object
 required:
   - bym
+  - ei
   - en
   - era
   - hoaw
   - ora
+  - ppi
   - ppl
   - ppn
   - pst
@@ -19,6 +21,8 @@ required:
 properties:
   bym:
     $ref: ./BirthYearMonth.yaml
+  ei:
+    $ref: ./EmployerInternalId.yaml
   en:
     $ref: ./EmployerName.yaml
   era:
@@ -35,6 +39,9 @@ properties:
     description: Age (in month since birth) for ordinary retirement.
     examples:
       - 780
+  ppi:
+    $ref: ./ProviderId.yaml
+    description: Swiss Enterprise Identification Number UID of the pension provider.
   ppl:
     type: object
     description: |
@@ -132,8 +139,3 @@ properties:
   ts:
     $ref: ./generic/DateTime.yaml
     description: Date and time of generation of the PensionStatement.
-  ei:
-    $ref: ./EmployerInternalId.yaml
-  ppi:
-    $ref: ./ProviderId.yaml
-    description: Swiss Enterprise Identification Number UID of the pension provider.
