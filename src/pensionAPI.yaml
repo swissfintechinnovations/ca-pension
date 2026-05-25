@@ -155,9 +155,24 @@ paths:
     get:
       summary: Retrieve a list of insured persons that are accessible with the presented access token
       description: |
-        This endpoint allows a client to retrieve the person ID(s) of the insured individual(s) for whom a user has granted consent during
-        an OAuth2 authorization flow. The provider, such as a pension provider, must return the insured person(s) linked to the presented
-        access token. Note: The related scope is to be exchanged during consent flow and persisted by the client (see RFC 6749 section 5.1).
+        Returns the list of person identifier(s) (`personId`) that the authenticated user can access via the API.
+
+        A valid OAuth2 access token, obtained through a user consent flow, is required. No specific scope is enforced
+        for this endpoint, but the presence of a valid consent is mandatory.
+
+        The returned list acts as a mapping between the authenticated user (represented by the access token) and the
+        insured persons that are technically accessible through this API. The service provider MUST ensure that
+        only those person IDs are returned which are both:
+
+        1. authorized for the user in the provider’s system, AND
+        2. explicitly permitted for API access under the user’s current consent.
+
+        This prevents exposing additional person IDs that the user might be entitled to in the backend but which are
+        not covered by the API consent agreement.
+
+        In most cases, only a single `personId` will be returned. Multiple person IDs MAY be returned if the user is
+        authorized and has consented to access data for more than one insured person. If no accessible persons remain
+        under the current consent, the endpoint returns an empty list.
       operationId: retrieveInsuredPersons
       tags:
         - person

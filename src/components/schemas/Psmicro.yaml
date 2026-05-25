@@ -1,0 +1,123 @@
+description: |
+  Psmicro = pension statement micro, is a temporary and highly reduced pension statement 
+  containing only key attributes for an anonymous and quick overview.
+  Compared to the Psc schema, employer data, pension provider information, person ID,
+  plan references, home ownership / max purchase information and statement type details are intentionally omitted.
+
+  IMPORTANT: This schema is strictly temporary and not part of the target architecture.
+  In the target state, the PensionStatement or Psc schemas must be used instead.
+  Psmicro can be removed once pension providers support modern secure APIs.
+type: object
+required:
+  - bym
+  - emi
+  - era
+  - ora
+  - pki
+  - rb
+  - rc
+  - rd
+  - sd
+  - ts
+properties:
+  bym:
+    type: string
+    description: Year and month of birth (Format YYYY-MM).
+    pattern: '^[0-9]{4}-(0[1-9]|1[0-2])$'
+    examples:
+      - "1985-05"
+  emi:
+    $ref: ./EmployerId.yaml
+    description: Swiss Enterprise Identification Number UID of the employer.
+  era:
+    type: integer
+    format: int32
+    description: Age (in month since birth) for earliest possible retirement.
+    examples:
+      - 696
+  ora:
+    type: integer
+    format: int32
+    description: Age (in month since birth) for ordinary retirement.
+    examples:
+      - 780
+  pki:
+    $ref: ./ProviderId.yaml
+    description: Swiss Enterprise Identification Number UID of the pension provider.
+  rb:
+    type: object
+    description: Benefits in case of death or disability to work.
+    required:
+      - cpd
+      - mlswpb
+      - opd
+      - pd
+      - ppd
+    properties:
+      cpd:
+        $ref: ./ChildPensionDisability.yaml
+      mlswpb:
+        $ref: ./MinimalLumpSumWithPensionBenefits.yaml
+      opd:
+        $ref: ./OrphanPensionDeath.yaml
+      pd:
+        $ref: ./PensionDisability.yaml
+      ppd:
+        $ref: ./PartnerPensionDeath.yaml
+  rc:
+    type: object
+    description: Retirement capital balances for the past and projections for the future.
+    required:
+      - bmr
+      - brd
+      - prb
+    properties:
+      bmr:
+        $ref: ./BalanceMandatoryReferenceDate.yaml
+      brd:
+        $ref: ./BalanceReferenceDate.yaml
+      prb:
+        type: array
+        description: |
+          Projected retirement benefits for a series of retirement ages. The list contains projections for each integer retirement age from
+          58 to the regular retirement age. For persons of 58 or older, the list is restricted to retirement ages higher than their current
+          age.
+        items:
+          type: object
+          required:
+            - cb
+            - p
+            - ra
+          properties:
+            cb:
+              $ref: ./CapitalBalance.yaml
+            p:
+              $ref: ./Pension.yaml
+            ra:
+              $ref: ./RetirementAge.yaml
+  rd:
+    $ref: ./generic/Date.yaml
+    description: Reference date of pension statement.
+  sd:
+    type: object
+    description: Details of salary relevant for insurance.
+    required:
+      - ds
+      - el
+      - ism
+      - isre
+      - isri
+    properties:
+      ds:
+        $ref: ./DeclaredSalary.yaml
+      el:
+        $ref: ./EmploymentLevel.yaml
+      ism:
+        $ref: ./InsuredSalaryMandatory.yaml
+      isre:
+        $ref: ./InsuredSalaryRetirement.yaml
+      isri:
+        $ref: ./InsuredSalaryRisk.yaml
+  ts:
+    $ref: ./generic/DateTime.yaml
+    description: Date and time of generation of the PensionStatement.

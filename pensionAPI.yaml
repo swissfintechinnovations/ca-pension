@@ -155,9 +155,24 @@ paths:
     get:
       summary: Retrieve a list of insured persons that are accessible with the presented access token
       description: |
-        This endpoint allows a client to retrieve the person ID(s) of the insured individual(s) for whom a user has granted consent during
-        an OAuth2 authorization flow. The provider, such as a pension provider, must return the insured person(s) linked to the presented
-        access token. Note: The related scope is to be exchanged during consent flow and persisted by the client (see RFC 6749 section 5.1).
+        Returns the list of person identifier(s) (`personId`) that the authenticated user can access via the API.
+
+        A valid OAuth2 access token, obtained through a user consent flow, is required. No specific scope is enforced
+        for this endpoint, but the presence of a valid consent is mandatory.
+
+        The returned list acts as a mapping between the authenticated user (represented by the access token) and the
+        insured persons that are technically accessible through this API. The service provider MUST ensure that
+        only those person IDs are returned which are both:
+
+        1. authorized for the user in the provider’s system, AND
+        2. explicitly permitted for API access under the user’s current consent.
+
+        This prevents exposing additional person IDs that the user might be entitled to in the backend but which are
+        not covered by the API consent agreement.
+
+        In most cases, only a single `personId` will be returned. Multiple person IDs MAY be returned if the user is
+        authorized and has consented to access data for more than one insured person. If no accessible persons remain
+        under the current consent, the endpoint returns an empty list.
       operationId: retrieveInsuredPersons
       tags:
         - person
@@ -819,9 +834,9 @@ components:
         - lastName
         - maritalStatus
         - personId
+        - policyIds
         - sex
         - ssn
-        - policyIds
       properties:
         birthDate:
           description: Birth date.
@@ -862,6 +877,11 @@ components:
             - married
         personId:
           $ref: '#/components/schemas/PersonId'
+        policyIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/PolicyId'
+          description: List of IDs of policies that insured person has with this pension fund.
         sex:
           type: string
           enum:
@@ -887,11 +907,6 @@ components:
           format: date
           examples:
             - '2018-04-13'
-        policyIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/PolicyId'
-          description: List of IDs of policies that insured person has with this pension fund.
     InsuredSalaryMandatory:
       description: Annual salary insured under mandatory coverage.
       type: number
@@ -1177,12 +1192,12 @@ components:
           format: date-time
           examples:
             - '2018-04-13T11:11:11Z'
+        languageCode:
+          $ref: '#/components/schemas/LanguageCode'
         pensionStatementId:
           $ref: '#/components/schemas/PensionStatementId'
         pensionStatementNo:
           $ref: '#/components/schemas/PensionStatementNo'
-        languageCode:
-          $ref: '#/components/schemas/LanguageCode'
     PensionStatementId:
       description: Technical ID of pension statement used in API calls.
       type: string
@@ -1252,10 +1267,10 @@ components:
           $ref: '#/components/schemas/RiskBenefits'
         salaryData:
           $ref: '#/components/schemas/SalaryData'
-        homeOwnershipAvailableForPledge:
-          $ref: '#/components/schemas/HomeOwnershipAvailableForPledge'
         vestedBenefits:
           $ref: '#/components/schemas/VestedBenefits'
+        homeOwnershipAvailableForPledge:
+          $ref: '#/components/schemas/HomeOwnershipAvailableForPledge'
     PlanId:
       description: Technical ID of pension plan used in API calls.
       type: string
@@ -1576,8 +1591,6 @@ components:
           $ref: '#/components/schemas/CapitalBalance'
         capitalBalanceMandatory:
           $ref: '#/components/schemas/CapitalBalanceMandatory'
-        pension:
-          $ref: '#/components/schemas/Pension'
         retirementAge:
           $ref: '#/components/schemas/RetirementAge'
         capitalBalanceNoInterest:
@@ -1590,6 +1603,8 @@ components:
           $ref: '#/components/schemas/ConversionRateMandatory'
         conversionRateSupplementary:
           $ref: '#/components/schemas/ConversionRateSupplementary'
+        pension:
+          $ref: '#/components/schemas/Pension'
     RetirementCapital:
       description: Retirement capital balances for the past and projections for the future.
       type: object
@@ -1597,8 +1612,8 @@ components:
         - balanceMandatoryReferenceDate
         - balanceReferenceDate
         - interestRates
-        - projectedRetirementBenefits
         - lastYearDevelopment
+        - projectedRetirementBenefits
       properties:
         balanceMandatoryReferenceDate:
           $ref: '#/components/schemas/BalanceMandatoryReferenceDate'
@@ -1606,6 +1621,8 @@ components:
           $ref: '#/components/schemas/BalanceReferenceDate'
         interestRates:
           $ref: '#/components/schemas/InterestRates'
+        lastYearDevelopment:
+          $ref: '#/components/schemas/LastYearDevelopment'
         projectedRetirementBenefits:
           type: array
           description: |
@@ -1617,8 +1634,6 @@ components:
           $ref: '#/components/schemas/BalanceEndCurrentYear'
         balanceMandatoryEndCurrentYear:
           $ref: '#/components/schemas/BalanceMandatoryEndCurrentYear'
-        lastYearDevelopment:
-          $ref: '#/components/schemas/LastYearDevelopment'
         transferredCapital:
           $ref: '#/components/schemas/TransferredCapital'
         transferredCapitalMandatory:
@@ -1793,7 +1808,7 @@ components:
       required:
         - from
         - to
-        - transaction
+        - transactions
       properties:
         from:
           description: Start of date range (inclusive).
