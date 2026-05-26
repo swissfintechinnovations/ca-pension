@@ -15,7 +15,9 @@ required:
 properties:
   ai:
     type: string
-    description: Unique Account Identifier. Use IBAN format (ISO 13616) whenever possible. If the product does not have an IBAN, use the policy or contract number.
+    description: |
+      Unique Account Identifier. Use IBAN format (ISO 13616) whenever possible. If the product does not have an IBAN, use the policy or
+      contract number.
     examples:
       - 'CH9300762011623852957'
   cp:
@@ -92,7 +94,8 @@ properties:
       inv:
         type: number
         format: double
-        description: Current invested share as an absolute amount. The remaining amount (cb minus inv) represents the cash/liquidity balance.
+        description: |
+          Current invested share as an absolute amount. The remaining amount (cb minus inv) represents the cash/liquidity balance.
         examples:
           - 85520
   rd:
