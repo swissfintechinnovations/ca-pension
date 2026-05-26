@@ -55,15 +55,15 @@ properties:
     description: Capital development for the full previous calendar year. When not available set all values to 0.
     required:
       - cg
+      - de
       - fe
       - ic
-      - de
       - wi
     examples:
       - cg: 1500
-        fe: -20
-        ic: 50
         de: 7056
+        fe: -20
+        ic: 50        
         wi: 0
   rc:
     type: object
@@ -116,15 +116,15 @@ properties:
     description: Capital development from Jan 1st of the current year to the reference date.
     required:
       - cg
+      - de
       - fe
       - ic
-      - de
       - wi
     examples:
       - cg: 200
+        de: 1800
         fe: 0
         ic: 0
-        de: 1800
         wi: 0
   div:
     type: number

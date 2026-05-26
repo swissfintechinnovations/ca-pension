@@ -33,15 +33,15 @@ properties:
     description: Capital development for the full previous calendar year. When not available set all values to 0.
     required:
       - cg
+      - de
       - fe
       - ic
-      - de
       - wi
     examples:
       - cg: 1500
-        fe: -20
-        ic: 120
         de: 7000
+        fe: -20
+        ic: 120      
         wi: 0
   rc:
     type: object
@@ -67,18 +67,18 @@ properties:
           Set to 0.0 if the account was opened or transferred to this provider during the current year.
         examples:
           - 106900
-      bvg:
-        type: number
-        format: double
-        description: BVG share as an absolute amount.
-        examples:
-          - 71500
       inv:
         type: number
         format: double
         description: Current invested share as an absolute amount. The remaining amount (cb minus inv) represents the cash/liquidity balance.
         examples:
           - 85520
+      bvg:
+        type: number
+        format: double
+        description: BVG share as an absolute amount.
+        examples:
+          - 71500
   rd:
     $ref: ./generic/Date.yaml
     description: Reference date of vested benefit statement.
@@ -100,15 +100,15 @@ properties:
     description: Capital development from Jan 1st of the current year to the reference date.
     required:
       - cg
-      - fe
-      - ic
       - de
+      - fe
+      - ic      
       - wi
     examples:
       - cg: 570
-        fe: -20
-        ic: 50
         de: 2500
+        fe: -20
+        ic: 50        
         wi: 0
   div:
     type: number
