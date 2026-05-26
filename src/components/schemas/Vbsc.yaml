@@ -63,7 +63,7 @@ properties:
       cbpy:
         $ref: ./CapitalBalance.yaml
         description: |
-          Capital balance at the end of the previous year (Dec 31st). 
+          Capital balance at the end of the previous year (Dec 31st).
           Set to 0.0 if the account was opened or transferred to this provider during the current year.
         examples:
           - 106900
