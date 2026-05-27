@@ -345,7 +345,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./components/schemas/Vbsc.yaml
+                $ref: ./components/schemas/PscVb.yaml
         '401':
           $ref: ./components/responses/standard401.yaml
         '404':
@@ -375,7 +375,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./components/schemas/3asc.yaml
+                $ref: ./components/schemas/Psc3A.yaml
         '401':
           $ref: ./components/responses/standard401.yaml
         '404':
