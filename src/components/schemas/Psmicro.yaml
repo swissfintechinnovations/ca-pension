@@ -1,5 +1,5 @@
 description: |
-  Psmicro = pension statement micro, is a temporary and highly reduced pension statement 
+  Psmicro = pension statement micro, is a temporary and highly reduced pension statement
   containing only key attributes for an anonymous and quick overview.
   Compared to the Psc schema, employer data, pension provider information, person ID,
   plan references, home ownership / max purchase information and statement type details are intentionally omitted.
@@ -21,14 +21,9 @@ required:
   - ts
 properties:
   bym:
-    type: string
-    description: Year and month of birth (Format YYYY-MM).
-    pattern: '^[0-9]{4}-(0[1-9]|1[0-2])$'
-    examples:
-      - "1985-05"
+    $ref: ./BirthYearMonth.yaml
   emi:
-    $ref: ./EmployerId.yaml
-    description: Swiss Enterprise Identification Number UID of the employer.
+    $ref: ./EmployerInternalId.yaml
   era:
     type: integer
     format: int32

@@ -1,0 +1,15 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Scripts (incl. subfolders)
+scripts/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/

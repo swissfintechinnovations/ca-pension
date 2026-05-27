@@ -1,0 +1,33 @@
+description: Shared capital development fields.
+type: object
+properties:
+  cg:
+    type: number
+    format: double
+    description: Total capital gains (positive) or losses (negative) from investments for the period.
+    examples:
+      - 1000
+  fe:
+    type: number
+    format: double
+    description: Total management or administrative fees for the period. Debits must be provided as a negative value.
+    examples:
+      - -100
+  ic:
+    type: number
+    format: double
+    description: Total interest credits for the period.
+    examples:
+      - 2000
+  de:
+    type: number
+    format: double
+    description: Total deposits or inflows for the period.
+    examples:
+      - 5000
+  wi:
+    type: number
+    format: double
+    description: Total withdrawals or outflows for the period, e.g. for home ownership (WEF) or divorce settlements. Debits must be provided as a negative value.
+    examples:
+      - -1000

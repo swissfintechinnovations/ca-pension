@@ -1,0 +1,4 @@
+description: Pension system internal identifier of the employer that must not be publicly known. Distinct from the Swiss Enterprise Identification Number UID.
+type: string
+examples:
+  - EMP_4711
