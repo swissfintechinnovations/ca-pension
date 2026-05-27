@@ -345,7 +345,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Vbsc'
+                $ref: '#/components/schemas/PscVb'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -375,7 +375,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/3asc'
+                $ref: '#/components/schemas/Psc3A'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -564,182 +564,6 @@ paths:
           $ref: '#/components/responses/standard500'
 components:
   schemas:
-    3asc:
-      description: |
-        3asc = 3a statement compact, is a reduced account statement consisting of only the most important account statement information.
-        All monetary values are in Swiss Francs (CHF) unless explicitly stated otherwise.
-        Short property names (3-4 chars) are used to minimize payload size.
-      type: object
-      required:
-        - ai
-        - cp
-        - pn
-        - ppn
-        - pyd
-        - rc
-        - rd
-        - ts
-      properties:
-        ai:
-          type: string
-          description: |
-            Unique Account Identifier. Use IBAN format (ISO 13616) whenever possible. If the product does not have an IBAN, use the policy or
-            contract number.
-          examples:
-            - CH9300762011623852957
-        cp:
-          type: object
-          description: Contribution potential (indicative, provider-specific view).
-          required:
-            - cy
-          properties:
-            cy:
-              type: number
-              format: double
-              description: |
-                Indicative remaining contribution capacity for the current year at this provider.
-                Calculated as the applicable annual cap minus deposits already made at THIS provider.
-                No guarantee of total tax deductibility if other 3a accounts exist.
-              examples:
-                - 2500
-            ret:
-              type: number
-              format: double
-              description: |
-                Indicative potential for retroactive purchases (past years).
-                Based solely on information available to this provider.
-                Non-binding and without legal effect regarding tax deductibility.
-                Omission of this field indicates the amount is unknown.
-              examples:
-                - 8400
-        pn:
-          type: string
-          description: Product name.
-          examples:
-            - sparen 3a
-        ppn:
-          $ref: '#/components/schemas/ProviderName'
-        pyd:
-          $ref: '#/components/schemas/CapitalDevelopment'
-          description: Capital development for the full previous calendar year. When not available set all values to 0.
-          required:
-            - cg
-            - de
-            - fe
-            - ic
-            - wi
-          examples:
-            - cg: 1500
-              de: 7056
-              fe: -20
-              ic: 50
-              wi: 0
-        rc:
-          type: object
-          description: |
-            Retirement capital properties.
-            Consistency rules:
-            - cb = cbpy + sum of cyd-properties
-            Minor rounding differences up to CHF 0.05 are acceptable.
-          required:
-            - cb
-            - cbpy
-            - inv
-          properties:
-            cb:
-              description: Current capital balance.
-              $ref: '#/components/schemas/CapitalBalance'
-              examples:
-                - 44000
-            cbpy:
-              $ref: '#/components/schemas/CapitalBalance'
-              description: |
-                Capital balance at the end of the previous year (Dec 31st).
-                Set to 0.0 if the account was opened or transferred to this provider during the current year.
-              examples:
-                - 42000
-            inv:
-              type: number
-              format: double
-              description: |
-                Current invested share as an absolute amount. The remaining amount (cb minus inv) represents the cash/liquidity balance.
-              examples:
-                - 85520
-        rd:
-          description: Reference date of 3a account statement.
-          type: string
-          format: date
-          examples:
-            - '2018-04-13'
-        ts:
-          description: Date and time of generation of the 3a account statement.
-          type: string
-          format: date-time
-          examples:
-            - '2018-04-13T11:11:11Z'
-        bch:
-          type: boolean
-          description: |
-            Indicates whether a beneficiary change occurred.
-            true = there was a beneficiary change.
-            false = there was no beneficiary change.
-            Presence of this field confirms the status is known; omission indicates the status is unknown.
-          examples:
-            - true
-            - false
-        cyd:
-          $ref: '#/components/schemas/CapitalDevelopment'
-          description: Capital development from Jan 1st of the current year to the reference date.
-          required:
-            - cg
-            - de
-            - fe
-            - ic
-            - wi
-          examples:
-            - cg: 200
-              de: 1800
-              fe: 0
-              ic: 0
-              wi: 0
-        div:
-          type: number
-          format: double
-          description: |
-            The amount withdrawn for pension equalization following a divorce.
-            Presence of this field confirms that the status and amount are known. Set to 0 if no withdrawal occurred.
-            Omission indicates that the status or amount is unknown.
-          examples:
-            - 10000
-        plg:
-          type: number
-          format: double
-          description: |
-            The amount of currently pledged capital.
-            Presence of this field confirms that the status and amount are known. Set to 0 if no pledged capital exists.
-            Omission indicates that the status or amount is unknown.
-          examples:
-            - 20000
-        pw:
-          type: boolean
-          description: |
-            Indicates whether a premium waiver in case of disability applies.
-            true = a premium waiver applies.
-            false = no premium waiver applies.
-            Presence of this field confirms the status is known.
-            Omission indicates the status is unknown.
-          examples:
-            - true
-            - false
-        wef:
-          type: number
-          format: double
-          description: |
-            The cumulative net amount withdrawn for home ownership financing (WEF).
-            Based solely on information available to this provider, might be incomplete for technical reasons.
-            Set to 0 if no withdrawal occurred. Omission indicates that the status or amount is unknown.
-          examples:
-            - 50000
     AdditionalSalary:
       description: Additional salary component.
       type: number
@@ -1826,6 +1650,357 @@ components:
           format: date-time
           examples:
             - '2018-04-13T11:11:11Z'
+    Psc3A:
+      description: |
+        Psc3A = pension statement compact 3a, is a reduced account statement consisting of only the most important account statement information.
+        All monetary values are in Swiss Francs (CHF) unless explicitly stated otherwise.
+        Short property names (3-4 chars) are used to minimize payload size.
+      type: object
+      required:
+        - ai
+        - cp
+        - pn
+        - ppn
+        - pyd
+        - rc
+        - rd
+        - ts
+      properties:
+        ai:
+          type: string
+          description: |
+            Unique Account Identifier. Use IBAN format (ISO 13616) whenever possible. If the product does not have an IBAN, use the policy or
+            contract number.
+          examples:
+            - CH9300762011623852957
+        cp:
+          type: object
+          description: Contribution potential (indicative, provider-specific view).
+          required:
+            - cy
+          properties:
+            cy:
+              type: number
+              format: double
+              description: |
+                Indicative remaining contribution capacity for the current year at this provider.
+                Calculated as the applicable annual cap minus deposits already made at THIS provider.
+                No guarantee of total tax deductibility if other 3a accounts exist.
+              examples:
+                - 2500
+            ret:
+              type: number
+              format: double
+              description: |
+                Indicative potential for retroactive purchases (past years).
+                Based solely on information available to this provider.
+                Non-binding and without legal effect regarding tax deductibility.
+                Omission of this field indicates the amount is unknown.
+              examples:
+                - 8400
+        pn:
+          type: string
+          description: Product name.
+          examples:
+            - sparen 3a
+        ppn:
+          $ref: '#/components/schemas/ProviderName'
+        pyd:
+          $ref: '#/components/schemas/CapitalDevelopment'
+          description: Capital development for the full previous calendar year. When not available set all values to 0.
+          required:
+            - cg
+            - de
+            - fe
+            - ic
+            - wi
+          examples:
+            - cg: 1500
+              de: 7056
+              fe: -20
+              ic: 50
+              wi: 0
+        rc:
+          type: object
+          description: |
+            Retirement capital properties.
+            Consistency rules:
+            - cb = cbpy + sum of cyd-properties
+            Minor rounding differences up to CHF 0.05 are acceptable.
+          required:
+            - cb
+            - cbpy
+            - inv
+          properties:
+            cb:
+              description: Current capital balance.
+              $ref: '#/components/schemas/CapitalBalance'
+              examples:
+                - 44000
+            cbpy:
+              $ref: '#/components/schemas/CapitalBalance'
+              description: |
+                Capital balance at the end of the previous year (Dec 31st).
+                Set to 0.0 if the account was opened or transferred to this provider during the current year.
+              examples:
+                - 42000
+            inv:
+              type: number
+              format: double
+              description: |
+                Current invested share as an absolute amount. The remaining amount (cb minus inv) represents the cash/liquidity balance.
+              examples:
+                - 85520
+        rd:
+          description: Reference date of 3a account statement.
+          type: string
+          format: date
+          examples:
+            - '2018-04-13'
+        ts:
+          description: Date and time of generation of the 3a account statement.
+          type: string
+          format: date-time
+          examples:
+            - '2018-04-13T11:11:11Z'
+        bch:
+          type: boolean
+          description: |
+            Indicates whether a beneficiary change occurred.
+            true = there was a beneficiary change.
+            false = there was no beneficiary change.
+            Presence of this field confirms the status is known; omission indicates the status is unknown.
+          examples:
+            - true
+            - false
+        cyd:
+          $ref: '#/components/schemas/CapitalDevelopment'
+          description: Capital development from Jan 1st of the current year to the reference date.
+          required:
+            - cg
+            - de
+            - fe
+            - ic
+            - wi
+          examples:
+            - cg: 200
+              de: 1800
+              fe: 0
+              ic: 0
+              wi: 0
+        div:
+          type: number
+          format: double
+          description: |
+            The amount withdrawn for pension equalization following a divorce.
+            Presence of this field confirms that the status and amount are known. Set to 0 if no withdrawal occurred.
+            Omission indicates that the status or amount is unknown.
+          examples:
+            - 10000
+        plg:
+          type: number
+          format: double
+          description: |
+            The amount of currently pledged capital.
+            Presence of this field confirms that the status and amount are known. Set to 0 if no pledged capital exists.
+            Omission indicates that the status or amount is unknown.
+          examples:
+            - 20000
+        pw:
+          type: boolean
+          description: |
+            Indicates whether a premium waiver in case of disability applies.
+            true = a premium waiver applies.
+            false = no premium waiver applies.
+            Presence of this field confirms the status is known.
+            Omission indicates the status is unknown.
+          examples:
+            - true
+            - false
+        wef:
+          type: number
+          format: double
+          description: |
+            The cumulative net amount withdrawn for home ownership financing (WEF).
+            Based solely on information available to this provider, might be incomplete for technical reasons.
+            Set to 0 if no withdrawal occurred. Omission indicates that the status or amount is unknown.
+          examples:
+            - 50000
+    PscVb:
+      description: |
+        PscVb = pension statement compact vested benefit, is a reduced pension statement consisting of only the most important pension statement
+        information. All monetary values are in Swiss Francs (CHF) unless explicitly stated otherwise.
+        Short property names (3-4 chars) for QR code payload.
+      type: object
+      required:
+        - ai
+        - hoaw
+        - pn
+        - ppn
+        - pyd
+        - rc
+        - rd
+        - ts
+      properties:
+        ai:
+          type: string
+          description: |
+            Unique Account Identifier. Use IBAN format (ISO 13616) whenever possible. If the product does not have an IBAN, use the policy or
+            contract number.
+          examples:
+            - CH9300762011623852957
+        hoaw:
+          $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
+          description: Amount available for withdrawal for home ownership.
+        pn:
+          type: string
+          description: Product name.
+          examples:
+            - vested benefits account
+        ppn:
+          $ref: '#/components/schemas/ProviderName'
+        pyd:
+          $ref: '#/components/schemas/CapitalDevelopment'
+          description: Capital development for the full previous calendar year. When not available set all values to 0.
+          required:
+            - cg
+            - de
+            - fe
+            - ic
+            - wi
+          examples:
+            - cg: 1500
+              de: 7000
+              fe: -20
+              ic: 120
+              wi: 0
+        rc:
+          type: object
+          description: |
+            Retirement capital balances.
+            Consistency rules:
+            - cb = cbpy + sum of cyd-properties
+            Minor rounding differences up to CHF 0.05 are acceptable.
+          required:
+            - cb
+            - cbpy
+            - inv
+          properties:
+            cb:
+              description: Current capital balance.
+              $ref: '#/components/schemas/CapitalBalance'
+              examples:
+                - 110000
+            cbpy:
+              $ref: '#/components/schemas/CapitalBalance'
+              description: |
+                Capital balance at the end of the previous year (Dec 31st).
+                Set to 0.0 if the account was opened or transferred to this provider during the current year.
+              examples:
+                - 106900
+            inv:
+              type: number
+              format: double
+              description: |
+                Current invested share as an absolute amount. The remaining amount (cb minus inv) represents the cash/liquidity balance.
+              examples:
+                - 85520
+            bvg:
+              type: number
+              format: double
+              description: BVG share as an absolute amount.
+              examples:
+                - 71500
+        rd:
+          description: Reference date of vested benefit statement.
+          type: string
+          format: date
+          examples:
+            - '2018-04-13'
+        ts:
+          description: Date and time of generation of the VestedBenefitStatement.
+          type: string
+          format: date-time
+          examples:
+            - '2018-04-13T11:11:11Z'
+        bch:
+          type: boolean
+          description: |
+            Indicates whether a beneficiary change occurred.
+            true = there was a beneficiary change.
+            false = there was no beneficiary change.
+            Presence of this field confirms the status is known; omission indicates the status is unknown.
+          examples:
+            - true
+            - false
+        cyd:
+          $ref: '#/components/schemas/CapitalDevelopment'
+          description: Capital development from Jan 1st of the current year to the reference date.
+          required:
+            - cg
+            - de
+            - fe
+            - ic
+            - wi
+          examples:
+            - cg: 570
+              de: 2500
+              fe: -20
+              ic: 50
+              wi: 0
+        div:
+          type: number
+          format: double
+          description: |
+            The amount withdrawn for pension equalization following a divorce.
+            Presence of this field confirms that the status and amount are known. Set to 0 if no withdrawal occurred.
+            Omission indicates that the status or amount is unknown.
+          examples:
+            - 10000
+        p3y:
+          type: object
+          description: |
+            If this field is present, then there is known purchase activity information for the last 3 years.
+            Based solely on information available to this provider.
+            If it is missing, this information is unknown.
+          required:
+            - s
+          properties:
+            s:
+              type: number
+              format: double
+              description: |
+                Cumulative purchase amount within the last 3 years.
+                Based solely on information available to this provider.
+              examples:
+                - 15000
+            d:
+              description: |
+                Date of the most recent purchase within the last 3 years.
+                Based solely on information available to this provider.
+                Omit this field if no purchase occurred within the last 3 years.
+              type: string
+              format: date
+              examples:
+                - '2025-04-13'
+        plg:
+          type: number
+          format: double
+          description: |
+            The amount of currently pledged capital.
+            Presence of this field confirms that the status and amount are known. Set to 0 if no pledged capital exists.
+            Omission indicates that the status or amount is unknown.
+          examples:
+            - 20000
+        wef:
+          type: number
+          format: double
+          description: |
+            The cumulative net amount withdrawn for home ownership financing (WEF).
+            Based solely on information available to this provider, might be incomplete for technical reasons.
+            Set to 0 if no withdrawal occurred. Omission indicates that the status or amount is unknown.
+          examples:
+            - 50000
     PurchaseSimParameters:
       description: Voluntary purchase simulation parameters.
       type: object
@@ -2129,181 +2304,6 @@ components:
       format: double
       examples:
         - 32840.55
-    Vbsc:
-      description: |
-        Vbsc = vested benefit statement compact, is a reduced pension statement consisting of only the most important pension statement
-        information. All monetary values are in Swiss Francs (CHF) unless explicitly stated otherwise.
-        Short property names (3-4 chars) for QR code payload.
-      type: object
-      required:
-        - ai
-        - hoaw
-        - pn
-        - ppn
-        - pyd
-        - rc
-        - rd
-        - ts
-      properties:
-        ai:
-          type: string
-          description: |
-            Unique Account Identifier. Use IBAN format (ISO 13616) whenever possible. If the product does not have an IBAN, use the policy or
-            contract number.
-          examples:
-            - CH9300762011623852957
-        hoaw:
-          $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
-          description: Amount available for withdrawal for home ownership.
-        pn:
-          type: string
-          description: Product name.
-          examples:
-            - vested benefits account
-        ppn:
-          $ref: '#/components/schemas/ProviderName'
-        pyd:
-          $ref: '#/components/schemas/CapitalDevelopment'
-          description: Capital development for the full previous calendar year. When not available set all values to 0.
-          required:
-            - cg
-            - de
-            - fe
-            - ic
-            - wi
-          examples:
-            - cg: 1500
-              de: 7000
-              fe: -20
-              ic: 120
-              wi: 0
-        rc:
-          type: object
-          description: |
-            Retirement capital balances.
-            Consistency rules:
-            - cb = cbpy + sum of cyd-properties
-            Minor rounding differences up to CHF 0.05 are acceptable.
-          required:
-            - cb
-            - cbpy
-            - inv
-          properties:
-            cb:
-              description: Current capital balance.
-              $ref: '#/components/schemas/CapitalBalance'
-              examples:
-                - 110000
-            cbpy:
-              $ref: '#/components/schemas/CapitalBalance'
-              description: |
-                Capital balance at the end of the previous year (Dec 31st).
-                Set to 0.0 if the account was opened or transferred to this provider during the current year.
-              examples:
-                - 106900
-            inv:
-              type: number
-              format: double
-              description: |
-                Current invested share as an absolute amount. The remaining amount (cb minus inv) represents the cash/liquidity balance.
-              examples:
-                - 85520
-            bvg:
-              type: number
-              format: double
-              description: BVG share as an absolute amount.
-              examples:
-                - 71500
-        rd:
-          description: Reference date of vested benefit statement.
-          type: string
-          format: date
-          examples:
-            - '2018-04-13'
-        ts:
-          description: Date and time of generation of the VestedBenefitStatement.
-          type: string
-          format: date-time
-          examples:
-            - '2018-04-13T11:11:11Z'
-        bch:
-          type: boolean
-          description: |
-            Indicates whether a beneficiary change occurred.
-            true = there was a beneficiary change.
-            false = there was no beneficiary change.
-            Presence of this field confirms the status is known; omission indicates the status is unknown.
-          examples:
-            - true
-            - false
-        cyd:
-          $ref: '#/components/schemas/CapitalDevelopment'
-          description: Capital development from Jan 1st of the current year to the reference date.
-          required:
-            - cg
-            - de
-            - fe
-            - ic
-            - wi
-          examples:
-            - cg: 570
-              de: 2500
-              fe: -20
-              ic: 50
-              wi: 0
-        div:
-          type: number
-          format: double
-          description: |
-            The amount withdrawn for pension equalization following a divorce.
-            Presence of this field confirms that the status and amount are known. Set to 0 if no withdrawal occurred.
-            Omission indicates that the status or amount is unknown.
-          examples:
-            - 10000
-        p3y:
-          type: object
-          description: |
-            If this field is present, then there is known purchase activity information for the last 3 years.
-            Based solely on information available to this provider.
-            If it is missing, this information is unknown.
-          required:
-            - s
-          properties:
-            s:
-              type: number
-              format: double
-              description: |
-                Cumulative purchase amount within the last 3 years.
-                Based solely on information available to this provider.
-              examples:
-                - 15000
-            d:
-              description: |
-                Date of the most recent purchase within the last 3 years.
-                Based solely on information available to this provider.
-                Omit this field if no purchase occurred within the last 3 years.
-              type: string
-              format: date
-              examples:
-                - '2025-04-13'
-        plg:
-          type: number
-          format: double
-          description: |
-            The amount of currently pledged capital.
-            Presence of this field confirms that the status and amount are known. Set to 0 if no pledged capital exists.
-            Omission indicates that the status or amount is unknown.
-          examples:
-            - 20000
-        wef:
-          type: number
-          format: double
-          description: |
-            The cumulative net amount withdrawn for home ownership financing (WEF).
-            Based solely on information available to this provider, might be incomplete for technical reasons.
-            Set to 0 if no withdrawal occurred. Omission indicates that the status or amount is unknown.
-          examples:
-            - 50000
     VestedBenefits:
       description: |
         The VestedBenefits object provides detailed information about the insured person's accrued retirement capital under occupational pension
