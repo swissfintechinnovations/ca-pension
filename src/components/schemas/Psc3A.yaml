@@ -1,11 +1,11 @@
 description: |
-  Vbsc = vested benefit statement compact, is a reduced pension statement consisting of only the most important pension statement
-  information. All monetary values are in Swiss Francs (CHF) unless explicitly stated otherwise.
-  Short property names (3-4 chars) for QR code payload.
+  Psc3A = pension statement compact 3a, is a reduced account statement consisting of only the most important account statement information.
+  All monetary values are in Swiss Francs (CHF) unless explicitly stated otherwise.
+  Short property names (3-4 chars) are used to minimize payload size.
 type: object
 required:
   - ai
-  - hoaw
+  - cp
   - pn
   - ppn
   - pyd
@@ -20,14 +20,36 @@ properties:
       contract number.
     examples:
       - 'CH9300762011623852957'
-  hoaw:
-    $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
-    description: Amount available for withdrawal for home ownership.
+  cp:
+    type: object
+    description: Contribution potential (indicative, provider-specific view).
+    required:
+      - cy
+    properties:
+      cy:
+        type: number
+        format: double
+        description: |
+          Indicative remaining contribution capacity for the current year at this provider.
+          Calculated as the applicable annual cap minus deposits already made at THIS provider.
+          No guarantee of total tax deductibility if other 3a accounts exist.
+        examples: 
+          - 2500.00
+      ret:
+        type: number
+        format: double
+        description: |
+          Indicative potential for retroactive purchases (past years).
+          Based solely on information available to this provider.
+          Non-binding and without legal effect regarding tax deductibility.
+          Omission of this field indicates the amount is unknown.
+        examples:
+          - 8400.00
   pn:
     type: string
     description: Product name.
     examples:
-      - "vested benefits account"
+      - "sparen 3a"
   ppn:
     $ref: ./ProviderName.yaml
   pyd:
@@ -41,14 +63,14 @@ properties:
       - wi
     examples:
       - cg: 1500
-        de: 7000
+        de: 7056
         fe: -20
-        ic: 120      
+        ic: 50        
         wi: 0
   rc:
     type: object
     description: |
-      Retirement capital balances.
+      Retirement capital properties.
       Consistency rules:
       - cb = cbpy + sum of cyd-properties
       Minor rounding differences up to CHF 0.05 are acceptable.
@@ -61,14 +83,14 @@ properties:
         description: Current capital balance.
         $ref: ./CapitalBalance.yaml
         examples:
-          - 110000
+          - 44000
       cbpy:
         $ref: ./CapitalBalance.yaml
         description: |
           Capital balance at the end of the previous year (Dec 31st).
           Set to 0.0 if the account was opened or transferred to this provider during the current year.
         examples:
-          - 106900
+          - 42000
       inv:
         type: number
         format: double
@@ -76,18 +98,12 @@ properties:
           Current invested share as an absolute amount. The remaining amount (cb minus inv) represents the cash/liquidity balance.
         examples:
           - 85520
-      bvg:
-        type: number
-        format: double
-        description: BVG share as an absolute amount.
-        examples:
-          - 71500
   rd:
     $ref: ./generic/Date.yaml
-    description: Reference date of vested benefit statement.
+    description: Reference date of 3a account statement.
   ts:
     $ref: ./generic/DateTime.yaml
-    description: Date and time of generation of the VestedBenefitStatement.
+    description: Date and time of generation of the 3a account statement.
   bch:
     type: boolean
     description: |
@@ -105,13 +121,13 @@ properties:
       - cg
       - de
       - fe
-      - ic      
+      - ic
       - wi
     examples:
-      - cg: 570
-        de: 2500
-        fe: -20
-        ic: 50        
+      - cg: 200
+        de: 1800
+        fe: 0
+        ic: 0
         wi: 0
   div:
     type: number
@@ -122,31 +138,6 @@ properties:
       Omission indicates that the status or amount is unknown.
     examples:
       - 10000
-  p3y:
-    type: object
-    description: |
-      If this field is present, then there is known purchase activity information for the last 3 years.
-      Based solely on information available to this provider.
-      If it is missing, this information is unknown.
-    required:
-      - s
-    properties:
-      s:
-        type: number
-        format: double
-        description: |
-          Cumulative purchase amount within the last 3 years.
-          Based solely on information available to this provider.
-        examples:
-          - 15000
-      d:
-        $ref: ./generic/Date.yaml
-        description: |
-          Date of the most recent purchase within the last 3 years.
-          Based solely on information available to this provider.
-          Omit this field if no purchase occurred within the last 3 years.
-        examples:
-          - '2025-04-13'
   plg:
     type: number
     format: double
@@ -156,6 +147,17 @@ properties:
       Omission indicates that the status or amount is unknown.
     examples:
       - 20000
+  pw:
+    type: boolean
+    description: |
+      Indicates whether a premium waiver in case of disability applies.
+      true = a premium waiver applies.
+      false = no premium waiver applies.
+      Presence of this field confirms the status is known.
+      Omission indicates the status is unknown.
+    examples:
+      - true
+      - false
   wef:
     type: number
     format: double
