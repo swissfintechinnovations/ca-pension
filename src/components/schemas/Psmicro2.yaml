@@ -1,0 +1,65 @@
+description: |
+  Psmicro2 = pension statement micro2, is a temporary and highly reduced pension statement
+  containing only key attributes for the anonymous use case pension or lump sum.
+
+  IMPORTANT: This schema is strictly temporary and not part of the target architecture.
+  In the target state, the PensionStatement or Psc schemas must be used instead.
+  Psmicro2 can be removed once pension providers support modern secure APIs.
+type: object
+required:
+  - conversionRateEnveloping
+  - declaredSalary
+  - maritalStatus
+  - postalCode
+  - projectedRetirementBenefits
+  - sex
+  - ts
+properties:
+  conversionRateEnveloping:
+    $ref: ./ConversionRateEnveloping.yaml
+  declaredSalary:
+    $ref: ./DeclaredSalary.yaml
+  maritalStatus:
+    type: string
+    enum:
+      - single
+      - married
+      - divorced
+      - widowed
+      - registeredPartnership
+      - dissolvedRegisteredPartnership
+      - unknown
+    description: |
+      Marital status:
+      * `single`: single
+      * `married`: married
+      * `divorced`: divorced
+      * `widowed`: widowed
+      * `registeredPartnership`: living in a registered partnership
+      * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
+      * `unknown`: marital status is not known
+    examples:
+      - married
+  postalCode:
+    $ref: ./PostalCode.yaml
+  projectedRetirementBenefits:
+    type: array
+    description: |
+      Projected retirement benefits for a series of retirement ages. The list contains projections for each integer retirement age from 58
+      to the regular retirement age. For persons of 58 or older, the list is restricted to retirement ages higher than their current age.
+    items:
+      $ref: ./RetirementBenefits.yaml
+  sex:
+      type: string
+    enum:
+      - male
+      - female
+    description: |
+      Sex:
+      * `male`: male
+      * `female`: female
+    examples:
+      - male
+  ts:
+    $ref: ./generic/DateTime.yaml
+    description: Date and time of generation of the PensionStatement.
