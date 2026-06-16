@@ -20,26 +20,7 @@ properties:
   declaredSalary:
     $ref: ./DeclaredSalary.yaml
   maritalStatus:
-    type: string
-    enum:
-      - single
-      - married
-      - divorced
-      - widowed
-      - registeredPartnership
-      - dissolvedRegisteredPartnership
-      - unknown
-    description: |
-      Marital status:
-      * `single`: single
-      * `married`: married
-      * `divorced`: divorced
-      * `widowed`: widowed
-      * `registeredPartnership`: living in a registered partnership
-      * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
-      * `unknown`: marital status is not known
-    examples:
-      - married
+    $ref: ./MaritalStatus.yaml
   postalCode:
     $ref: ./PostalCode.yaml
   projectedRetirementBenefits:
@@ -50,16 +31,7 @@ properties:
     items:
       $ref: ./RetirementBenefits.yaml
   sex:
-      type: string
-    enum:
-      - male
-      - female
-    description: |
-      Sex:
-      * `male`: male
-      * `female`: female
-    examples:
-      - male
+    $ref: ./Sex.yaml
   ts:
     $ref: ./generic/DateTime.yaml
     description: Date and time of generation of the PensionStatement.
