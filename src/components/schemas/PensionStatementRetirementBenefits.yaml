@@ -7,20 +7,21 @@ description: |
   Psmicro2 can be removed once pension providers support modern secure APIs.
 type: object
 required:
-  - conversionRateEnveloping
   - declaredSalary
   - maritalStatus
+  - ordinaryRetirementAge
   - postalCode
   - projectedRetirementBenefits
+  - referenceDate
   - sex
-  - ts
+  - timeStamp
 properties:
-  conversionRateEnveloping:
-    $ref: ./ConversionRateEnveloping.yaml
   declaredSalary:
     $ref: ./DeclaredSalary.yaml
   maritalStatus:
     $ref: ./MaritalStatus.yaml
+  ordinaryRetirementAge:
+    $ref: ./OrdinaryRetirementAge.yaml
   postalCode:
     $ref: ./PostalCode.yaml
   projectedRetirementBenefits:
@@ -30,8 +31,13 @@ properties:
       to the regular retirement age. For persons of 58 or older, the list is restricted to retirement ages higher than their current age.
     items:
       $ref: ./RetirementBenefits.yaml
+      required:
+        - conversionRateEnveloping
+  referenceDate:
+    $ref: ./generic/Date.yaml
+    description: Reference date of pension statement.
   sex:
     $ref: ./Sex.yaml
-  ts:
+  timeStamp:
     $ref: ./generic/DateTime.yaml
     description: Date and time of generation of the PensionStatement.

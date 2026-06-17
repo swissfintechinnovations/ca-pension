@@ -24,11 +24,7 @@ properties:
   homeOwnershipAvailableForWithdrawal:
     $ref: ./HomeOwnershipAvailableForWithdrawal.yaml
   ordinaryRetirementAge:
-    type: integer
-    format: int32
-    description: Age (in month since birth) for ordinary retirement.
-    examples:
-      - 780
+    $ref: ./OrdinaryRetirementAge.yaml
   regularPurchaseMaxAmount:
     $ref: ./RegularPurchaseMaxAmount.yaml
   retirementCapital:
