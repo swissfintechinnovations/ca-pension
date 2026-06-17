@@ -1,10 +1,10 @@
 description: |
-  Psmicro2 = pension statement micro2, is a temporary and highly reduced pension statement
+  PensionStatementRetirementBenefits = this is a temporary and highly reduced pension statement
   containing only key attributes for the anonymous use case pension or lump sum.
 
   IMPORTANT: This schema is strictly temporary and not part of the target architecture.
-  In the target state, the PensionStatement or Psc schemas must be used instead.
-  Psmicro2 can be removed once pension providers support modern secure APIs.
+  In the target state, the full PensionStatement or Psc schemas must be used instead.
+  PensionStatementRetirementBenefits can be removed once pension providers support modern secure APIs.
 type: object
 required:
   - declaredSalary
