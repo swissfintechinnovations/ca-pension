@@ -1,4 +1,6 @@
-description: The maximum amount the insured person is permitted to contribute to their pension plan as an ordinary purchase.
+description: |
+  The maximum amount the insured person is permitted to contribute to their pension plan as an ordinary purchase,
+  excluding any purchase to finance or compensate for early retirement.
 type: number
 format: double
 examples:
