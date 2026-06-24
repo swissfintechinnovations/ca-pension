@@ -1,10 +1,11 @@
 description: |
-  PensionStatementRetirementBenefits = this is a temporary and highly reduced pension statement
-  containing only key attributes for the anonymous use case pension or lump sum.
+  PsPensionAndLumpSum = is a temporary and highly reduced pension statement containing key attributes for a minimal financial analysis
+  concerning pension and lump sum. Required fields such as declaredSalary, maritalStatus, and postalCode allow for the inclusion of budget
+  and tax considerations when planning for retirement (as used for example at renteundkapital.ch).
 
   IMPORTANT: This schema is strictly temporary and not part of the target architecture.
   In the target state, the full PensionStatement or Psc schemas must be used instead.
-  PensionStatementRetirementBenefits can be removed once pension providers support modern secure APIs.
+  PsPensionAndLumpSum can be removed once pension providers support modern secure APIs.
 type: object
 required:
   - declaredSalary
