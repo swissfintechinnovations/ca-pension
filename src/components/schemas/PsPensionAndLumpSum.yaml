@@ -28,9 +28,18 @@ properties:
       Projected retirement benefits for a series of retirement ages. The list contains projections for each integer retirement age from 58
       to 70. For persons of 58 or older, the list is restricted to retirement ages higher than their current age.
     items:
-      $ref: ./RetirementBenefits.yaml
+      type: object
       required:
+        - capitalBalance
         - conversionRateEnveloping
+        - retirementAge
+      properties:
+        capitalBalance:
+          $ref: ./CapitalBalance.yaml          
+        conversionRateEnveloping:
+          $ref: ./ConversionRateEnveloping.yaml
+        retirementAge:
+          $ref: ./RetirementAge.yaml
   referenceDate:
     $ref: ./generic/Date.yaml
     description: Reference date of pension statement.
