@@ -960,26 +960,7 @@ components:
           examples:
             - Doe
         maritalStatus:
-          type: string
-          enum:
-            - single
-            - married
-            - divorced
-            - widowed
-            - registeredPartnership
-            - dissolvedRegisteredPartnership
-            - unknown
-          description: |
-            Marital status:
-            * `single`: single
-            * `married`: married
-            * `divorced`: divorced
-            * `widowed`: widowed
-            * `registeredPartnership`: living in a registered partnership
-            * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
-            * `unknown`: marital status is not known
-          examples:
-            - married
+          $ref: '#/components/schemas/MaritalStatus'
         personId:
           $ref: '#/components/schemas/PersonId'
         policyIds:
@@ -988,16 +969,7 @@ components:
             $ref: '#/components/schemas/PolicyId'
           description: List of IDs of policies that insured person has with this pension fund.
         sex:
-          type: string
-          enum:
-            - male
-            - female
-          description: |
-            Sex:
-            * `male`: male
-            * `female`: female
-          examples:
-            - male
+          $ref: '#/components/schemas/Sex'
         ssn:
           type: integer
           format: int64
@@ -1160,6 +1132,27 @@ components:
       format: double
       examples:
         - 92834
+    MaritalStatus:
+      description: |
+        Marital status:
+        * `single`: single
+        * `married`: married
+        * `divorced`: divorced
+        * `widowed`: widowed
+        * `registeredPartnership`: living in a registered partnership
+        * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
+        * `unknown`: marital status is not known
+      type: string
+      enum:
+        - single
+        - married
+        - divorced
+        - widowed
+        - registeredPartnership
+        - dissolvedRegisteredPartnership
+        - unknown
+      examples:
+        - married
     MinimalLumpSumWithPensionBenefits:
       description: |
         A guaranteed minimum one-off lump sum payment in the event of death, which is paid in addition to other pension benefits (e.g., a
@@ -1176,6 +1169,12 @@ components:
       format: double
       examples:
         - 74383
+    OrdinaryRetirementAge:
+      description: Age (in month since birth) for ordinary retirement.
+      type: integer
+      format: int32
+      examples:
+        - 780
     OrphanPensionDeath:
       description: Annual orphan pension in case of death.
       type: number
@@ -1359,11 +1358,7 @@ components:
         homeOwnershipAvailableForWithdrawal:
           $ref: '#/components/schemas/HomeOwnershipAvailableForWithdrawal'
         ordinaryRetirementAge:
-          type: integer
-          format: int32
-          description: Age (in month since birth) for ordinary retirement.
-          examples:
-            - 780
+          $ref: '#/components/schemas/OrdinaryRetirementAge'
         regularPurchaseMaxAmount:
           $ref: '#/components/schemas/RegularPurchaseMaxAmount'
         retirementCapital:
@@ -2031,7 +2026,9 @@ components:
           examples:
             - 780
     RegularPurchaseMaxAmount:
-      description: The maximum amount the insured person is permitted to contribute to their pension plan as an ordinary purchase.
+      description: |
+        The maximum amount the insured person is permitted to contribute to their pension plan as an ordinary purchase,
+        excluding any purchase to finance or compensate for early retirement.
       type: number
       format: double
       examples:
@@ -2177,6 +2174,17 @@ components:
           $ref: '#/components/schemas/Bonus'
         otherSalaryComponent:
           $ref: '#/components/schemas/OtherSalaryComponent'
+    Sex:
+      description: |
+        Sex:
+        * `male`: male
+        * `female`: female
+      type: string
+      enum:
+        - male
+        - female
+      examples:
+        - male
     SimulationResultPensionStatement:
       description: Financial effect of simulation.
       type: object
