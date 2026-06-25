@@ -24,26 +24,7 @@ properties:
     examples:
       - Doe
   maritalStatus:
-    type: string
-    enum:
-      - single
-      - married
-      - divorced
-      - widowed
-      - registeredPartnership
-      - dissolvedRegisteredPartnership
-      - unknown
-    description: |
-      Marital status:
-      * `single`: single
-      * `married`: married
-      * `divorced`: divorced
-      * `widowed`: widowed
-      * `registeredPartnership`: living in a registered partnership
-      * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
-      * `unknown`: marital status is not known
-    examples:
-      - married
+    $ref: ./MaritalStatus.yaml
   personId:
     $ref: ./PersonId.yaml
   policyIds:
@@ -52,16 +33,7 @@ properties:
       $ref: ./PolicyId.yaml
     description: List of IDs of policies that insured person has with this pension fund.
   sex:
-    type: string
-    enum:
-      - male
-      - female
-    description: |
-      Sex:
-      * `male`: male
-      * `female`: female
-    examples:
-      - male
+    $ref: ./Sex.yaml
   ssn:
     type: integer
     format: int64

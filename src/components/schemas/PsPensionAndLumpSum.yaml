@@ -1,0 +1,50 @@
+description: |
+  PsPensionAndLumpSum = is a temporary and highly reduced pension statement containing key attributes for a minimal financial analysis
+  concerning pension and lump sum. Required fields such as declaredSalary, maritalStatus, and postalCode allow for the inclusion of budget
+  and tax considerations when planning for retirement (as used for example at renteundkapital.ch).
+
+  IMPORTANT: This schema is strictly temporary and not part of the target architecture.
+  In the target state, the full PensionStatement or Psc schemas must be used instead.
+  PsPensionAndLumpSum can be removed once pension providers support modern secure APIs.
+type: object
+required:
+  - declaredSalary
+  - maritalStatus
+  - postalCode
+  - projectedRetirementBenefits
+  - referenceDate
+  - sex
+  - timeStamp
+properties:
+  declaredSalary:
+    $ref: ./DeclaredSalary.yaml
+  maritalStatus:
+    $ref: ./MaritalStatus.yaml
+  postalCode:
+    $ref: ./PostalCode.yaml
+  projectedRetirementBenefits:
+    type: array
+    description: |
+      Projected retirement benefits for a series of retirement ages. The list contains projections for each integer retirement age from 58
+      to 70. For persons of 58 or older, the list is restricted to retirement ages higher than their current age.
+    items:
+      type: object
+      required:
+        - capitalBalance
+        - conversionRateEnveloping
+        - retirementAge
+      properties:
+        capitalBalance:
+          $ref: ./CapitalBalance.yaml          
+        conversionRateEnveloping:
+          $ref: ./ConversionRateEnveloping.yaml
+        retirementAge:
+          $ref: ./RetirementAge.yaml
+  referenceDate:
+    $ref: ./generic/Date.yaml
+    description: Reference date of pension statement.
+  sex:
+    $ref: ./Sex.yaml
+  timeStamp:
+    $ref: ./generic/DateTime.yaml
+    description: Date and time of generation of the PensionStatement.

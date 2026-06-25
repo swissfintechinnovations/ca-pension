@@ -1,0 +1,20 @@
+description: |
+  Marital status:
+  * `single`: single
+  * `married`: married
+  * `divorced`: divorced
+  * `widowed`: widowed
+  * `registeredPartnership`: living in a registered partnership
+  * `dissolvedRegisteredPartnership`: registered partnership has been dissolved
+  * `unknown`: marital status is not known
+type: string
+enum:
+  - single
+  - married
+  - divorced
+  - widowed
+  - registeredPartnership
+  - dissolvedRegisteredPartnership
+  - unknown
+examples:
+  - married

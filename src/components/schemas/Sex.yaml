@@ -1,0 +1,10 @@
+description: |
+  Sex:
+  * `male`: male
+  * `female`: female
+type: string
+enum:
+  - male
+  - female
+examples:
+  - male

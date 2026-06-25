@@ -1,0 +1,5 @@
+description: Age (in month since birth) for ordinary retirement.
+type: integer
+format: int32
+examples:
+  - 780
