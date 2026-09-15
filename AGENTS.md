@@ -5,12 +5,12 @@
 - Repo: `github.com/swissfintechinnovations/ca-pension`
 - OpenAPI version: `3.1.0`  
 - Bundled spec at repo root: `pensionAPI.yaml`  
-- Repo with config files, reusable workflows, and wiki: `github.com/swissfintechinnovations/.github`  
+- Read-only repo with config files, reusable workflows, and wiki: `github.com/swissfintechinnovations/.github`  
 
 ## What you are allowed to edit
 - **Edit only** the canonical source components under `src/components/{schemas,parameters,headers,responses,...}`.
 - **Do not touch** the bundled root file — it is generated from `src/*` by the Redocly bundle workflow on PR. Editing it directly will be overwritten.
-- **Do not touch** anything in `.github/`.
+- **Do not touch** anything in the `.github/` folder or the reusable workflows in the `github.com/swissfintechinnovations/.github` repo.
 
 ## Editing rules and patterns
 - Only do small, focused changes, not large refactors.
