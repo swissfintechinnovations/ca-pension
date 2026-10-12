@@ -1,0 +1,9 @@
+operationId: getPensionStatementDocument
+description: |
+  PDF document of the selected pension statement.
+  The `pensionStatementId` of any entry in the response array (if provided) can be used as the `pensionStatementId` path parameter.
+  The expression below addresses the first entry; it applies to every entry alike.
+
+  Example: `GET /statements/550e8450-e59b-21d4-a346-442215440560/documents`
+parameters:
+  pensionStatementId: $response.body#/0/pensionStatementId

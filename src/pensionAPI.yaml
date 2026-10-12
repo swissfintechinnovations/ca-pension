@@ -193,6 +193,11 @@ paths:
                   properties:
                     personId:
                       $ref: ./components/schemas/PersonId.yaml
+          links:
+            insuredPersonDetails:
+              $ref: ./components/links/insuredPersonListDetails.yaml
+            pensionStatements:
+              $ref: ./components/links/insuredPersonListPensionStatements.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -222,6 +227,15 @@ paths:
             application/json:
               schema:
                 $ref: ./components/schemas/InsuredPerson.yaml
+          links:
+            policyDetails:
+              $ref: ./components/links/policyListDetails.yaml
+            salaryChangeSimulation:
+              $ref: ./components/links/policyListSalaryChangeSimulation.yaml
+            purchaseSimulation:
+              $ref: ./components/links/policyListPurchaseSimulation.yaml
+            retirementCapitalTransactions:
+              $ref: ./components/links/policyListRetirementCapitalTransactions.yaml
         '401':
           $ref: ./components/responses/standard401.yaml
         '404':
@@ -256,6 +270,17 @@ paths:
                 type: array
                 items:
                   $ref: ./components/schemas/PensionStatement.yaml
+          links:
+            pensionStatementDocument:
+              $ref: ./components/links/pensionStatementListDocument.yaml
+            pensionStatementCompact:
+              $ref: ./components/links/pensionStatementListCompact.yaml
+            vestedBenefitStatementCompact:
+              $ref: ./components/links/pensionStatementListVestedBenefitCompact.yaml
+            pillar3aStatementCompact:
+              $ref: ./components/links/pensionStatementListPillar3aCompact.yaml
+            pensionPlanDescriptionDocument:
+              $ref: ./components/links/pensionStatementListPlanDescriptionDocument.yaml
         '400':
           $ref: ./components/responses/standard400.yaml
         '401':
@@ -403,6 +428,13 @@ paths:
             application/json:
               schema:
                 $ref: ./components/schemas/Policy.yaml
+          links:
+            insuredPersonDetails:
+              $ref: ./components/links/insuredPersonDetails.yaml
+            pensionStatements:
+              $ref: ./components/links/pensionStatements.yaml
+            pensionPlanDescriptionDocument:
+              $ref: ./components/links/pensionPlanDescriptionDocument.yaml
         '401':
           $ref: ./components/responses/standard401.yaml
         '404':
@@ -467,6 +499,13 @@ paths:
             application/json:
               schema:
                 $ref: ./components/schemas/SimulationResultPensionStatement.yaml
+          links:
+            insuredPersonDetails:
+              $ref: ./components/links/simulationResultInsuredPersonDetails.yaml
+            pensionStatements:
+              $ref: ./components/links/simulationResultPensionStatements.yaml
+            pensionPlanDescriptionDocument:
+              $ref: ./components/links/simulationResultPlanListDescriptionDocument.yaml
         '401':
           $ref: ./components/responses/standard401.yaml
         '404':
@@ -513,6 +552,13 @@ paths:
             application/json:
               schema:
                 $ref: ./components/schemas/SimulationResultPensionStatement.yaml
+          links:
+            insuredPersonDetails:
+              $ref: ./components/links/simulationResultInsuredPersonDetails.yaml
+            pensionStatements:
+              $ref: ./components/links/simulationResultPensionStatements.yaml
+            pensionPlanDescriptionDocument:
+              $ref: ./components/links/simulationResultPlanListDescriptionDocument.yaml
         '401':
           $ref: ./components/responses/standard401.yaml
         '404':

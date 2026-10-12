@@ -1,0 +1,9 @@
+operationId: getInsuredPerson
+description: |
+  Details of the selected insured person.
+  The `personId` of any entry in the response array can be used as the `personId` path parameter.
+  The expression below addresses the first entry; it applies to every entry alike.
+
+  Example: `GET /insured-persons/JohnDoe_1234`
+parameters:
+  personId: $response.body#/0/personId

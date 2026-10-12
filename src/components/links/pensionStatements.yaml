@@ -1,0 +1,8 @@
+operationId: getPensionStatementsByDate
+description: |
+  Pension statement(s) of the insured person.
+  The `personId` returned in the response can be used as the `personId` path parameter.
+
+  Example: `GET /insured-persons/JohnDoe_1234/statements`
+parameters:
+  personId: $response.body#/personId

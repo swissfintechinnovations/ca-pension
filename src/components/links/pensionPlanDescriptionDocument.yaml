@@ -1,0 +1,8 @@
+operationId: getPensionPlanDescriptionDocument
+description: |
+  PDF description document of the pension plan.
+  The `planId` of the `pensionPlan` returned in the response (if provided) can be used as the `planId` path parameter.
+
+  Example: `GET /plans/Plan_XY4284_425/description-documents`
+parameters:
+  planId: $response.body#/pensionPlan/planId

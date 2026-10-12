@@ -1,0 +1,8 @@
+operationId: getInsuredPerson
+description: |
+  Details of the insured person.
+  The `personId` of the `pensionStatementBeforeChange` can be used as the `personId` path parameter.
+
+  Example: `GET /insured-persons/JohnDoe_1234`
+parameters:
+  personId: $response.body#/pensionStatementBeforeChange/personId

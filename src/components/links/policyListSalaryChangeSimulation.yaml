@@ -1,0 +1,9 @@
+operationId: simulateSalaryChange
+description: |
+  Simulation of a salary and/or employment level change for the selected policy.
+  Any entry of the `policyIds` array can be used as the `policyId` path parameter.
+  The expression below addresses the first entry; it applies to every entry alike.
+
+  Example: `POST /policies/Pol_56789-2024/salary-change-simulation`
+parameters:
+  policyId: $response.body#/policyIds/0
