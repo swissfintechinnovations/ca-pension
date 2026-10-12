@@ -193,6 +193,11 @@ paths:
                   properties:
                     personId:
                       $ref: '#/components/schemas/PersonId'
+          links:
+            insuredPersonDetails:
+              $ref: '#/components/links/insuredPersonListDetails'
+            pensionStatements:
+              $ref: '#/components/links/insuredPersonListPensionStatements'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -222,6 +227,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InsuredPerson'
+          links:
+            policyDetails:
+              $ref: '#/components/links/policyListDetails'
+            salaryChangeSimulation:
+              $ref: '#/components/links/policyListSalaryChangeSimulation'
+            purchaseSimulation:
+              $ref: '#/components/links/policyListPurchaseSimulation'
+            retirementCapitalTransactions:
+              $ref: '#/components/links/policyListRetirementCapitalTransactions'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -256,6 +270,17 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PensionStatement'
+          links:
+            pensionStatementDocument:
+              $ref: '#/components/links/pensionStatementListDocument'
+            pensionStatementCompact:
+              $ref: '#/components/links/pensionStatementListCompact'
+            vestedBenefitStatementCompact:
+              $ref: '#/components/links/pensionStatementListVestedBenefitCompact'
+            pillar3aStatementCompact:
+              $ref: '#/components/links/pensionStatementListPillar3aCompact'
+            pensionPlanDescriptionDocument:
+              $ref: '#/components/links/pensionStatementListPlanDescriptionDocument'
         '400':
           $ref: '#/components/responses/standard400'
         '401':
@@ -403,6 +428,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Policy'
+          links:
+            insuredPersonDetails:
+              $ref: '#/components/links/insuredPersonDetails'
+            pensionStatements:
+              $ref: '#/components/links/pensionStatements'
+            pensionPlanDescriptionDocument:
+              $ref: '#/components/links/pensionPlanDescriptionDocument'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -467,6 +499,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SimulationResultPensionStatement'
+          links:
+            insuredPersonDetails:
+              $ref: '#/components/links/simulationResultInsuredPersonDetails'
+            pensionStatements:
+              $ref: '#/components/links/simulationResultPensionStatements'
+            pensionPlanDescriptionDocument:
+              $ref: '#/components/links/simulationResultPlanListDescriptionDocument'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -513,6 +552,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SimulationResultPensionStatement'
+          links:
+            insuredPersonDetails:
+              $ref: '#/components/links/simulationResultInsuredPersonDetails'
+            pensionStatements:
+              $ref: '#/components/links/simulationResultPensionStatements'
+            pensionPlanDescriptionDocument:
+              $ref: '#/components/links/simulationResultPlanListDescriptionDocument'
         '401':
           $ref: '#/components/responses/standard401'
         '404':
@@ -2481,3 +2527,171 @@ components:
           scopes:
             read:basic_pension_data: Access to basic pension data (user profile, pension statements, and transactions).
             read:pension_plan: Access to pension plan description.
+  links:
+    insuredPersonDetails:
+      operationId: getInsuredPerson
+      description: |
+        Details of the insured person.
+        The `personId` returned in the response can be used as the `personId` path parameter.
+
+        Example: `GET /insured-persons/JohnDoe_1234`
+      parameters:
+        personId: $response.body#/personId
+    insuredPersonListDetails:
+      operationId: getInsuredPerson
+      description: |
+        Details of the selected insured person.
+        The `personId` of any entry in the response array can be used as the `personId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /insured-persons/JohnDoe_1234`
+      parameters:
+        personId: $response.body#/0/personId
+    insuredPersonListPensionStatements:
+      operationId: getPensionStatementsByDate
+      description: |
+        Pension statement(s) of the selected insured person.
+        The `personId` of any entry in the response array can be used as the `personId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /insured-persons/JohnDoe_1234/statements`
+      parameters:
+        personId: $response.body#/0/personId
+    pensionPlanDescriptionDocument:
+      operationId: getPensionPlanDescriptionDocument
+      description: |
+        PDF description document of the pension plan.
+        The `planId` of the `pensionPlan` returned in the response (if provided) can be used as the `planId` path parameter.
+
+        Example: `GET /plans/Plan_XY4284_425/description-documents`
+      parameters:
+        planId: $response.body#/pensionPlan/planId
+    pensionStatementListCompact:
+      operationId: getPensionStatementCompact
+      description: |
+        Compact pension statement of the selected pension statement (e.g. for QR codes).
+        The `pensionStatementId` of any entry in the response array (if provided) can be used as the `pensionStatementId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /statements/550e8450-e59b-21d4-a346-442215440560/compact-statements`
+      parameters:
+        pensionStatementId: $response.body#/0/pensionStatementId
+    pensionStatementListDocument:
+      operationId: getPensionStatementDocument
+      description: |
+        PDF document of the selected pension statement.
+        The `pensionStatementId` of any entry in the response array (if provided) can be used as the `pensionStatementId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /statements/550e8450-e59b-21d4-a346-442215440560/documents`
+      parameters:
+        pensionStatementId: $response.body#/0/pensionStatementId
+    pensionStatementListPillar3aCompact:
+      operationId: get3aStatementCompact
+      description: |
+        Compact 3a statement of the selected pension statement (e.g. for QR codes).
+        The `pensionStatementId` of any entry in the response array (if provided) can be used as the `pensionStatementId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /statements/550e8450-e59b-21d4-a346-442215440560/compact-3a-statements`
+      parameters:
+        pensionStatementId: $response.body#/0/pensionStatementId
+    pensionStatementListPlanDescriptionDocument:
+      operationId: getPensionPlanDescriptionDocument
+      description: |
+        PDF description document of the selected pension plan.
+        The `planId` of any entry in the `pensionPlans` array of any pension statement in the response array (if provided) can be used as the
+        `planId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /plans/Plan_XY4284_425/description-documents`
+      parameters:
+        planId: $response.body#/0/pensionPlans/0/planId
+    pensionStatementListVestedBenefitCompact:
+      operationId: getVestedBenefitStatementCompact
+      description: |
+        Compact vested benefits statement of the selected pension statement (e.g. for QR codes).
+        The `pensionStatementId` of any entry in the response array (if provided) can be used as the `pensionStatementId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /statements/550e8450-e59b-21d4-a346-442215440560/compact-vb-statements`
+      parameters:
+        pensionStatementId: $response.body#/0/pensionStatementId
+    pensionStatements:
+      operationId: getPensionStatementsByDate
+      description: |
+        Pension statement(s) of the insured person.
+        The `personId` returned in the response can be used as the `personId` path parameter.
+
+        Example: `GET /insured-persons/JohnDoe_1234/statements`
+      parameters:
+        personId: $response.body#/personId
+    policyListDetails:
+      operationId: getPolicy
+      description: |
+        Details of the selected policy.
+        Any entry of the `policyIds` array can be used as the `policyId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /policies/Pol_56789-2024`
+      parameters:
+        policyId: $response.body#/policyIds/0
+    policyListPurchaseSimulation:
+      operationId: simulatePurchase
+      description: |
+        Simulation of a voluntary purchase for the selected policy.
+        Any entry of the `policyIds` array can be used as the `policyId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `POST /policies/Pol_56789-2024/purchase-simulation`
+      parameters:
+        policyId: $response.body#/policyIds/0
+    policyListRetirementCapitalTransactions:
+      operationId: getRetirementCapitalTransactions
+      description: |
+        Retirement capital transactions of the selected policy.
+        Any entry of the `policyIds` array can be used as the `policyId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /policies/Pol_56789-2024/transactions`
+      parameters:
+        policyId: $response.body#/policyIds/0
+    policyListSalaryChangeSimulation:
+      operationId: simulateSalaryChange
+      description: |
+        Simulation of a salary and/or employment level change for the selected policy.
+        Any entry of the `policyIds` array can be used as the `policyId` path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `POST /policies/Pol_56789-2024/salary-change-simulation`
+      parameters:
+        policyId: $response.body#/policyIds/0
+    simulationResultInsuredPersonDetails:
+      operationId: getInsuredPerson
+      description: |
+        Details of the insured person.
+        The `personId` of the `pensionStatementBeforeChange` can be used as the `personId` path parameter.
+
+        Example: `GET /insured-persons/JohnDoe_1234`
+      parameters:
+        personId: $response.body#/pensionStatementBeforeChange/personId
+    simulationResultPensionStatements:
+      operationId: getPensionStatementsByDate
+      description: |
+        Pension statement(s) of the insured person.
+        The `personId` of the `pensionStatementBeforeChange` can be used as the `personId` path parameter.
+
+        Example: `GET /insured-persons/JohnDoe_1234/statements`
+      parameters:
+        personId: $response.body#/pensionStatementBeforeChange/personId
+    simulationResultPlanListDescriptionDocument:
+      operationId: getPensionPlanDescriptionDocument
+      description: |
+        PDF description document of the selected pension plan.
+        The `planId` of any entry in the `pensionPlans` array of the `pensionStatementBeforeChange` (if provided) can be used as the `planId`
+        path parameter.
+        The expression below addresses the first entry; it applies to every entry alike.
+
+        Example: `GET /plans/Plan_XY4284_425/description-documents`
+      parameters:
+        planId: $response.body#/pensionStatementBeforeChange/pensionPlans/0/planId
